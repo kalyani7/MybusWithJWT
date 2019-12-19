@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10 p-0">
+        <div class="ae-box">
+            <form name="bankForm" class="form-horizontal ad-form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="editUsernameInput">Bank Name<span class="data-required">*</span></label>
+                        <input type="text" id="editUsernameInput" name="usernameInput" class="form-control" ng-model="bank.bankName"
+                               placeholder="Bank Name" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="editContactInput">Account Number<span class="data-required">*</span></label>
+                        <input type="text" id="editContactInput" name="contactInput" class="form-control" ng-model="bank.accountNumber" placeholder="Account Number" required>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="editFirstNameInput">Account Name<span class="data-required">*</span></label>
+                        <input type="text" id="editFirstNameInput" class="form-control" ng-model="bank.accountName" placeholder="Account Name" required >
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="ifscCode">IFSC Code<span class="data-required">*</span></label>
+                        <input type="text" id="ifscCode" class="form-control" ng-model="bank.ifscCode" placeholder="IFSC Code" required >
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4"> </div>
+                    <div class="col-xs-2 text-right">
+                        <button class="btn btn-primary" ng-click="save(bank)">Save</button>
+                    </div>
+                    <div class="col-xs-2 next">
+                        <button  class="btn btn-danger" ng-click="cancelBank()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

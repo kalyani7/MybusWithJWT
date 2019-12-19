@@ -1,0 +1,345 @@
+<div class="container" ng-show="downloaded" >
+    <table class="table table-bordered table-condensed table-hover" >
+        <tr><td>From: {{service.source}}</td> <td>To:{{service.destination}}</td> <td>Journey Date: {{service.jdate | date}}</td><td>{{service.busType}}</td></tr>
+        <tr>
+            <td>Conductor: {{service.conductorInfo}}</td>
+            <td>Vehicle:{{service.vehicleRegNumber}}</td>
+            <td>Report ID: <a href="" ng-click="serviceIdClick(service.serviceReportId)" data-toggle="modal" data-target="#largeShoes">{{service.serviceReportId}}</a></td>
+            <td>Submitted By: {{service.attrs.submittedBy}}</td>
+        </tr>
+    </table>
+    <table class="table table-bordered table-condensed table-hover" style="width:85%">
+        <tr><td>Net Income - Redbus</td><td>{{service.netRedbusIncome| number}}</td>
+            <td>Net Income - Abhibus</td><td>{{service.netOnlineIncome| number}}</td>
+            <td>Net Income - Cash</td><td>{{service.netCashIncome | number}}</td>
+            <td>Total Net Income</td><td>{{service.netIncome| number}}</td>
+            <td>Gross Income</td><td>{{service.grossIncome| number}}</td>
+        </tr>
+    </table>
+    <div class="row" >
+        <div class="col-sm-6" style="overflow-y: auto;height: 60%;">
+            <h4>Bookings</h4>
+            <table class="table table-bordered table-condensed table-hover" ng-table="bookingsTableParams">
+                <tr ng-repeat="booking in currentPageOfBookings">
+                    <td data-title="'BookedBy'"  sortable="'bookedBy'" class="clickable-item col-md-2">{{ booking.bookedBy }}</td>
+                    <td data-title="'Ticket'"  sortable="'ticketNo'" class="clickable-item col-md-2">{{ booking.ticketNo }}</td>
+                    <td data-title="'Seats'"  sortable="'seatsCount'" class="clickable-item col-md-2">{{ booking.seatsCount }}</td>
+                    <td data-title="'Basic + Tax'"  class="clickable-item col-md-2" >
+                        {{booking.basicAmount + booking.serviceTax}}
+                    </td>
+                    <td data-title="'NetAmt'"  sortable="'netAmt'" class="clickable-item col-md-2" >
+                        {{booking.netAmt}}
+                        <span style="color:red;" ng-show="booking.due">Due</span>
+                    </td>
+                </tr>
+                <tr><td>Total</td><td>{{service.seatsCount}}</td><td/></tr>
+                <tr ng-if="!currentPageOfBookings || currentPageOfBookings.length === 0">
+                    <td colspan="5">No bookings found. </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <h4>Additional Income</h4>
+            <table class="table table-bordered table-condensed table-hover">
+                <tr>
+                    <td>Luggage</td>
+                    <td>{{service.luggageIncome}}</td>
+                </tr>
+                <tr>
+                    <td>Advance Given</td>
+                    <td>{{service.advance}}</td>
+                </tr>
+                <tr>
+                    <td>On Road Service Bookings</td>
+                    <td>{{service.onRoadServiceIncome}}</td>
+                </tr>
+                <tr>
+                    <td>Other</td>
+                    <td>{{service.otherIncome}}</td>
+                </tr>
+            </table>
+            <h4>Expenses</h4>
+            <table class="table table-bordered table-condensed table-hover">
+                <tr ng-repeat="expense in service.expenses">
+                    <td>{{expense.name}}</td>
+                    <td>{{expense.amount}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <h4>Staff : </h4>
+            <table class="table table-bordered table-condensed table-hover">
+                <tr ng-repeat="s in staff">
+                    <td>{{s.nameCode}}</td>
+                    <td>{{s.type}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <h4>Service Notes : </h4>
+            <p>{{service.notes || '--'}}</p>
+        </div>
+    </div>
+
+    <br/>
+
+</div>
+
+<div ng-show="!downloaded">
+    Please wait while the report data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+</div>
+
+
+<!-- The modal -->
+<div class="modal fade" id="largeShoes" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalLabelLarge">Modal Title</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div>
+                    <table class="table table-bordered table-condensed table-hover" >
+                        <tr><td>From: {{serviceData.source}}</td> <td>To:{{serviceData.destination}}</td> <td>Journey Date:{{serviceData.jdate}}</td><td>{{serviceData.busType}}</td></tr>
+                        <tr><td>Conductor: {{serviceData.conductorInfo}}</td>
+                            <td>Vehicle: {{serviceData.vehicleRegNumber}}</td>
+                            <td>Received At: {{serviceData.source}}</td><td>{{serviceData.serviceNumber}}</td></td></tr>
+                    </table>
+                    <table class="table table-bordered table-condensed table-hover">
+                        <tr><td>Net Income - Redbus</td><td>{{serviceData.netRedbusIncome| number}}</td>
+                            <td>Net Income - Online</td><td>{{serviceData.netOnlineIncome| number}}</td>
+                            <td>Net Income - Cash</td><td>{{serviceData.netCashIncome| number}}</td>
+                            <td>Total Net Income</td><td>{{serviceData.netIncome| number}}</td>
+                            <td>Gross Income</td><td>{{serviceData.grossIncome| number}}</td>
+                        </tr>
+                    </table>
+                    <div class="row">
+
+                        <div class="col-sm-8" style="overflow-x: auto;height: 60%;">
+                            <h4>Bookings</h4>
+                            <table class="table table-bordered table-condensed table-hover" ng-table="bookingsTableParams">
+                                <tr ng-repeat="booking in currentPageOfBookings" ng-class="{changedRate: rateToBeVerified(booking)}">
+                                    <td data-title="'Seats'"  sortable="'seats'" class="clickable-item col-md-1">
+                        <span ng-show="booking.id != null" title="{{booking.seats}}">
+                             {{ booking.seats | cut:true:10:' ...'}}
+                        </span>
+                                        <span ng-show="booking.id == null">
+                             <input ng-model="booking.seats" style="width:100px;" ng-change="countSeats()">
+                        </span>
+                                    </td>
+                                    <td data-title="'Tikcet#'"  sortable="'ticketNo'" class="clickable-item col-md-1">
+                                        {{ booking.ticketNo }}
+                                    </td>
+                                    <td data-title="'BookedBy'"  sortable="'bookedBy'" class="clickable-item col-md-2"
+                                        ng-style="isCashBooking(booking) && !booking.hasValidAgent && {'background-color':'red'}">
+                       <span ng-show="booking.id != null" >
+                             {{ booking.bookedBy}}
+                        </span>
+                                        <span ng-if="!booking.hasValidAgent"><a href="#" ng-click="editAgent(booking.bookedBy)">Update branch </a></span>
+                                        <span ng-show="booking.id == null">
+                             <select ng-options="agent.username as agent.username for agent in agents" class="form-control" ng-model="booking.bookedBy"></select>
+                        </span>
+                                    </td>
+                                    <td data-title="'Name'"  sortable="'name'" class="clickable-item col-md-1">
+                        <span ng-show="booking.id != null" title="{{booking.name}}">
+                             {{ booking.name | cut:false:10:' ...'}}
+                        </span>
+                                        <span ng-show="booking.id == null">
+                             <input ng-model="booking.name" style="width:100px;">
+                        </span>
+                                    </td>
+                                    <td data-title="'NetAmt'"  class="clickable-item col-md-2" >
+                                        <span ng-show="isOnlineBooking(booking)">{{booking.netAmt}} </span>
+                                        <span ng-show="isCashBooking(booking)">
+                            <div class="row">
+                                <div class="col-sm-5"><input type="number" ng-model="booking.netAmt" ng-change="calculateNet(booking)" style="width:70px;">
+                                </div>
+                                <div class="col-sm-4"><input type="checkbox" ng-model="booking.due" ng-change="calculateNet(booking)">Due</div>
+                                <div class="col-sm-1" ng-if="booking.index">
+                                    <span class="glyphicon glyphicon-remove-sign"  ng-click="deleteBooking(booking)"></span>
+                                </div>
+                            </div>
+                        </span>
+                                    </td>
+                                    <td data-title="'Net'"  class="clickable-item col-md-2" >
+                                        {{booking.originalCost}}
+                                    </td>
+                                    <td data-title="'Basic'"  class="clickable-item col-md-2" >
+                                        {{booking.basicAmount}}
+                                    </td>
+                                    <td data-title="'Tax'"  class="clickable-item col-md-2" >
+                                        {{booking.serviceTax}}
+                                    </td>
+                                    <td data-title="'Comm'"  class="clickable-item col-md-2" >
+                                        {{booking.commission}}
+                                    </td>
+                                </tr>
+                                <tr><td>Total Seats:{{serviceData.totalSeats}}</td></tr>
+                                <tr ng-if="!currentPageOfBookings || currentPageOfBookings.length === 0">
+                                    <td colspan="5">No bookings found. </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-sm-4">
+                            <b>Milage:</b>{{serviceData.milage}}
+                            <h4>Additional Income</h4>
+                            <table class="table table-bordered table-condensed table-hover">
+                                <tr>
+                                    <td>Luggage</td>
+                                    <td>{{serviceData.luggageIncome}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Advance Given</td>
+                                    <td>{{serviceData.advance}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>On Road Service Bookings</td>
+                                    <td>{{serviceData.onRoadServiceIncome}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>{{serviceData.otherIncome}}
+                                    </td>
+                                </tr>
+                            </table>
+                            <h4>Expenses</h4>
+                            <table class="table table-bordered table-condensed table-hover">
+                                <tr ng-repeat="expense in service.expenses">
+                                    <td>{{expense.name}}
+                                    <td>{{expense.amount}}<input type="number" placeholder="amount" ng-model="expense.amount" ng-change="calculateNet()">
+                                        <span class="glyphicon glyphicon-remove-sign" ng-show="expense.index" ng-click="deleteExpense(expense)"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+<!--                            <h4>Staff</h4>-->
+<!--                            <table class="table table-bordered table-condensed table-hover">-->
+<!--                                <tr ng-repeat="s in staffDetails track by $index">-->
+<!--                                    <td>{{s.nameCode}}</td>-->
+<!--                                    <td>{{s.type}} <span class="glyphicon glyphicon-remove-sign" ng-click="deleteStaff(s, $index)"></span></td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td> <select class="form-control" ng-model="newStaffId">-->
+<!--                                        <option value="" selected>&#45;&#45;Select Staff&#45;&#45;</option>-->
+<!--                                        <option ng-repeat="s in allStaff | orderBy:'nameCode'" value="{{s.id}}">{{s.nameCode}}</option>-->
+<!--                                    </select></td>-->
+<!--                                    <td>-->
+<!--                                        <button type="button" class="btn btn-sm btn-primary" ng-click="addStaff()">-->
+<!--                                            <span class="glyphicon glyphicon-plus"></span> Add Staff-->
+<!--                                        </button>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+
+                            <br/>
+                            <br/>
+                            <div class="row">
+                                <h6>Service Notes</h6>
+                                <div class="col-sm-12">
+                                    <p>{{serviceData.notes}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div >
+                    <div class="row">
+<!--                        <div class="col-sm-8">-->
+<!--                            <button type="button" class="btn btn-sm btn-primary" ng-click="addBooking()">-->
+<!--                                <span class="glyphicon glyphicon-plus"></span> Add Booking-->
+<!--                            </button>-->
+<!--                        </div>-->
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-sm btn-danger" ng-click="haltService('HALT')" ng-if="!serviceDats.invalid && !serviceData.status">
+                                <span class="glyphicon"></span> Halted Service
+                            </button>
+                            <button type="button" class="btn btn-sm btn-warning" ng-click="submit('SUBMITTED')" ng-if="requireVerification()">
+                                <span class="glyphicon"></span> Submit For Verification
+                            </button>
+                            <button type="button" class="btn btn-sm btn-success" ng-click="submit('SUBMITTED')" ng-if="canSubmit()">
+                                <span class="glyphicon"></span> Submit Report
+                            </button>
+                            <span ng-if="serviceData.status" style="color:red"> Service report has been submitted on {{serviceData.updatedAt|date}} by {{serviceData.attrs.submittedBy}}</span>
+                            <span ng-show="serviceData.invalid" style="color:red;">Please assign branch offices to agents <a ng-click="launchAgents()">here</a></span>
+                        </div>
+
+                    </div>
+                    <br/>
+
+                </div>
+
+                <div ng-show="!downloaded">
+                    Please wait while the report data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+                </div>
+                <script type="text/ng-template" id="edit-agent-modal.html">
+
+                    <div class="modal-header">
+                        <div class="row">
+                            <div class="col-sm-11">
+                                <h3 class="modal-title">Edit Agent</h3>
+                            </div>
+                            <div class="col-sm-1">
+                                <md-button>
+                                    <md-icon type="button" class="btn-sm" ng-click="cancel()">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </md-icon>
+                                </md-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <form name="agentUpdateForm" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-sm-7 col-xs-offset-2">
+                                    UserName : {{agent.username}}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="branchOffice">BranchOffice</label>
+                                <div class="col-sm-4">
+                                    <select id="branchOffice" ng-options="office.id as office.name for office in offices" class="form-control" ng-model="agent.branchOfficeId" required></select>
+                                    <a ng-click="launchAddBranchOffice()">Add New Branch</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="commission">Commission</label>
+                                <div class="col-sm-4">
+                                    <input type="number" id="commission" ng-model="agent.commission">
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" ng-click="saveAgent()">Update</button>
+                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                    </div>
+                </script>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Initialize Bootstrap functionality -->
+<script>
+    // Initialize tooltip component
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    // Initialize popover component
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>

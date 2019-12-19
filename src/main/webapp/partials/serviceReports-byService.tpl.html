@@ -1,0 +1,38 @@
+<div>
+    <ol class="breadcrumb">
+        <li><a href="#" ng-click="viewBack()"><i class="fa fa-arrow-left"></i> Service Income Reports</a></li>
+        <li class="active">Reports by Service Number</li>
+    </ol>
+    <div class="row mtb-5">
+        <div class="col-sm-4 p-0"><b>Service Number:</b> {{serviceNum}}</div>
+        <div class="col-sm-4"><b>Source:</b> {{serviceReportsByServiceNumber[0].source}}</div>
+        <div class="col-sm-4"><b>Destination:</b> {{serviceReportsByServiceNumber[0].destination}}</div>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+        <tr>
+            <th>Journey Date</th>
+            <th>Advance</th>
+            <th>Luggage Income</th>
+            <th>Net Cash Income</th>
+            <th>Net Income</th>
+            <th>Net Online Income</th>
+            <th>Net Redbus Income</th>
+            <th>On RoadService Income</th>
+            <th>Other Income</th>
+            <th>Gross Income</th>
+        </tr>
+        <tr ng-repeat="reports in serviceReportsByServiceNumber">
+            <td><a href="#" ng-click="goToServiceReport(reports)"> {{reports.jDate}} </a></td>
+            <td>{{reports.advance}}</td>
+            <td>{{reports.luggageIncome | number:2}}</td>
+            <td>{{reports.netCashIncome | number:2}}</td>
+            <td>{{reports.netIncome | number:2}}</td>
+            <td>{{reports.netOnlineIncome | number:2}}</td>
+            <td>{{reports.netRedbusIncome | number:2}}</td>
+            <td>{{reports.onRoadServiceIncome | number:2}}</td>
+            <td>{{reports.otherIncome | number:2}}</td>
+            <td>{{reports.grossIncome | number:2}}</td>
+        </tr>
+    </table>
+
+</div>

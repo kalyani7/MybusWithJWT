@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="page-header">
+        <h3>Trip Expense</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 p-0">
+        <div class="ae-box">
+            <form name="tsOtherForm" class="form-horizontal ad-form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Expense Date:</label>
+                        <my-datepicker ng-model="tripExpense.date"></my-datepicker>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">BillNo:</label>
+                        <input type="text" class="form-control" ng-model="tripExpense.billNo" placeholder="Bill No"
+                               required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Expense Type:</label>
+                        <select id="expenseType" ng-options="expenseType.id as expenseType.types for expenseType in expenseTypes"
+                                class="form-control" ng-model="tripExpense.expenseType" required>
+                            <option value="" selected>--Select Expense Type--</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Party Name:</label>
+                        <select id="fillingStation" ng-options="supplier.id as supplier.name for supplier in suppliers"
+                                class="form-control" ng-model="tripExpense.partyId" required>
+                            <option value="" selected>--Select supplier--</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Payment Mode:</label>
+                      <!--  <select class="form-control" ng-model="tripExpense.paymentType">
+                            <option value="" selected>&#45;&#45;select&#45;&#45;</option>
+                            <option value="CREDIT" selected>Credit</option>
+                            <option value="CASH" selected>Cash</option>
+                        </select>-->
+                        <label class="radio-inline" style="padding-top: 0;padding-left: 35px;">
+                            <input type="radio" class="form-check-input" name="CREDIT" VALUE="CREDIT" ng-model="tripExpense.paymentType">Credit
+                        </label>
+                        <label class="radio-inline" style="padding-top: 0;padding-left: 35px;">
+                            <input type="radio" class="form-check-input" name="CASH" VALUE="CASH" ng-model="tripExpense.paymentType">Cash
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Quantity:</label>
+                        <input type="number" class="form-control" ng-model="tripExpense.quantity" placeholder="0" min="0" >
+<!--                               required ng-change="calculateAmount(tripExpense.quantity, tripExpense.amountPerQuantity)">-->
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Amount:</label>
+                        <input type="number" class="form-control" ng-model="tripExpense.amountPerQuantity" placeholder="Amount">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Total Amount:</label>
+                        <input type="number" class="form-control" ng-model="tripExpense.amount" placeholder="0" min="0"
+                               required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-2 text-right">
+                        <button class="btn btn-primary" ng-click="saveTripData()">Save</button>
+                    </div>
+                    <div class="col-xs-2 next">
+                        <button class="btn btn-danger" ng-click="cancelTripData()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<!--<div class="box-head">-->
+    <div ng-controller="CargoBookingHeaderController">
+        <div class="row" style="border-bottom: 1px solid #c3c3c5; margin-bottom: 20px">
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <h3 style="color: #337ab7;">{{ headline }}</h3>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-6 col-sm-8 col-xs-12">
+                <div class="booking-search">
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="LR Number" ng-model="bookingId">
+                            <div class="input-group-btn">
+                                <button class="btn btn-info" type="submit" ng-click="search()">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                                <button type="button" class="btn btn-info" ng-click="newBooking()">New Booking</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--</div>-->
+
+
+<script type="text/ng-template" id="cargobookings-modal.html">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-sm-11">
+                <h3 class="modal-title">Bookings</h3>
+            </div>
+            <div class="col-sm-1">
+                <md-button>
+                    <md-icon type="button" class="btn-sm" ng-click="cancel()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </md-icon>
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <table class="table table-bordered">
+            <thead>
+                <th>Booking ID</th>
+                <th>From Contact</th>
+                <th>To</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="booking in bookings">
+                    <td> <a ng-click="gotoBooking(booking.id)">{{booking.shipmentNumber}}</a></td>
+                    <td> {{booking.fromContact}} {{booking.fromName}}</a></td>
+                    <td> {{booking.toContact}} {{booking.toName}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</script>

@@ -1,0 +1,131 @@
+<div>
+    <ol class="breadcrumb">
+        <li><a href="#" ng-click="viewBack()"><i class="fa fa-arrow-left"></i> {{fileName}}</a></li>
+        <li><a href="#"> Verification Details</a></li>
+    </ol>
+</div>
+<div class="bpdp-tab" ng-init="tab=1">
+    <ul>
+        <li class="tab" ng-class="{active:tab==1}" ng-click="uploadByStatus(false)">
+            <a href ng-click="tab = 1">Bookings Not In Invoice</a>
+        </li>
+        <li class="tab" ng-class="{active:tab==2}" ng-click="uploadByStatus(true)">
+            <a href ng-click="tab = 2">Invoice Bookings Not InBookings</a>
+        </li>
+        <li class="tab" ng-class="{active:tab==3}" ng-click="uploadByStatus(true)">
+            <a href ng-click="tab = 3">Cancelled Bookings</a>
+        </li>
+    </ul>
+    <div class="tab-content" ng-show="tab==1" style="overflow-x: scroll !important;">
+        <table class="table table-bordered table-condensed table-hover table-striped text-center">
+            <tr>
+                <th>S.No</th>
+                <th>Ticket No</th>
+                <th>JourneyDate</th>
+                <th>Name</th>
+                <th>Phone No</th>
+                <th>Boarding Point</th>
+                <th>Boarding Time</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Service Name</th>
+                <th>Service Number</th>
+            </tr>
+            <tr ng-repeat="bookingNot in bookingsNotInInvoice">
+                <td data-title="'S No'" style="">{{ $index + 1 }}</td>
+                <td data-title="'TIN'" class="col-sm-2" sortable="'tin'">{{ bookingNot.ticketNo }}</td>
+                <td data-title="'PNR'" class="col-sm-2" sortable="''">{{ bookingNot.journeyDate | date }}</td>
+                <td data-title="'DOM'" class="col-sm-2">{{ bookingNot.name }}</td>
+                <td data-title="'Route'" class="col-sm-1" sortable="''">{{ bookingNot.phoneNo }}</td>
+                <td data-title="'Seats'" class="col-sm-1" sortable="''">{{ bookingNot.seats }}</td>
+                <td data-title="'Ticket Fare'" class="col-sm-1" sortable="''">{{ bookingNot.boardingPoint }}</td>
+                <td data-title="'IGST On Commission'" class="col-sm-1" sortable="''">{{ bookingNot.boardingTime }}</td>
+                <td data-title="'CGST On Commission'" class="col-sm-1" sortable="''">{{ bookingNot.source }}</td>
+                <td data-title="'SGST On Commission'" class="col-sm-1" sortable="''">{{ bookingNot.destination }}</td>
+                <td data-title="'AC Bus GST'" class="col-sm-1" sortable="''">{{ bookingNot.serviceName }}</td>
+                <td data-title="'Commission Without GST'" class="col-sm-1" sortable="''">{{ bookingNot.serviceNumber }}</td>
+            </tr>
+            <tr ng-if="!bookingsNotInInvoice || bookingsNotInInvoice.length === 0">
+                <td colspan="12">No bookings exist.</td>
+            </tr>
+        </table>
+
+        <div class="row">
+            <h3>{{title}}</h3>
+        </div>
+    </div>
+    <div class="tab-content" ng-show="tab==2" style="overflow-x: scroll !important;">
+        <table class="table table-bordered table-condensed table-hover table-striped text-center">
+            <tr>
+                <th>S.No</th>
+                <th>PNR</th>
+                <th>DOE</th>
+                <th>DOM</th>
+                <th>Route</th>
+                <th>Seats</th>
+                <th>Ticket Fare</th>
+                <th>CGST</th>
+                <th>SGST</th>
+                <th>IGST</th>
+                <th>NetPayable</th>
+                <th>Operator Offer</th>
+            </tr>
+            <tr ng-repeat="invoiceBookingNot in invoiceBookingNotInBookings">
+                <td data-title="'S No'">{{$index + 1 }}</td>
+                <td data-title="'PNR'" class="col-sm-2" sortable="''">{{ invoiceBookingNot.ticketNo }}</td>
+                <td data-title="'DOE'" class="col-sm-2">{{ invoiceBookingNot.doe }}</td>
+                <td data-title="'DOM'" class="col-sm-2">{{ invoiceBookingNot.dom }}</td>
+                <td data-title="'Route'" class="col-sm-1" sortable="''">{{ invoiceBookingNot.route }}</td>
+                <td data-title="'Seats'" class="col-sm-1" sortable="''">{{ invoiceBookingNot.seats }}</td>
+                <td data-title="'Ticket Fare'" class="col-sm-1" sortable="''">{{ invoiceBookingNot.ticketFare }}</td>
+                <td data-title="'CGST On Commission'" class="col-sm-1" sortable="''">{{ invoiceBookingNot.cgstOnCommission }}</td>
+                <td data-title="'SGST On Commission'" class="col-sm-1" sortable="''">{{ invoiceBookingNot.sgstOnCommission }}</td>
+                <td data-title="'IGST On Commission'" class="col-sm-1" sortable="''">{{ invoiceBookingNot.igstOnCommission }}</td>
+                <td data-title="'NetPayable'" class="col-sm-1" sortable="''">{{ invoiceBookingNot.netPayable }}</td>
+                <td data-title="'Operator Offer'" class="col-sm-1" sortable="''">{{ invoiceBookingNot.operatorOffer }}</td>
+            </tr>
+            <tr ng-if="!invoiceBookingNotInBookings || invoiceBookingNotInBookings.length === 0">
+                <td colspan="17">No bookings exist.</td>
+            </tr>
+        </table>
+    </div>
+    <div class="tab-content" ng-show="tab==3" style="overflow-x: scroll !important;">
+        <table class="table table-bordered table-condensed table-hover table-striped text-center">
+            <tr>
+                <th>S.No</th>
+                <th>Ticket No</th>
+                <th>JourneyDate</th>
+                <th>Name</th>
+                <th>Phone No</th>
+                <th>Seats</th>
+                <th>Boarding Point</th>
+                <th>Boarding Time</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Service Name</th>
+                <th>Service Number</th>
+            </tr>
+            <tr ng-repeat="bookingNot in cancelledBookings">
+                <td data-title="'S No'" style="">{{ $index + 1 }}</td>
+                <td data-title="'TIN'" class="col-sm-2" sortable="'tin'">{{ bookingNot.ticketNo }}</td>
+                <td data-title="'PNR'" class="col-sm-2" sortable="''">{{ bookingNot.journeyDate | date }}</td>
+                <td data-title="'DOM'" class="col-sm-2">{{ bookingNot.name }}</td>
+                <td data-title="'Route'" class="col-sm-1" sortable="''">{{ bookingNot.phoneNo }}</td>
+                <td data-title="'Seats'" class="col-sm-1" sortable="''">{{ bookingNot.seats }}</td>
+                <td data-title="'Ticket Fare'" class="col-sm-1" sortable="''">{{ bookingNot.boardingPoint }}</td>
+                <td data-title="'IGST On Commission'" class="col-sm-1" sortable="''">{{ bookingNot.boardingTime }}</td>
+                <td data-title="'CGST On Commission'" class="col-sm-1" sortable="''">{{ bookingNot.source }}</td>
+                <td data-title="'SGST On Commission'" class="col-sm-1" sortable="''">{{ bookingNot.destination }}</td>
+                <td data-title="'AC Bus GST'" class="col-sm-1" sortable="''">{{ bookingNot.serviceName }}</td>
+                <td data-title="'Commission Without GST'" class="col-sm-1" sortable="''">{{ bookingNot.serviceNumber }}</td>
+            </tr>
+            <tr ng-if="!cancelledBookings || cancelledBookings.length === 0">
+                <td colspan="12">No bookings exist.</td>
+            </tr>
+        </table>
+
+        <div class="row">
+            <h3>{{title}}</h3>
+        </div>
+    </div>
+</div>

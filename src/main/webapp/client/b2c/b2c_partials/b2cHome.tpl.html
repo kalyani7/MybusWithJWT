@@ -1,0 +1,73 @@
+<legend></legend>
+
+<div class = "col-md-6 bg-success">
+	</br>
+	<div class="form-group">
+		<div class = "col-md-12">
+			<h4>{{ headline }}</h4>
+		</div>
+	</div>
+	</br>
+	<form name="searchForbus" class="form-horizontal ng-pristine ng-scope ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength" autocomplete="off" role="form" unsaved-warning-form="">	
+	
+	<div class="form-group">
+		<div class = "col-md-6">
+			<input type="radio"  data-ng-checked="true" ng-model="busJourney.journeyType" value="ONE_WAY" ng-init="busJourney.journeyType='ONE_WAY'"> One Way  
+			<input type="radio"  ng-model="busJourney.journeyType" value="TWO_WAY"> Two Way
+		</div>
+	</div>
+	<div class="form-group">
+	
+			<div  ng-show="searchForbus.fromCityId.$touched && searchForbus.fromCityId.$invalid" class="alert alert-danger col-md-10 col-offset-2">
+				Please Select From City.
+		 	</div>
+			<div  ng-show="searchForbus.toCityId.$touched && searchForbus.toCityId.$invalid" class="alert alert-danger col-md-10 col-offset-2">
+				Please Select To City.
+		 	</div>
+		 	
+		 	<div  ng-if=" (busJourney.fromCityId && busJourney.toCityId) && busJourney.fromCityId == busJourney.toCityId" class="alert alert-danger col-md-10 col-offset-2">
+				From city and To city can't be same
+		 	</div>
+		<label class="col-sm-4 control-label" for="fromInput" >From </label>
+		<div class = "col-md-8">
+			<input type="text" list="fromCityId" name="fromCity" class="form-control" ng-model="busJourney.fromCityId" required/>
+			
+			<datalist id="fromCity">
+			  	<option ng-repeat="city in allCities" value="{{city.name}}">
+			</datalist>
+		</div>
+	</div>
+	</br>
+	<div class="form-group">
+			<label  class="col-sm-4 control-label" for="toInput" >To</label>
+		<div class = "col-md-8">
+		<input type = "text" class = "form-control" list = "toCityId" name = "toCity" ng-model="busJourney.toCityId"  required/>
+			<datalist id= "toCity">
+			  	<option ng-repeat="city in allCities" value="{{city.name}}">
+			</datalist>
+		</div>
+		
+	</div>
+	</br>
+	<div class="form-group">
+			<label  class="col-sm-4 control-label" for="busJourney.dateOfJourneyInput">Date of Journey</label>
+		<div class = "col-md-8">
+			<input type="date" class="form-control" ng-model="busJourney.dateOfJourney"  placeholder="yyyy-MM-dd" min="{{minDate}}" max="{{manDate}}"  ng-change="onSelectDateOfJourney()" required />
+		</div>
+	</div>
+	</br>
+	<div class="form-group" ng-if="busJourney.journeyType=='TWO_WAY'">
+			<label class="col-sm-4 control-label" for="returnJourneyInput" >Return Journey</label>
+		<div class = "col-md-8">
+			<input type="date" class="form-control" ng-model="busJourney.returnJourney"  placeholder="yyyy-MM-dd" min="{{rminDate}}" max="{{manDate}}"  required />
+		</div>
+	</div>
+	</form>
+	</br>
+	<div class="col-md-4">
+		<button class="btn btn-sm btn-primary" ng-click="searchBuses()" ng-disabled="ok()"><h4> Search For Bus </h4></button>
+	</div>
+	</br>
+	</br><div>&nbsp;</div>
+	
+</div>

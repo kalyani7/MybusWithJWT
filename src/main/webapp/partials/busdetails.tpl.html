@@ -1,0 +1,21 @@
+<legend>{{ headline }}</legend>
+
+<br/>
+<br/>
+
+<table class="table table-bordered table-condensed table-hover" ng-table="expenseContentTableParams">
+    <tr ng-repeat="bus in busdetails.buses">
+        <td data-title="'Bus Type'" class="clickable-item" ng-click="goToExpense(expense.id)">{{ bus.type }}</td>
+        <td data-title="'Bus Route'" sortable="'city'" class="clickable-item" ng-click="goToExpense(expense.id)">{{ bus.route }}</td>
+        <td data-title="'Seats'" class="clickable-item" ng-click="goToExpense(expense.id)">{{ bus.seats }}</td>
+        <td data-title="'Layout'" class="clickable-item" ng-click="goToBusLayout(bus.type)">{{ bus.layout }}</td>
+    </tr>
+    <tr ng-if="!currentPageOfExpenses || currentPageOfExpenses.length === 0">
+        <td colspan="4">No details exist.</td>
+    </tr>
+</table>
+
+
+
+
+

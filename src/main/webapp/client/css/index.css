@@ -1,0 +1,15 @@
+
+.navbar-default  {
+    background-color: #f3ff9e;
+    border-color:black ;
+}
+
+.navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    font-family: proxima-nova;
+    font-style: normal;
+    font-weight: 100;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #272fff;
+}
+

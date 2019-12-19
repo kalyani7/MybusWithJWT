@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{ title }}</h3>
+    </div>
+</div>
+
+<!--<legend>{{ title }}</legend>-->
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="col-lg-5 col-sm-5">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label ls text-uppercase text-600 font-weight-semi-bold">From: </label>
+                                <div class="col-sm-10">
+                                    <select id="fromCity" ng-options="city.id as city.name for city in cities" class="form-control" ng-model="fromFilterByCities">
+                                        <option selected value="">--Select Boarding--</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-5 col-sm-5">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label ls text-uppercase text-600 font-weight-semi-bold">To: </label>
+                                <div class="col-sm-10">
+                                    <select id="toCity" ng-options="city.id as city.name for city in cities" class="form-control"
+                                            ng-model="toFilterByCities">
+                                        <option selected value="">--Select Departure--</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-2 col-sm-2">
+                        <button type="button" class="btn btn-sm btn-primary pull-right" ng-click="search()">
+                            <span class="glyphicon glyphicon-search"></span> Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="routeContentTableParams">
+                <tr ng-repeat="route in currentPageOfServices" ng-class="route.active?'':'bg-danger'">
+                    <td data-title="'Name'" sortable="'name'" class="clickable-item">{{ route.name }}</td>
+                    <td data-title="'From City'" sortable="'fromCityId'"class="clickable-item">{{ route.attrs.fromCity}}<!-- {{route.id}} --></td>
+                    <td data-title="'To City'"  sortable="'toCityId'" class="clickable-item">{{ route.attrs.toCity }}</td>
+                </tr>
+                <tr ng-if="!currentPageOfServices || currentPageOfServices.length === 0">
+                    <td colspan="4">No routes exist. try different .</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

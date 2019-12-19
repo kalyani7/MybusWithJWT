@@ -1,0 +1,116 @@
+<div ng-controller="fullTripListController">
+    <legend>Full Trip Details</legend>
+    <div class="bpdp-tab" ng-init="tab=1">
+        <ul>
+            <li class="tab" ng-class="{active:tab==1}">
+                <a href ng-click="tab = 1">Payment Not Completed</a>
+            </li>
+            <li class="tab" ng-class="{active:tab==2}">
+                <a href ng-click="tab = 2">Payment Completed</a>
+            </li>
+            <li class="tab" style="float: right;">
+                <div class="text-right col-sm-6">
+                    <button type="submit" class="btn btn-primary" ui-sref="addFullTrip"> + Add</button>
+                </div>
+            </li>
+        </ul>
+
+        <div class="tab-content" ng-show="tab==1">
+            <table class="table table-bordered table-condensed table-hover text-center" id="planTable1">
+                <tr>
+                    <th style="text-align: center">S No</th>
+                    <th style="text-align: center">Created On</th>
+                    <th style="text-align: center">Trip Data</th>
+                    <th style="text-align: center">Created By Name</th>
+                    <th style="text-align: center">From</th>
+                    <th style="text-align: center">To</th>
+                    <th style="text-align: center">Remarks</th>
+                    <th style="text-align: center">Amount</th>
+                    <th style="text-align: center">Action</th>
+                </tr>
+                <tr ng-repeat="trip in notPayTrips" class="text-center">
+                    <td data-title="'S No'" class="clickable-item">{{$index + 1}}</td>
+                    <td data-title="'Created On'" sortable="'tripDate'">{{ trip.createdAt | date }}</td>
+                    <td data-title="'Trip Date'" sortable="'tripDate'">{{ trip.tripDate | date }}</td>
+                    <td data-title="'Created By Name'" sortable="'createdBy'">{{ trip.attrs.createdBy }}</td>
+                    <td data-title="'From'" sortable="'from'">{{ trip.from  }}</td>
+                    <td data-title="'To'" sortable="'to'">{{ trip.to  }}</td>
+                    <td data-title="'Remarks'" sortable="'remarks'">{{ trip.remarks  }}</td>
+                    <td data-title="'Amount'" sortable="'charge'">{{ trip.charge  }}</td>
+                    <td data-title="'Action'">
+                        <span ng-if="trip.due">
+                            <a href="#" ng-click="updateFullTrip(trip.id);">
+                                <i class="fa fa-pencil"></i>
+                            </a>&nbsp;&nbsp;
+                            <a href="#" ng-click="payFullTrip(trip.id)">
+                                Pay Now
+                            </a>
+                        </span>
+                        <span ng-if="!trip.due">
+                            Payment received on {{trip.paidOn | date}}
+                        </span>
+                    </td>
+                </tr>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+        <div class="tab-content" ng-show="tab==2">
+            <table class="table table-bordered table-condensed table-hover text-left" id="planTable2" ng-table="fullTripsTableParams">
+                <tr ng-repeat="trip in paymentTrips" class="text-center">
+                    <td data-title="'S No'" class="clickable-item">{{(fullTripsTableParams.page()-1) * fullTripsTableParams.count() + $index + 1 }}</td>
+                    <td data-title="'Created On'" sortable="'tripDate'">{{ trip.createdAt | date }}</td>
+                    <td data-title="'Trip Date'" sortable="'tripDate'">{{ trip.tripDate | date }}</td>
+                    <td data-title="'Created By Name'" sortable="'createdBy'">{{ trip.attrs.createdBy }}</td>
+                    <td data-title="'From'" sortable="'from'">{{ trip.from  }}</td>
+                    <td data-title="'To'" sortable="'to'">{{ trip.to  }}</td>
+                    <td data-title="'Remarks'" sortable="'remarks'">{{ trip.remarks  }}</td>
+                    <td data-title="'Amount'" sortable="'charge'">{{ trip.charge  }}</td>
+                    <td data-title="'Action'">
+                        <span ng-if="trip.due">
+                            <a href="#" ng-click="updateFullTrip(trip.id);">
+                                <i class="fa fa-pencil"></i>
+                            </a>&nbsp;&nbsp;
+                            <a href="#" ng-click="payFullTrip(trip.id)">
+                                Pay Now
+                            </a>
+                        </span>
+                                <span ng-if="!trip.due">
+                            Payment received on {{trip.paidOn | date}} by {{trip.attrs.paidBy}}
+                        </span>
+                    </td>
+
+                </tr>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <!--<div class="row">-->
+        <!--<table class="table table-bordered table-condensed table-hover text-left" id="planTable" ng-table="fullTripsTableParams">-->
+            <!--<tr ng-repeat="trip in fullTrips" class="text-center">-->
+                <!--<td data-title="'S No'" class="clickable-item">{{$index + ((fullTripsTableParams.page()-1) * fullTripsTableParams.count()) }}</td>-->
+                <!--<td data-title="'Created On'" sortable="'tripDate'">{{ trip.createdAt | date }}</td>-->
+                <!--<td data-title="'Trip Date'" sortable="'tripDate'">{{ trip.tripDate | date }}</td>-->
+                <!--<td data-title="'From'" sortable="'from'">{{ trip.from  }}</td>-->
+                <!--<td data-title="'To'" sortable="'to'">{{ trip.to  }}</td>-->
+                <!--<td data-title="'Remarks'" sortable="'remarks'">{{ trip.remarks  }}</td>-->
+                <!--<td data-title="'Amount'" sortable="'charge'">{{ trip.charge  }}</td>-->
+                <!--<td data-title="'Action'">-->
+                    <!--<span ng-if="trip.due">-->
+                        <!--<a href="#" ng-click="updateFullTrip(trip.id);">-->
+                            <!--<i class="fa fa-pencil"></i>-->
+                        <!--</a>&nbsp;&nbsp;-->
+                        <!--<a href="#" ng-click="payFullTrip(trip.id)">-->
+                            <!--Pay Now-->
+                        <!--</a>-->
+                    <!--</span>-->
+                    <!--<span ng-if="!trip.due">-->
+                        <!--Payment received on {{trip.paidOn | date}}-->
+                    <!--</span>-->
+                <!--</td>-->
+
+            <!--</tr>-->
+
+        <!--</table>-->
+    <!--</div>-->
+</div>

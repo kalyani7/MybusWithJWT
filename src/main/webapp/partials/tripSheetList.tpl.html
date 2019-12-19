@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-12" style="padding: 0;">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="addTripSheet()">
+                            <span class="glyphicon glyphicon-plus"></span> Add Trip Sheet
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-12">
+                    <form class="form-horizontal" autocomplete="off" role="form" unsaved-warning-form>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label class="ls text-600 font-weight-semi-bold">Start Date:</label>
+                                <my-datepicker ng-model="query.startDate"></my-datepicker>
+                            </div>
+                            <!--<div class="col-sm-1"></div>-->
+                            <div class="col-sm-3">
+                                <label class="ls text-600 font-weight-semi-bold">End Date:</label>
+                                <my-datepicker ng-model="query.endDate"></my-datepicker>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="ls text-600 font-weight-semi-bold">VehicleNo :</label>
+                                <select class="form-control"
+                                        ng-options="vehicle.id as vehicle.regNo for vehicle in vehicles"
+                                        ng-model="query.vehicleId" id="vehicle">
+                                    <option value="" selected>--Select Vehicle--</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="ls text-600 font-weight-semi-bold">Driver:</label>
+                                <select class="form-control" ng-options="staff.id as staff.name for staff in staffList"
+                                        ng-model="query.driverId">
+                                    <option value="" selected>&#45;&#45;Select Driver&#45;&#45;</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-1">
+                                <div class="" style="margin-top: 26px">
+                                    <button type="button" class="btn btn-sm btn-success"
+                                            ng-click="searchTripSheetReports()"> Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1"
+                   ng-table="tripSheetTableParams">
+                <tr ng-repeat="tripSheet in tripSheetList">
+                    <td data-title="'Truck No'" class="clickable-item" sortable="'bankName'">{{ tripSheet.attrs.RegNo
+                        }}
+                    </td>
+                    <td data-title="'Dep. On'" class="clickable-item" sortable="'accountName'">{{ tripSheet.startDate |
+                        date }}
+                    </td>
+                    <td data-title="'Arrival'" class="clickable-item" sortable="'accountNumber'">{{ tripSheet.endDate |
+                        date }}
+                    </td>
+                    <td data-title="'Driver'" class="clickable-item" sortable="'accountNumber'">{{
+                        tripSheet.attrs.driver }}
+                    </td>
+                    <td data-title="'Sheet No'" class="clickable-item" sortable="'accountNumber'">{{ tripSheet.sheetNo
+                        }}
+                    </td>
+                    <td data-title="'Allowed Expenses'" class="clickable-item" sortable="'accountNumber'">{{
+                        tripSheet.allowedExpenses }}
+                    </td>
+                    <td data-title="'Action'" class="ed-btn">
+                        <md-icon type="button" class="btn btn-xs" ng-click="editTripSheet(tripSheet.id)">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </md-icon>
+                        <md-icon type="button" class="btn btn-xs" ng-click="deleteTripSheet(tripSheet.id)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </md-icon>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

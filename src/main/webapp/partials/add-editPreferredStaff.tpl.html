@@ -1,0 +1,60 @@
+<legend>{{titleName}}</legend>
+<div>
+    <form name="thisForm" class="form-horizontal" autocomplete="off" role="form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="vehicle">Vehicle<span class="data-required">*</span></label>
+            <div class="col-sm-4">
+                <select ng-options="s.id as s.regNo for s in allVehicles" class="form-control" ng-model="staff.vehicleId"
+                        id="vehicle">
+                    <option value="" selected>--Select Vehicle--</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Staff<span class="data-required">*</span></label>
+            <div class="col-sm-4">
+                <table class="table table-bordered table-condensed table-hover">
+                    <tr ng-repeat="s in staffDetails track by $index">
+                        <td>{{s.nameCode}}</td>
+                        <td>{{s.type}} <span class="glyphicon glyphicon-remove-sign" ng-click="deleteStaff(s, $index)"></span></td>
+                    </tr>
+                    <tr>
+                        <td> <select class="form-control" ng-model="newStaffId">
+                            <option value="" selected>--Select Staff--</option>
+                            <option ng-repeat="s in allStaff | orderBy:'nameCode'" value="{{s.id}}">{{s.nameCode}}</option>
+                        </select></td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="addStaff()">
+                                <span class="glyphicon glyphicon-plus"></span> Add Staff
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="sourceId">Source<span class="data-required">*</span></label>
+            <div class="col-sm-4">
+                <select ng-options="s.id as s.name for s in cities" class="form-control" ng-model="staff.sourceId"
+                        id="sourceId">
+                    <option value="" selected>--Source--</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="destinationId">Destination<span class="data-required">*</span></label>
+            <div class="col-sm-4">
+                <select ng-options="s.id as s.name for s in cities" class="form-control" ng-model="staff.destinationId"
+                        id="destinationId">
+                    <option value="" selected>--Destination--</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="form-group row text-center mt-30">
+            <button class="btn btn-primary" ng-click="save()">Save</button>
+            <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

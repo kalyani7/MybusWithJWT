@@ -1,0 +1,244 @@
+<div ng-include="'partials/cargoLookup.tpl.html'"></div>
+<!--<hr/>-->
+<div class="row">
+    <div class="box-body-form">
+        <form name="cargoDetails" class="form-horizontal" autocomplete="off" role="form" unsaved-warning-form>
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-12 control-label">From Branch Office<span
+                        class="data-required">*</span></label>
+                <div class="col-sm-4 col-xs-12">
+                    <select id="fromBranchOffice" ng-options="office.id as office.name for office in offices"
+                            class="form-control" ng-model="shipment.fromBranchId" ng-if="currentUser.admin"></select>
+                    <select id="fromBranchOffice" ng-options="office.id as office.name for office in offices"
+                            class="form-control" ng-model="shipment.fromBranchId" readonly="true"
+                            ng-if="!currentUser.admin"></select>
+                </div>
+                <label class="col-sm-2 control-label">To Branch Office<span class="data-required">*</span></label>
+                <div class="col-sm-4">
+                    <select id="toBranchOffice" ng-options="office.id as office.name for office in offices"
+                            class="form-control" ng-model="shipment.toBranchId" required></select>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">LR Type<span class="data-required">*</span>:</label>
+                <div class="col-sm-4">
+                    <select id="lrType" class="form-control" ng-model="shipment.paymentType" required
+                            ng-options="shipmentType.shipmentType as shipmentType.shipmentType for shipmentType in shipmentTypes"></select>
+                    <span ng-if="shipment.paymentType == 'OnAccount'">
+                            <label>Account Name<span class="data-required">*</span>:</label>
+                            <select id="supplier" ng-options="f.id as f.name for f in suppliers" class="form-control"
+                                    ng-model="shipment.supplierId"/>
+                        </span>
+                </div>
+                <span ng-if="currentUser.admin">
+                        <label class="col-sm-2 control-label">For User</label>
+                        <div class="col-sm-4">
+                            <select id="forUser" class="form-control" ng-model="shipment.forUser" required
+                                    ng-options="user.id as user.fullName for user in users"></select></div>
+                    </span>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">WayBill No:</label>
+                <div class="col-sm-4"><input type="text" class="form-control" ng-model="shipment.wayBillNo"></div>
+
+                <label class="col-sm-2 control-label">Dispatch Date:</label>
+                <div class="col-sm-4">
+                    <my-datepicker ng-model="shipment.dispatchDate"></my-datepicker>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Remarks:</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" rows="3" ng-model="shipment.remarks"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-xs-12 marginless p_r_0">
+                    <div class="panel panel-default m_b_0">
+                        <div class="panel-heading clr_l_brown bold ng-binding">
+                            Sender Details
+                        </div>
+                        <div class="panel-body p_rl_0">
+                            <form class="form-horizontal ng-pristine ng-valid ng-valid-maxlength" role="form">
+                                <div class="form-group m_b_8">
+                                    <label class="col-sm-4 col-xs-4 control-label LabelForm ng-binding">Mobile No<span
+                                            class="mandatory_symbol ng-scope">&nbsp;*</span></label>
+                                    <div class="col-sm-7 col-xs-7 input_select_height">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-earphone small"></span>
+                                                </span>
+                                            <input type="number"
+                                                   class="form-control h_30 ng-pristine ng-untouched ng-valid placeholder ng-empty ng-valid-maxlength"
+                                                   placeholder="10 digit number"
+                                                   maxlength="10" ng-model="shipment.fromContact" ng-trim="false"
+                                                   ng-blur="getDetailsForContact('from')">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group m_b_8">
+                                    <label for="senderName"
+                                           class="col-sm-4 col-xs-4 control-label LabelForm ng-binding">
+                                        Sender Name &nbsp;*</span>
+                                    </label>
+                                    <div class="col-sm-7 col-xs-7">
+                                        <input type="text" class="form-control" id="senderName"
+                                               ng-model="shipment.fromName" placeholder="Company/Person name"
+                                               ng-keydown="$event.keyCode===9">
+                                    </div>
+                                </div>
+
+                                <div class="form-group m_b_8 ng-scope">
+                                    <label class="col-sm-4 col-xs-4 control-label LabelForm ng-binding">
+                                        Sender Email
+                                    </label>
+                                    <div class="col-sm-7 col-xs-7">
+                                        <input type="email" class="form-control" ng-trim="false" placeholder="Email"
+                                               ng-model="shipment.fromEmail">
+                                    </div>
+                                </div>
+                                <div class="form-group m_b_8 ng-scope">
+                                    <label class="col-sm-4 col-xs-4 control-label LabelForm ng-binding">
+                                        Service Tax Number
+                                    </label>
+                                    <div class="col-sm-7 col-xs-7">
+                                        <input type="text" class="form-control" ng-trim="false"
+                                               placeholder="Service Tax Number" ng-model="shipment.tinNumber">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-xs-12 marginless p_l_5">
+                    <div class="panel panel-default m_b_0">
+                        <div class="panel-heading clr_l_brown bold ng-binding">
+                            Receiver Details
+                        </div>
+                        <div class="panel-body p_rl_0">
+                            <div class="form-group m_b_5">
+                                <label for="CustomerID1" class="col-sm-4 col-xs-4 control-label">
+                                    Copy Sender details
+                                </label>
+                                <div class="col-sm-7 col-xs-7">
+                                    <input type="checkbox" id="CustomerID1" ng-model="shipment.copySenderDetails"
+                                           ng-change="copySenderDetails()" class="m_t_9 handCursor">
+                                </div>
+                            </div>
+                            <div class="form-group m_b_8 ng-scope">
+                                <label class="col-sm-4 col-xs-4 control-label LabelForm">
+                                        <span class="ng-binding">
+                                            Mobile No
+                                            <span class="mandatory_symbol ng-scope">&nbsp;*</span>
+                                        </span>
+                                </label>
+                                <div class="col-sm-7 col-xs-7">
+                                    <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-earphone small"></span>
+                                            </span>
+                                        <input type="number" class="form-control" id="mobile1num"
+                                               placeholder="10 digit number" maxlength="10"
+                                               ng-model="shipment.toContact" ng-blur="getDetailsForContact('to')">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group m_b_8 ng-scope">
+                                <label for="senderName11" class="col-sm-4 col-xs-4 control-label LabelForm">
+                                        <span class="ng-binding">
+                                            Receiver Name
+                                            <span class="mandatory_symbol">&nbsp;*</span>
+                                        </span>
+                                </label>
+                                <div class="col-sm-7 col-xs-7">
+                                    <input type="text" class="form-control" id="senderName11" ng-model="shipment.toName"
+                                           placeholder="Company/Person name">
+                                </div>
+                            </div>
+                            <div class="form-group m_b_8 ng-scope">
+                                <label class="col-sm-4 col-xs-4 control-label LabelForm ng-binding">
+                                    To Email
+                                </label>
+                                <div class="col-sm-7 col-xs-7">
+                                    <input type="email"
+                                           class="form-control h_28 ng-pristine ng-untouched ng-valid placeholder ng-empty"
+                                           ng-trim="false" placeholder="Email" ng-model="shipment.toEmail">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!--Close the 3rd line of code-->
+            </div>
+        </form>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Item Description</th>
+                    <th>Value of Goods</th>
+                    <th>Quantity</th>
+                    <th>Kg's</th>
+                    <th>Freight Charge</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in shipment.items">
+                    <td><input type="text" class="form-control" placeholder="Item Description" ng-model="item.description">
+                    </td>
+                    <td><input type="number" class="form-control" placeholder="value" ng-model="item.value"></td>
+                    <td><input type="number" class="form-control" placeholder="quantity" ng-model="item.quantity"></td>
+                    <td><input type="number" class="form-control" placeholder="weight" ng-model="item.weight"></td>
+                    <td><input type="number" class="form-control" placeholder="charge" ng-model="item.charge"
+                               ng-change="calculateTotal()">
+                        <span class="glyphicon glyphicon-remove-sign" ng-show="item.index"
+                              ng-click="deleteItem(item)"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">Loading charges</td>
+                    <td><input type="number" class="form-control" placeholder="Loading charge"
+                               ng-model="shipment.loadingCharge" ng-change="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">Unloading charges</td>
+                    <td><input type="number" class="form-control" placeholder="Unloading charge"
+                               ng-model="shipment.unloadingCharge" ng-change="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">Other charges</td>
+                    <td><input type="number" class="form-control" placeholder="Other charge" ng-model="shipment.otherCharge"
+                               ng-change="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">TOTALS</td>
+                    <td>{{getTotalPrice()}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-2 col-xs-3 btn-align-right">
+        <button type="button" class="btn btn-info" ng-click="addItem()">
+            <span class="glyphicon glyphicon-plus "></span> Add Item
+        </button>
+    </div>
+    <div class="col-lg-10 col-sm-10 col-xs-9">
+        <div class="col-lg-8 col-sm-8 col-xs-2"></div>
+        <div class="col-lg-2 col-sm-2 col-xs-5 btn-align-right">
+            <button type="button" class="btn btn-danger" ng-click="cancelShipmentForm()">
+                Cancel
+            </button>
+        </div>
+        <div class="col-lg-2 col-sm-2 col-xs-5 btn-align-left">
+            <button type="button" class="btn btn-success" ng-click="saveCargoBooking()">
+                Submit
+            </button>
+        </div>
+    </div>
+</div>
+<!--</div>-->

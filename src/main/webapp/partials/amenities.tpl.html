@@ -1,0 +1,143 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="handleClickAddAmenity()">
+                            <span class="glyphicon glyphicon-plus"></span> Add Amenity
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="amenityTableParams">
+                <tr ng-repeat="amenity in currentPageOfAmenities">
+                    <td data-title="'Amenity'"  sortable="'name'" class="clickable-item" >{{ amenity.name }}</td>
+                    <td data-title="'Status'" sortable="'active'"  class="clickable-item">
+                        <span ng-if="!amenity.active">InActive</span>
+                        <span ng-if="amenity.active">Active</span>
+                    </td>
+                    <td data-title="'Action'" class="ed-btn">
+                        <md-button>
+                            <md-icon type="button" class="btn btn-xs" ng-click="handleClickUpdateAmenity(amenity.id)">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </md-icon>
+                        </md-button>
+                        <md-button>
+                            <md-icon type="button" class="btn btn-xs" ng-click="deleteAmenityById(amenity.id)">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+                <tr ng-if="!amenities || amenities.length === 0">
+                    <td colspan="4">No Amenities exist.  Please add some.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal popup for adding Amenity -->
+
+<script type="text/ng-template" id="add-Amenity-modal.html">
+
+    <div class="col-12">
+        <div class="modal-header">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h3 class="modal-title">Add Amenity</h3>
+                </div>
+                <div class="col-xs-2">
+                    <md-button class=" pull-right">
+                        <md-icon type="button" class="btn-sm" ng-click="cancel()">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </md-icon>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+    <!--<div class="row">-->
+            <form name="amenityForm" class="" role="form">
+                <div class="row">
+                    <!--<div class="form-group">-->
+                         <div class="col-xs-12 ">
+                             <label class="ls text-600 font-weight-semi-bold">Name</label>
+                             <input type="text" id="amenityInput" class="form-control" ng-model="amenity.name" placeholder="Amenity Name">
+                         </div>
+                    <!--</div>-->
+                </div>
+                <div class="row">
+                    <!--<div class="form-group">-->
+                        <div class="col-xs-12" style="padding-left: 40px">
+                            <label class="ls text-600 font-weight-semi-bold checkbox" for="activeInactive">
+                                <input type="checkbox" id="activeInactive" class="" ng-model="amenity.active">
+                                Active
+                            </label>
+                        </div>
+                    <!--</div>-->
+                </div>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="addAmenity()" ng-disabled="!isInputValid()">Add</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+</script>
+
+
+<!-- modal popup for Updating Amenity -->
+
+<script type="text/ng-template" id="update-amenity-modal.html">
+
+    <div class="col-12">
+        <div class="modal-header">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h3 class="modal-title">Edit Amenity</h3>
+                </div>
+                <div class="col-xs-2 pull-right">
+                    <md-button class=" pull-right">
+                        <md-icon type="button" class="btn-sm" ng-click="cancel()">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </md-icon>
+                    </md-button>
+                </div>
+        	</div>
+		</div>
+	</div>
+    <div class="modal-body">
+        <form name="amenityUpdateForm" class="" role="form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <label class="ls text-600 font-weight-semi-bold">Name</label>
+                    <input type="text" id="amenityNameUpdate" class="form-control" ng-model="amenity.name" placeholder="Amenity Name">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12" style="padding-left: 40px">
+                    <label class="ls text-600 font-weight-semi-bold checkbox" for="activeInactive">
+                        <input type="checkbox" id="activeInactive" class="" ng-model="amenity.active">
+                        Active
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="updateAmenity()" ng-disabled="!isInputValid()">Update</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

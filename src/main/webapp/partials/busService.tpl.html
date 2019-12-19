@@ -1,0 +1,37 @@
+<div class="toolbar-button-div pull-right">
+    <button type="button" class="btn btn-sm btn-primary" ng-click="busServiceCtrl.addNewBusService()"><span class="glyphicon glyphicon-plus"></span>Add New Service</button>
+</div>
+
+<table class="table table-bordered table-condensed table-hover" ng-table="busServiceCtrl.serviceContentTableParams">
+    <tr ng-repeat="service in busServiceCtrl.services">
+        <td data-title="'Service Name'" class="clickable-item" ng-click="busServiceCtrl.goToBusService(service.id)">{{service.serviceName}}</td>
+        <td data-title="'Service Number'" class="clickable-item" ng-click="busServiceCtrl.goToBusService(service.id)">{{service.serviceNumber}}</td>
+        <td data-title="'From Date'" class="clickable-item" ng-click="busServiceCtrl.goToBusService(service.id)">{{service.schedule.startDate | date: "yyyy-MM-dd"}}</td>
+        <td data-title="'To Date'" class="clickable-item" ng-click="busServiceCtrl.goToBusService(service.id)">{{service.schedule.endDate | date: "yyyy-MM-dd"}}</td>
+        <td data-title="'Total Seats'" class="clickable-item" ng-click="busServiceCtrl.goToBusService(service.id)">N/A</td>
+        <td data-title="'Bus Type'" class="clickable-item" ng-click="busServiceCtrl.goToBusService(service.id)">12</td>
+        <td class="col-md-2">
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="busServiceCtrl.goToBusService(service.id)">
+                    <span class="glyphicon glyphicon-pencil"></span></md-icon>
+            </md-button>
+        </td>
+        <td class="col-md-2">
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="busServiceCtrl.deleteService(service)">
+                    <span class="glyphicon glyphicon-remove"></span></md-icon>
+            </md-button>
+        </td>
+        <td data-title="'Publish status'">
+            
+            	<button ng-show="service.status=='PUBLISHED'" ng-disabled="true" class="btn btn-primary">Published</button>
+            	<button ng-hide="service.status=='PUBLISHED'" class="btn btn-primary" ng-click=" busServiceCtrl.busServicePublish(service.id)" >Publish</button>
+            	<button ng-show="service.status=='IN_ACTIVE'" class="btn btn-primary">Active</button>
+            	
+            </div>
+        </td>
+    </tr>
+    <tr ng-if="!busServiceCtrl.currentPageOfServices || busServiceCtrl.currentPageOfServices.length === 0">
+        <td colspan="4">No Services created.</td>
+    </tr>
+</table>

@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="page-header">
+        <h3>Other</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 p-0">
+        <div class="ae-box">
+            <form name="tsOtherForm" class="form-horizontal ad-form">
+                <div class="row">
+<!--                    <div class="col-lg-6 col-md-6 padding-bottom">-->
+<!--                        <label class="ls text-600 font-weight-semi-bold">Party Name:</label>-->
+<!--                        <select id="fillingStation" ng-options="supplier.id as supplier.name for supplier in suppliers" class="form-control" ng-model="tsPayment.partyId"  required>-->
+<!--                            <option value="" selected>&#45;&#45;Select supplier&#45;&#45;</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-6 col-md-6 padding-bottom">-->
+<!--                        <label class="ls text-600 font-weight-semi-bold">BillNo:</label>-->
+<!--                        <input type="text" class="form-control" ng-model="tsPayment.billNo" placeholder="BillNo" required>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Description:</label>
+                        <input type="text" class="form-control" ng-model="tsOther.description" placeholder="Description" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Amount:</label>
+                        <input type="number" class="form-control" ng-model="tsOther.amount" placeholder="Amount" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4"> </div>
+                    <div class="col-xs-2 text-right">
+                        <button class="btn btn-primary" ng-click="saveOtherData()">Save</button>
+                    </div>
+                    <div class="col-xs-2 next">
+                        <button  class="btn btn-danger" ng-click="cancelOtherData()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{headline}}</h3>
+    </div>
+</div>
+
+<!--<legend>{{headline}}</legend>-->
+
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 p-0">
+        <div class="ae-box">
+            <form name="amenityForm" class="ad-form" role="form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="accountName">AccountName<span class="data-required">*</span></label>
+                        <input type="text" id="accountName" class="form-control" ng-model="account.name" placeholder="Account Name">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="accountDomain">Account Domain <span class="data-required">*</span></label>
+                        <input type="text" id="accountDomain" class="form-control" ng-model="account.domainName" placeholder="Domain Name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="apiURL">Api URL<span class="data-required">*</span></label>
+                        <input type="text" id="apiURL" class="form-control" ng-model="account.apiURL" placeholder="apiURL">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Account provider type<span class="data-required">*</span></label>
+                        <select ng-model="account.providerType" class="form-control">
+                            <option value="Abhibus">Abhibus</option>
+                            <option value="Bitla">Bitla</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="userName">UserName<span class="data-required">*</span></label>
+                        <input type="text" id="userName" class="form-control" ng-model="account.userName" placeholder="User Name">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="password">Password<span class="data-required">*</span></label>
+                        <input type="text" id="password" class="form-control" ng-model="account.password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <input type="checkbox" ng-model="account.skipAgentValidity" class="custom-check form-checkbox">
+                        <label class="ls text-600 font-weight-semi-bold" > Skip Agent Verification </label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <input type="checkbox" ng-model="account.sendInvoiceEmail" class="custom-check form-checkbox">
+                        <label class="ls text-600 font-weight-semi-bold" > Send Invoice Emails </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="onlineBooking">Online Booking Type<span class="data-required">*</span></label>
+                        <input type="text" id="onlineBooking" ng-model="account.onlineBookingTypes" placeholder="Online Booking Types" class="form-control">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Email<span class="data-required">*</span></label>
+                        <input type="text" id="notificationEmail" class="form-control" ng-model="account.email" placeholder="email(s)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">SMS Sender Name<span class="data-required">*</span></label>
+                        <input type="text" id="SMSSenderName" class="form-control" ng-model="account.smsSenderName" placeholder="SMS Sender Name">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="cargoServiceName">Cargo Service Name<span class="data-required">*</span></label>
+                        <input type="text" id="cargoServiceName" class="form-control" ng-model="account.cargoServiceName" placeholder="Cargo Service Name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="emailTemplates">Email Template<span class="data-required">*</span></label>
+                        <input type="text" id="emailTemplates" class="form-control" ng-model="account.emailTemplates" placeholder="folder path">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="sendGridApiKey">Api key<span class="data-required">*</span></label>
+                        <input type="text" id="sendGridApiKey" class="form-control" ng-model="account.sendGridApiKey" placeholder="Api Key">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 padding-bottom">
+                        <div class="pull-right">
+                            <button class="btn btn-primary" ng-click="saveAccount()">Save</button>
+                            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
+</div>

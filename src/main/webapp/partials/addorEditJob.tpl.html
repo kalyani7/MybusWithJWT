@@ -1,0 +1,122 @@
+<legend>{{titleName}}</legend>
+<div>
+    <form name="thisForm" class="form-horizontal" autocomplete="off" role="form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="vehicle">Vehicle<span class="data-required">*</span></label>
+            <div class="col-sm-4">
+                <select ng-options="vehicle.id as vehicle.regNo for vehicle in allVehicles" class="form-control" ng-model="job.vehicleId"
+                        id="vehicle" ng-change="getOdometerReading(vehicle)">
+                    <option value="" selected>--Select Vehicle--</option>
+                </select>
+            </div>
+            <label class="col-sm-2 control-label">Job Date</label>
+            <div class="col-sm-4">
+                <my-datepicker ng-model="job.jobDate"></my-datepicker>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Old Odometer</label>
+            <div class="col-sm-4">
+                {{odometerReading}}
+            </div>
+            <label class="col-sm-2 control-label">Current Milage</label>
+            <div class="col-sm-4">
+                <input type="text" id="fuel" ng-model="job.mileage" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div style="font-size: 20px;" class="float-right" ng-click="addJobInventories()">
+                    <i class="fa fa-plus-square">Add Spares</i>
+                </div>
+            <div ng-repeat="inventory in job.inventories">
+                <label class="col-sm-2 control-label" for="inventory">Part Name<span class="data-required">*</span></label>
+                <div class="col-sm-4">
+                    <select ng-options="s.id as s.nameAndPrice for s in allInventories" class="form-control"
+                            ng-model="inventory.inventoryId" id="inventory" ng-change="setUnitCost(inventory)">
+                        <option value="" selected>--Select Inventory--</option>
+                    </select>
+                </div>
+                <label class="col-sm-1 control-label" for="inventoryQuantity">Quantity</label>
+                <div class="col-sm-4">
+                    <input type="number" id="inventoryQuantity" name="inventoryQuantity" class="form-control" ng-model="inventory.quantity" ng-change="calculateTotal()">
+                </div>
+                <span style="font-size: 20px;" ng-click="deleteJobInventory($index)">
+                <i class="fa fa-minus-square"></i>
+                </span>
+                &nbsp
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Additional Cost</label>
+            <div class="col-sm-4">
+                <input type="number" id="additionalCost" name="additionalCost" class="form-control" ng-model="job.additionalCost" ng-change="calculateTotal()">
+            </div>
+            <label class="col-sm-2 control-label">Total Cost</label>
+            <div class="col-sm-4">
+                {{job.totalCost}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Job Description</label>
+            <div class="col-sm-4">
+                <textarea class="form-control" ng-model="job.jobDescription" rows="7"> </textarea>
+            </div>
+
+            <label class="col-sm-2 control-label">Job Completed</label>
+            <div class="col-sm-4">
+                <input type="checkbox" class="form-control" ng-model="job.jobCompleted" rows="7"> </input>
+            </div>
+        </div>
+
+
+
+        <fieldset>
+            <div class="form-group">
+                <legend>
+                    <div>
+                        <label class="col-sm-2 control-label">Reminder </label>
+                        <input type="checkbox" ng-model="job.reminder">
+                    </div>
+                </legend>
+            </div>
+
+        <div class="row" ng-show="job.reminder">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Reminder Date</label>
+                <div class="col-sm-4">
+                    <my-datepicker ng-model="job.reminderDate"></my-datepicker>
+                </div>
+                <label class="col-sm-2 control-label" for="remainderText">Reminder Text</label>
+                <div class="col-sm-4">
+                    <textarea id="remainderText" ng-model="job.reminderText" rows="3" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="remainderText">Expected Mileage</label>
+                <div class="col-sm-4">
+                    <input type="text" id="milege" ng-model="job.expectedMileage" class="form-control">
+                </div>
+                <label class="col-sm-2 control-label" for="vehicle">For user : </label>
+                <div class="col-sm-4">
+                    <select ng-options="user.id as user.fullName for user in allUsers" class="form-control"
+                            ng-model="job.forUser"
+                            id="">
+                        <option value="" selected>--Select User--</option>
+                    </select>
+                </div>
+            </div>
+            <label class="col-sm-2 control-label" for="remarks">Remarks</label>
+            <div class="col-sm-4">
+                <textarea id="remarks" ng-model="job.remarks" rows="3" class="form-control"></textarea>
+            </div>
+        </div>
+        </fieldset>
+        <div class="clearfix"></div>
+        <div class="form-group row text-center mt-30">
+            <button class="btn btn-primary" ng-click="save()">Save</button>
+            <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+        </div>
+
+    </form>
+</div>

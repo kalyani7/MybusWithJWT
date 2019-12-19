@@ -1,0 +1,118 @@
+<legend>Daily Trips List</legend>
+
+<div class="bpdp-tab" ng-init="tab=1">
+    <ul>
+        <li class="tab"  ng-class="{active:tab==1}">
+            <a href ng-click="tab = 1">Daily Trips</a>
+        </li>
+
+        <li class="tab" ng-class="{active:tab==2}">
+            <a href ng-click="tab = 2">Search</a>
+        </li>
+    </ul>
+    <div class="tab-content" ng-show="tab==1">
+        <div class="row">
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-default" ng-click="previousDay()"><i class="glyphicon glyphicon-chevron-left"></i></button>
+            </div>
+
+            <div class="col-sm-3">
+                <p class="input-group">
+                    <my-datepicker ng-model="dt" ng-click="selectedDate()"></my-datepicker>
+                </p>
+            </div>
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-default" ng-click="nextDay()"><i class="glyphicon glyphicon-chevron-right"></i></button>
+            </div>
+            <button type="button" class="btn btn-sm btn-primary" ng-click="addDailyTrip()"><span
+                    class="glyphicon glyphicon-plus"></span> Add Trip
+            </button>
+            <label class="col-sm-1 control-label" ></label>
+            <div class="col-sm-3 ">
+            </div>
+        </div>
+        <!--<div class="row" ng-show="loading">
+            loading reports data for {{date}}...
+        </div>-->
+        <div class="row" style="margin-top:20px;">
+            <div class="col-xs-12">
+                <table class="table table-bordered table-condensed table-hover" ng-table="dailyTripsTableParams">
+                    <tr ng-repeat="trip in dailyTrips">
+                        <td data-title="'Date'" sortable="'date'" class="clickable-item">{{ trip.date }}</td>
+                        <td data-title="'Service #'" sortable="'serviceName'" class="clickable-item">{{ trip.serviceName }}</td>
+                        <td data-title="'VehicleNo'" sortable="'attrs.RegNo'" class="clickable-item">{{ trip.attrs.RegNo }}</td>
+                        <td data-title="'Staff'" sortable="'attrs.staffNames'" class="clickable-item">{{ trip.attrs.staffNames }}</td>
+
+
+                        <td class="clickable-item col-sm-2" data-title="'Action'">
+                            <md-icon type="button" class="btn" ng-click="addDailyTrip(trip.id)" title="Edit trip">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </md-icon>
+                            <md-icon type="button" class="btn" ng-click="deleteDailyTrip(trip.id)" title="Delete trip">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </md-icon>
+                        </td>
+                    </tr>
+                    <tr ng-if="!dailyTrips || dailyTrips.length === 0">
+                        <td colspan="6">No dailyTrips exist. Please add some.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content" ng-show="tab==2">
+        <form name="searchFuelBills" class="form-horizontal" autocomplete="off" role="form" unsaved-warning-form >
+            <div class="form-group">
+                <label class="col-sm-2 control-label p-5">Start Date:</label>
+                <div class="col-sm-3" >
+                    <my-datepicker ng-model="fromDate"></my-datepicker>
+                    <span class="input-group-btn">
+                    </span>
+
+                </div>
+
+                <label class="col-sm-2 control-label p-5">End Date:</label>
+                <div class="col-sm-3" >
+                    <my-datepicker ng-model="toDate"></my-datepicker>
+                    <span class="input-group-btn">
+                    </span>
+                </div>
+            </div>
+            <div class=" form-group">
+                <label class="col-sm-2 control-label" >VehicleNo :</label>
+                <div class="col-sm-3">
+                    <select class="form-control" ng-options="vehicle.id as vehicle.regNo for vehicle in vehiclesList" ng-model="searchQuery.vehicleId" id="vehicle">
+                        <option value="" selected>--Select Vehicle--</option>
+                    </select>
+                </div>
+
+                <label class="col-sm-1 control-label p-5">Staff:</label>
+                <div class="col-sm-3">
+                    <select id="fillingStationId" ng-options="staff.id as staff.name for staff in staffList" class="form-control" ng-model="searchQuery.staffId">
+                        <option value="" selected="selected">--Select Staff--</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-sm btn-success " ng-click="search()"> Search</button></button>
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="fuelBills">
+                    <table class="table table-bordered table-condensed table-hover" ng-table="dailyTripsSearchTableParams">
+                        <tr ng-repeat="trip in searchDailyTrips">
+                            <td data-title="'Date'" sortable="'date'" class="clickable-item">{{ trip.date }}</td>
+                            <td data-title="'Service #'" sortable="'serviceName'" class="clickable-item">{{ trip.serviceName }}</td>
+                            <td data-title="'VehicleNo'" sortable="'attrs.RegNo'" class="clickable-item">{{ trip.attrs.RegNo }}</td>
+                            <td data-title="'Staff'" sortable="'attrs.staffNames'" class="clickable-item">{{ trip.attrs.staffNames }}</td>
+                        </tr>
+                        <tr ng-if="!searchDailyTrips || searchDailyTrips.length === 0">
+                            <td colspan="6">No dailyTrips exist. Please add some.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

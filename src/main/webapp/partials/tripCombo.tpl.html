@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{headline}}</h3>
+    </div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="handleClickEditTrip()">
+                            <span class="glyphicon glyphicon-plus"></span> Add Trip Combo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="tripComboTableParams">
+                <tr ng-repeat="trip in currentPageOfTripCombos">
+                    <td data-title="'ComboNumbers'"  sortable="'comboNumber'" class="clickable-item col-md-4" >{{trip.comboNumber }}</td>
+                    <td data-title="'ServiceNumbers'" sortable="'serviceNumber'"  class="clickable-item col-md-4">{{trip.serviceNumber}}</td>
+                    <td data-title="'Status'" sortable="'active'" class="clickable-item col-md-2"><span ng-if="!trip.active">InActive</span><span ng-if="trip.active">Active</span></td>
+                    <td data-title="'Action'" class="ed-btn">
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="handleClickEditTrip(trip.id)">
+                                <span class="glyphicon glyphicon-pencil"></span></md-icon>
+                        </md-button>
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="delete(trip.id)">
+                                <span class="glyphicon glyphicon-remove"></span></md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+                <tr ng-if="!currentPageOfTripCombos || currentPageOfTripCombos.length === 0">
+                    <td colspan="5">No Trips Combos exist.  Please add some.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- modal popup for adding Trip Combo -->
+
+<script type="text/ng-template" id="update-tripCombo-modal.html">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-sm-11">
+                <h3 class="modal-title">Add/Edit</h3>
+            </div>
+            <div class="col-sm-1">
+                <md-button>
+                    <md-icon type="button" class="btn-sm" ng-click="cancel()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </md-icon>
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+
+        <!-- ---------------------------------------------------------------------------- -->
+
+        <form name="amenityForm" class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="col-xs-12" style="padding-left: 40px">
+                    <label class="ls text-600 font-weight-semi-bold control-label">Combo Number<span class="data-required">*</span> :</label>
+                    <input type="text" id="serviceone" class="form-control" ng-model="tripCombo.comboNumber" placeholder="Combo Number">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12" style="padding-left: 40px">
+                    <label class="ls text-600 font-weight-semi-bold control-label">Service Number<span class="data-required">*</span> :</label>
+                    <input type="text" id="servicetwo" class="form-control" ng-model="tripCombo.serviceNumber" placeholder="Service Number">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12" style="padding-left: 40px">
+                    <label class="ls text-600 font-weight-semi-bold checkbox" for="activeInactive">
+                        <input type="checkbox" id="activeInactive" class="" ng-model="tripCombo.active">
+                        Active :
+                    </label>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="save()" ng-disabled="!isInputValid()">Save</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

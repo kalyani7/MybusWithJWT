@@ -1,0 +1,75 @@
+<div class="" ng-show="!loading" >
+    <legend>{{ headline }}</legend><br/>
+
+    <div class="bpdp-tab" ng-init="tab=1">
+
+        <ul>
+            <li class="tab"  ng-class="{active:tab==1}">
+                <a href ng-click="tab = 1">Return Tickets By Date</a>
+            </li>
+            <li class="tab" ng-class="{active:tab==2}">
+                <a href ng-click="tab = 2">Return Tickets By Agent</a>
+            </li>
+            <li class="tab" ng-class="{active:tab==3}">
+                <a href ng-click="tab = 3">All Return Tickets</a>
+            </li>
+        </ul>
+        <div class="tab-content" ng-show="tab==1">
+            <table class="table table-bordered table-condensed table-hover" ng-table="returnTicketsByDateTableParams">
+                <tr ng-repeat="(key,value) in returnTickets.allDuesMappedByDate">
+                    <td data-title="'Date'" class="clickable-item col-md-1" ng-click="showReturnTicketsByDate(key)"><a>{{ key | date }}</a></td>
+                    <td data-title="'Number of tickets'" class="clickable-item col-md-1" ng-click="showReturnTicketsByDate(key)"><a>{{ value.length }}</a></td>
+                </tr>
+                <tr ng-if="!returnTickets.allDuesMappedByDate">
+                    <td colspan="7">No entries exist.</td>
+                </tr>
+            </table>
+        </div>
+        <div class="tab-content" ng-show="tab==2">
+            <div ng-show="!downloaded">
+            <table class="table table-bordered table-condensed table-hover" ng-table="returnTicketsByAgentTableParams">
+                <tr ng-repeat="(key,value) in returnTickets.allDuesMappedByAgent">
+                    <td data-title="'Agent'" class="clickable-item col-md-1" ng-click="showReturnTicketsByAgent(key)" ><a>{{ key }}</a></td>
+                    <td data-title="'Number of tickets'" class="clickable-item col-md-1" ng-click="showReturnTicketsByAgent(key)"><a>{{ value.length }}</a></td>
+                </tr>
+
+                <tr ng-if="!returnTickets.allDuesMappedByAgent">
+                    <td colspan="8">No dues found. </td>
+                </tr>
+            </table>
+            </div>
+            <div ng-show="downloaded">
+                Please wait while the data is loading <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+            </div>
+
+        </div>
+
+        <div class="tab-content" ng-show="tab==3">
+            <div ng-show="!returned">
+            <table class="table table-bordered table-condensed table-hover" ng-table="allReturnTicketsTableParams">
+                <tr ng-repeat="returnTicket in returnTickets.allDues">
+                    <td data-title="'BookedBy'"  sortable="'bookedBy'" class="clickable-item col-md-1">{{ returnTicket.bookedBy }}</td>
+                    <td data-title="'Passenger'"  sortable="'name'" class="clickable-item col-md-1">{{ returnTicket.name }}</td>
+                    <td data-title="'Route'"  sortable="'serviceName'" class="clickable-item col-md-1">{{ returnTicket.serviceName }}</td>
+                    <td data-title="'Service'"  sortable="'serviceNumber'" class="clickable-item col-md-1">{{ returnTicket.serviceNumber }}</td>
+                    <td data-title="'JourneyDate'"  sortable="'jdate'" class="clickable-item col-md-1">{{ returnTicket.jdate }}</td>
+                    <td data-title="'BookedOn'"  sortable="'bookedDate'" class="clickable-item col-md-1" >{{ returnTicket.bookedDate }}</td>
+                    <td data-title="'Pay'"  class="clickable-item col-md-1"><a ng-click="payBooking(returnTicket.id,null,returnTicket.serviceNumber)">Pay Now</a></td>
+
+                </tr>
+
+                <tr ng-if="!returnTickets.allDues || returnTickets.allDues === 0">
+                    <td colspan="8">No dues found for branch {{officeDue.name}}. </td>
+                </tr>
+            </table>
+            </div>
+            <div ng-show="returned">
+                Please wait while the data is loading <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+            </div>
+        </div>
+</div>
+</div>
+
+<div ng-show="loading">
+    Please wait while the data is loading <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+</div>

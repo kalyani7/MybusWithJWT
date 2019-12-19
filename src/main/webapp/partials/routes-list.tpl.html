@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{headline}}</h3>
+    </div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <label class="ls text-uppercase text-600 font-weight-semi-bold">Total No of Routes: </label>
+                    <span>{{ currentPageOfRoutes.length }}</span>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-primary" ui-sref="createRoute">
+                            <span class="glyphicon glyphicon-plus"></span> Add New Route
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="routeContentTableParams">
+                <tr ng-repeat="route in currentPageOfRoutes" ng-class="route.active?'':'bg-danger'">
+                    <td data-title="'Name'" sortable="'name'" class="clickable-item">{{ route.name }}</td>
+                    <td data-title="'From City'" sortable="'fromCityId'"class="clickable-item">{{ route.attrs.fromCity}}<!-- {{route.id}} --></td>
+                    <td data-title="'To City'"  sortable="'toCityId'" class="clickable-item">{{ route.attrs.toCity }}</td>
+                    <td data-title="'Action'" class="ed-btn">
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="handleClickUpdateRoute(route.id)">
+                                <span class="glyphicon glyphicon-pencil"></span></md-icon>
+                        </md-button>
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="handleClickDeleteRoute(route.id)">
+                                <span class="glyphicon glyphicon-remove"></span></md-icon>
+                        </md-button>
+                    </td>
+
+                </tr>
+                <tr ng-if="!currentPageOfRoutes || currentPageOfRoutes.length === 0">
+                    <td colspan="4">No routes exist.  Please add some.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="col-lg-3">
+<!--                        <label class="ls text-uppercase text-600 font-weight-semi-bold control-label">Total: </label><span>  {{ userCount }}</span>-->
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+<!--                        <form class="form-horizontal">-->
+<!--                            <div class="form-group">-->
+<!--                                <label class="col-sm-2 control-label ls text-uppercase text-600 font-weight-semi-bold">Search:</label>-->
+<!--                                <div class="col-sm-10">-->
+<!--                                    <input type="text" class="form-control" ng-model="filter" placeholder="Search">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </form>-->
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="addBank()"><span class="glyphicon glyphicon-plus"></span> Add Bank</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="userContentTableParams">
+                <tr ng-repeat="bank in bankList">
+                    <td data-title="'Bank Name'" class="clickable-item" sortable="'bankName'">{{ bank.bankName }}</td>
+                    <td data-title="'Account Name'" class="clickable-item" sortable="'accountName'">{{ bank.accountName }}</td>
+                    <td data-title="'Account Number'" class="clickable-item" sortable="'accountNumber'">{{ bank.accountNumber }}</td>
+                    <td data-title="'IFSC Code'" class="clickable-item" sortable="'ifscCode'">{{ bank.ifscCode }}</td>
+                    <td data-title="'Action'" class="ed-btn">
+                        <md-icon type="button" class="btn btn-xs" ng-click="editBank(bank.id)">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </md-icon>
+                        <md-icon type="button" class="btn btn-xs" ng-click="deleteBank(bank.id)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </md-icon>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

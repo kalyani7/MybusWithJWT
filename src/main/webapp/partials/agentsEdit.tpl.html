@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{headline}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 p-0">
+        <div class="ae-box">
+            <form name="agentUpdateForm" class=" ad-form" role="form">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="username">User Name</label>
+                        <input type="text" id="username" class="form-control" ng-model="agent.username">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="mobile">Mobile Number</label>
+                        <input type="text" id="mobile" class="form-control" ng-model="agent.mobile">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="mobile">Landline Number</label>
+                        <input type="text" id="landline" class="form-control" ng-model="agent.landline">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="branchOffice">BranchOffice</label>
+                        <select id="branchOffice" ng-options="office.id as office.name for office in offices"
+                                class="form-control" ng-model="agent.branchOfficeId" required></select>
+                        <a style="cursor: pointer;" ng-click="launchAddBranchOffice()">Add New Branch</a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="commission">Commission</label>
+                        <input type="number" id="commission" class="form-control" ng-model="agent.commission">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 padding-bottom">
+                        <div class="pull-right">
+                            <button class="btn btn-primary" ng-click="saveAgent()">Add</button>
+                            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
+</div>

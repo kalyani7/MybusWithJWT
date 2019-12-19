@@ -1,0 +1,24 @@
+<legend>{{ headline }}</legend>
+
+
+
+Business JSON:
+
+Resolved by Factual? {{resolved}}
+<br/>
+Factual Id : {{factualId}}
+<table style="vertical-align: text-top;">
+	<thead>
+		<th />
+		<th>FourSquare</th>
+		<th>Yelp</th>
+	</thead>
+	<tr>
+		<td style="vertical-align: text-top;"><pre class="tiny-debug"
+				style="width: 350px" ng-bind="business | json"></pre></td>
+		<td style="vertical-align: text-top;"><pre class="tiny-debug"
+				style="width: 350px" ng-bind="foursquareResponse | json"></pre></td>
+		<td style="vertical-align: text-top;"><pre class="tiny-debug"
+				style="width: 350px" ng-bind="yelpResponse | json"></pre></td>
+	</tr>
+</table>

@@ -1,0 +1,30 @@
+<legend>Jobs</legend>
+<div>
+    <div class="bpdp-tab">
+        <a ui-sref="inventories"><i class="fa fa-arrow-left" aria-hidden="true"></i>Go To Inventories Page</a>
+        <div class="tab-content">
+            <div class="form-group">
+                <div class="col-xs-2">
+                    <label class="control-label p-5">Count:</label>{{jobsCount}}
+                </div>
+            </div>
+            <table class="table table-bordered table-striped table-condensed table-hover text-center" ng-table="pendingTableParams"
+                   hide-pagination="false">
+                <tr ng-repeat="job in inventoryJobs"class="text-center">
+                    <td data-title="'S No'">{{ $index + 1 }}</td>
+                    <td data-title="'Inventory'" sortable="'attrs.inventory'" class="clickable-item col-sm-2">{{job.attrs.inventory }}</td>
+                    <td data-title="'Vehicle'" sortable="'attrs.RegNo'" class="clickable-item">{{job.attrs.RegNo }}</td>
+                    <td data-title="'Mileage'" sortable="'mileage'" class="clickable-item">{{job.mileage}}</td>
+                    <td data-title="'Job Date'" sortable="'jobDate'" class="clickable-item">{{job.jobDate | date}}</td>
+                    <td data-title="'Description'">{{job.jobDescription}}</td>
+                    <td data-title="'Remainder Date'" sortable="'reminderDate'" class="clickable-item col-sm-2">{{job.reminderDate | date}}</td>
+                    <td data-title="'Cost'" class="clickable-item col-sm-2">{{job.totalCost}}</td>
+                </tr>
+                <tr ng-if="!inventoryJobs || inventoryJobs.length === 0">
+                    <td colspan="7">No Jobs exist.</td>
+                </tr>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

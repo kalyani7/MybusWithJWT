@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{headline}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 p-0">
+        <div class="ae-box">
+            <form name="thisForm" class="form-horizontal ad-form" autocomplete="off" role="form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom"
+                         ng-class="{ 'has-error': (thisForm.officeName.$dirty || thisForm.submitted) && thisForm.officeName.$error.required}">
+                        <label class="ls text-600 font-weight-semi-bold" for="officeName">Name <span
+                                class="data-required">*</span></label>
+                        <input type="text" id="officeName" name="officeName" class="form-control" ng-model="office.name"
+                               placeholder="Office name" required>
+                        <span class="msg-error"
+                              ng-show="(thisForm.officeName.$dirty || thisForm.submitted) && thisForm.officeName.$error.required">Office name required</span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom"
+                         ng-class="{ 'has-error': thisForm.contactInput.$invalid && thisForm.contactInput.$dirty }">
+                        <label class="ls text-600 font-weight-semi-bold" for="editContactInput">Contact<span
+                                class="data-required">*</span></label>
+                        <input type="number" id="editContactInput" name="contactInput" class="form-control"
+                               ng-model="office.contact" ng-minlength="10" ng-maxlength="11"
+                               placeholder="contact number" required>
+                        <span class="msg-error" ng-show="thisForm.submitted && thisForm.contactInput.$invalid">Contact numeber requires 10 digits minimum </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom"
+                         ng-class="{ 'has-error': thisForm.city.$invalid && thisForm.city.$dirty }">
+                        <label class="ls text-600 font-weight-semi-bold" for="city">City<span
+                                class="data-required">*</span></label>
+                        <select id="city" ng-options="city.id as city.name for city in cities" class="form-control"
+                                ng-model="office.cityId" required></select>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="city">Manager</label>
+                        <select id="manager" ng-options="user.id as user.fullName for user in users"
+                                class="form-control" ng-model="office.managerId"></select>
+                        <small><a ng-click="launchUserAdd()">Add New User</a></small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom"
+                         ng-class="{ 'has-error': thisForm.emailInput.$invalid && thisForm.emailInput.$dirty }">
+                        <label class="ls text-600 font-weight-semi-bold" for="editEmailInput">Email</label>
+                        <input type="email" id="editEmailInput" name="emailInput" class="form-control"
+                               ng-model="office.email" placeholder="Email">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="editEmailInput">Address</label>
+                        <input type="text" id="address" name="address" class="form-control" ng-model="office.address"
+                               placeholder="Address">
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="checkbox" id="editallowCargoBooking" name="allowCargoBooking"
+                           ng-model="office.allowCargoBooking" style="width:20px;height: 20px;margin-left: 15px">
+                    <label class="ls text-600 font-weight-semi-bold" for="editEmailInput">Allow Cargo Bookings</label>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 padding-bottom">
+                        <div class="pull-right">
+                            <button class="btn btn-primary" ng-click="save(thisForm)">Save</button>
+                            <button class="btn btn-warning" ng-click="cancel(thisForm)">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
+</div>

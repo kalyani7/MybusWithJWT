@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+
+<!--- Edit User Form------->
+
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 p-0">
+        <div class="ae-box">
+            <form name="thisForm" class="form-horizontal ad-form" autocomplete="off" role="form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom" ng-class="{ 'has-error': thisForm.name.$invalid && thisForm.name.$dirty }">
+                        <label class="ls text-600 font-weight-semi-bold" for="name">Name<span class="data-required">*</span></label>
+                        <input type="text" id="name" name="name" class="form-control" ng-model="staff.name" placeholder="Full Name">
+                        <span ng-show="(thisForm.name.$dirty || thisForm.submitted) && thisForm.name.$error.required">Name required</span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom" ng-class="{ 'has-error': thisForm.contactNumber.$invalid && thisForm.contactNumber.$dirty }">
+                        <label class="ls text-600 font-weight-semi-bold" for="contactNumber">Contact Number<span class="data-required">*</span></label>
+                        <input type="text" id="contactNumber" name="contactNumber" class="form-control" ng-model="staff.contactNumber" placeholder="Contact Number">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom" ng-class="{ 'has-error': thisForm.name.$invalid && thisForm.name.$dirty }">
+                        <label class="ls text-600 font-weight-semi-bold" for="adhar">Aadhar number<span class="data-required"></span></label>
+                        <input type="text" id="adhar" name="aadhar" class="form-control" ng-model="staff.aadharNumber" placeholder="Aadhar Number">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="contactNumber">License Expiry<span class="data-required">*</span></label>
+                        <my-datepicker ng-model="staff.dlExpiry"></my-datepicker>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom" ng-class="{ 'has-error': thisForm.name.$invalid && thisForm.name.$dirty }">
+                        <label class="ls text-600 font-weight-semi-bold" for="code">Code<span class="data-required"></span></label>
+                        <input type="text" id="code" name="code" class="form-control" ng-model="staff.code" placeholder="Code">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="contactNumber">Type<span class="data-required">*</span></label>
+                        <select id="type" class="form-control" ng-model="staff.type">
+                            <option value="Driver">Conductor</option>
+                            <option value="Cleaner">Cleaner</option>
+                            <option value="Driver">Driver</option>
+                            <option value="Driver">Electrician</option>
+                            <option value="Cleaner">Mechanic</option>
+                            <option value="Cleaner">Manager</option>
+                            <option value="Cleaner">Office Staff</option>
+                            <option value="Driver">OtherStaff</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="code">Salary Per Duty<span class="data-required"></span></label>
+                        <label class="ls text-600 font-weight-semi-bold checkbox" for="editActiveInput">
+                            <input type="number" id="salaryPerDuty" class="form-control" ng-model="staff.salaryPerDuty">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold checkbox" for="editActiveInput" style="margin-left: 20px">
+                            <input type="checkbox" id="terminated" class="form-check-input" ng-model="staff.terminated">
+                            Terminated
+                        </label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold checkbox" for="editActiveInput" style="margin-left: 20px">
+                            <input type="checkbox" id="editActiveInput" class="form-check-input" ng-model="staff.active">
+                            Active.
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group row text-center mt-30">
+                    <button class="btn btn-primary" ng-click="save()">Save</button>
+                    <button  class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+        <!--<form name="thisForm" class="form-horizontal" autocomplete="off" role="form">-->
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label" for="name">Name<span class="data-required">*</span></label>-->
+                <!--<div class="col-sm-4" ng-class="{ 'has-error': thisForm.name.$invalid && thisForm.name.$dirty }">-->
+                    <!--<input type="text" id="name" name="name" class="form-control" ng-model="staff.name" placeholder="Full Name">-->
+                    <!--<span ng-show="(thisForm.name.$dirty || thisForm.submitted) && thisForm.name.$error.required">Name required</span>-->
+                <!--</div>-->
+                <!--<label class="col-sm-2 control-label" for="contactNumber">Contact Number<span class="data-required">*</span></label>-->
+                <!--<div class="col-sm-4" ng-class="{ 'has-error': thisForm.contactNumber.$invalid && thisForm.contactNumber.$dirty }">-->
+                    <!--<input type="text" id="contactNumber" name="contactNumber" class="form-control" ng-model="staff.contactNumber" placeholder="Contact Number">-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label" for="adhar">Aadhar number<span class="data-required"></span></label>-->
+                <!--<div class="col-sm-4" ng-class="{ 'has-error': thisForm.name.$invalid && thisForm.name.$dirty }">-->
+                    <!--<input type="text" id="adhar" name="aadhar" class="form-control" ng-model="staff.aadharNumber"-->
+                           <!--placeholder="Aadhar Number">-->
+                <!--</div>-->
+                <!--<label class="col-sm-2 control-label" for="contactNumber">License Expiry<span class="data-required">*</span></label>-->
+                <!--<div class="col-sm-4">-->
+                    <!--<p class="input-group">-->
+                        <!--<my-datepicker ng-model="staff.dlExpiry"></my-datepicker>-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label" for="code">Code<span class="data-required"></span></label>-->
+                <!--<div class="col-sm-4" ng-class="{ 'has-error': thisForm.name.$invalid && thisForm.name.$dirty }">-->
+                    <!--<input type="text" id="code" name="code" class="form-control" ng-model="staff.code"-->
+                           <!--placeholder="Code">-->
+                <!--</div>-->
+                <!--<label class="col-sm-2 control-label" for="contactNumber">Type<span class="data-required">*</span></label>-->
+                <!--<div class="col-sm-4">-->
+                    <!--<p class="input-group">-->
+                        <!--<select id="type" class="form-control" ng-model="staff.type">-->
+                            <!--<option value="Driver">Conductor</option>-->
+                            <!--<option value="Cleaner">Cleaner</option>-->
+                            <!--<option value="Driver">Driver</option>-->
+                            <!--<option value="Driver">Electrician</option>-->
+                            <!--<option value="Cleaner">Mechanic</option>-->
+                            <!--<option value="Cleaner">Manager</option>-->
+                            <!--<option value="Cleaner">Office Staff</option>-->
+                            <!--<option value="Driver">OtherStaff</option>-->
+                        <!--</select>-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label checkbox" for="editActiveInput">Terminated</label>-->
+                <!--<div class="col-xs-1">-->
+                    <!--<input type="checkbox" id="terminated" class="form-check-input" ng-model="staff.terminated">-->
+                <!--</div>-->
+                <!--<label class="col-sm-2 control-label checkbox" for="editActiveInput">Active</label>-->
+                <!--<div class="col-xs-1">-->
+                    <!--<input type="checkbox" id="editActiveInput" class="form-check-input" ng-model="staff.active">-->
+                <!--</div>-->
+            <!--</div>-->
+
+           <!--<div class="form-group row">-->
+                <!--<div class="col-sm-4 text-right">-->
+                    <!--<button class="btn btn-primary" ng-click="save()">Save</button>-->
+                <!--</div>-->
+                <!--<div class="col-sm-3 next">-->
+                    <!--<button  class="btn btn-danger" ng-click="cancel()">Cancel</button>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</form>-->
+
+

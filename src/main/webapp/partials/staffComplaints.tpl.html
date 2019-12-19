@@ -1,0 +1,52 @@
+    <legend>{{ title }}</legend>
+      <div class="row form-group">
+        <div class="col-xs-3">
+            <ul class="list-inline">
+                <li><label class="control-label p-5">Count:</label>{{count}}</li>
+            </ul>
+        </div>
+
+          <div class="col-sm-6">
+              <label class="control-label p-5 col-sm-4">Search By Staff:</label>
+              <div class="col-sm-8">
+                <select id="staffId" ng-options="staff.id as staff.name for staff in staffList" class="form-control"
+                        ng-model="filterByStaff" ng-change="init(filterByStaff)">
+                    <option selected value="">--Select Staff--</option>
+                </select>
+              </div>
+          </div>
+
+        <div class="pull-right" >
+            <button type="button" class="btn btn-sm btn-primary" ng-click="addStaffComplaint()"><span
+                    class="glyphicon glyphicon-plus"></span> New Complaint
+            </button>
+        </div>
+    </div>
+
+
+
+    <table class="table table-bordered table-striped table-condensed table-hover text-center" ng-table="complaintsTableParams"
+           hide-pagination="false">
+    <tr ng-repeat="complaints in currentPageOfStaffComplaints">
+        <td data-title="'StaffName'" sortable="'staffname'" class="clickable-item col-sm-2">{{ complaints.attrs.StaffName }}</td>
+        <td data-title="'Vehichle.No'" sortable="'regNo'" class="clickable-item col-sm-2">{{ complaints.attrs.RegNo }}</td>
+        <td data-title="'Remarks'" sortable="'remarks'" class="clickable-item col-sm-2">{{ complaints.remarks }}</td>
+        <td data-title="'Incident Date'" sortable="'complaints.incidentdate'" class="clickable-item col-sm-2">{{ complaints.incidentDate | date}}</td>
+        <td class="col-sm-1">
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="deleteComplaint(complaints.id)">
+                    <span class="fa fa-trash"></span></md-icon>
+            </md-button>
+        </td>
+    </tr>
+    <tr ng-if="!currentPageOfStaffComplaints || currentPageOfStaffComplaints.length === 0">
+        <td colspan="7">No Complaints exist.  </td>
+    </tr>
+</table>
+
+
+
+
+
+
+

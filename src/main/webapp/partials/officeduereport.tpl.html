@@ -1,0 +1,245 @@
+
+<div class="container" ng-show="!loading" >
+    <legend>{{ headline }}</legend>
+    <div class="row">
+        <div class="col-sm-2"> Branch: <b>{{officeDue.name}}</b></div>
+        <div class="col-sm-4"> Manager: <b>{{officeDue.managerName}}</b>  {{currentUser}}</div>
+    </div>
+
+    <div class="bpdp-tab" ng-init="tab=1">
+
+        <ul>
+            <li class="tab"  ng-class="{active:tab==1}">
+                <a href ng-click="tab = 1">Due Report By Date</a>
+            </li>
+            <li class="tab" ng-class="{active:tab==2}">
+                <a href ng-click="tab = 2">Due Report By Service</a>
+            </li>
+            <li class="tab" ng-class="{active:tab==3}">
+                <a href ng-click="tab = 3">Due Report By Agents</a>
+            </li>
+            <li class="tab" ng-class="{active:tab==4}">
+                <a href ng-click="tab = 4">Search</a>
+            </li>
+            <li class="tab" ng-class="{active:tab==5}">
+                <a href ng-click="tab = 5">Search By PNR</a>
+            </li>
+        </ul>
+        <div class="tab-content" ng-show="tab==1">
+            <b>Due Report</b>
+            <table class="table table-bordered table-condensed table-hover" ng-table="officeDuesTableParams">
+                <tr ng-repeat="due in currentPageOfOfficeDues">
+                    <td data-title="'Date'"  sortable="'date'" class="clickable-item col-md-1" ng-click="showDueReportByDate(due.date)"><a ng-click="showDueReportByDate(due.date)">{{ due.date }}</a></td>
+                    <td data-title="'Total Due'" sortable="'totalDue'"  class="clickable-item col-md-1" ng-click="showDueReportByDate(due.date)" >{{due.totalDue| number:2}} </td>
+                </tr>
+
+                <tr ng-if="!currentPageOfOfficeDues || currentPageOfOfficeDues.length === 0">
+                    <td colspan="8">No dues found for branch {{officeDue.name}}. </td>
+                </tr>
+            </table>
+        </div>
+        <div class="tab-content" ng-show="tab==2">
+            <b> Due Report By Service</b>
+            <table class="table table-bordered table-condensed table-hover" ng-table="serviceDuesTableParams">
+                <tr ng-repeat="due in currentPageOfServiceDues">
+                    <td data-title="'Service Id'"  sortable="'Id'" class="clickable-item col-md-1" ng-click="showDueReportByService(due._id)" ><a ng-click="showDueReportByService(due._id)">{{ due._id }}</a></td>
+                    <td data-title="'Total Due'" sortable="'totalDue'"  class="clickable-item col-md-1"  >{{ due.totalDue | number:2}} </td>
+                </tr>
+
+                <tr ng-if="!currentPageOfServiceDues || currentPageOfServiceDues.length === 0">
+                    <td colspan="8">No dues found for branch {{officeDue.name}}. </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="tab-content" ng-show="tab==3">
+            <table>
+                <tr>
+                    <td><b class="col-md-4">Due Report By Agent</b></td>
+                    <td class="col-md-4" align="right"><input class="form-control col-md-4"  ng-model="searchText" type="search" placeholder="Search text"></td>
+                </tr>
+                </table>
+                    <table class="table table-bordered table-condensed table-hover" ng-table="agentDuesTableParams">
+                <tr ng-repeat="due in currentPageOfAllAgentDues | filter:searchText">
+                    <td data-title="'Agent'"  sortable="'Id'" class="clickable-item col-md-1">
+                        <a ng-click="showDueReportByAgent(due._id)">{{ due._id }}</a>
+                    </td>
+                    <td data-title="'Total Due'" sortable="'totalDue'"  class="clickable-item col-md-1"  >{{ due.totalDue | number:2}} </td>
+                </tr>
+
+                <tr ng-if="!currentPageOfAllAgentDues || currentPageOfAllAgentDues.length === 0">
+                    <td colspan="8">No dues found for branch {{officeDue.name}}. </td>
+                </tr>
+            </table>
+        </div>
+        <div class="tab-content" ng-show="tab==4">
+            <form name="searchPayment">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Start Date :</label>
+                    <div class="col-sm-3">
+                        <my-datepicker ng-model="startDate"></my-datepicker>
+                    </div>
+
+                    <label class="col-sm-2 control-label ">End Date :</label>
+                    <div class="col-sm-3" >
+                        <my-datepicker ng-model="endDate"></my-datepicker>
+                    </div>
+                </div><br/><br/><br/>
+                <div class=" form-group">
+                    <div class="col-sm-3">
+                        <select id="searchBranchOffice" ng-options="office.id as office.name for office in offices" class="form-control" ng-model="branchOfficeId">
+                            <option value="" selected="selected">Branch Office (optional)</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-success " ng-click="search()" ng-disabled = "searchPayments.$invalid ">Search Dues </button></button>
+                    <button type="button" class="btn btn-sm btn-success " ng-click="exportToExcel('dueSearchResultsTable', 'BookingDues')" ng-disabled = "searchPayments.$invalid "> Export to Excel </button>
+                    <button type="button" class="btn btn-sm btn-success pull-right " ng-click="payBookings()" ng-show = "selectedBookings.length > 0"> Pay Bookings </button>
+
+                </div>
+            </form>
+            <br/>
+            <table class="table table-bordered table-condensed table-hover">
+                <tr><td>Total Due:{{totalDue | number}}</td></tr>
+            </table>
+
+            <table class="table table-bordered table-condensed table-hover" ng-table="searchDuesTableParams" id="dueSearchResults">
+                <tr ng-repeat="booking in dueBookings ">
+                    <td data-title="'BookedBy'" sortable="'bookedBy'" class="clickable-item col-md-1" >{{booking.bookedBy}}</td>
+                    <td data-title="'PNR'"  sortable="'ticketNo'" class="clickable-item col-md-1" >{{booking.ticketNo}}</td>
+                    <td data-title="'Passenger'" class="clickable-item col-md-1" >{{booking.name}} {{booking.phoneNo}}</td>
+                    <td data-title="'Seats'"  sortable="'seats'" class="clickable-item col-md-1" >{{booking.seats }}</td>
+                    <td data-title="'Service #'"  sortable="'service Number'" class="clickable-item col-md-1" >{{booking.serviceNumber }}</td>
+                    <td data-title="'Route'" sortable="'serviceNumber'" class="clickable-item col-md-2" >{{booking.source}} - {{booking.destination}} - {{booking.serviceName}})</td>
+                    <td data-title="'Journey Date'"  sortable="'jdate'" class="clickable-item col-md-1" >{{booking.jdate }}</td>
+                    <td data-title="'Booked On'" sortable="'bookedDate'" class="clickable-item col-md-1" >{{booking.bookedDate }}</td>
+                    <td data-title="'Due'"  sortable="'netAmt'" class="clickable-item col-md-1">{{ booking.netAmt | number }}</td>
+                    <td data-title="'Pay'"  class="clickable-item col-md-1">
+                        <input
+                                type="checkbox"
+                                name="selectedBookings[]"
+                                value="{{booking.id}}"
+                    <td data-title="'Passx`g.id}}"
+                            ng-checked="selection.indexOf(booking.id) > -1"
+                            ng-click="toggleBookingSelection(booking.id)">
+                    </td>
+
+                </tr>
+                <tr ng-if="!dueBookings || dueBookings.length === 0">
+                    <td colspan="10">No Bookings found</td>
+                </tr>
+            </table>
+            <div style="display: none;">
+                <table class="table table-bordered table-condensed table-hover" ng-table="searchBookingsParams" id="dueSearchResultsTable">
+                    <tr ng-repeat="booking in dueBookings ">
+                        <td data-title="'BookedBy'" sortable="'bookedBy'" class="clickable-item col-md-1" >{{booking.bookedBy}}</td>
+                        <td data-title="'PNR'"  sortable="'ticketNo'" class="clickable-item col-md-1" >{{booking.ticketNo}}</td>
+                        <td data-title="'Passenger'" class="clickable-item col-md-1" >{{booking.name}} {{booking.phoneNo}}</td>
+                        <td data-title="'Seats'"  sortable="'seats'" class="clickable-item col-md-1" >{{booking.seats }}</td>
+                        <td data-title="'Service #'"  sortable="'service Number'" class="clickable-item col-md-1" >{{booking.serviceNumber }}</td>
+                        <td data-title="'Route'" sortable="'serviceNumber'" class="clickable-item col-md-2" >{{booking.source}} - {{booking.destination}} - {{booking.serviceName}})</td>
+                        <td data-title="'Journey Date'"  sortable="'jdate'" class="clickable-item col-md-1" >{{booking.jdate }}</td>
+                        <td data-title="'Booked On'" sortable="'bookedDate'" class="clickable-item col-md-1" >{{booking.bookedDate }}</td>
+                        <td data-title="'Due'"  sortable="'netAmt'" class="clickable-item col-md-1">{{ booking.netAmt }}</td>
+                    </tr>
+                    <tr ng-if="!dueBookings || dueBookings.length === 0">
+                        <td colspan="10">No Bookings found</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="tab-content" ng-show="tab==5">
+            <form name="searchPayment">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">PNR# :</label>
+                    <div class="col-sm-6">
+                        <input type="text" ng-model="pnr">  <button type="button" class="btn btn-sm btn-success " ng-click="searchByPNR()">Search Ticket</button>
+                    </div>
+                </div>
+            </form>
+            <br/>
+            <table class="table table-bordered table-condensed table-hover" id="duesByPNR">
+                <tr ng-repeat="booking in duesByPNR">
+                    <td data-title="'BookedBy'" sortable="'bookedBy'" class="clickable-item col-md-1" >{{booking.bookedBy}}</td>
+                    <td data-title="'PNR'"  sortable="'ticketNo'" class="clickable-item col-md-1" >{{booking.ticketNo}}</td>
+                    <td data-title="'Passenger'" class="clickable-item col-md-1" >{{booking.name}} {{booking.phoneNo}}</td>
+                    <td data-title="'Seats'"  sortable="'seats'" class="clickable-item col-md-1" >{{booking.seats }}</td>
+                    <td data-title="'Service #'"  sortable="'service Number'" class="clickable-item col-md-1" >{{booking.serviceNumber }}</td>
+                    <td data-title="'Route'" sortable="'serviceNumber'" class="clickable-item col-md-2" >{{booking.source}} - {{booking.destination}} - {{booking.serviceName}})</td>
+                    <td data-title="'Journey Date'"  sortable="'jdate'" class="clickable-item col-md-1" >{{booking.jdate }}</td>
+                    <td data-title="'Booked On'" sortable="'bookedDate'" class="clickable-item col-md-1" >{{booking.bookedDate }}</td>
+                    <td data-title="'Due'"  sortable="'netAmt'" class="clickable-item col-md-1">{{ booking.netAmt }}</td>
+                    <td data-title="'Pay'"  class="clickable-item col-md-1" ng-if="booking.due"><a  ng-click="payBooking(booking.id,null,agentName)">Pay Now</a></td>
+                    <td data-title="'Paid on'"  ng-if="!booking.due" class="clickable-item col-md-1">Paid By:{{booking.attrs.paidBy}} on {{booking.paidOn|date}}</td>
+                </tr>
+                <tr ng-if="!duesByPNR || duesByPNR.length === 0">
+                    <td colspan="7">No Bookings found</td>
+                </tr>
+            </table>
+        </div>
+</div>
+</div>
+
+<div ng-show="loading">
+    Please wait while the report data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+</div>
+
+
+
+<script type="text/ng-template" id="officeDueReportByAgent.html">
+
+    <div class="container-fluid" style="padding: 10px 20px;" ng-show="!loading">
+        <div class="row">
+            <div class="col-lg-11">
+                <h3 class="modal-title">{{ headline }}</h3>
+            </div>
+            <div class="col-lg-1" style="text-align: right;">
+                <md-button>
+                    <md-icon type="button" class="btn-sm" ng-click="$dismiss()">
+                        <span class="glyphicon glyphicon-remove" style="cursor: pointer;"></span>
+                    </md-icon>
+                </md-button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-4"> Agent Name :  <b>{{ agentName }}</b></div>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-sm btn-success " ng-click="exportToExcel('agentDuesReport', 'AgentDuesReport')"> Export to Excel </button>
+            </div>
+            <div class="col-sm-4"> <button type="button" class="btn btn-sm btn-success pull-right " ng-click="payBookings()" ng-show = "selectedBookings.length > 0"> Pay Bookings </button></div>
+
+        </div>
+        <div class="row">
+            <br/>
+        </div>
+        <table class="table table-bordered table-condensed table-hover" ng-table="duesTableParams" id="agentDuesReport">
+            <tr ng-repeat="booking in currentPageOfDuesByAgent ">
+                <td data-title="'S No'">{{(duesTableParams.page() - 1) * duesTableParams.count() + $index + 1 }}</td>
+                <td data-title="'Passenger'" class="clickable-item col-md-1" >{{booking.name}} {{booking.phoneNo}}</td>
+                <td data-title="'PNR'"  sortable="'ticketNo'" class="clickable-item col-md-1" >{{booking.ticketNo}}</td>
+                <td data-title="'Seats'"  sortable="'seats'" class="clickable-item col-md-1" >{{booking.seats }}</td>
+                <td data-title="'Service #'"  sortable="'service Number'" class="clickable-item col-md-1" >{{booking.serviceNumber }}</td>
+                <td data-title="'Route'" sortable="'serviceNumber'" class="clickable-item col-md-2" >{{booking.source}} - {{booking.destination}} - {{booking.serviceName}})</td>
+                <td data-title="'Journey Date'"  sortable="'jdate'" class="clickable-item col-md-1" >{{booking.jdate }}</td>
+                <td data-title="'Booked On'" sortable="'bookedDate'" class="clickable-item col-md-1" >{{booking.bookedDate }}</td>
+                <td data-title="'Due'"  sortable="'netAmt'" class="clickable-item col-md-1">{{ booking.netAmt }}</td>
+                <td data-title="'Pay'"  class="clickable-item col-md-1">
+                    <input
+                            type="checkbox"
+                            name="selectedBookings[]"
+                            value="{{booking.id}}"
+                            ng-checked="selection.indexOf(booking.id) > -1"
+                            ng-click="toggleBookingSelection(booking.id)">
+                </td>
+            </tr>
+
+            <tr ng-if="!currentPageOfDuesByAgent || currentPageOfDuesByAgent.length === 0">
+                <td colspan="8">No dues found for branch. </td>
+            </tr>
+        </table>
+    </div>
+
+    <div ng-show="loading">
+        Please wait while the report data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+    </div>
+</script>

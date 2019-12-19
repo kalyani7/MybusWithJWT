@@ -1,0 +1,105 @@
+<legend>Salary Reports</legend>
+<div class="bpdp-tab" ng-init="tab=1">
+    <div>
+        <form class="form-horizontal" autocomplete="off" role="form" unsaved-warning-form >
+            <div class="form-group">
+                <label class="col-sm-2 control-label p-5">Start Date:</label>
+                <div class="col-sm-2" >
+                    <my-datepicker ng-model="fromDate"></my-datepicker>
+                </div>
+                <!--<div class="col-sm-1"></div>-->
+                <label class="col-sm-2 control-label p-5">End Date:</label>
+                <div class="col-sm-2" >
+                    <my-datepicker ng-model="toDate"></my-datepicker>
+                </div>
+            </div>
+            <div class=" form-group">
+                <label class="col-sm-2 control-label" >VehicleNo :</label>
+                <div class="col-sm-3">
+                    <select class="form-control" ng-options="vehicle.id as vehicle.regNo for vehicle in vehiclesList" ng-model="vehicleId" id="vehicle">
+                        <option value="" selected>--Select Vehicle--</option>
+                    </select>
+                </div>
+                <label class="col-sm-1 control-label p-5">Staff:</label>
+                <div class="col-sm-3">
+                    <select class="form-control" ng-options="staff.id as staff.name for staff in staffList | orderBy:'nameCode'"
+                            ng-model="staffId">
+                        <option value="" selected>&#45;&#45;Select Staff&#45;&#45;</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-sm btn-success" ng-click="searchSalaryReports()"> Search </button>
+            </div>
+        </form>
+    </div>
+    <ul>
+        <li class="tab"  ng-class="{active:tab==1}"  ng-click="getSalaryReportsByStatus(false)">
+            <a href ng-click="tab = 1">Pending</a>
+        </li>
+        <li class="tab"  ng-class="{active:tab==2}" ng-click="getSalaryReportsByStatus(true)">
+            <a href ng-click="tab = 2">Paid</a>
+        </li>
+
+    </ul>
+    <div class="tab-content" ng-show="tab==1">
+        <div class="toolbar-button-div pull-right">
+            <button type="button" class="btn btn-sm btn-success pull-right " ng-click="paySalary()"
+                    ng-show="selectedPayments.length > 0">Pay
+            </button>
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-xs-12">
+                <table class="table table-bordered table-striped table-condensed table-hover" ng-table="salaryReportParams">
+                    <tr ng-repeat="report in salaryReports">
+                        <td data-title="'S No'">{{(salaryReportParams.page() - 1) * salaryReportParams.count() + $index + 1 }}
+                        <td data-title="'Trip Date'" sortable="'date'" class="clickable-item">{{ report.tripDate | date}}</td>
+                        <td data-title="'Staff'" sortable="'attrs.staffNames'" class="clickable-item">{{ report.attrs.staffName }}</td>
+                        <td data-title="'Vehicle No'" sortable="'attrs.RegNo'" class="clickable-item">{{ report.attrs.RegNo }}</td>
+                        <td data-title="'Salary'" sortable="'salaryPerDuty'" class="clickable-item">{{ report.salaryPerDuty | number }}</td>
+                        <td data-title="'Pay'" sortable="'paidOn'" class="clickable-item" >
+                        <span>
+                             <input
+                                     type="checkbox"
+                                     name="selectedPayments[]"
+                                     value="{{report.id}}"
+                                     ng-checked="selection.indexOf(report.id) > -1"
+                                     ng-click="toggleSalaryReportSelection(report.id)">
+                        </span>
+                            <span ng-if="expense.status">
+                           {{expense.status}}
+                        </span>
+                        </td>
+                        <!--<td><a href="#" ng-click="payForTrip(report.id)" ng-if="!report.paidOn">Pay </a></td>-->
+                    </tr>
+                    <tr ng-if="!salaryReports || salaryReports.length === 0">
+                        <td colspan="9">No records exist.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" ng-show="tab==2">
+        <div class="row" style="margin-top:20px;">
+            <div class="col-xs-12">
+                <table class="table table-bordered table-striped table-condensed table-hover" ng-table="salaryReportParams">
+                    <tr ng-repeat="report in salaryReports">
+                        <td data-title="'S No'">{{(salaryReportParams.page() - 1) * salaryReportParams.count() + $index + 1 }}
+                        <td data-title="'Trip Date'" sortable="'date'" class="clickable-item">{{ report.tripDate | date}}</td>
+                        <td data-title="'Staff'" sortable="'attrs.staffNames'" class="clickable-item">{{ report.attrs.staffName }}</td>
+                        <td data-title="'Vehicle No'" sortable="'attrs.RegNo'" class="clickable-item">{{ report.attrs.RegNo }}</td>
+                        <td data-title="'Paid On'" sortable="'paidOn'" class="clickable-item">{{(report.paidOn | date)}}</td>
+                        <td data-title="'Amount paid'" sortable="'amountPaid'" class="clickable-item">{{(report.amountPaid)}}</td>
+                        <td data-title="'Paid By'" sortable="'paidBy.fullName'" class="clickable-item">{{ (report.paidBy.fullName)}}</td>
+                    </tr>
+                    <tr ng-if="!salaryReports || salaryReports.length === 0">
+                        <td colspan="9">No records exist.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

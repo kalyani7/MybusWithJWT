@@ -1,0 +1,186 @@
+<div class="col-md-8">
+	
+	<div class="col-md-10">
+		<label>Give us your email address</label>
+	</div>
+	
+	<div class="col-md-10">
+		<div class="col-md-6">
+			<input type="text" name="name" class="form-control" ng-model="payment.firstName" placeholder="Name" ng-init="payment.firstName='srinu'">
+		</div>
+		<div class="col-md-6">
+			<input type="text" name="customerPhoneNo" class="form-control" ng-model="payment.phoneNo" placeholder="Phone No" ng-init="payment.phoneNo='9492541342'">
+		</div>
+	<br/>
+	<br>
+	</div>
+	<div class="col-md-10">
+		<div class="col-md-6">
+			<input type="email" name="customerEmail" class="form-control" ng-model="payment.email" placeholder="Email" ng-init="payment.email='srinu@gmail.com'">
+		</div>
+		<div class="col-md-6">
+			<input name="customerAddress" class="form-control" ng-model="payment.address" placeholder="Address" ng-init="payment.address='hyderabad'">
+		</div>
+		<br/>
+		<br>
+	</div>
+	<div class="col-md-10" ng-repeat = "busJ in busJourneyies.busJournies" ng-init="payment.passengerInfo[busJ.journeyType]=[]">
+	
+		<br>
+		<label ng-if="busJ.journeyType=='ONE_WAY'">Onward Passenger Details </label>
+		<label ng-if="busJ.journeyType=='TWO_WAY'">Return Passenger Details </label>
+	
+	
+		<div class="col-md-12" ng-repeat="s in busJ.seatNumbers" ng-init="payment.passengerInfo[busJ.journeyType][$index]={}">
+		
+			<label class="col-md-2">Passenger{{$index+1}}:</label>
+			<div class="col-md-3"> 
+				<input type="radio" ng-model="payment.passengerInfo[busJ.journeyType][$index].gender"  value="male" ng-model="payment. "> Male 
+				<input type="radio" ng-model="payment.passengerInfo[busJ.journeyType][$index].gender" value="female" ng-model="payment. "> Female
+			</div>
+			<div class="col-md-3"> 
+				<input type="text" class="form-control" name = "name" ng-model="payment.passengerInfo[busJ.journeyType][$index].name" placeholder="Name" ng-model="payment. ">
+			</div>
+			<div class="col-md-2"> 
+				<input type="number" class="form-control" ng-model="payment.passengerInfo[busJ.journeyType][$index].age" placeholder="Age"> 
+			</div>
+			<div class="col-md-2"><input type="text" class="form-control" ng-disabled="true" ng-model="payment.passengerInfo[busJ.journeyType][$index].seatNumber" ng-init="payment.passengerInfo[busJ.journeyType][$index].seatNumber=s" >
+			<input type="hidden" ng-disabled="true" ng-model="payment.passengerInfo[busJ.journeyType][$index].seatFare" ng-init="payment.passengerInfo[busJ.journeyType][$index].seatFare=busJ.fare">
+			</div>
+			
+			<br/>
+			<br>
+	
+		</div>
+	</div>
+	<div class="col-md-10">
+		<br>
+		<div class="col-md-7">
+			<label>select Payment type</label>
+		</div>
+	  	<div class="col-md-5">
+	  		<select class="form-control" ng-model="payment.paymentType">
+		 		<option value="" selected="selected">-- pament type --</option>
+		 		<option value="EBS">EBS</option>
+		 		<option value="PAYU">PAYU</option>
+		 	</select>
+	  	</div>
+	 	<br>
+	</div>
+
+   	<div class="col-md-10"> 
+	 	<div class="col-md-1">
+	 		
+	 		<input type="checkbox" ng-model="acceptTerms" value="terms">
+	 		
+	 	</div>
+	 	<div class="col-md-10"> 
+	 	I agree to all the Terms and Conditions.
+	 	</div>
+ 	</div>
+ 	<input type="button" class="btn btn-primary pull-left" ng-disabled="ok()" ng-click="paymentButtonClicked()" value=" PayNow">
+</div>
+<div class="col-md-4">
+{{busJourneyies.busJourney}}
+<div  ng-repeat="busJourney in busJourneyies.busJournies">
+	<div class="col-md-12 text-primary">
+		<label  ng-if="busJourney.journeyType=='ONE_WAY'" >Onward Journey Ticket Details</label>
+		<label  ng-if="busJourney.journeyType=='TWO_WAY'" >Return Journey Ticket Details</label>
+	</div>
+
+	<div class="row">
+		<div class="col-md-5">
+			<label>From</label>
+		</div>
+		<div class="col-md-7">{{busJourney.fromCityId}}</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-5">
+			<label>To</label>
+		</div>
+		<div class="col-md-7">{{busJourney.toCityId}}</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-5">
+			<label>Journey Date </label>
+		</div>
+		<div class="col-md-7">{{busJourney.dateOfJourney}}</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-5">
+			<label>Service No </label>
+		</div>
+		<div class="col-md-7">{{busJourney.serviceNumber}}</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-5">
+			<label>Bus Type </label>
+		</div>
+		<div class="col-md-7">{{busJourney.serviceName}}</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-5">
+			<label>Seat Selection </label>
+		</div>
+		<div class="col-md-7"><span ng-repeat="sNo in busJourney.seatNumbers">{{sNo}}</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-5">
+			<label>Boarding Point </label>
+		</div>
+		<div class="col-md-7">{{busJourney.boardingPoint.bpName}}-{{busJourney.boardingPoint.time}}</div>
+	</div>
+
+	<div class="row" ng-if="busJourney.dropingPoint">
+		<div class="col-md-5">
+			<label>Droping Point </label>
+		</div>
+		<div class="col-md-7">{{busJourney.dropingPoint.droppingName}}-{{busJourney.dropingPoint.droppingTime}}</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-5">
+			<label>Fare </label>
+		</div>
+		<div class="col-md-7">{{busJourney.fare}}</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-5">
+			<label>10.00% Discount</label>
+		</div>
+		<div class="col-md-7">{{busJourney.discount}}</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-5">
+			<label>Net Amount</label>
+		</div>
+		<div class="col-md-7">{{busJourney.totalFare}}</div>
+	</div>
+
+</div>
+
+<div>
+
+
+	<div class="col-md-12 text-primary">
+		<label>Total Amount Payable</label>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-5">
+			<label>Net Amount</label>
+		</div>
+		<div class="col-md-7">{{busJourneyies.finalFare}}</div>
+	</div>
+</div>
+</div>
+<!-- This is a payu form directive which need to be submitted to payu payment gateway -->
+<form-submitter></form-submitter>

@@ -1,0 +1,76 @@
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="page-header">
+            <h3>{{ headline }}</h3>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="bpdp-tab" ng-init="tab=1">
+        <ul>
+            <li class="tab"  ng-class="{active:tab==1}">
+                <a href ng-click="tab = 1">All Bookings</a>
+            </li>
+            <li class="tab" ng-class="{active:tab==2}">
+                <a href ng-click="tab = 2">Search</a>
+            </li>
+        </ul>
+        <div class="tab-content box-body box-body-windo" ng-show="tab==1">
+            <span ng-show="!loading">
+                <table class="table table-bordered table-striped table-condensed table-hover" ng-table="countTableParams" hide-pagination="false">
+                    <tr ng-repeat="count in bookingCounts" ng-click="showBookingByPhone(count)">
+                        <td data-title="'Phone'"  sortable="'id'" class="clickable-item col-sm-2" >{{count._id}}</td>
+                        <td data-title="'Bookings'"  sortable="'totalBookings'" class="clickable-item col-sm-2" >{{ count.totalBookings }}</td>
+                    </tr>
+                </table>
+
+            </span>
+
+            <div ng-show="loading">
+                Please wait while the booking data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+            </div>
+        </div>
+        <div class="tab-content box-body box-body-windo" ng-show="tab==2">
+            <form name="searchForm" class="form-horizontal" role="form" autocomplete="off">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="phoneNumber">Phone number</label>
+                    <div class="col-sm-4">
+                        <input id="phoneNumber" type="number" class="form-control" ng-model="phoneNumber" placeholder="Enter the phone number" size="15">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-4 text-right">
+                        <button class="btn btn-primary" ng-click="search()" >Find Bookings</button>
+                    </div>
+                    <div class="col-sm-3 next">
+                        <button  class="btn btn-danger" ng-click="reset()">Reset</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed table-hover" ng-table="bookingsTableParams" hide-pagination="false">
+                    <tr ng-repeat="booking in currentPageOfBookings">
+                        <td data-title="'Booked By'"  sortable="'bookedBy'" class="clickable-item col-md-1" >{{ booking.bookedBy }}</td>
+                        <td data-title="'Ticket No'"  sortable="'ticketNo'" class="clickable-item col-md-1" >{{ booking.ticketNo }}</td>
+                        <td data-title="'Passenger'" class="clickable-item col-md-1" >{{booking.name}} {{booking.phoneNo}}</td>
+                        <td data-title="'Route'" sortable="'serviceNumber'" class="clickable-item col-md-1" >{{booking.source}} - {{booking.destination}} - {{booking.serviceName}})</td>
+                        <td data-title="'Seats'"  sortable="'seats'" class="clickable-item col-md-1" >{{booking.seats }}</td>
+                        <td data-title="'Journey Date'"  sortable="'jdate'" class="clickable-item col-md-1" >{{booking.jdate }}</td>
+                        <td data-title="'Booked On'" sortable="'bookedDate'" class="clickable-item col-md-1" >{{booking.bookedDate }}</td>
+                        <td data-title="'Due'"  sortable="'netAmt'" class="clickable-item col-md-1">{{ booking.netAmt }}</td>
+                    </tr>
+                    <tr ng-if="!currentPageOfBookings || currentPageOfBookings.length==0">
+                        <td colspan="7">No Bookings found</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

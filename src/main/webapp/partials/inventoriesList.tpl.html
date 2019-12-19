@@ -1,0 +1,47 @@
+<legend>Inventories</legend>
+<div class="row">
+    <div class="row form-group">
+        <div class="col-xs-2">
+            <label class="control-label p-5">Count:</label>{{count}}
+        </div>
+        <div class="col-xs-8 form-group">
+            <label class="control-label col-sm-2 p-5">Search:</label>
+            <div class="input-group col-sm-6">
+                <input type="text" class="form-control" placeholder="Search.." ng-model="inventoryName">
+                <span class="input-group-addon btn-primary custom-ga" id="basic-addon2" ng-click="init(inventoryName)">Search</span>
+            </div>
+        </div>
+        <div class="pull-right">
+            <button type="button" class="btn btn-sm btn-primary" ng-click="editInventory()"><span
+                    class="glyphicon glyphicon-plus"></span> Add Inventory
+            </button>
+        </div>
+    </div>
+
+<table class="table table-bordered table-striped table-condensed table-hover" ng-table="inventoryTableParams" hide-pagination="false">
+    <tr ng-repeat="inventory in inventories">
+        <td data-title="'Inventory Name'"  sortable="'name'" class="clickable-item col-sm-2" >{{ inventory.name }}</td>
+        <td data-title="'Unique Id'"  sortable="'uniqueId'" class="clickable-item col-sm-2" >{{ inventory.uniqueId }}</td>
+        <td data-title="'Supplier'"  sortable="'supplierId'" class="clickable-item col-sm-2" >{{ inventory.attrs.supplierName}}</td>
+        <td data-title="'Quantity'"  sortable="'quantity'" class="clickable-item col-sm-2" >{{ inventory.quantity }}</td>
+        <td data-title="'Remaining Quantity'"  sortable="'remainingQuantity'" class="clickable-item col-sm-2" >{{ inventory.remainingQuantity }}</td>
+        <td data-title="'UnitPrice'"  sortable="'unitCost'" class="clickable-item col-sm-2" >{{ inventory.unitCost }}</td>
+
+        <td class="col-sm-1">
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="editInventory(inventory.id)">
+                    <span class="glyphicon glyphicon-pencil"></span></md-icon>
+                <md-icon type="button" class="btn" ng-click="deleteInventory(inventory.id)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </md-icon>
+                <md-icon type="button" class="btn btn-xs" ng-click="viewJob(inventory.id)" title="View Job">
+                    <i class="glyphicon glyphicon-eye-open"></i>
+                </md-icon>
+            </md-button>
+        </td>
+    </tr>
+    <tr ng-if="!inventories || inventories.length === 0">
+        <td colspan="7">No Inventories exist.  </td>
+    </tr>
+</table>
+</div>

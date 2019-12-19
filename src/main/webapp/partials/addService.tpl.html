@@ -1,0 +1,268 @@
+<div ng-controller="addorEditServiceController">
+    <legend>{{title}}</legend>
+        <div class="row addService">
+            <div class="col-xs-12 form-group">
+                <label class="control-label p-5">Service Name: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <input type="text" class="form-control" ng-model="service.serviceName">
+                </div>
+
+                <label class="control-label p-5">Service Number: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <input type="text" class="form-control" ng-model="service.serviceNumber">
+                </div>
+            </div>
+            <div class="col-xs-12 form-group">
+                <label class="control-label p-5">Enquiry Phone Number: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <input type="text" class="form-control" ng-model="service.enquiryPhoneNumber">
+                </div>
+
+                <label class="control-label p-5">Cutoff-Time: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <input type="text" class="form-control" ng-model="service.cutoffTime">
+                </div>
+            </div>
+            <div class="col-xs-12 form-group">
+                <label class="control-label p-5">Layout Name: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <select class="form-control" ng-model="service.layoutName" ng-change="getLayout(service.layoutName)">
+                        <option value="" selected>--Select Layout--</option>
+                        <option ng-repeat="layout in layoutNames" value="{{layout.id}}">{{layout.name}}</option>
+                    </select>
+                </div>
+
+                <label class="control-label p-5">Status: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <select class="form-control" ng-model="service.status">
+                        <option value="" selected>--Select Status--</option>
+                        <option ng-repeat="s in status" value="{{s.id}}">{{s.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 form-group">
+                <label class="control-label p-5">Service Tax: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <input type="text" class="form-control" ng-model="service.serviceTax">
+                </div>
+
+                <label class="control-label p-5">Service Tax Mode: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <select class="form-control" ng-model="service.serviceTaxMode">
+                        <option value="" selected>--Select--</option>
+                        <option ng-repeat="s in status" value="{{s.id}}">{{s.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 form-group">
+                <label class="control-label p-5">Select All/Deselect All
+                    <input type="checkbox" class="checkbox custom-check checkbox-inline" ng-model="selectAll">: <span class="data-required">*</span> </label>
+                <div class="w-70">
+                    <table class="holder">
+                        <span class="deckTitle" ng-show="layoutByIdData.lowerDeck">Lower Deck:</span>
+                        <tr ng-repeat="r in layoutByIdData.lowerDeck">
+                            <td ng-repeat="seat in r.seats track by $index">
+                                <input type="checkbox" style="width:35px"
+                                       data-ng-model="selectAll"/> <br><span>{{seat.number}}</span></td>
+                        </tr>
+                    </table>
+                    <table class="holder" ng-if="layoutByIdData.hasUpperDeck">
+                        <span class="deckTitle" ng-show="layoutByIdData.hasUpperDeck == true">Upper Deck:</span>
+                        <tr ng-repeat="r in layoutByIdData.upperDeck">
+                            <td ng-repeat="seat in r.seats track by $index">
+                                <input type="checkbox" style="width:35px"
+                                       data-ng-model="seat.number"/> <br><span>{{seat.number}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 form-group">
+                <label class="control-label p-5">Seats/Berth No's: </label>
+                <div class="w-40">
+                    <textarea rows="4" class="form-control" ng-model="service.seats"></textarea>
+                </div>
+            </div>
+            <div class="col-xs-12 form-group">
+                <label class="control-label p-5">Upper Berth No's: </label>
+                <div class="w-40">
+                    <textarea rows="4" class="form-control" ng-model="service.upperBerthNos"></textarea>
+                </div>
+                <span>Berth No. seperated by ','</span>
+            </div>
+            <div class="col-xs-12 form-group">
+                <label class="control-label p-5">Double Berth No's: </label>
+                <div class="w-40">
+                    <textarea rows="4" class="form-control" ng-model="service.doubleBerthNos"></textarea>
+                </div>
+                <span>Berth No. seperated by ','</span>
+            </div>
+            <div class="col-xs-12">
+                <label class="control-label p-5">Journey From Date: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <my-datepicker ng-model="service.journeyFromDate"></my-datepicker>
+                </div>
+                <label class="control-label p-5">Journey To Date: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <my-datepicker ng-model="service.journeyToDate"></my-datepicker>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <label class="control-label p-5">Journey Start Time: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <select class="">
+                        <option value="" selected>HH</option>
+                        <option ng-repeat="hour in hours">{{hour.value}}</option>
+                    </select>
+                    <select class="">
+                        <option value="" selected>MM</option>
+                        <option ng-repeat="hour in hours">{{hour.value}}</option>
+                    </select>
+                    <select>
+                        <option value="" selected>Sec</option>
+                        <option ng-repeat="hour in hours">{{hour.value}}</option>
+                    </select>
+                </div>
+                <label class="control-label p-5">Journey End Time: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <select class="">
+                        <option value="" selected>HH</option>
+                        <option ng-repeat="hour in hours">{{hour.value}}</option>
+                    </select>
+                    <select class="">
+                        <option value="" selected>MM</option>
+                        <option ng-repeat="hour in hours">{{hour.value}}</option>
+                    </select>
+                    <select>
+                        <option value="" selected>Sec</option>
+                        <option ng-repeat="hour in hours">{{hour.value}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <label class="control-label p-5">Service Mode: <span class="data-required">*</span></label>
+                <ul class="w-30 list-inline">
+                    <li>
+                        <label><input type="radio" ng-model="service.serviceMode" name="serviceMode" value="Daily">Daily</label></li>
+                    <li><label><input type="radio" ng-model="service.serviceMode" name="serviceMode" value="Weekly">Weekly</label></li>
+                    <li><label><input type="radio" ng-model="service.serviceMode" name="serviceMode" value="Special">Special</label></li>
+                </ul>
+            </div>
+            <div class="col-xs-12" ng-show="service.serviceMode === 'Special'">
+                <label class="control-label p-5">Journey Date: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <my-datepicker ng-model="service.journeySpecialDate"></my-datepicker>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <label class="control-label p-5">Route Name: <span class="data-required">*</span></label>
+                <div class="w-30">
+                    <select class="form-control" ng-change="getViaCities(service.route)" ng-model="service.route">
+                        <option value="" selected>--Select Route--</option>
+                        <option ng-repeat="route in routeNames" value="{{route.id}}">{{route.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-12 form-group" ng-show="service.route">
+                <table class="text-center route-table">
+                    <tr>
+                        <th class="col-sm-3 text-center"><b>Station Name</b></th>
+                        <th class="col-sm-3 text-center"><b>Provide Stop</b></th>
+                        <th class="col-sm-3 text-center"><b>Departure Time</b></th>
+                        <th class="col-sm-3 text-center"><b>Day</b></th>
+                    </tr>
+                    <tr>
+                        <td>{{viaCities.fromCityName}}</td>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            <select class="">
+                                <option value="" selected>HH</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                            <select class="">
+                                <option value="" selected>MM</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                            <select>
+                                <option value="" selected>Sec</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                <option value="" selected>Day</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="viaCity in viaCities.viaCitiesNames track by $index">
+                        <td>{{viaCity.viaCityName}}</td>
+                        <td>
+                            <input type="checkbox" ng-model="viaCity.viaCityId"
+                                    checklist-value="{{viaCity.viaCityId}}" ng-change="selectCity({cityName:viaCity.viaCityName, status:viaCity.viaCityId})" >
+                        </td>
+                        <td>
+                            <select class="">
+                                <option value="" selected>HH</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                            <select class="">
+                                <option value="" selected>MM</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                            <select>
+                                <option value="" selected>Sec</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                <option value="" selected>Day</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{viaCities.toCityName}}</td>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            <select class="">
+                                <option value="" selected>HH</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                            <select class="">
+                                <option value="" selected>MM</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                            <select>
+                                <option value="" selected>Sec</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                <option value="" selected>Day</option>
+                                <option ng-repeat="hour in hours">{{hour.value}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button type="submit"><b>Get Halts Fare</b></button> </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    <div class="col-xs-12 text-center mtb-5">
+        <button class="btn btn-primary btn-success" ng-click="addBusService()">Save</button>
+        <button class="btn btn-primary btn-danger">Cancel</button>
+    </div>
+
+</div>

@@ -1,0 +1,40 @@
+
+<div class="container" ng-show="!loading">
+    <legend>{{ headline }}</legend>
+   <div class="row">
+        <div class="col-sm-6"> Service Number :  <b>{{serviceNo}}</b></div>
+       <div class="col-sm-4"> <button type="button" class="btn btn-sm btn-success pull-right " ng-click="payBookings()" ng-show = "selectedBookings.length > 0"> Pay Bookings </button></div>
+
+   </div>
+    <div class="row">
+        <br/>
+    </div>
+    <table class="table table-bordered table-condensed table-hover" ng-table="duesTableParams">
+        <tr ng-repeat="booking in currentPageOfDues">
+            <td data-title="'Booked By'"  sortable="'bookedBy'" class="clickable-item col-md-1" >{{ booking.bookedBy }}</td>
+            <td data-title="'PNR'"  sortable="'ticketNo'" class="clickable-item col-md-1" >{{booking.ticketNo}}</td>
+            <td data-title="'Passenger'" class="clickable-item col-md-1" >{{booking.name}} {{booking.phoneNo}}</td>
+            <td data-title="'Route'" sortable="'serviceNumber'" class="clickable-item col-md-1" >{{booking.source}} - {{booking.destination}} - {{booking.serviceName}})</td>
+            <td data-title="'Seats'"  sortable="'seats'" class="clickable-item col-md-1" >{{booking.seats }}</td>
+            <td data-title="'Journey Date'"  sortable="'jdate'" class="clickable-item col-md-1" >{{booking.jdate }}</td>
+            <td data-title="'Booked On'" sortable="'bookedDate'" class="clickable-item col-md-1" >{{booking.bookedDate }}</td>
+            <td data-title="'Due'"  sortable="'netAmt'" class="clickable-item col-md-1">{{ booking.netAmt }}</td>
+            <td data-title="'Pay'"  class="clickable-item col-md-1">
+                <input
+                        type="checkbox"
+                        name="selectedBookings[]"
+                        value="{{booking.id}}"
+                        ng-checked="selection.indexOf(booking.id) > -1"
+                        ng-click="toggleBookingSelection(booking.id)">
+            </td>
+        </tr>
+
+        <tr ng-if="!currentPageOfDues || currentPageOfDues.length === 0">
+            <td colspan="8">No dues found for branch. </td>
+        </tr>
+    </table>
+</div>
+
+<div ng-show="loading">
+    Please wait while the report data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+</div>

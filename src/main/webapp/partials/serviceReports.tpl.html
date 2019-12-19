@@ -1,0 +1,74 @@
+<legend>{{ headline }}</legend>
+<div ng-controller="DatepickerPopupCtrl">
+    <div class="row" ng-show="!loading">
+        <div class="col-sm-1"/>
+        <div class="col-sm-1">
+            <button type="button" class="btn btn-default" ng-click="previousDay()"><i class="glyphicon glyphicon-chevron-left"></i></button>
+        </div>
+
+        <div class="col-sm-3">
+            <p class="input-group">
+                <my-datepicker ng-model="dt"></my-datepicker>
+            </p>
+        </div>
+        <div class="col-sm-1">
+            <button type="button" class="btn btn-default" ng-click="nextDay()"><i class="glyphicon glyphicon-chevron-right"></i></button>
+        </div>
+        <div class="col-sm-4">
+            <div class="toolbar-button-div pull-right">
+                <button type="button" class="btn btn-sm btn-primary" ng-click="downloadReports()" ng-show="!downloaded">
+                    <span class="glyphicon glyphicon-plus"></span> Download Passenger Report
+                </button>
+                <p ng-show="downloaded">The report was downloaded on {{downloadedOn}}</p>
+                <!--
+                <button type="button" class="btn btn-sm btn-primary" ng-click="refreshReports()" ng-show="downloaded && isAdmin()">
+                    <span class="glyphicon glyphicon-plus"></span> Refresh Reports
+                </button> -->
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="loading">
+        loading reports data for {{date}}...
+    </div>
+    
+    <div class="row" style="margin-top:20px;">
+       	<form name="thisForm" class="form-horizontal" autocomplete="off" role="form">
+		    <div class="form-group">
+		        <label class="col-sm-2 control-label" for="service">Services</label>
+		        <div class="col-sm-4">
+		            <select id="service" ng-options="service.serviceId as service.serviceName for service in serviceList" class="form-control" ng-model="serviceId"></select>
+		        </div>
+		
+		        <div class="col-sm-4">
+		             <button class="btn btn-primary" ng-disabled="!serviceId" ng-click="getPassengerReport(serviceId)">Download Passenger Report</button>   
+		        </div>
+		    </div>
+	    </form>
+    </div>
+    
+    <div class="row" style="margin-top:20px;">
+	    <table class="table table-bordered table-condensed table-hover">
+	        <tr><td>Total:{{currentPageOfReports.length}}</td> <td>Submitted:{{submitted}}</td> <td>Verified:{{verified}}</td></tr>
+	    </table>
+	
+	    <table class="table table-bordered table-condensed table-hover" ng-table="serviceReportTableParams">
+	        <tr ng-repeat="service in currentPageOfReports">
+	            <td data-title="'Service#'"  sortable="'serviceNumber'" class="clickable-item col-md-2" ng-click="goToServiceReport(service)">{{ service.serviceNumber }}</td>
+	            <td data-title="'Type'"  sortable="'busType'" class="clickable-item col-md-2" ng-click="goToServiceReport(service)">{{ service.busType }}</td>
+	            <td data-title="'From'"  sortable="'source'" class="clickable-item col-md-2" ng-click="goToServiceReport(service)">{{ service.source }}</td>
+	            <td data-title="'To'"  sortable="'destination'" class="clickable-item col-md-2" ng-click="goToServiceReport(service)">{{ service.destination }}</td>
+	            <td data-title="'Vehicle'"  sortable="'vehicleRegNumber'" class="clickable-item col-md-2" ng-click="goToServiceReport(service)">{{ service.vehicleRegNumber }}</td>
+	            <td data-title="'Cash/Net Income'" sortable="'netIncome'" class="clickable-item col-md-2" ng-click="goToServiceReport(service)">{{ service.netCashIncome }}/ {{ service.netIncome }}</td>
+	            <td data-title="'Status'"  sortable="'status'" class="clickable-item col-md-2" ng-click="goToServiceReport(service)">
+	                {{service.status}}
+	            </td>
+                <td data-title="'Submitted By'"  sortable="'status'" class="clickable-item col-md-2" ng-click="goToServiceReport(service)">
+                    {{service.attrs.submittedBy}}
+                </td>
+	         </tr>
+	        <tr ng-if="!currentPageOfReports || currentPageOfReports.length === 0">
+	            <td colspan="8">No reports exist. </td>
+	        </tr>
+	    </table>
+	 </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="container">
+	<div class="row h3  text-center">PASSENGER DETAILS</div>
+	<div class="row">
+		<label  id="boardingPoint">Boarding At</label>
+		<label>{{bookingCtrl.passengerInfo.boardingPoint}}</label>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="h4">Primary Passenger</div>
+			</div>
+			<div class="col-sm-4 pull-center">
+				<div class="h4">Seat:{{bookingCtrl.passengerInfo.primaryPassenger.seatNumber}}</div>
+			</div>
+		</div>
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<input type=" text" id="pname" class="form-control" name="pname"
+				     data-ng-model="bookingCtrl.passengerInfo.primaryPassenger.name"
+					placeholder="Name" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<input type="text" id="page" class="form-group" name="page"
+				     data-ng-model="bookingCtrl.passengerInfo.primaryPassenger.age"
+					class="form-control" placeholder="Age" />
+			</div>
+			<div class="col-sm-4 pull-left">
+				<label class="radio-inline"> <input type="radio"
+				    data-ng-model="bookingCtrl.passengerInfo.primaryPassenger.gender"
+					name="gender" id="male" value="male">Male
+				</label> <label class="radio-inline"> <input type="radio"
+					data-ng-model="bookingCtrl.passengerInfo.primaryPassenger.gender"
+					name="gender" id="female" value="female">Female
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group" data-ng-repeat="copassenger in bookingCtrl.passengerInfo.copassengers" data-ng-init="rowNumber = $index">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="h4">Co-Passenger {{rowNumber +1}}</div>
+			</div>
+			<div class="col-sm-4 pull-center">
+				<div class="h4">Seat:{{copassenger.seatNumber}}</div>
+			</div>
+		</div>
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<input type=" text" id="pname" class="form-control" name="pname" data-ng-model="copassenger.name"
+					placeholder="Name" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<input type="text" id="page" class="form-group" name="page" data-ng-model="copassenger.age"
+					class="form-control" placeholder="Age" />
+			</div>
+			<div class="col-sm-4 pull-left">
+				<label class="radio-inline"> <input type="radio" data-ng-model="copassenger.gender"
+					name="gender" id="male" value="male">Male
+				</label> <label class="radio-inline"> <input type="radio" data-ng-model="copassenger.gender"
+					name="gender" id="female" value="female">Female
+				</label>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+			<div class="col-sm-4">
+				<div class="h4">Contact Details</div>
+			</div>
+	</div>
+	<div class="row form-group">
+			<div class="col-sm-6">
+				<input type=" text" id="emailId" class="form-control" name="emailId"
+				    data-ng-model="bookingCtrl.contactInfo.email"
+					placeholder="Email" />
+			</div>
+	</div>
+	<div class="row form-group">
+			<div class="col-sm-6">
+				<input type=" text" id="phoneNumber" class="form-control" name="phoneNumber"
+				    data-ng-model="bookingCtrl.contactInfo.phone"
+					placeholder="Phone" />
+			</div>
+	</div>
+	<div class="row">
+			<div class="col-sm-4 pull-center">
+				<input type="submit" id="payment" class="btn btn-primary" data-ng-click="bookingCtrl.doPayment()" value="Do Payment" />
+			</div>
+	</div>
+</div>

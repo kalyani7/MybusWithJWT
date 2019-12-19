@@ -1,0 +1,116 @@
+<legend>{{ headline }}</legend>
+
+<div class="toolbar-button-div pull-right">
+    <button type="button" class="btn btn-sm btn-primary" ng-click="goToAddNewPlan()"><span class="glyphicon glyphicon-plus"></span> Add New Plan</button>
+</div>
+
+<table class="table table-bordered table-condensed table-hover" id="planTable" ng-table="planContentTableParams">
+    <tr ng-repeat="plan in currentPageOfPlans" ng-class="plan.active?'':'bg-danger'">
+        <td data-title="'Name'"  id="planName"  class="col-md-4">{{ plan.name  }}</td>
+        <td data-title="'Type'" class="col-md-4">{{ plan.type }}</td>
+        <td data-title="'Settlement Frequency'"  class="col-md-4">{{ plan.settlementFrequency }}</td>
+        <td class="col-md-2">
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="handleClickUpdatePlan(plan.id)">
+                    <span class="glyphicon glyphicon-pencil"></span></md-icon>
+            </md-button>
+        </td>
+        <td class="col-md-2">
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="handleClickDeletePlan(plan.id)">
+                    <span class="glyphicon glyphicon-remove"></span></md-icon>
+            </md-button>
+        </td>
+
+    </tr>
+    <tr ng-if="!currentPageOfPlans || currentPageOfPlans.length === 0">
+        <td colspan="4">No Plans exist.  Please add some.</td>
+    </tr>
+</table> 
+
+<!-- modal popup for Updating Plan -->
+
+<script type="text/ng-template" id="update-plan-modal.html">
+    
+	<div class="modal-header">
+        <div class="row">
+            <div class="col-sm-11">
+                <h3 class="modal-title">Update Plan</h3>
+            </div>
+            <div class="col-sm-1">
+                <md-button>
+                    <md-icon type="button" class="btn-sm" ng-click="cancel()">
+                        <span class="glyphicon glyphicon-remove"></span></md-icon>
+                </md-button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-body">
+
+        <!-- ---------------------------------------------------------------------------- -->
+        <form name="planUpdateForm" class="form-horizontal col-xs-offset-2" role="form">
+            <div class="form-group">
+                <!-- <label class="col-sm-3 control-label" for="planNameUpdate">Name</label> -->
+                <div class="col-sm-7">
+                    <input type="text" placeholder="Name" id="planNameUpdate" class="form-control" ng-model="plan.name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Plan Type</label>
+                <div class="col-sm-7">
+                    <label class="radio-inline" for="prePaidRadio"><input id="prePaidRadio" type="radio"  ng-model="plan.type" value="PREPAID"/>Pre-paid</label>
+                    <label class="radio-inline" for="postPaidRadio"><input id="postPaidRadio" type="radio"  ng-model="plan.type" value="POSTPAID"/>Post-Paid</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Commission Type</label>
+                <div class="col-sm-7">
+                    <label class="radio-inline" for="fixedRadio"><input id="fixedRadio" type="radio"  ng-model="plan.commissionType" value="FIXED"/>Fixed</label>
+                    <label class="radio-inline" for="percentageRadio"><input id="percentageRadio" type="radio"  ng-model="plan.commissionType" value="PERCENTAGE"/>Percentage</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!--  <label class="col-sm-3 control-label" for="depositInput">Deposit</label> -->
+                <div class="col-sm-7">
+                    <input type="number" placeholder="Deposit" id="depositInput" class="form-control" ng-model="plan.deposit">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- <label class="col-sm-3 control-label" for="balanceInput">Balance</label> -->
+                <div class="col-sm-7">
+                    <input type="number" placeholder="Balance" id="balanceInput" class="form-control" ng-model="plan.balance">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-5 control-label">Settlement Frequency</label>
+                <div class="col-sm-8">
+                    <label class="radio-inline" for="dailyRadio"><input id="dailyRadio" type="radio" ng-model="plan.settlementFrequency" value="DAILY"/>Daily</label>
+                    <label class="radio-inline" for="weeklyRadio"><input id="weeklyRadio" type="radio" ng-model="plan.settlementFrequency" value="WEEKLY"/>Weekly</label>
+                    <label class="radio-inline" for="monthlyRadio"><input id="monthlyRadio" type="radio" ng-model="plan.settlementFrequency" value="MONTHLY"/>Monthly</label>
+                    <label class="radio-inline" for="customRadio"><input id="customRadio" type="radio" ng-model="plan.settlementFrequency" value="CUSTOM"/>Custom</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- <label class="col-sm-3 control-label" for="thresholdInput">Threshold</label> -->
+                <div class="col-sm-7">
+                    <input type="number" placeholder="Threshold" id="thresholdInput" class="form-control" ng-model="plan.threshold">
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">Update</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+

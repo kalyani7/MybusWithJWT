@@ -1,0 +1,91 @@
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="handleClickAddCollectionZone()">
+                            <span class="glyphicon glyphicon-plus"></span> Add Collection Zone
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="tableParams">
+                <tr ng-repeat="collectionZone in collectionZones">
+                    <td data-title="'Name'"  sortable="'name'" class="clickable-item col-md-6" >{{ collectionZone.name }}</td>
+                    <td data-title="'Status'" sortable="'active'"  class="clickable-item col-md-4"><span ng-if="!collectionZone.active">InActive</span><span ng-if="collectionZone.active">Active</span></td>
+                    <td data-title="'Action'" class="ed-btn">
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="handleClickUpdateAmenity(collectionZone.id)">
+                                <span class="glyphicon glyphicon-pencil"></span></md-icon>
+                        </md-button>
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="deleteById(collectionZone.id)">
+                                <span class="glyphicon glyphicon-remove"></span></md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+                <tr ng-if="!collectionZones || collectionZones.length === 0">
+                    <td colspan="4">No collectionZones exist.  Please add some.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- modal popup for adding Amenity -->
+
+<script type="text/ng-template" id="add-collectionZone-modal.html">
+
+	<div class="modal-header">
+		<div class="row">
+            <div class="col-sm-11">
+        		<h3 class="modal-title">Collection Zone</h3>
+    		</div>
+ 			<div class="col-sm-1">
+        		<md-button>
+            		<md-icon type="button" class="btn-sm" ng-click="cancel()">
+               			<span class="glyphicon glyphicon-remove"></span>
+					</md-icon>
+           		</md-button>
+        	</div>
+		</div>
+	</div>
+    <div class="modal-body">
+
+        <!-- ---------------------------------------------------------------------------- -->
+        <form name="amenityForm" class="form-horizontal" role="form">
+            <div class="form-group">
+                 <div class="col-sm-7 col-xs-offset-2">
+                     <input type="text" id="collectionZoneName" class="form-control" ng-model="collectionZone.name" placeholder="CollectionZone Name">
+                 </div>
+            </div>
+
+         	<div class="form-group">
+               <label class="col-sm-4 control-label checkbox" for="activeInactive">Active</label>
+               <div class="col-sm-1">
+                    <input type="checkbox" id="activeInactive" class="form-control" ng-model="collectionZone.active">
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="save()">Add</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+

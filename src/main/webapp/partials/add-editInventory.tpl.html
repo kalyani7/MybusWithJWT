@@ -1,0 +1,59 @@
+<legend>{{pageTitle}}</legend>
+<form name="thisForm" class="form-horizontal" autocomplete="off" role="form">
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="name">Inventory name</label>
+        <div class="col-sm-4">
+            <input type="text" id="name" name="name" class="form-control" ng-model="inventory.name" placeholder="name">
+        </div>
+        <label class="col-sm-2 control-label" for="uniqueId">Unique Id*</label>
+        <div class="col-sm-4">
+            <input type="text" id="uniqueId" name="uniqueid" class="form-control" ng-model="inventory.uniqueId" placeholder="unique id">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Supplier</label>
+        <div class="col-sm-4">
+            <ui-select ng-model="inventory.supplierType" theme="select2" style="width: 100%">
+                <ui-select-match placeholder="Select Supplier ...">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="supplier in suppliers" null-option="others">
+                    <div ng-bind-html="supplier.name | highlight: $select.search "></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <label class="col-sm-2 control-label" for="uniqueId">Quantity</label>
+        <div class="col-sm-4">
+            <input type="number" id="quantity" name="quantity" class="form-control" ng-model="inventory.quantity" placeholder="quantity">
+        </div>
+    </div>
+    <div ng-show="inventory.supplierType == others">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="uniqueId">Other</label>
+            <div class="col-sm-4">
+                <input type="text" ng-model="inventory.othersSupplierName" class="form-control"  placeholder="Supplier*">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="activeInactive">Unit cost</label>
+        <div class="col-sm-4">
+            <input type="number" id="unitCost" name="unitCost" class="form-control" ng-model="inventory.unitCost" placeholder="Price">
+        </div>
+        <label class="col-sm-2 control-label" for="activeInactive">Paid :</label>
+        <div class="col-sm-4">
+            <input type="checkbox" id="activeInactive" ng-model="inventory.paid" class="custom-check">
+        </div>
+    </div>
+    <table>
+        <tr ng-repeat="message in inventory.messages" trackby $index>
+            <td>{{$index+1}}</td>
+            <td>.</td>
+            <td>{{message}}</td>
+        </tr>
+    </table>
+    <div class="clearfix"></div>
+    <div class="form-group row text-center mt-30">
+        <button class="btn btn-primary" ng-click="save()">Save</button>
+        <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+    </div>
+</form>
+</div>

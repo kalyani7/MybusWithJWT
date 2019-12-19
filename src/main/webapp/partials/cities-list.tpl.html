@@ -1,0 +1,143 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <label class="ls text-uppercase text-600 font-weight-semi-bold">Total No of Cities: </label>
+                    <span>{{ citiesCount }}</span>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="handleClickAddStateCity()"><span class="glyphicon glyphicon-plus"></span> Add City</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="cityContentTableParams">
+                <tr ng-repeat="city in currentPageOfCities" ng-class="city.active?'':'bg-danger'">
+                    <td data-title="'City'"  sortable="'name'" class="clickable-item" ng-click="goToBoardingPointsList(city.id)">{{ city.name }}</td>
+                    <td data-title="'State'"  sortable="'state'" class="clickable-item" ng-click="goToBoardingPointsList(city.id)">{{ city.state }}</td>
+                    <td data-title="'Action'" class="ed-btn">
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="handleClickUpdateStateCity(city.id)">
+                                <span class="glyphicon glyphicon-pencil"></span></md-icon>
+                        </md-button>
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="handleClickDeleteStateCity(city.id)">
+                                <span class="glyphicon glyphicon-remove"></span></md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+                <tr ng-if="!currentPageOfCities || currentPageOfCities.length === 0">
+                    <td colspan="4">No cities exist.  Please add some.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- modal popup for adding city/state -->
+
+<script type="text/ng-template" id="add-city-state-modal.html">
+
+	<div class="modal-header">
+		<div class="row">
+            <div class="col-xs-10">
+        		<h3 class="modal-title">Add a New City</h3>
+    		</div>
+ 			<div class="col-xs-2">
+        		<md-button class=" pull-right">
+            		<md-icon type="button" class="btn-sm" ng-click="cancel()">
+               			<span class="glyphicon glyphicon-remove"></span>
+					</md-icon>
+           		</md-button>
+        	</div>
+		</div>
+	</div>
+    <div class="modal-body">
+
+        <!-- ---------------------------------------------------------------------------- -->
+        <form name="cityStateNeighForm" class="form-horizontal" role="form">
+            <div class="form-group">
+               <div class="col-sm-7 col-xs-offset-2">
+                    <state-options id="modalStateInput" class="field" name="modalStateInput" ng-model="city.state" required></state-options>
+                </div>
+            </div>
+
+            <div class="form-group">
+               <!-- <label class="col-sm-3 control-label" for="cityInput">City</label> -->
+                <div class="col-sm-7 col-xs-offset-2">
+                    <input type="text" id="cityInput" class="form-control" ng-model="city.name" placeholder="City">
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()" ng-disabled="!isInputValid()">Add</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+
+<!-- modal popup for Updating city/state -->
+
+<script type="text/ng-template" id="update-city-state-modal.html">
+
+	<div class="modal-header">
+		<div class="row">
+            <div class="col-xs-10">
+        		<h3 class="modal-title">Update City</h3>
+    		</div>
+ 			<div class="col-xs-2">
+        		<md-button class=" pull-right">
+            		<md-icon type="button" class="btn-sm" ng-click="cancel()">
+               			<span class="glyphicon glyphicon-remove"></span>
+					</md-icon>
+           		</md-button>
+        	</div>
+		</div>
+	</div>
+    <div class="modal-body">
+
+        <!-- ---------------------------------------------------------------------------- -->
+        <form name="cityStateUpdateForm" class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="col-sm-7 col-xs-offset-2">
+                    <state-options id="modalStateInput" class="field" name="modalStateInput" ng-model="city.state" required></state-options>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- <label class="col-sm-3 control-label" for="cityInput">City</label> -->
+                <div class="col-sm-7 col-xs-offset-2">
+                    <input type="text" id="cityInput1" class="form-control" ng-model="city.name" placeholder="City">
+                </div>
+            </div>
+
+            <div class="form-group">
+               <label class="col-sm-4 control-label checkbox" for="activeInactive">Active</label>
+               <!-- <label class="col-sm-3 control-label" for="activeInactive"><span ng-if="!city.active">InActive</span></label>-->
+
+                <div class="col-sm-1">
+                    <input type="checkbox" id="activeInactive" class="form-control" ng-model="city.active">
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()" ng-disabled="!isInputValid()">Ok</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+

@@ -1,0 +1,32 @@
+<div class="">
+
+    <legend>{{ headline }}</legend>
+    <div class="row form-group">
+        <div class="col-sm-3">
+            <span class="small-text">Total: {{ userCount }}</span>
+        </div>
+        <div class="col-sm-6">
+            <label class="control-label p-5 col-sm-4">By Branch Office:</label>
+            <div class="col-sm-8">
+                <select class="form-control" ng-model="branchName" ng-change="searchBranchOffice(branchName)">
+                    <option value="" selected>--Branch Office--</option>
+                    <option value="All">All</option>
+                    <option ng-repeat="name in branchOfficeNames" value="{{name.id}}">{{name.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="table table-bordered table-condensed table-hover table-striped" ng-table="cashBalanceTableParams">
+        <tr ng-repeat="user in cashBalanceArray">
+            <td data-title="'userName'" class="col-sm-2" sortable="'fullName'">{{ user.userName }}</td>
+            <td data-title="'Name'" class="col-sm-2" sortable="'fullName'">{{ user.fullName }}</td>
+            <td data-title="'Contact'" class="col-sm-2" sortable="'contact'">{{ user.contact }}</td>
+            <td data-title="'CashBalance'" sortable="'amountToBePaid'" class="col-sm-1" sortable="'active'">
+                {{user.amountToBePaid | number : 2}}
+            </td>
+        </tr>
+        <tr ng-if="!cashBalanceArray || cashBalanceArray.length === 0" class="text-center">
+            <td colspan="11">No Cargo Bookings found</td>
+        </tr>
+    </table>
+</div>

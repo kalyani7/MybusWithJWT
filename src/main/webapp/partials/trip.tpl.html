@@ -1,0 +1,164 @@
+<style type="text/css">
+    .holder{
+    height:300px;
+    width:750px;
+    background-color:#F5F5F5;
+    border:1px solid #A4A4A4;
+    margin-left:10px;
+    }
+
+    .bigbus{
+    height:400px;
+    width:750px;
+    background-color:#F5F5F5;
+    border:1px solid #A4A4A4;
+    margin-left:10px;
+    }
+
+    table tr td.seat{
+    background:url("images/available_seat_img.gif") no-repeat scroll 0 0 transparent;
+    height:77px;
+    //width:40px;
+    }
+
+    table tr td.sleeper{
+    background:url("images/sleeper.png") no-repeat scroll 0 0 transparent;
+    height:77px;
+    //width:40px;
+    }
+
+     table tr td.selectedSeat
+    {
+    	background:url("images/booked_seat_img.jpg") no-repeat scroll 0 0 transparent;
+    	height:77px;
+    }
+    table tr td.selectingSeat
+    {
+	    background:url("images/selected_seat_img.jpg") no-repeat scroll 0 0 transparent;
+	    height:77px;
+    }
+    .seatDescription{
+	    padding-left : 5px;
+	    font-size : 10px;
+    }
+
+</style>
+<div data-ng-class="container">
+	<form name="searchBusesForm">
+		<div class="form-group">
+			<div class="row">
+				<div class="col-sm-2">
+					<label for="fromCity">From:</label>
+				</div>
+				<div class="col-sm-6">
+					<select name="fromCity" id="fromCity" ng-model="tripCtrl.searchFields.fromCity" class="form-control">
+      					<option data-ng-repeat="city in tripCtrl.cities" value="{{city.id}}">{{city.name}}</option>
+    				</select>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class="col-sm-2">
+					<label for="toCity">To:</label>
+				</div>
+				<div class="col-sm-6">
+					<select name="toCity" id="toCity" data-ng-model="tripCtrl.searchFields.toCity" class="form-control">
+      					<option data-ng-repeat="city in tripCtrl.cities" value="{{city.id}}">{{city.name}}</option>
+    				</select>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class="col-sm-2">
+					<label for="tripDate">Date of Journey</label>
+				</div>
+				<div class="col-sm-6">
+					<input type="date" placeholder="Journey Date" 
+						data-ng-model="tripCtrl.searchFields.tripDate" options="dateOptions" class="form-control" opened="opened"  
+					/>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-6 center">
+					<input type="submit" class="btn btn-primary" ng-click="tripCtrl.searchTrips()" value="Search Trips" />
+				</div>
+			</div>
+			<br/>
+		</div>
+	</form>
+	<hr><h4>Trips</h4><hr>
+	<table class="table table-bordered table-condensed table-hover" 
+			data-ng-show="tripCtrl.trips.length>0">
+		<thead>
+            <tr>
+                <th>
+                   <label>Service Name</label>
+                </th>
+                <th>
+                  <label>Timing</label>
+                </th>
+                <th>
+                  <label>Fare</label>
+                </th>
+            </tr>
+        </thead>		
+	<tbody>
+    <tr data-ng-repeat-start="trip in tripCtrl.trips">
+        <td>{{trip.serviceName}}</td>
+        <td>{{trip.tripDate | date: "hh:mm a"}}</td>
+        <td>{{trip.tripFare}} &nbsp;&nbsp;&nbsp;&nbsp;
+        	<input type="submit" class="btn btn-success" data-ng-click="tripCtrl.getTrip(trip.id)" value="View Seats" />
+        </td>
+     <tr>
+     <tr data-ng-repeat-end>
+     	<td>
+	    <table data-ng-if="!tripCtrl.busLayouts[trip.id].busLayout.sleeper" class="holder" data-ng-class="{'bigbus': tripCtrl.busLayouts[trip.id].busLayout.isBig}">
+	    	<tr data-ng-repeat="seats in tripCtrl.busLayouts[trip.id].busLayout.rows" data-ng-init="rowNumber = $index">
+	        	<td data-ng-class="getMatchingClass(trip.id,rowNumber,seat)" data-ng-repeat="seat in seats.seats">
+	        		<label  style="width:35px" data-ng-if="seat.number" data-ng-click="tripCtrl.markSeatForSelection(trip.id,seat,rowNumber)" >
+	        			{{tripCtrl.getSeatName(seat)}}
+	        		</label>
+	        	</td>
+	    	</tr>
+		</table>
+		<span>{{tripCtrl.busLayout.upperHeader}}</span>
+		<table class="holder">
+		    <tr data-ng-repeat="seats in tripCtrl.busLayout.upper">
+		        <td data-ng-class="{'sleeper': seat.number}" data-ng-repeat="seat in seats.seats">
+		        	<label style="width:35px" data-ng-if="seat.number" data-ng-init="mycol=tripCtrl.getSeatName(seat);" data-ng-model="seat[mycol]" >
+		        		{{tripCtrl.getSeatName(seat)}}
+		        	</label>
+		        </td>
+		    </tr>
+		</table>
+		<span>{{tripCtrl.busLayout.lowerHeader}}</span>
+		<table class="holder">
+		    <tr data-ng-repeat="seats in tripCtrl.busLayout.lower">
+		        <td data-ng-class="{'sleeper': seat.number}" data-ng-repeat="seat in seats.seats">
+		        	<label style="width:35px" data-ng-if="seat.number" data-ng-init="mycol=tripCtrl.getSeatName(seat);" 
+		        				data-ng-model="seat[mycol]" >{{tripCtrl.getSeatName(seat)}}</label>
+		        </td>
+		    </tr>
+		</table>
+		</td>
+		<td colspan="2">
+			<div data-ng-show="tripCtrl.busLayouts[trip.id].showLayout">
+				<select name="boardingPoint" id="boardingPoint" data-ng-model="tripCtrl.busLayouts[trip.id].selectedBoardingPoint"
+									data-ng-change="tripCtrl.enableContinue(trip.id);" class="form-control">
+	      					<option data-ng-repeat="boardingPoint in tripCtrl.busLayouts[trip.id].boardingPoints" value="{{boardingPoint.id}}">{{boardingPoint.name}}</option>
+	    		</select>
+	    		<br>
+	    		<input type="submit" id="continue" class="btn btn-primary"
+	    		    data-ng-show="tripCtrl.busLayouts[trip.id].showContinue" 
+	    		    data-ng-click="tripCtrl.proceedForBooking(trip.id)" value="Continue" />
+    		</div>
+		</td>
+    </tr>
+    </tbody>
+</table>
+</div>
+

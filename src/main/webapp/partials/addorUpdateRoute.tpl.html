@@ -1,0 +1,167 @@
+<div ng-controller="AddUpdateRouteModalController">
+    <div class="row">
+        <div class="page-header">
+            <h3>{{headline}}</h3>
+        </div>
+    </div>
+    <!--<legend>{{title}}</legend>-->
+
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 p-0">
+            <div class="ae-box">
+                <form name="amenityForm" class="ad-form" role="form">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 padding-bottom">
+                            <label class="ls text-600 font-weight-semi-bold" for="routeInput">Route Name:<span class="data-required">*</span></label>
+                            <input name="modalRouteName" type="text" id="routeInput" class="form-control" ng-model="route.name"
+                                   placeholder="Enter name for the Route"
+                                   ng-mouseleave="onMouseLeave(route.name)">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 padding-bottom">
+                            <label class="ls text-600 font-weight-semi-bold" for="originCity">Origin City:<span class="data-required">*</span></label>
+                            <select ng-options="city.id as city.name for city in cities | orderBy:'name'" class="form-control"
+                                    ng-model="route.fromCityId" required id="originCity">
+                                <option value="">--Select Origin City--</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-6 padding-bottom">
+                            <label class="ls text-600 font-weight-semi-bold" for="destinationCity">Destination City:<span class="data-required">*</span></label>
+                            <select ng-options=" city.id as city.name for city in cities | orderBy:'name'" class="form-control"
+                                    ng-model="route.toCityId" required id="destinationCity">
+                                <option value="">--Select Destination City--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 padding-bottom">
+                            <div class="input-group">
+                                <label class="ls text-600 font-weight-semi-bold" for="destinationCity">Via Cities:</label>
+                                <select name="modalRouteViaCities" ng-model="selectedViaCityId"
+                                        ng-options="city.id as city.name for city in selectedCities | orderBy:'name'" class="form-control">
+                                    <option value="">--Select Via City--</option>
+                                </select>
+                                <div class="input-group-btn form-input-group">
+                                    <button class="btn btn-primary" id="modalRouteAddViaCitiesButton"
+                                            ng-click="addTheCity(selectedViaCityId)">Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <ul dnd-list="list" class="cityDragandDrop">
+                                <li ng-repeat="item in list"
+                                    dnd-draggable="item"
+                                    dnd-moved="sorting($index)"
+                                    dnd-effect-allowed="move"
+                                    dnd-selected="selectedViaCities.selected = item"
+                                    ng-class="{'selected': selectedViaCities.selected === item}" draggable="true">
+                                    <span>{{$index+1}} - {{item.name}}
+                                        <a href="#" ng-click="deleteCityFromList(item.id)">
+                                            <span class="glyphicon glyphicon-remove"></span></a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="ls text-600 font-weight-semi-bold checkbox" for="activeInactive" style="margin-left: 20px;">
+                                <input type="checkbox" id="activeInactive" class="custom-check" ng-model="route.active">
+                                Active
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 padding-bottom">
+                            <div class="pull-right">
+                                <button class="btn btn-primary" ng-click="ok()">{{title}}</button>
+                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 form-group">
+            <label class="col-sm-2 control-label p-5" for="routeInput">Route Name:<span class="data-required">*</span></label>
+            <div class="col-sm-5">
+                <input name="modalRouteName" type="text" id="routeInput" class="form-control" ng-model="route.name"
+                       placeholder="Enter name for the Route"
+                       ng-mouseleave="onMouseLeave(route.name)">
+            </div>
+        </div>
+    <div class="col-xs-12 form-group">
+        <div class="">
+            <label class="col-sm-2 control-label p-5" for="originCity">Origin City:<span class="data-required">*</span></label>
+            <div class="col-sm-4">
+                <select ng-options="city.id as city.name for city in cities | orderBy:'name'" class="form-control"
+                        ng-model="route.fromCityId" required id="originCity">
+                    <option value="">--Select Origin City--</option>
+                </select>
+            </div>
+        </div>
+        <div class="">
+            <label class="col-sm-2 control-label p-5" for="destinationCity">Destination City:<span class="data-required">*</span></label>
+            <div class="col-sm-4">
+                <select ng-options=" city.id as city.name for city in cities | orderBy:'name'" class="form-control"
+                        ng-model="route.toCityId" required id="destinationCity">
+                    <option value="">--Select Destination City--</option>
+                </select>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-xs-12 form-group">
+        <label class="col-sm-2 control-label p-5" for="destinationCity">Via Cities:</label>
+            <div class="col-sm-4">
+                <select name="modalRouteViaCities" ng-model="selectedViaCityId"
+                        ng-options="city.id as city.name for city in selectedCities | orderBy:'name'" class="form-control">
+                    <option value="">--Select Via City--</option>
+                </select>
+            </div>
+            <div class="col-sm-1 p-5">
+                <button class="btn btn-primary btn-xs" id="modalRouteAddViaCitiesButton"
+                        ng-click="addTheCity(selectedViaCityId)">Add
+                </button>
+            </div>
+
+
+        <label class="col-sm-1 control-label p-5" for="activeInactive">Active:</label>
+            <div class="col-sm-1 ">
+                <input type="checkbox" id="activeInactive" class="custom-check" ng-model="route.active">
+            </div>
+    </div>
+        <div class="col-sm-6 col-xs-offset-2">
+            <ul dnd-list="list" class="cityDragandDrop">
+                <li ng-repeat="item in list"
+                    dnd-draggable="item"
+                    dnd-moved="sorting($index)"
+                    dnd-effect-allowed="move"
+                    dnd-selected="selectedViaCities.selected = item"
+                    ng-class="{'selected': selectedViaCities.selected === item}" draggable="true">
+                        <span>{{$index+1}} -{{item.name}}
+                            <a href="#" ng-click="deleteCityFromList(item.id)">
+                                <span class="glyphicon glyphicon-remove"></span></a>
+
+                        </span>
+                </li>
+            </ul>
+        </div>
+
+<div class="clearfix"></div>
+    <div class="text-right">
+        <button class="btn btn-primary" ng-click="ok()">{{title}}</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+    </div>
+</div>

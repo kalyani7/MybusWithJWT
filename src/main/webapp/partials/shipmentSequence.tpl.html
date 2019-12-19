@@ -1,0 +1,16 @@
+<div class="">
+    <legend>{{ headline }}</legend>
+    <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-hover" ng-table="sequenceTableParams">
+            <tr ng-repeat="sequence in currentPageOfsequences">
+                <td data-title="'Sequence Type'"  sortable="'SequenceType'" class="clickable-item col-md-2">{{ sequence.shipmentType }}</td>
+                <td data-title="'Start Number'"  sortable="'StartNumber'" class="clickable-item col-md-2" >{{ sequence.startNumber }}</td>
+                <td data-title="'Code Type'"  sortable="'CodeType'" class="clickable-item col-md-2">{{ sequence.shipmentCode }}</td>
+                <td data-title="'Next Number'"  sortable="'NextNumber'" class="clickable-item col-md-2" >{{ city.nextNumber }}</td>
+            </tr>
+            <tr ng-if="!currentPageOfsequences || currentPageOfsequences.length === 0">
+                <td colspan="4">No sequences exist.  Please add some.</td>
+            </tr>
+        </table>
+    </div>
+</div>

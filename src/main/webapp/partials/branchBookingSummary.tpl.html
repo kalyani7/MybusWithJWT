@@ -1,0 +1,135 @@
+<div ng-include="'partials/cargoLookup.tpl.html'"></div>
+
+<div ng-controller="CargoBranchSummaryController">
+    <div class="row">
+        <div class="box-body">
+            <div class="filter-form">
+                <form name="shipments">
+                    <div class="row filter-btn">
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12">
+                            <label class="ls text-600 font-weight-semi-bold">From Office:</label>
+                            <select id="fromBranchOffice" ng-options="office.id as office.name for office in offices"
+                                    class="form-control input-sm" ng-model="filter.fromBranchId" required></select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12">
+                            <label class="ls text-600 font-weight-semi-bold">Start Date :</label>
+                            <my-datepicker class="filter-date" ng-model="filter.startDate"></my-datepicker>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12">
+                            <label class="ls text-600 font-weight-semi-bold ">End Date :</label>
+                            <my-datepicker class="filter-date" ng-model="filter.endDate"></my-datepicker>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12 filter-btn-lr">
+                            <div class="btn-group filter-search-btn">
+                                <button type="button" class="btn btn-sm btn-success " ng-click="search()">Search
+                                    Bookings
+                                </button>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-success "
+                                        ng-click="exportToExcel('cargoBookings', 'CargoBookings')"
+                                        ng-disabled="searchPayments.$invalid ">Export to Excel
+                                </button>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <span ng-if="!summaryData || !summaryData.branchCargoBookings || summaryData.branchCargoBookings.length ===0 ">
+                <table class="table table-condensed table-hover text-center table-sm fs--1">
+                    <tr>
+                        <td>
+                            No Bookings found for the selected date range. Please adjust the search filter
+                        </td>
+                    </tr>
+                </table>
+            </span>
+            <div ng-if="summaryData.branchCargoBookings.length > 0">
+                <div class="table-responsive labelTextSize">
+                    <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" id="cargoBookings" data-theme="a">
+                        <thead>
+                            <tr>
+                                <th>Branch name</th>
+                                <th>Total No of Bookings</th>
+                                <th>Paid Booking (A)</th>
+                                <th>To-Pay Booking (B)</th>
+                                <th>To-Pay Delivered (C)</th>
+                                <th>On-Account Booking (D)</th>
+                                <th>Cancelled Amount (E)</th>
+                                <th>Total Bookings(A +B )</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in summaryData.branchCargoBookings" class="ng-scope">
+                                <td>{{branch.branchOfficeName}}</td>
+                                <td>{{branch.onAccountBookingsCount + branch.paidBookingsCount +
+                                    branch.topayBookingsCount}}
+                                </td>
+                                <td>{{branch.paidBookingsTotal}}</td>
+                                <td>{{branch.topayBookingsTotal}}</td>
+                                <td>{{branch.topayBookingsDeliveredTotal}}</td>
+                                <td>{{branch.onAccountBookingsTotal}}</td>
+                                <td>{{branch.canceledBookingsTotal}}</td>
+                                <td>{{branch.paidBookingsTotal + branch.topayBookingsTotal}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>{{summaryData.paidBookingsTotal}}</td>
+                                <td>{{summaryData.toPayBookingsTotal}}</td>
+                                <td>{{summaryData.toPayDeliveryTotal}}</td>
+                                <td>{{summaryData.onAccountBookingsTotal}}</td>
+                                <td>{{summaryData.cancelledTotal}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">(A + B + D - E) : {{summaryData.paidBookingsTotal +
+                                    summaryData.toPayBookingsTotal + summaryData.onAccountBookingsTotal -
+                                    summaryData.cancelledTotal}}
+                                </td>
+                                <td colspan="4">(A + C - E) : {{summaryData.paidBookingsTotal +
+                                    summaryData.toPayDeliveryTotal - summaryData.cancelledTotal}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div ng-if="summaryData.userCargoBookingsSummaries.length > 0">
+                <div class="table-responsive labelTextSize">
+                    <table class="table table-bordered bg-th table-sm fs--1" id="menu_list" data-theme="a">
+                        <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>Paid Booking</th>
+                                <th>To-Pay Booking</th>
+                                <th>To-Pay Delivered</th>
+                                <th>On-Account Booking</th>
+                                <th>Cancelled Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="user in summaryData.userCargoBookingsSummaries" class="ng-scope">
+                                <td>{{user.userName}}</td>
+                                <td>{{user.paidBookingsTotal}}</td>
+                                <td>{{user.topayBookingsTotal}}</td>
+                                <td>{{user.topayBookingsDeliveredTotal}}</td>
+                                <td>{{user.onAccountBookingsTotal}}</td>
+                                <td>{{user.canceledBookingsTotal}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>{{user.paidBookingsTotal}}</td>
+                                <td>{{user.toPayBookingsTotal}}</td>
+                                <td></td>
+                                <td>{{user.onAccountBookingsTotal}}</td>
+                                <td>{{user.cancelledTotal}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

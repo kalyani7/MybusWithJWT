@@ -1,0 +1,18 @@
+<div class="row" ng-show="!loading">
+    <legend>{{ headline }}</legend>
+    <table class="table table-bordered table-condensed table-hover" ng-table="duesTableParams">
+        <tr ng-repeat="dueReport in currentPageOfDues">
+            <td data-title="'Name'"  sortable="'name'" class="clickable-item col-md-2" ng-click="goToDueReport(dueReport.branchOfficeId)">{{ dueReport.name }}</td>
+            <td data-title="'Cash Balance'"  sortable="'cashBalance'" class="clickable-item col-md-2"> <a ng-click="gotoPayments()">{{ dueReport.cashBalance | number : 2}}</a></td>
+            <td data-title="'Total Due'"  sortable="'totalDue'" class="clickable-item col-md-2"><a ng-click="goToDueReport(dueReport.branchOfficeId)">{{ dueReport.totalDue | number : 2}}</a></td>
+        </tr>
+
+        <tr ng-if="!currentPageOfDues || currentPageOfDues.length === 0">
+            <td colspan="5">No reports exist. </td>
+        </tr>
+    </table>
+</div>
+
+<div ng-show="loading">
+    Please wait while the report data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+</div>

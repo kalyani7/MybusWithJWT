@@ -1,0 +1,124 @@
+<div class="row">
+	<div class="col-md-9">
+		<div ng-init="tab='ONE_WAY'">
+			
+				<label class="tab" ng-class="{active:tab=='ONE_WAY'}">
+					<a href ng-click="setTab('ONE_WAY')">One Way Journey</a>
+				</label>
+				<label class="tab" ng-if="ticketinfo.busJournies.length==2" ng-class="{active:tab=='TWO_WAY'}">
+				<strong> &nbsp;|&nbsp;</strong>
+					<a href ng-click="setTab('TWO_WAY')">Two Way Journey</a>
+				</label>
+			
+			<div ng-repeat="journey in ticketinfo.busJournies" ng-show="isSet(journey.journeyType)">
+					<div class="col-md-12">
+					
+						<div class="row">
+						
+							<div class="col-md-3">
+								<label>From City :</label> {{journey.fromCityId}}
+							</div>
+							<div class="col-md-3">
+								<label>To City :</label> {{journey.toCityId}}
+							</div>
+							
+							<div class="col-md-6">
+								<label>Date Of Journey :</label> {{journey.dateOfJourney}}
+							</div>
+	
+						</div>
+						
+						<div class="row">
+								<div class="col-md-3">
+									<label>
+									Service Name : 
+									</label>{{journey.serviceName}}
+								</div>
+								<div class="col-md-3">
+									<label>
+									Service Number :
+									</label	>{{journey.serviceNumber}}
+								</div>
+								<div class="col-md-6">
+									<label>Ticket No :</label> {{ticketinfo.bookingId}}
+								</div>
+						</div>
+						
+						<div class="row">
+							<table class="table">
+								<tr class="info">
+									<th>Droping Point</th>
+									<th>Droping Point</th>
+								</tr>
+								
+								<tr>
+									<td>
+										{{journey.boardingPoint.bpName}}-{{journey.boardingPoint.time}}
+									</td>
+									<td>
+										{{journey.dropingPoint.droppingName}}-{{journey.boardingPoint.droppingTime}}
+									</td>
+								
+								</tr>
+								
+							</table>
+						</div>
+						
+						<div class="row">
+							<label>Customer Info and Payment Info :</label>
+							<table class ="table table-condensed">
+								<tr class="info">
+									<th>C Name</th>
+									<th>C Phone No</th>
+									<th>C Email</th>
+									<th>Payment Type</th>
+									<th>Payment Id</th>
+								</tr>
+								
+								<tr>
+									<td>{{passengerData.firstName}}</td>
+									<td>{{passengerData.phoneNo}}</td>
+									<td>{{passengerData.email}}</td>
+									<td>{{passengerData.paymentType}}</td>
+									<td>{{passengerData.merchantRefNo}}</td>
+									
+								</tr>
+							</table>
+							
+						</div>
+					
+					<div class="row" >
+						<label>Passenger Information :</label>
+						<table class="table">
+							<tr class="info">
+								<th> Name </th>
+								<th> Gender </th>
+								<th> Age </th>
+								<th> Seat No </th>
+								<th> SeatFare </th>
+							</tr>
+							
+							<tr ng-if=" journey.journeyType == 'ONE_WAY'" ng-repeat="passinfo in passengerData.passengerInfoOneWay">
+								<td> {{passinfo.name}} </td>
+								<td> {{passinfo.gender}} </td>
+								<td> {{passinfo.age}} </td>
+								<td>{{passinfo.seatNumber}}</td>
+								<td>{{passinfo.seatFare}}</td>
+							</tr>
+							<tr ng-if=" journey.journeyType == 'TWO_WAY'" ng-repeat="passinfo in passengerData.passengerInfoTwoWay">
+								<td> {{passinfo.name}} </td>
+								<td> {{passinfo.gender}} </td>
+								<td> {{passinfo.age}} </td>
+								<td>{{passinfo.seatNumber}}</td>
+								<td>{{passinfo.seatFare}}</td>
+							</tr>
+							<tr>
+							 <td colspan="4">Total Fare</td> <td>{{journey.totalFare}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

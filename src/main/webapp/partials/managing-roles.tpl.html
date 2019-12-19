@@ -1,0 +1,35 @@
+<div class="row">
+	<div class="page-header">
+		<h3>{{headline}}</h3>
+	</div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+	<div class="box-body">
+		<div class="filter-form"></div>
+		<div class="table-responsive">
+			<table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="roleContentTableParams">
+				<thead>
+					<tr>
+						<th class="clickable-item " />
+						<th ng-repeat="role in roles" class="clickable-item " >{{role.name}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="menu in menus">
+						<td>{{menu.name | capitalize}}</td>
+						<td ng-repeat="permission in menu.permissions">
+							<input type="checkbox" ng-disabled="!isEditable" ng-checked="permission.allowed" ng-model='permission.allowed' checklist-value="{{permission.allowed}}" ng-change="addOrRemovefromRoles(permission.allowed,menu.name,permission.roleName)"/>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="text-right">
+		<button class="btn btn-warning" ng-click="editManagingRoles()">Edit Roles</button>
+		<button class="btn btn-primary" ng-disabled="!isEditable" ng-click="updateManagingRoles()">Update Roles</button>
+	</div>
+</div>

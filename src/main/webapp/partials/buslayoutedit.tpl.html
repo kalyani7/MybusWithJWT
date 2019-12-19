@@ -1,0 +1,188 @@
+<style type="text/css">
+    .holder {
+        height: 330px;
+        width: 700px;
+        background-color: #F5F5F5;
+        margin-left: 10px;
+    }
+    .holder tr td{
+        height: 77px;
+        text-align: left;
+    }
+
+    .seatInputs {
+        height: 330px;
+        margin: 0;
+        text-align: center;
+        width: 320px;
+    }
+    .seatInputs tr td{
+        height: 77px;
+    }
+
+    .bigbus {
+        height: 400px;
+        width: 700px;
+        background-color: #F5F5F5;
+        border: 1px solid #A4A4A4;
+        margin-left: 10px;
+    }
+
+    table tr td.seat {
+        background: url("client/assets-new/images/available_seat_img.gif") no-repeat scroll 0 1px transparent;
+    }
+
+    table tr td.sleeper {
+        background: url("client/assets-new/images/sleeper1.png") no-repeat scroll 0 1px transparent;
+    }
+
+    #place .selectedSeat {
+        background-image: url("client/assets-new/images/booked_seat_img.gif");
+    }
+
+    #place .selectingSeat {
+        background-image: url("client/assets-new/images/selected_seat_img.gif");
+    }
+
+    .seatDescription {
+        padding-left: 5px;
+        font-size: 10px;
+    }
+
+</style>
+
+
+<div ng-class="container">
+    <!--seat arrangement-->
+    <form name="layoutForm">
+        <div class="form-group">
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Name:</label>
+                    <input type="text" placeholder="Name" class="form-control" ng-model="name" required>
+                    <br>
+                </div>
+                <div class="col-sm-4">
+                    <label>No of rows:</label>
+                    <select class="form-control" data-ng-model="totalRows" ng-change="initRows()" required>
+                        <option ng-value="" selected="selected">-- No of rows --</option>
+                        <option ng-value="1">1</option>
+                        <option ng-value="2">2</option>
+                        <option ng-value="3">3</option>
+                        <option ng-value="4">4</option>
+                        <option ng-value="5">5</option>
+                    </select>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-sm-1 control-label checkbox">Active</label>
+                <div class="col-sm-3">
+                    <div class="col-sm-1 p-5">
+                        <input type="checkbox" ng-checked="active" class="form-control custom-check" ng-model="active">
+                    </div>
+                </div>
+                <label class="col-sm-2 control-label checkbox">Has Upper Deck</label>
+                <div class="col-sm-3">
+                    <div class="col-sm-1 p-5">
+                        <input type="checkbox" class="form-control custom-check" ng-model="hasUpperDeck"
+                               ng-change="initUpperDeck()" ng-checked="hasUpperDeck">
+                    </div>
+                </div>
+                <label class="col-sm-2 control-label checkbox">Total Seats -</label>
+                <div class="col-sm-1">
+                    <label class="control-label checkbox ">{{totalSeats}}</label>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <input type="submit" class="btn btn-primary" ng-if="!valid" ng-disabled="layoutForm.$invalid"
+           ng-click="saveLayout()" value="Save Layout"/>
+    <input type="submit" class="btn btn-primary" ng-if="valid" ng-click="saveLayout()" value="Save Layout"/>
+    <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+    <hr>
+
+
+</div>
+
+<div>
+    <span ng-show="hasUpperDeck ==true"><b>{{lowerHeader}}:</b></span>
+    <div class="row">
+        <table class="holder col-sm-5">
+            <tr ng-repeat="r in lowerDeck" ng-class="{'red':r.noOfSeats == 0}">
+                <td ng-class="{'seat':r.rowType === 'SEAT',  'sleeper':r.rowType === 'BERTH'  }"
+                    ng-repeat="seat in r.seats track by $index">
+                    <input type="text" style="width:35px"
+                           data-ng-model="seat.number"/></td>
+            </tr>
+        </table>
+
+        <table class="seatInputs col-sm-2">
+            <tr ng-repeat="r in lowerDeck">
+                <td><input type="text" style="width:35px" data-ng-model="r.noOfSeats"
+                           ng-change="getNumber(r,r.noOfSeats,'')"/></td>
+                <td>
+                    <select data-ng-model="r.rowType">
+                        <option value="" selected="selected">-- Type --</option>
+                        <option value="SEAT">SEAT</option>
+                        <option value="BERTH">BERTH</option>
+                    </select>
+                </td>
+                <td>
+                    <!--<select data-ng-model="r.isWindow">
+                        <option value="" selected="selected">&#45;&#45;Window&#45;&#45;</option>
+                        <option value="YES">Yes</option>
+                        <option value="NO">No</option>
+                    </select>-->
+                    <label>Window:
+                      <label><input type="radio" ng-value=true data-ng-model="r.window" ng-checked="r.window"> Yes</label>
+                      <label><input type="radio" ng-value=false data-ng-model="r.window" ng-checked="r.window"> No </label>
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<hr>
+<div ng-show="hasUpperDeck ==true">
+    <span><b>{{upperHeader}}:</b></span>
+    <div class="row">
+        <table class="holder col-sm-6">
+            <tr ng-repeat="r in upperDeck" ng-class="{'red':r.noOfSeats == 0}">
+                <td ng-class="{'seat':r.rowType === 'SEAT', 'sleeper':r.rowType === 'BERTH'}"
+                    ng-repeat="seat in r.seats track by $index">
+                    <input type="text" style="width:35px"
+                           data-ng-model="seat.number"/></td>
+            </tr>
+        </table>
+        <table class="col-sm-2 seatInputs">
+            <tr ng-repeat="r in upperDeck">
+                <td><input type="text" style="width:35px" data-ng-model="r.noOfSeats"
+                           ng-change="getNumber(r,r.noOfSeats)"/>
+                <td>
+                    <select data-ng-model="r.rowType">
+                        <option value="" selected="selected">-- Type --</option>
+                        <option value="SEAT">SEAT</option>
+                        <option value="BERTH">BERTH</option>
+                    </select></td>
+                <td>
+                  <!--  <select data-ng-model="r.isWindow">
+                        <option value="" selected="selected">&#45;&#45;Window &#45;&#45;</option>
+                        <option value="YES">Yes</option>
+                        <option value="NO">No</option>
+                    </select>-->
+                    {{r.isWindow}}
+                    <label>Window:
+                        <label><input type="radio" ng-value=true data-ng-model="r.window" ng-checked="r.window"> Yes</label>
+                        <label><input type="radio" ng-value=false data-ng-model="r.window" ng-checked="r.window"> No </label>
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+

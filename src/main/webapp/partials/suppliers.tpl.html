@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="handleEdit()">
+                            <span class="glyphicon glyphicon-plus"></span> Add Supplier
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="tableParams">
+                <tr ng-repeat="supplier in suppliers">
+                    <td data-title="'Name'"  sortable="'name'" class="clickable-item" >{{ supplier.name }}</td>
+                    <td data-title="'Party Type'"  sortable="'partyType'" class="clickable-item" >{{ supplier.partyType }}</td>
+                    <td data-title="'Contact'" sortable="'contact'"  class="clickable-item">{{supplier.contact}}</td>
+                    <td data-title="'Amount to be paid'" sortable="'toBePaid'"  class="clickable-item">{{supplier.toBePaid}}</td>
+                    <td data-title="'Amount to be collected'" sortable="'toBeCollected'"  class="clickable-item">{{supplier.toBeCollected}}</td>
+                    <td data-title="'Action'">
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="handleEdit(supplier.id)">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </md-icon>
+                        </md-button>
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="delete(supplier.id)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </md-icon>
+                        </md-button>
+                    </td>
+
+                </tr>
+                <tr ng-if="!suppliers || suppliers.length === 0">
+                    <td colspan="4">No suppliers.  Please add some.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- modal popup for adding Amenity -->
+
+<script type="text/ng-template" id="edit-supplier-modal.html">
+    
+	<div class="modal-header">
+		<div class="row">
+            <div class="col-sm-11">
+        		<h3 class="modal-title">Supplier</h3>
+    		</div>
+ 			<div class="col-sm-1">
+        		<md-button>
+            		<md-icon type="button" class="btn-sm" ng-click="cancel()">
+               			<span class="glyphicon glyphicon-remove"></span>
+					</md-icon>
+           		</md-button>
+        	</div>
+		</div>
+	</div>
+    <div class="modal-body">
+
+        <!-- ---------------------------------------------------------------------------- -->
+        <form name="fillingStationForm" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-xs-4 control-label checkbox ls text-uppercase text-600 font-weight-semi-bold" for="fname">Name</label>
+                <div class="col-sm-5">
+                     <input type="text" id="fname" class="form-control" ng-model="supplier.name" placeholder="Name">
+                 </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 control-label checkbox ls text-uppercase text-600 font-weight-semi-bold" for="fcontact">Contact</label>
+                <div class="col-sm-5">
+                    <input type="text" id="fcontact" class="form-control" ng-model="supplier.contact" placeholder="Contact">
+                </div>
+            </div>
+         	<div class="form-group">
+               <label class="col-sm-4 control-label checkbox ls text-uppercase text-600 font-weight-semi-bold" for="activeInactive" style="padding-top:0; ">Active</label>
+               <div class="col-sm-1">
+                    <input type="checkbox" id="activeInactive" ng-model="supplier.active">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label checkbox ls text-uppercase text-600 font-weight-semi-bold" for="activeInactive">Party Type</label>
+                <label class="radio-inline control-label checkbox ls">
+                    <input type="radio" name="CREDITORS" value="CREDITORS" ng-model="supplier.partyType"> Creditors
+                </label>
+                <label class="radio-inline control-label checkbox ls">
+                    <input type="radio" name="DEBTORS" value="DEBTORS" ng-model="supplier.partyType"> Debtors
+                </label>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="save()">Save</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+
+

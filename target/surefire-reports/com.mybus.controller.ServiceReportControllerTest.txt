@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: com.mybus.controller.ServiceReportControllerTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.432 s <<< FAILURE! - in com.mybus.controller.ServiceReportControllerTest
+testPendingServiceReports(com.mybus.controller.ServiceReportControllerTest)  Time elapsed: 0.126 s  <<< FAILURE!
+java.lang.AssertionError: 
+Expected an array at JSON path "$" but found: {message=Error :Load pending reports }
+Expected: an instance of java.util.List
+     but: <{message=Error :Load pending reports }> is a java.util.LinkedHashMap
+	at com.mybus.controller.ServiceReportControllerTest.testPendingServiceReports(ServiceReportControllerTest.java:118)
+

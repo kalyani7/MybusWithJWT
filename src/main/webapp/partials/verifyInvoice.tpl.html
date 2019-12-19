@@ -1,0 +1,53 @@
+<legend>{{header}}</legend>
+
+<form name="uploadInvoiceForm" class="form-horizontal" autocomplete="off" role="form">
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label class="control-label">Start Date : </label>
+
+            <my-datepicker ng-model="uploadInvoice.startDate"></my-datepicker>
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label">End Date : </label>
+            <my-datepicker ng-model="uploadInvoice.endDate"/>
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label">File Name : </label>
+            <input type="text" ng-model="uploadInvoice.file" class="form-control" id="uploadFiles">
+        </div>
+        <div class="col-sm-1" style="padding-top: 27px;">
+            <button class="btn btn-primary" ng-click="save();">Upload</button>
+        </div>
+    </div>
+</form>
+
+<div class="" ng-show="!loading">
+    <table class="table table-bordered table-striped table-condensed table-hover" >
+        <tr>
+            <th>File Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Uploaded By</th>
+            <th>Uploaded On</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="entry in invoiceEntries">
+            <td data-title="'File Name'"  sortable="'fileName'" class="clickable-item col-sm-2" >
+                <a href="{{url}}" ng-click="downloadFile(entry.fileName)">{{ entry.fileName }}</a></td>
+            <td data-title="'Start Date'"  sortable="'startDate'" class="clickable-item col-sm-2" >{{ entry.startDate }}</td>
+            <td data-title="'End Date'"  sortable="'endDate'" class="clickable-item col-sm-2" >{{ entry.endDate }}</td>
+            <td data-title="'Uploaded By'"  sortable="'attrs.createdBy'" class="clickable-item col-sm-2" >{{ entry.attrs.createdBy }}</td>
+            <td data-title="'Uploaded On'"  sortable="'createdAt'" class="clickable-item col-sm-2" >{{ entry.createdAt | date }}</td>
+            <td sortable="'name'" class="clickable-item col-sm-2"><a href="#" ng-click="getVerificationDetails(entry.id)">Check Details</a></td>
+            <td sortable="'name'" class="clickable-item col-sm-2"><a href="#" ng-click="deleteEntry(entry.id)">Delete</a></td>
+        </tr>
+        <tr ng-if="!invoiceEntries || invoiceEntries.length === 0">
+            <td colspan="7">No records exist.  </td>
+        </tr>
+    </table>
+</div>
+
+<div ng-show="loading">
+    Please wait while the report data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+</div>

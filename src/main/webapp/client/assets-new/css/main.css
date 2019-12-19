@@ -1,0 +1,717 @@
+/*=================================================
+||				1. Imports 
+==================================================*/
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,400,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab);
+
+body
+{
+    font-family: 'Roboto', 'Open-Sans', sans-serif;
+    overflow-x: hidden;
+    color: #fff;
+}
+/*Owl Carousel*/
+.owl-prev, .owl-next
+{
+    position: absolute;
+    top: 43%;
+    font-size: 22px;
+    padding: 5px;
+}
+.owl-next
+{
+    right: -40px;
+}
+.owl-prev
+{
+    left: -40px;
+}
+.owl-prev:before
+{
+    content: "\f3d2";
+    font-family: 'ionicons';
+    /*color: #fff;*/
+}
+.owl-next:before
+{
+    content: "\f3d3";
+    font-family: "ionicons";
+    /*color: #fff;*/
+}
+.section-title{
+    color: #313131;
+    text-align: center;
+}
+.section-subtitle{
+    color: #583b54;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.section-wrapper{
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+p{
+    color: #969595;
+}
+.border-radius{
+    border-radius: 0 !important;
+    border-color: #2f9e43;
+    height: 45px;
+}
+p:hover{
+    cursor: default;
+}
+.navbar-toggle {
+    background-color: #2f9e43;
+    border: 1px solid #24b73f;
+    border-radius: 0;
+    transition: all .4s ease-in-out;
+}
+.navbar-default .navbar-toggle {
+    border-color: #24b73f;
+}
+.navbar-default .navbar-toggle .icon-bar{
+    background: #fff;
+}
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
+    background: #fff;
+}
+.navbar-toggle:hover .icon-bar, .navbar-toggle:focus .icon-bar {
+    background-color: #2f9e43;
+}
+.form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+/*=================================================
+||				3. Header
+==================================================*/
+/*navbar*/
+.navbar-default .navbar-brand{
+    border: 1px solid transparent;
+    color: #2f9e43;
+    font-size: 33px;
+    padding: 10px 0px;
+    height: auto;
+    font-weight: 400;
+    letter-spacing: -1px;
+    text-transform: capitalize;
+}
+ul.nav.navbar-nav.navbar-right{
+    margin-top: 10px;
+}
+.navbar-default .navbar-brand span{
+    color: #313131;
+}
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover{
+    color: #fff;
+}
+.navbar-default {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 5px 0px;
+    border-radius: 0;
+    text-transform: uppercase;
+}
+.navbar-default .navbar-nav>li>a{
+    color: #000;
+    padding-right: 20px;
+    padding-left: 20px;
+    border: 1px solid transparent;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all .4s ease-in-out;
+}
+.navbar-default .navbar-nav>li>a:hover{
+    color: #2f9e43;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+    color: #2f9e43;
+    background: #fff;
+}
+.navbar-nav>li>a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
+    background-color: transparent;
+    color: #2f9e43;
+    background: #fff;
+}
+/*Home*/
+.flexslider{
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow-x: hidden;
+    background: transparent;
+    background-image: url('../images/header.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.slider-item{
+    background-size: inherit;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+}
+.inner-intro{
+    display: table-cell;
+    vertical-align: middle;
+    position: absolute;
+    right: 200px;
+    top: 120px;
+    text-align: center;
+}
+.header-title{
+    font-size: 34px;
+    font-weight: 400;
+}
+.header-title span{
+    font-weight: 700;
+}
+.header-sub-title{
+    font-size: 14px;
+    color: #fff;
+    margin: 20px auto 25px;
+}
+.custom-btn{
+    color: #FFF;
+    background-color: transparent;
+    border-color: #FFF;
+    border-radius: 0px;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 400;
+    transition: all .4s ease-in-out;
+}
+.custom-btn:hover{
+    background: #fff;
+    color: #583b54;
+}
+
+
+/*--Login --*/
+#loginContainer {
+    position: relative;
+    padding: 0.5em 0em;
+    border: solid 1px #2f9e43;
+    background: #2f9e43;
+}
+#loginContainer a span{
+    padding: 1em 2em;
+    color: #FFF;
+}
+#loginContainer a span:hover{
+    color: #2f9e43;
+    background: #fff;
+}
+
+#loginButton {
+    position:relative;
+    z-index:30;
+    cursor:pointer;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    top: 3px;
+}
+#loginContainer .active  span{
+    color: #2f9e43;
+    background: #f7f7f7;
+}
+#loginBox {
+    position: absolute;
+    top: 50px;
+    left: -282px;
+    display: none;
+    z-index: 99999;
+}
+#loginForm:after {
+    content: '';
+    position: absolute;
+    right: 25px;
+    top: -9px;
+    border-left: 10px solid rgba(0, 0, 0, 0);
+    border-right: 10px solid rgba(0, 0, 0, 0);
+    border-bottom: 10px solid #FFFFFF;
+}
+#loginModal .modal-xs{
+    width: 406px;
+    margin: 0 auto;
+}
+#loginForm, #mob-loginForm {
+    width: 375px;
+    background: #fff;
+    border: 1px solid #d6d6d6;
+    margin: 0 auto;
+}
+#loginForm fieldset, #mob-loginForm fieldset {
+    margin:0 0 15px 0;
+    display:block;
+    border:0;
+    padding:0;
+}
+fieldset#body, fieldset#mob-body {
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    margin: 0 0 1em 0;
+}
+#loginForm #checkbox, #mob-loginForm #checkbox {
+    width:auto;
+    margin:3px 6px 0 0;
+    float:left;
+    padding:0;
+    border:0;
+    *margin:-3px 9px 0 0;
+}
+#body label, #mob-body label {
+    color:#87807c;
+    margin:10px 0 0 0;
+    display:block;
+    float:left;
+    font-size:0.9em;
+}
+#loginForm #body fieldset label, #mob-loginForm #mob-body fieldset label{
+    display: block;
+    float: none;
+    margin: 0 0 6px 0;
+    font-weight: 400;
+}
+#body label i, #mob-body label i {
+    color: #9E9E9E;
+    font-size: 1em;
+    font-weight: 400;
+}
+#loginForm input, #mob-loginForm input {
+    width: 100%;
+    border: 1px solid #DADADA;
+    color: #222;
+    background: #FFF;
+    padding: 6px;
+    font-size: 0.9em;
+    -webkit-apperance: none;
+}
+#loginForm #login, #mob-loginForm #login {
+    background: #2f9e43;
+    color: #fff;
+    font-size: 1em;
+    padding: 5px 20px;
+    border: 1px solid #6fd508;
+    transition: all .5s;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+}
+#loginForm #login:hover {
+    background: #FFFFFF;
+    color: #777;
+    border: 1px solid #777;
+}
+#loginForm span {
+    display: block;
+    padding-bottom: 15px;
+}
+#loginForm span a{
+    color: #777 !important;
+    padding: 0 !important;
+    font-size: .9em;
+}
+#loginForm span a:hover{
+    text-decoration: none;
+    color: #2B2B2B !important;
+}
+input:focus {
+    outline:none;
+}
+.login-grid-left{
+    float: none;
+    width: 100%;
+    padding: 2em;
+}
+
+
+.button-bottom {
+    margin-top: 1em;
+}
+
+.social-sits p {
+    color: #777;
+    font-size: .9em;
+}
+.button-bottom p a {
+    color: #DF2229;
+}
+.emergency-grid {
+    float: right;
+}
+.emergency-grid ul{
+    padding:0;
+    margin:0;
+}
+.emergency-grid ul li{
+    display: inline-block;
+    color: #A9A9A9;
+    margin: 0;
+    font-size: 1em;
+}
+.emergency-grid ul li.call{
+    color: #292929;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 2em;
+}
+/*--//Login --*/
+/*=================================================
+||				Marquee
+==================================================*/
+.move-text {
+    padding: 2em 0;
+}
+
+.marquee {
+    margin: 0 auto;
+    font-size: 1em;
+    height: 20px;
+    color: #E33735;
+    overflow: hidden;
+}
+/*=================================================
+||				4. Find a bus
+==================================================*/
+.form-dropdown{
+    margin-top: -25px;
+}
+.custom-addon{
+    background: #fff;
+}
+.border-right{
+    border-right: 0px;
+}
+.custom-button{
+    background: #2f9e43;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    transition: all .4s ease-in-out;
+}
+.custom-button:hover{
+    background: #24b73f;
+    border-color: #24b73f;
+    color: #fff;
+}
+.tour .input-group{
+    margin-bottom: 22px;
+}
+/*=================================================
+||				5. Why Choose Us
+==================================================*/
+.offer{
+    color: black;
+    text-align: center;
+    background: #f9f9f9;
+}
+.offer-item{
+    background: #fff;
+    letter-spacing: 1px;
+    padding: 30px;
+    transition: all .3s ease-in;
+    margin: 10px 0px;
+    cursor:pointer;
+}
+.icon{
+    padding: 20px 0;
+    font-size: 35px;
+    color: #2f9e43;
+}
+.offer-item h3{
+    padding-bottom: 40px;
+    margin: 0px;
+    font-size: 15px;
+}
+.offer-item p{
+    padding-bottom: 20px;
+    font-size: 13px;
+    line-height: 170%;
+}
+.offer-item:hover{
+    box-shadow: 0 0 5px #555;
+}
+
+
+/*=================================================
+||				6. Top Destinations
+==================================================*/
+.visit-item{
+    padding: 0px 15px;
+    transition: all .4s ease-in-out;
+    opacity: .6;
+}
+.visit-item:hover{
+    opacity: 1;
+}
+.visit .owl-theme .owl-controls .owl-nav [class*=owl-]{
+    background: #fff;
+    color: #2f9e43;
+    font-size: 25px;
+}
+/*=================================================
+||				7. offer-cta
+==================================================*/
+.offer-cta{
+    background: url("../images/cta-1.png") right center;
+    background-size: cover;
+}
+.offering{
+    float: right;
+    color: #2f9e43;
+    text-align: center;
+    padding: 32px 0;
+}
+.percent{
+    font-style: italic;
+    font-size: 68px;
+}
+.percent span{
+    font-size: 117px;
+    font-weight: 700;
+    font-style: normal;
+}
+.FTour{
+    font-size: 30px;
+    font-weight: 200;
+    margin-top: -20px;
+}
+.price-btn{
+    background: #2f9e43;
+    color: #fff;
+    border-color: #2f9e43;
+    text-transform: capitalize;
+    margin: 20px;
+}
+.price-btn:hover{
+    color: #2f9e43;
+    background-color: #fff;
+    border-color: #2f9e43;
+}
+/*=================================================
+||				8. Additional Services
+==================================================*/
+.additional-services .col-md-4{
+    margin-bottom: 30px;
+}
+.custom-table{
+    display: table;
+}
+/*.additional-services .custom-table:hover{
+	box-shadow: 0 0 30px rgba(125, 125, 125, 0.1);
+}*/
+.add-srvc-img{
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+.add-srvc-heading{
+    color: #313131;
+    font-size: 16px;
+}
+.add-srvc-detail{
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 10px;
+    background-color: #f9f9f9;
+    color: #969595;
+    font-size: 13px;
+    padding-right: 30px;
+}
+/*=================================================
+||				9. partners
+==================================================*/
+.sponsor{
+    text-align: center;
+    background: #f9f9f9;
+}
+.sponsor-item{
+    /*width: 100px !important; */
+    padding: 30px;
+    opacity: .3;
+    transition: all .4s ease-in-out;
+    margin-bottom: 30px;
+}
+.sponsor-item:hover{
+    opacity: 1;
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+    background: #2f9e43;
+}
+.owl-theme .owl-dots .owl-dot span{
+    background: #f1f1f1;
+}
+/*=================================================
+||				10. Subscribe
+==================================================*/
+.subscribe{
+    text-align: center !important;
+}
+.brand-logo{
+    font-size: 33px;
+    color: #2f9e43;
+}
+a.brand-logo span{
+    color: #583b54;
+}
+a.brand-logo:focus, a.brand-logo:hover{
+    color: #2f9e43;
+    text-decoration: none;
+}
+
+.subscribe-now{
+    color: #313131;
+    font-size: 13px;
+    margin: 40px 0 20px;
+}
+.custom-sub-btn{
+    background-color: #2f9e43;
+    color: #fff;
+    border-color: #2f9e43;
+    transition: all .4s ease-in-out;
+}
+.custom-sub-btn:hover{
+    background: #24b73f;
+    border-color: #24b73f;
+    color: #fff;
+}
+/*.input-group .custom-sub{
+	width: 300px;
+}*/
+.social-icon{
+    text-align: center;
+    list-style-type: none;
+    margin: 30px 0 0;
+    padding: 0;
+    font-size: 20px;
+}
+.social-icon li{
+    display: inline;
+    padding: 5px;
+}
+.social-icon a{
+    color: #2f9e43;
+}
+.social-icon a:hover{
+    color: #24b73f;
+}
+
+footer{
+    text-align: center;
+    padding: 20px;
+    background: #2f9e43;
+}
+footer a{
+    color: #fff;
+    padding: 5px;
+}
+footer a:hover{
+    color: #fff;
+}
+footer a:hover, footer a:focus{
+    text-decoration: none;
+    color: #fff;
+}
+.top {
+    display: inline-block;
+    float: right;
+    background-color: #2F6B5A;
+    border-radius: 4px;
+}
+/*=================================================
+||				13. Media Query
+==================================================*/
+
+@media (max-width: 991px){
+    .offer-cta{
+        background: url("../images/cta-1.png") bottom left no-repeat;
+    }
+    .offering{
+        padding-bottom: 300px;
+    }
+}
+@media (max-width: 768px){
+    #loginBox {
+        left:0;
+        width: 100%;
+    }
+    #loginForm {
+        width: inherit;
+    }
+    #loginForm:after {
+        left: 25px;
+        right: inherit;
+    }
+    #loginButton {
+        top:1px;
+    }
+    #loginContainer {
+        padding:0;
+    }
+    #loginContainer a span {
+        display:flex;
+    }
+
+}
+@media (max-width: 480px){
+    .slider-item{
+        background-image: none !important;
+    }
+    .slide{
+        height: auto;
+    }
+    .intro{
+        max-height: 627px;
+    }
+    .navbar-default .navbar-nav>li>a{
+        font-weight: 400;
+    }
+    .navbar-default .navbar-brand{
+        padding-left: 15px;
+    }
+}
+
+.header{
+   position: relative;
+    top: 0;
+}
+
+.header .carousel{
+    background-color:#486c77de;
+    height: 100%;
+}
+
+.navbar-collapse.in {
+    overflow-y: initial !important;
+}
+.padTop-60{
+    padding-top: 60px;
+}
+.banner-img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.carousel-control.right{
+    background-image: none !important;
+}
+.carousel-control.left{
+    background-image: none !important;
+}

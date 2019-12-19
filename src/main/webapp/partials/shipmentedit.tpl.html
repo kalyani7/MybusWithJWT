@@ -1,0 +1,115 @@
+<legend>{{ headline }}</legend>
+
+<!--- Edit User Form------->
+
+<form name="shipmentForm" class="form-horizontal" autocomplete="off" role="form">
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="shipmentFromCity">From City</label>
+        <div class="col-sm-4" ng-class="{ 'has-error': shipmentForm.shipmentFromCity.$invalid && shipmentForm.shipmentFromCity.$dirty }">
+            <input type="text" id="shipmentFromCity" name="usernameInput" class="form-control" ng-model="user.userName"  ng-mouseleave="onMouseLeave(user.userName)"
+                   placeholder="UserName" ng-required>
+            <span ng-show="userForm.usernameInput.$dirty && userForm.usernameInput.$error.required">Username required</span>
+        </div>
+
+        <label class="col-sm-2 control-label" for="editContactInput">Contact</label>
+        <div class="col-sm-4" ng-class="{ 'has-error': userForm.contactInput.$invalid && userForm.contactInput.$dirty }">
+            <input type="number" id="editContactInput" name="contactInput" class="form-control" ng-model="user.contact" ng-minlength="10" ng-maxlength="10" placeholder="contact number">
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="editFirstNameInput">First Name</label>
+        <div class="col-sm-4">
+            <input type="text" id="editFirstNameInput" class="form-control" ng-model="user.firstName" placeholder="First Name" ng-required >
+        </div>
+        <label class="col-sm-2 control-label" for="editLastNameInput">Last Name</label>
+        <div class="col-sm-4">
+            <input type="text" id="editLastNameInput" class="form-control" ng-model="user.lastName" placeholder="Last Name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="editPasswordInput">Password</label>
+        <div class="col-sm-4">
+            <input type="password" id="editPasswordInput" name="passwordInput" class="form-control" ng-model="user.password" placeholder="Password">
+        </div>
+        <label class="col-sm-2 control-label" for="editConfirmPasswordInput">Confirm Password</label>
+        <div class="col-sm-4">
+            <input type="password" id="editConfirmPasswordInput" name="confirmPasswordInput" class="form-control" ng-model="confirmPassword"
+                   pw-check="editPasswordInput" placeholder="Confirm Password">
+            <div class="msg-block" ng-show="user.password !== confirmPassword">
+                <span class="msg-error" ng-show="userForm.confirmPasswordInput.$error.pwmatch">Passwords don't match.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="editEmailInput">Email</label>
+        <div class="col-sm-4" ng-class="{ 'has-error': userForm.emailInput.$invalid && userForm.emailInput.$dirty }">
+            <input type="email" id="editEmailInput" name="emailInput" class="form-control" ng-model="user.email" placeholder="Email">
+        </div>
+
+        <label class="col-sm-2 control-label" for="editEmailInput">Secondary contact </label>
+        <div class="col-sm-4" ng-class="{ 'has-error': userForm.secondaryContact.$invalid && userForm.secondaryContact.$dirty }">
+            <input type="number" id="secondaryContact" name="secondaryContact" class="form-control" ng-model="user.secondaryContact" ng-minlength="10" ng-maxlength="10" placeholder="Secondary contact">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="editAddressInput">Address</label>
+        <div class="col-sm-4">
+            <input type="text" id="editAddressInput" class="form-control" ng-model="user.address1" placeholder="Address">
+        </div>
+
+        <label class="col-sm-2 control-label" for="editCityInput">City</label>
+        <div class="col-sm-4">
+            <input type="text" id="editCityInput" class="form-control" ng-model="user.city" placeholder="City">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="editStateInput">State</label>
+        <div class="col-sm-4">
+            <input type="text" id="editStateInput" class="form-control" ng-model="user.state" placeholder="State">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">User Type</label>
+        <div class="col-sm-4">
+            <label class="radio-inline" ng-repeat="role in roles"><input type="radio" ng-model="user.userType" value="{{role.name | uppercase}}">{{role.name}}</label>
+        </div>
+
+        <label class="col-sm-2 control-label checkbox" for="editActiveInput">Active</label>
+        <div class="col-xs-1">
+            <input type="checkbox" id="editActiveInput" class="form-check-input" ng-model="user.active">
+        </div>
+    </div>
+
+    <div class="form-group" ng-show="user.userType=='AGENT'">
+        <label class="col-sm-2 control-label" for="editPlanTypeInput">Agent Plan Type</label>
+        <div class="col-sm-4">
+            <select name="planTypeInput" id="editPlanTypeInput" class="form-control" ng-model="user.planType"
+                    ng-options="planType.id as planType.name for planType in planTypes">
+                <option value="">--Select Agent Plan Type--</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-4 text-right">
+            <button class="btn btn-primary" ng-click="save()">Save</button>
+        </div>
+        <div class="col-sm-3 next">
+            <button  class="btn btn-danger" ng-click="cancelUser(userForm)">Cancel</button>
+        </div>
+    </div>
+
+</form>
+
+

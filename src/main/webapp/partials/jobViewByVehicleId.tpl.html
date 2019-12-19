@@ -1,0 +1,30 @@
+<legend>Job View by Vehicle</legend>
+
+<div ng-controller="VehicleController" ng-init="jobViewByVehicle()">
+    <ol class="breadcrumb">
+        <li><a href="#" ui-sref="vehicles">Vehicles</a></li>
+        <li class="active">Job view by Vehicle - <b>{{jobListByVehicle[0].attrs.RegNo}}</b></li>
+    </ol>
+    <div class="row">
+        <table class="table table-bordered table-striped table-condensed table-hover text-center" ng-table="searchTableParams"
+               hide-pagination="true">
+            <tr ng-repeat="job in jobListByVehicle">
+                <td data-title="'Inventory'" sortable="'attrs.inventory'" class="clickable-item">{{
+                    job.attrs.inventory }}
+                </td>
+                <td data-title="'Mileage'" sortable="'mileage'" class="clickable-item">{{job.mileage}}
+                </td>
+                <td data-title="'Job Date'" sortable="'jobDate'" class="clickable-item">{{job.jobDate |
+                    date}}
+                </td>
+                <td data-title="'Remainder Date'" sortable="'reminderDate'" class="clickable-item">
+                    {{job.reminderDate | date}}
+                </td>
+            </tr>
+            <tr ng-if="!jobListByVehicle || jobListByVehicle.length === 0">
+                <td colspan="7">No Jobs exist.</td>
+            </tr>
+        </table>
+
+    </div>
+</div>

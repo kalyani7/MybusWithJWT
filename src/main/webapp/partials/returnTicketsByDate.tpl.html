@@ -1,0 +1,25 @@
+<div class="container" ng-show="!loading">
+    <legend>{{ headline }}</legend><br/>
+
+    <table class="table table-bordered table-condensed table-hover" ng-table="byDateTableParams">
+        <tr ng-repeat="returnTicket in currentPageOfTickets">
+            <td data-title="'BookedBy'" class="clickable-item col-md-1">{{ returnTicket.bookedBy }}</td>
+            <td data-title="'Passenger'" class="clickable-item col-md-1">{{ returnTicket.name }}</td>
+            <td data-title="'Route'" class="clickable-item col-md-1">{{ returnTicket.serviceName }}</td>
+            <td data-title="'Service'" class="clickable-item col-md-1">{{ returnTicket.serviceNumber }}</td>
+            <td data-title="'JourneyDate'" class="clickable-item col-md-1">{{ returnTicket.jdate }}</td>
+            <td data-title="'BookedOn'" class="clickable-item col-md-1" >{{ returnTicket.bookedDate }}</td>
+            <td data-title="'Pay'"  class="clickable-item col-md-1"><a ng-click="payBooking(booking.id,null,serviceNo)">Pay Now</a></td>
+
+        </tr>
+
+        <tr ng-if="!currentPageOfTickets || currentPageOfTickets.length === 0">
+            <td colspan="8">No return Tickets found for agent. </td>
+        </tr>
+    </table>
+
+</div>
+
+<div ng-show="loading">
+    Please wait while the report is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+</div>

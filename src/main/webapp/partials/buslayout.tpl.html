@@ -1,0 +1,27 @@
+<legend>Layouts</legend>
+<div class="toolbar-button-div pull-right">
+    <button type="button" class="btn btn-sm btn-primary" ng-click="addNewBusLayout()">
+        <span class="glyphicon glyphicon-plus"></span> Add Layout</button>
+</div>
+
+<table class="table table-bordered table-condensed table-hover text-center" ng-table="layoutContentTableParams">
+    <tr ng-repeat="layout in currentPageOfLayouts">
+        <td data-title="'Layout Name'" sortable="'name'">{{ layout.name }}</td>
+        <td data-title="'Rows'" sortable="'totalRows'">{{ layout.totalRows }}</td>
+        <td data-title="'Total Seats'" sortable="'totalSeats'">{{ layout.totalSeats }}</td>
+        <td>
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="goToBusLayout(layout.id)">
+                    <span class="glyphicon glyphicon-pencil"></span></md-icon>
+            </md-button>
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="deleteLayout(layout)">
+                    <span class="glyphicon glyphicon-remove"></span></md-icon>
+            </md-button>
+        </td>
+
+    </tr>
+    <tr ng-if="!currentPageOfLayouts || currentPageOfLayouts.length === 0">
+        <td colspan="4">No details exist.</td>
+    </tr>
+</table>

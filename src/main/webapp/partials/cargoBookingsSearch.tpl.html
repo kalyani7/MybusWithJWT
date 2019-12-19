@@ -1,0 +1,115 @@
+<div ng-include="'partials/cargoLookup.tpl.html'"></div>
+
+<div ng-controller="CargoBookingListController">
+    <div class="row">
+        <div class="box-body">
+            <div class="filter-form">
+                <form name="shipments">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12">
+                            <label class="ls text-600 font-weight-semi-bold">From Office:</label>
+                            <select id="fromBranchOffice" ng-options="office.id as office.name for office in offices"
+                                    class="form-control input-sm" ng-model="filter.fromBranchId" required></select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12">
+                            <label class="ls text-600 font-weight-semi-bold ">To Office:</label>
+                            <select id="toBranchOffice" ng-options="office.id as office.name for office in offices"
+                                    class="form-control input-sm" ng-model="filter.toBranchId" required></select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12">
+                            <label class="ls text-600 font-weight-semi-bold ">Booked By:</label>
+                            <select id="user" ng-options="member.id as member.fullName for member in members"
+                                    class="form-control input-sm" ng-model="filter.bookedBy">
+                                <option value="" selected="selected">User (Optional)</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12">
+                            <label class="ls text-600 font-weight-semi-bold ">Status:</label>
+                            <select id="status" class="form-control input-sm" ng-model="filter.status">
+                                <option value="" selected="selected">All (Optional)</option>
+                                <option value="READYFORSHIPMENT">Ready</option>
+                                <option value="INTRANSIT">In Transit</option>
+                                <option value="ARRIVED">Arrived</option>
+                                <option value="CANCELLED">Cancelled</option>
+                                <option value="DELIVERED">Delivered</option>
+                                <option value="ONHOLD">On Hold</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row filter-btn">
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12">
+                            <label class="ls text-600 font-weight-semi-bold">LR Type</label>
+                            <select id="lrType" class="form-control input-sm" ng-model="filter.paymentType" required
+                                    ng-options="shipmentType.shipmentType as shipmentType.shipmentType for shipmentType in shipmentTypes"></select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12">
+                            <label class="ls text-600 font-weight-semi-bold">Start Date :</label>
+                            <my-datepicker class="filter-date" ng-model="filter.startDate"></my-datepicker>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12">
+                            <label class="ls text-600 font-weight-semi-bold ">End Date :</label>
+                            <my-datepicker class="filter-date" ng-model="filter.endDate"></my-datepicker>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-12 filter-btn-lr">
+                            <div class="btn-group filter-search-btn">
+                                <button type="button" class="btn btn-sm btn-success " ng-click="search()"> Search
+                                    Bookings
+                                </button>
+                                <button type="button" class="btn btn-sm btn-success "
+                                        ng-click="exportToExcel('cargoBookings', 'CargoBookings')"
+                                        ng-disabled="searchPayments.$invalid ">Export to Excel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="cargoBookingsTable" id="cargoBookings">
+                    <tr ng-repeat="cargoBooking in cargoBookings">
+                        <td data-title="'S No'" class="clickable-item">{{$index + 1 + ((cargoBookingsTable.page()-1) *
+                            cargoBookingsTable.count()) }}
+                        </td>
+                        <td data-title="'LR#'" sortable="'date'" class="clickable-item"><a href="#"
+                                                                                           ng-click="gotoBooking(cargoBooking.id)">{{cargoBooking.shipmentNumber}}</a>
+                        </td>
+                        <td data-title="'Items'" class="clickable-item">{{cargoBooking.totalArticles}}</td>
+                        <td data-title="'DispatchDate'" sortable="'dispatchDate'" class="clickable-item">
+                            {{cargoBooking.dispatchDate | date}}
+                        </td>
+                        <td data-title="'From - To'" sortable="'attrs.fromBranchOfficeName'" class="clickable-item">
+                            ({{cargoBooking.attrs.fromBranchOfficeName}}) - ({{cargoBooking.attrs.toBranchOfficeName}})
+                        </td>
+                        <td data-title="'To Contact'" sortable="'attrs.toName'" class="clickable-item">
+                            {{cargoBooking.toName}}<br>{{cargoBooking.toContact}}
+                        </td>
+                        <td data-title="'Remarks'" sortable="'attrs.remarks'" class="clickable-item">
+                            {{cargoBooking.remarks || '--'}}
+                        </td>
+                        <td data-title="'Amount'" class="clickable-item">{{cargoBooking.totalCharge}}</td>
+                        <td data-title="'BookedBy'" sortable="'bookedBy'" class="clickable-item">
+                            {{cargoBooking.attrs.bookedBy}}
+                        </td>
+                        <td data-title="'PayNow'" class="clickable-item">
+                            <a href="#"
+                               ng-if="!cargoBooking.canceled && cargoBooking.cargoTransitStatus !== 'DELIVERED'"
+                               ng-click="initiateDeliverCargoBooking(cargoBooking.id)">
+                                Deliver
+                            </a>
+                            <span ng-if="cargoBooking.canceled"> Cancelled</span>
+                            <span ng-if="cargoBooking.cargoTransitStatus === 'DELIVERED'">Delivered to - {{cargoBooking.deliveryNotes}}</span>
+                        </td>
+                        <td data-title="'Comment'" class="clickable-item">
+                            <a href="#" ng-if="!cargoBooking.reviewComment" ng-click="addComment(cargoBooking.id)">Add
+                                Comment</a>
+                            <a href="#" ng-click="addComment(cargoBooking.id)">{{cargoBooking.reviewComment}}</a>
+                        </td>
+                    </tr>
+                    <tr ng-if="!cargoBookings || cargoBookings.length === 0">
+                        <td colspan="11">No Cargo Bookings found</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

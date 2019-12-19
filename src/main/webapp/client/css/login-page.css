@@ -1,0 +1,78 @@
+
+	body {
+		background:url(/images/london_ride_river_house_dock_9656_3840x2400.jpg);
+		margin:0px;
+		font-family: 'Ubuntu', sans-serif;
+	}
+
+	td{
+		font-weight: bold;
+		font-size: 20px;
+		color: white;
+	}
+	.login-header {
+		color:#fff;
+		text-align:center;
+		font-size:300%;
+	}
+	.login-header h1 {
+		text-shadow: 0px 5px 15px #000;
+	}
+
+
+	.error {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+ 
+.msg {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+	
+}
+ 
+#login-box {
+	width: 350px;
+	padding: 20px;
+	margin: 50px auto;
+	border: 2px solid #999;
+	background: #2c3e50;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	box-shadow:10px 5px 20px #333;
+	}
+
+	.login-form input[type="text"],
+	.login-form input[type="password"] {
+	width: 100%;
+	max-width:400px;
+	height:30px;
+	font-family: 'Ubuntu', sans-serif;
+	margin:10px 0;
+	border-radius:5px;
+	border:2px solid #f2f2f2;
+	outline:none;
+	padding-left:10px;
+	}
+
+.btn{
+	height:30px;
+	width:100px;
+	background:#fff;
+	border:1px solid #f2f2f2;
+	border-radius:20px;
+	color: slategrey;
+	text-transform:uppercase;
+	font-family: 'Ubuntu', sans-serif;
+	cursor:pointer;
+}

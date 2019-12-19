@@ -1,0 +1,150 @@
+<!--<div class="container" style="width: 100%">-->
+<div ng-include="'partials/cargoLookup.tpl.html'"></div>
+
+<div ng-controller="CargoCancellationsController">
+    <div class="bpdp-tab" ng-init="tab=1">
+        <ul>
+            <li class="tab" ng-class="{active:tab==1}">
+                <a href ng-click="tab = 1">Pending</a>
+            </li>
+            <li class="tab" ng-class="{active:tab==2}">
+                <a href ng-click="tab = 2">Cancelled</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content" ng-show="tab==2">
+
+        <div class="row">
+            <div class="filter-form">
+                <div class="row">
+                </div>
+            </div>
+            <div class="box-body box-body-windo">
+                <div class="table-responsive">
+                    <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="searchCancelledParams" id="cancelledCargoBookings">
+                        <thead>
+                        <tr>
+                            <th>S No</th>
+                            <th>LR#</th>
+                            <th>Date</th>
+                            <th>From - To</th>
+                            <th>Amount</th>
+                            <th>BookedBy - BookedOn</th>
+                            <th>CancelledBy - CancelledOn</th>
+                            <th>Cancellation remark</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="cargoBooking in cancelledCargoBookings">
+                            <td>{{$index + 1  + ((searchCancelledParams.page()-1) * searchCancelledParams.count())}}</td>
+                            <td data-title="'LR#'" class="clickable-item"><a href="#" ng-click="gotoBooking(cargoBooking.id)">{{cargoBooking.shipmentNumber}}</a>
+                            </td>
+                            <td data-title="'Date'" sortable="'dispatchDate'" class="clickable-item">{{cargoBooking.dispatchDate
+                                | date}}
+                            </td>
+                            <td data-title="'From - To'" sortable="'attrs.fromBranchOfficeName'" class="clickable-item">
+                                ({{cargoBooking.attrs.fromBranch}}) - ({{cargoBooking.attrs.toBranch}})
+                            </td>
+                            <td data-title="'Amount'" class="clickable-item">{{cargoBooking.totalCharge}}</td>
+                            <td data-title="'BookedBy'" sortable="'bookedBy'" class="clickable-item">
+                                {{cargoBooking.attrs.bookedBy}} - {{cargoBooking.createdAt | date: format : short}}
+                            </td>
+                            <td data-title="'CancelledBy'" sortable="'canceledBy'" class="clickable-item">
+                                {{cargoBooking.canceldBy}} - {{cargoBooking.canceledOn | date: short}}
+                            </td>
+                            <td data-title="'Reason'" class="clickable-item">
+                                {{cargoBooking.cancellationReason}}
+                            </td>
+                        </tr>
+                        <tr ng-if="!cancelledCargoBookings || cancelledCargoBookings.length === 0">
+                            <td colspan="7">No Cargo Bookings found</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
+
+    <div class="tab-content" ng-show="tab==1">
+        <div class="row">
+            <div class="filter-form">
+                <div class="row">
+                </div>
+            </div>
+            <div class="box-body box-body-windo">
+                <div class="table-responsive">
+                    <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="pendingCancellationParams" id="cancellationPendingBookings">
+                        <thead>
+                        <tr>
+                            <th>S No</th>
+                            <th>LR#</th>
+                            <th>Date</th>
+                            <th>From - To</th>
+                            <th>Amount</th>
+                            <th>BookedBy - BookedOn</th>
+                            <th>Cancelled By</th>
+                            <th>Reason</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="cargoBooking in pendingCargoBookings">
+                            <td>{{$index + 1  + ((pendingCancellationParams.page()-1) * pendingCancellationParams.count())}}</td>
+                            <td data-title="'LR#'" class="clickable-item"><a href="#" ng-click="gotoBooking(cargoBooking.id)">{{cargoBooking.shipmentNumber}}</a>
+                            </td>
+                            <td data-title="'Date'" sortable="'dispatchDate'" class="clickable-item">{{cargoBooking.dispatchDate
+                                | date}}
+                            </td>
+                            <td data-title="'From - To'" sortable="'attrs.fromBranchOfficeName'" class="clickable-item">
+                                ({{cargoBooking.attrs.fromBranch}}) - ({{cargoBooking.attrs.toBranch}})
+                            </td>
+                            <td data-title="'Amount'" class="clickable-item">{{cargoBooking.totalCharge}}</td>
+                            <td data-title="'BookedBy'" sortable="'bookedBy'" class="clickable-item">
+                                {{cargoBooking.attrs.bookedBy}} - {{cargoBooking.createdAt | date: format : short}}
+                            </td>
+                            <td data-title="'CancelledBy'" sortable="'cancelledBy'" class="clickable-item">
+                                {{cargoBooking.attrs.cancelledBy}}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-info " ng-click="saveShipmentId(cargoBooking.id)" data-toggle="modal"
+                                        data-target="#approveCancellation" ng-if="currentUser.cancelCargoBookings">Approve
+                                </button>
+                            </td>
+                        </tr>
+                        <tr ng-if="!cancelledCargoBookings || cancelledCargoBookings.length === 0">
+                            <td colspan="7">No Cargo Bookings found</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
+    <div id="approveCancellation" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="height: 130px">
+                    <label class="col-sm-2 control-label">Reason</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" ng-model="reason" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="approveCancellation()">Approve</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--</div>-->
+
+
+

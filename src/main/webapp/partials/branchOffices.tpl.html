@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <label class="ls text-uppercase text-600 font-weight-semi-bold">Total: </label>
+                    <span>{{ branchOfficeCount }}</span>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="addOffice()"><span class="glyphicon glyphicon-plus"></span> Add Office</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="officeTableParams">
+                <tr ng-repeat="office in currentPageOfOffices">
+                    <td data-title="'S No'">{{(officeTableParams.page() - 1) * officeTableParams.count() + $index + 1 }}</td>
+                    <td data-title="'Name'" sortable="'name'">{{ office.name }}</td>
+                    <td data-title="'City'" sortable="'attrs.cityName'">{{ office.attrs.cityName }}</td>
+                    <td data-title="'Manager'" >{{ office.attrs.managerName }}</td>
+                    <td data-title="'Contact'" class="col-sm-1" sortable="'contact'">{{ office.contact }}</td>
+                    <td data-title="'Email'" sortable="'email'">{{ office.email }}</td>
+                    <td data-title="'Address'" sortable="'address'">{{ office.address }}</td>
+                    <td data-title="'Action'" class="ed-btn">
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="edit(office)">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </md-icon>
+                        </md-button>
+                        <md-button >
+                            <md-icon type="button" class="btn" ng-click="delete(office)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

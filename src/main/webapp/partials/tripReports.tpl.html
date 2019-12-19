@@ -1,0 +1,29 @@
+<legend>{{ headline }}</legend>
+<div>
+    <div class="row" ng-show="!loading">
+        <div class="col-sm-1"/>
+        <div class="col-sm-1">
+            <button type="button" class="btn btn-default" ng-click="previousDay()"><i class="glyphicon glyphicon-chevron-left"></i></button>
+        </div>
+
+        <div class="col-sm-3">
+            <p class="input-group">
+                <my-datepicker ng-model="dt"></my-datepicker>
+            </p>
+        </div>
+        <div class="col-sm-1">
+            <button type="button" class="btn btn-default" ng-click="nextDay()"><i class="glyphicon glyphicon-chevron-right"></i></button>
+        </div>
+        <div class="col-sm-6">
+            <div class="toolbar-button-div pull-right">
+                <button type="button" class="btn btn-sm btn-primary" ng-click="startTrip()">
+                    <span class="glyphicon glyphicon-plus"></span> Start Trip
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="loading">
+        loading reports data for {{date}}...
+    </div>
+</div>

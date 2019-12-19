@@ -1,0 +1,201 @@
+<div class="container">
+<!--<legend>{{ headline }}</legend>-->
+<ol class="breadcrumb">
+    <li><a ng-href="/#/cities">All Cities</a></li>
+    <li ng-repeat="crumb in breadCrumbs"><a ng-href="/#/cities/{{crumb.id}}">{{crumb.name}}</a></li>
+    <li><strong>{{ city.name }}</strong></li>
+</ol>
+
+<div class="toolbar-button-div pull-right">
+    <button type="button"  class="btn btn-sm btn-danger" ng-click="handleDeleteButtonClicked(city.id)"><i
+            class="glyphicon glyphicon-remove"></i> Delete {{ city.name }}
+    </button>
+</div>
+
+<div class="bpdp-tab" ng-init="tab=1">
+    <ul>
+        <li class="tab"  ng-class="{active:tab==1}">
+            <a href ng-click="tab = 1">Boarding Points</a>
+        </li>
+        <li class="tab" ng-class="{active:tab==2}">
+            <a href ng-click="tab = 2">Dropping Points</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" ng-show="tab==1">
+    <table class="table table-bordered table-condensed table-hover" ng-table="boardingPointContentTableParams">
+        <div class="toolbar-button-div pull-right">
+            <button type="button" class="btn btn-sm btn-primary" ng-click="handleClickAddBoardingPoint()"><span
+                    class="glyphicon glyphicon-plus"></span> Add Boarding Point
+            </button>
+        </div>
+    <tr ng-repeat="boardingPoint in currentPageOfBoardingPoints" ng-class="boardingPoint.active?'':'bg-danger'">
+        <td data-title="'Name'"  sortable="'name'" class="clickable-item col-md-6">{{ boardingPoint.name }}</td>
+        <td data-title="'Landmark'" class="clickable-item col-md-4">{{ boardingPoint.landmark }}</td>
+        <td>
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="deleteBpOnClick(boardingPoint.id)">
+                    <span class="glyphicon glyphicon-remove"></span></md-icon>
+            </md-button>
+
+        </td>
+        <td>
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="updateBpOnClick(boardingPoint.id)">
+                    <span class="glyphicon glyphicon-pencil"></span></md-icon>
+            </md-button>
+        </td>
+    </tr>
+    <tr ng-if="!currentPageOfBoardingPoints || currentPageOfBoardingPoints.length === 0">
+        <td colspan="4">No boardingPoint exist.  Please add some.</td>
+    </tr>
+    </table>
+    </div>
+    <div class="tab-content" ng-show="tab==2">
+    <table class="table table-bordered table-condensed table-hover" ng-table="boardingPointContentTableParams">
+    <tr ng-repeat="boardingPoint in currentPageOfBoardingPoints" ng-if="boardingPoint.droppingPoint" ng-class="boardingPoint.active?'':'bg-danger'">
+        <td data-title="'Name'"  sortable="'name'" class="clickable-item col-md-6">{{ boardingPoint.name }}</td>
+        <td data-title="'Landmark'" class="clickable-item col-md-4">{{ boardingPoint.landmark }}</td>
+        <td>
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="deleteBpOnClick(boardingPoint.id)">
+                    <span class="glyphicon glyphicon-remove"></span></md-icon>
+            </md-button>
+
+        </td>
+        <td>
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="updateBpOnClick(boardingPoint.id)">
+                    <span class="glyphicon glyphicon-pencil"></span></md-icon>
+            </md-button>
+        </td>
+    </tr>
+    <tr ng-if="!currentPageOfBoardingPoints || currentPageOfBoardingPoints.length === 0">
+        <td colspan="4">No boardingPoint exist.  Please add some.</td>
+    </tr>
+    </table>
+    </div>
+</div>
+<!--modal popup for adding boardingpoint(Bp) to existing city -->
+<script type="text/ng-template" id="add-boardingpoint-to-city-state-modal.html">
+   <div class="modal-header">
+        <div class="row">
+            <div class="col-sm-11">
+                <h3 class="modal-title">Add Boarding point to {{ city.name }}</h3>
+            </div>
+            <div class="col-sm-1">
+                <md-button>
+                    <md-icon type="button" class="btn-sm" ng-click="cancel()">
+                        <span class="glyphicon glyphicon-remove"></span></md-icon>
+                </md-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+        <form name="addBoardingPointForm " role="form" class="container-fluid col-xs-offset-2">
+
+            <div class="form-group">
+                <label for="modalAddNeighInput">Boarding Point</label>
+
+                <div class="row top-buffer-5">
+                    <!-- <label class="col-sm-2 control-label" for="addBoardingPoint">Name</label> -->
+                    <div class="col-xs-10">
+                        <div class="form-group" ng-class="{ 'has-error': addBoardingPointForm.name.$invalid && addBoardingPointForm.name.$dirty}">
+                            <input type="text" placeholder="Name" id="modalAddNeighInput" name="name" class="form-control"
+                                   ng-model="boardingPoint.name" placeholder="name" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row top-buffer-5">
+                    <!-- <label class="col-sm-2 control-label" for="addBoardingPoint">Landmark</label> -->
+                    <div class="col-xs-10">
+                        <div class="form-group" ng-class="{ 'has-error': addBoardingPointForm.landmark.$invalid && addBoardingPointForm.landmark.$dirty }">
+                            <input type="text" placeholder = "Landmark" class="form-control" name="landmark" ng-model="boardingPoint.landmark"
+                                   placeholder="near by landmark" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row top-buffer-5">
+                    <!-- <label class="col-sm-2 control-label" for="addBoardingPoint">Contact</label> -->
+                    <div class="col-xs-10">
+                        <div class="form-group" ng-class="{ 'has-error': addBoardingPointForm.contact.$invalid && addBoardingPointForm.contact.$dirty }">
+                            <input type="text" placeholder="Contact" class="form-control" name="contact" ng-model="boardingPoint.contact"
+                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-minlength="7" ng-maxlength="10" ng-required="true"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row top-buffer-5">
+                    <label class="col-sm-2 control-label checkbox" for="addBoardingPoint">Active</label>
+                    <div class="col-sm-2">
+						<div class="col-sm-12">
+                    		<input type="checkbox" id="addBoardingPoint" class="form-control" ng-model="boardingPoint.active">
+                    	</div>
+                    </div>
+                    <label class="col-sm-4 control-label checkbox" for="addBoardingPoint">Dropping Point</label>
+                    <div class="col-sm-2">
+						<div class="col-sm-12">
+                        	<input type="checkbox" id="addBoardingPointDp" class="form-control" ng-model="boardingPoint.droppingPoint">
+						</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="ok(id)" ng-disabled="!isInputValid()">Add</button>
+                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                </div>
+
+                </div>
+        </form>
+    </div>
+</script>
+<!--modal popup for updating boardingpoint(Bp) to existing city/state/boardingpoint -->
+
+<script type="text/ng-template" id="update-boardingPt.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Update Boarding point to {{ city.name }}</h3>
+    </div>
+    <div class="modal-body">
+        <div name="updateBoardingPointForm" role="form" class="container-fluid">
+            <label for="modalAddNeighInput">Boarding Point</label>
+                <div class="row top-buffer-5">
+                    <label class="col-sm-2 control-label" for="boardingPointUpdate">Name</label>
+                    <div class="col-xs-8">
+                        <input type="text" id="modalUpdateNeighInput" class="form-control" ng-model="boardingPoint.name"
+                               placeholder="name">
+                    </div>
+                </div>
+                <div class="row top-buffer-5">
+                    <label class="col-sm-2 control-label" for="boardingPointUpdate">Landmark</label>
+                    <div class="col-xs-8">
+                        <input type="text" class="form-control" ng-model="boardingPoint.landmark"
+                               placeholder="near by landmark">
+                    </div>
+                </div>
+                <div class="row top-buffer-5">
+                    <label class="col-sm-2 control-label" for="boardingPointUpdate">Contact</label>
+                    <div class="col-xs-8">
+                        <input type="text" class="form-control" ng-model="boardingPoint.contact"
+                               placeholder="contact number">
+                    </div>
+                </div>
+                <div class="row top-buffer-5">
+                    <label class="col-sm-2 control-label checkbox" for="boardingPointUpdate">Active</label>
+                    <div class="col-sm-1">
+                        <input type="checkbox" id="boardingPointUpdate" class="form-control" ng-model="boardingPoint.active">
+                    </div>
+                    <label class="col-sm-3 control-label checkbox" for="boardingPointUpdate">Dropping Point</label>
+                    <div class="col-sm-1">
+                        <input type="checkbox" id="boardingPointUpdateDp" class="form-control" ng-model="boardingPoint.droppingPoint">
+                    </div>
+                </div>
+        </div>
+        <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok(boardingPoint.id)">Update</button>
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+        </form>
+    </div>
+</script>
+
+</div>

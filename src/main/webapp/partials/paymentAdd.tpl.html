@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add</h3>
+</div>
+<div class="modal-body">
+
+    <!-- ---------------------------------------------------------------------------- -->
+    <form name="addNewExpenseForm" class="form-horizontal" role="form">
+        <div class="form-group">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="expenseDate">Date</label>
+                <div class="col-sm-4">
+                    <p class="input-group">
+                        <input type="text" id="expenseDate" class="form-control" uib-datepicker-popup="{{format}}"
+                               ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions"
+                               ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                    </p>
+                </div>
+                <label class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-4">
+                    <input type="text" id="description" class="form-control" ng-model="payment.description" placeholder="Description">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="expenseAmount">Amount</label>
+                <div class="col-sm-4">
+                    <input type="number" id="expenseAmount" class="form-control" ng-model="payment.amount" placeholder="Amount" required>
+                </div>
+                <label class="col-sm-2 control-label">Type</label>
+                <div class="col-sm-4">
+                    <p class="input-group">
+                        <input type="radio" ng-model="payment.type" value="EXPENSE" value="EXPENSE"> Expense
+                        <input type="radio" ng-model="payment.type" value="INCOME" value="INCOME"> Income
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="branchOffice">Branch</label>
+                <div class="col-sm-4">
+                    <select id="branchOffice" ng-options="office.id as office.name for office in offices" class="form-control" ng-model="payment.branchOfficeId" ng-if="user.admin"></select>
+                    <input ng-if="!user.admin" class="form-control" value="{{ user.attrs.branchName }}" readonly>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="add()">Save</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

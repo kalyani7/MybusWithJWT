@@ -1,0 +1,55 @@
+<legend>Uploads</legend>
+<div class="row">
+    <div class="row form-group">
+        <div class="col-xs-2">
+            <label class="control-label p-5">Count:</label>{{count}}
+        </div>
+        <div class="col-xs-10 form-group">
+            <div class="input-group col-sm-5">
+                <input type="text" class="form-control" placeholder="Search By file name" ng-model="query.fileName" ng-change="init()">
+            </div>
+            <!--<div class="input-group col-sm-5">
+                <select class="form-control" ng-options="user.id as user.fullName for user in users"
+                        ng-model="query.uploadedBy" id="user" name="userId" ng-change="init()">
+                    <option value="" selected>&#45;&#45;Select&#45;&#45;</option>
+                </select>
+            </div>-->
+        </div>
+        <div class="pull-right">
+            <button type="button" class="btn btn-sm btn-primary" ng-click="uploadDocument()"><span
+                    class="glyphicon glyphicon-plus"></span> Upload
+            </button>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped table-condensed table-hover" ng-table="documentUploadsTableParams" hide-pagination="false">
+        <tr ng-repeat="upload in currentPageOfUploads">
+            <td data-title="'S.No'" style="text-align: center;width: 5%">{{(documentUploadsTableParams.page() - 1) * documentUploadsTableParams.count() + $index
+                + 1 || $index+1}}
+            </td>
+            <td data-title="'File Name'" style="text-align: center"   class="clickable-item col-sm-2" >{{ upload.fileName }}</td>
+            <td data-title="'File Uploaded'" style="text-align: center"   class="clickable-item col-sm-2" >{{ upload.displayName }}</td>
+            <td data-title="'Description'" style="text-align: center"   class="clickable-item col-sm-2" >{{ upload.description }}</td>
+            <td data-title="'Uploaded By'" style="text-align: center"   class="clickable-item col-sm-2" >{{ upload.attrs.uploadedBy }}</td>
+            <td data-title="'Uploaded On'" style="text-align: center"  class="clickable-item col-sm-2" >{{ upload.attrs.uploadedAt }}</td>
+
+            <td class="col-sm-1">
+                <md-button>
+                    <md-icon type="button" class="btn">
+                        <a href="{{upload.attrs.url}}" title="Download" download>
+                            <span class="glyphicon glyphicon-download-alt"></span>
+                        </a>
+                    </md-icon>
+                    <md-icon type="button" class="btn">
+                        <a href="" title="Delete" ng-click="removeFile(upload.filePath,upload.id)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </md-icon>
+                </md-button>
+            </td>
+        </tr>
+        <tr ng-if="!uploads || uploads.length === 0">
+            <td colspan="7">No Records exist.  </td>
+        </tr>
+    </table>
+</div>

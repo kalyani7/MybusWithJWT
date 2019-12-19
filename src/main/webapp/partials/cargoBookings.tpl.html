@@ -1,0 +1,68 @@
+<div class="container" style="width: 95%">
+    <div ng-include="'partials/cargoLookup.tpl.html'"></div>
+</div>
+
+<div ng-controller="CargoBookingListController">
+    <form name="shipments">
+        <div class="form-group row">
+            <label class="col-sm-1 control-label">From Office:</label>
+            <div class="col-sm-2">
+                <select id="fromBranchOffice" ng-options="office.id as office.name for office in offices" class="form-control" ng-model="filter.fromBranchId" required></select>
+            </div>
+
+            <label class="col-sm-1 control-label ">To Office:</label>
+            <div class="col-sm-2" >
+                <select id="toBranchOffice" ng-options="office.id as office.name for office in offices" class="form-control" ng-model="filter.toBranchId" required></select>
+            </div>
+            <label class="col-sm-1 control-label ">Booked By:</label>
+            <div class="col-sm-2" >
+                <select id="user" ng-options="member.id as member.fullName for member in members" class="form-control" ng-model="filter.bookedBy" >
+                    <option value="" selected="selected">User (Optional)</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-1 control-label">LR Type</label>
+            <div class="col-sm-2">
+                <select id="lrType" class="form-control" ng-model="filter.paymentType" required
+                        ng-options="shipmentType.shipmentType as shipmentType.shipmentType for shipmentType in shipmentTypes"></select>
+            </div>
+            <label class="col-sm-1 control-label">Start Date :</label>
+            <div class="col-sm-2">
+                <my-datepicker ng-model="filter.startDate"></my-datepicker>
+            </div>
+
+            <label class="col-sm-1 control-label ">End Date :</label>
+            <div class="col-sm-2" >
+                <my-datepicker ng-model="filter.endDate"></my-datepicker>
+            </div>
+            <button type="button" class="btn btn-sm btn-success " ng-click="search()"> Search Bookings </button></button>
+            <button type="button" class="btn btn-sm btn-success " ng-click="exportToExcel('cargoBookings', 'CargoBookings')" ng-disabled = "searchPayments.$invalid ">Export to Excel </button></button>
+        </div>
+    </form>
+    <br/>
+    <table class="table table-bordered table-condensed table-hover" ng-table="cargoBookingsTable" id="cargoBookings">
+        <tr ng-repeat="cargoBooking in cargoBookings">
+            <td class="clickable-item">{{$index + ((cargoBookingsTable.page()-1) * cargoBookingsTable.count()) }}</td>
+
+            <td data-title="'LR#'" sortable="'date'" class="clickable-item"><a href="#" ng-click="gotoBooking(cargoBooking.id)">{{cargoBooking.shipmentNumber}}</a> </td>
+            <td data-title="'CreatedOn'" sortable="'createdAt'"  class="clickable-item">{{cargoBooking.createdAt| date}}</td>
+            <td data-title="'From'" sortable="'attrs.fromBranchOfficeName'"  class="clickable-item">{{cargoBooking.attrs.fromBranchOfficeName}}</td>
+            <td data-title="'To'" sortable="'attrs.toBranchOfficeName'"  class="clickable-item">{{cargoBooking.attrs.toBranchOfficeName}}</td>
+            <td data-title="'To Contact'" sortable="'attrs.toName'"  class="clickable-item">
+                {{cargoBooking.toName}}<br>{{cargoBooking.toContact}}</td>
+            <td data-title="'Remarks'" sortable="'attrs.remarks'"  class="clickable-item">
+                {{cargoBooking.remarks}}</td>
+            <td data-title="'Amount'" class="clickable-item">{{cargoBooking.totalCharge}}</td>
+            <td data-title="'BookedBy'" sortable="'bookedBy'"  class="clickable-item">{{cargoBooking.attrs.bookedBy}}</td>
+            <td data-title="'PayNow'" class="clickable-item"> <a href="#" ng-if="!cargoBooking.canceled && cargoBooking.cargoTransitStatus !== 'DELIVERED'" ng-click="initiateDeliverCargoBooking(cargoBooking.id)">Deliver</a>
+                <span ng-if="cargoBooking.canceled"> Cancelled</span>
+                <span ng-if="cargoBooking.cargoTransitStatus === 'DELIVERED'"> Delivered</span>
+            </td>
+        </tr>
+        <tr ng-if="!cargoBookings || cargoBookings.length === 0">
+            <td colspan="7">No Cargo Bookings found</td>
+        </tr>
+    </table>
+</div>

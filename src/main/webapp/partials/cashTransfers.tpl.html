@@ -1,0 +1,210 @@
+<div ng-show="!loading" class="">
+    <legend>Cash Transfers</legend>
+
+    <div class="bpdp-tab" ng-init="tab=1">
+            <ul>
+                <li class="tab"  ng-class="{active:tab==1}">
+                    <a href ng-click="tab = 1">Pending</a>
+                </li>
+                <li class="tab" ng-class="{active:tab==2}">
+                    <a href ng-click="tab = 2">Approved/Rejected</a>
+                </li>
+                <li class="tab" ng-class="{active:tab==3}">
+                    <a href ng-click="tab = 3">Search</a>
+                </li>
+            </ul>
+        <div class="tab-content" ng-show="tab==1">
+            <div class="toolbar-button-div pull-right">
+                <button type="button" class="btn btn-sm btn-primary" ng-click="handleClickAddCashTransfer()" ng-if="canAddCashTransfer()"><span class="glyphicon glyphicon-plus"></span> Add</button>
+            </div>
+        Total: {{pendingCashTransfersCount}}
+        <table class="table table-bordered table-condensed table-hover" ng-table="pendingCashTransferTableParams">
+            <tr ng-repeat="cashTransfer in currentPageOfPendingCashTransfers">
+                <td data-title="'Date'" sortable="'date'">{{cashTransfer.date | date}}</td>
+                <td data-title="'From User'" sortable="'fromBranchId'" >{{cashTransfer.attrs.fromUser}}</td>
+                <td data-title="'To User/Branch'" sortable="'toBranchId'" >{{cashTransfer.attrs.toUser}}</td>
+                <td data-title="'Description'">
+                    <a ng-if="cashTransfer.serviceFormId" href="#!/serviceform/{{cashTransfer.serviceFormId}}">{{cashTransfer.description}}</a>
+                    <span ng-if="!cashTransfer.serviceFormId">{{cashTransfer.description}}</span>
+                </td>
+                <td data-title="'Amount'" sortable="'amount'">{{cashTransfer.amount}}</span></td>
+                <td data-title="'CreatedBy'">{{cashTransfer.attrs.createdBy}}</td>
+                <td data-title="'Status'" sortable="'status'" class="clickable-item" >
+                   <span ng-if="!cashTransfer.status && userId !==  cashTransfer.fromUserId">
+                        <a ng-click="approveOrRejectCashTransfer(cashTransfer,'Approve')">Approve</a>
+                        <a ng-click="approveOrRejectCashTransfer(cashTransfer)">Reject</a>
+                    </span>
+                    <span ng-if="cashTransfer.status">
+                       {{cashTransfer.status}}
+                    </span>
+                </td>
+                <td style="width:10%">
+                    <md-icon type="button" class="btn" ng-click="edit(cashTransfer.id)">
+                        <span class="glyphicon glyphicon-pencil" ng-if="cashTransfer.status == null" ng-click="handleClickUpdateCashTransfer(cashTransfer.id)" ></span></md-icon>
+                    <md-icon type="button" class="btn" ng-click="delete(cashTransfer.id)" ng-if="cashTransfer.status == null" ng-click="delete(id)">
+                        <span class="glyphicon glyphicon-trash"></span></md-icon>
+
+                </td>
+
+            </tr>
+            <tr ng-if="!currentPageOfPendingCashTransfers || currentPageOfPendingCashTransfers.length === 0">
+                <td colspan="7">No entries exist.  Please add some.</td>
+            </tr>
+        </table>
+        </div>
+        <div class="tab-content" ng-show="tab==2">
+            Total: {{approvedCashTransfersCount}}
+            <table class="table table-bordered table-condensed table-hover" ng-table="approvedCashTransfersTableParams">
+                <tr ng-repeat="cashTransfer in currentPageOfApprovedCashTransfers">
+                    <td data-title="'Date'" sortable="'date'">{{cashTransfer.date | date}}</td>
+                    <td data-title="'From User'" sortable="'fromBranchId'" >{{cashTransfer.attrs.fromUser}}</td>
+                    <td data-title="'To User/Branch'" sortable="'toBranchId'" >{{cashTransfer.attrs.toUser}}</td>
+                    <td data-title="'Description'">
+                        <a ng-if="cashTransfer.serviceFormId" href="#!/serviceform/{{cashTransfer.serviceFormId}}">{{cashTransfer.description}}</a>
+                        <span ng-if="!cashTransfer.serviceFormId">{{cashTransfer.description}}</span>
+                    </td>
+                    <td data-title="'Amount'" sortable="'amount'">{{cashTransfer.amount}}</span></td>
+                    <td data-title="'CreatedBy'">{{cashTransfer.attrs.createdBy}}</td>
+                    <td data-title="'Status'" sortable="'status'" class="clickable-item" ng-if="user.admin">
+                        <span ng-if="cashTransfer.status">
+                       {{cashTransfer.status}}
+                    </span>
+                    </td>
+                </tr>
+                <tr ng-if="!currentPageOfApprovedCashTransfers || currentPageOfApprovedCashTransfers.length === 0">
+                    <td colspan="7">No entries exist.  Please add some.</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="tab-content" ng-show="tab==3">
+            <form name="searchCashTransfers" class="form-horizontal" autocomplete="off" role="form" unsaved-warning-form >
+                <div class="form-group">
+                    <label class="col-sm-2 control-label ">Start Date</label>
+                    <div class="col-sm-3" >
+                        <input type="text" name="startDate" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
+                               is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
+                               close-text="Close" alt-input-formats="altInputFormats" ng-change="dateChanged()"  ng-show="false"/>
+                        {{dt.getFullYear()+"-"+monthNames[dt.getMonth()]+"-"+dt.getDate()}}
+                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+
+                        <span class="input-group-btn">
+                            <span class="error" ng-show="searchCashTransfers.startDate.$error.max">Start date should be before end date</span>
+                        </span>
+                    </div>
+
+                    <label class="col-sm-2 control-label ">End Date</label>
+                    <div class="col-sm-3" >
+                        <input type="text" name="endDate" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt2"
+                               is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true"
+                               close-text="Close" alt-input-formats="altInputFormats" ng-change="dateChanged()"  ng-show="false"/>
+                        {{dt2.getFullYear()+"-"+monthNames[dt2.getMonth()]+"-"+dt2.getDate()}}
+                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <span class="input-group-btn">
+                            <span class="error" ng-show="searchCashTransfers.startDate.$error.max">You choose future date as end date</span>
+                        </span>
+                    </div>
+                </div>
+                <div class=" form-group">
+                    <div class="col-sm-5">
+                        <select id="branchOffice" ng-options="office.id as office.name for office in offices" class="form-control" ng-model="officeId">
+                            <option value="" selected="selected">Branch Office (optional)</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <select id="user" ng-options="member.id as member.fullName for member in members" class="form-control" ng-model="userSelect" >
+                            <option value="" selected="selected">User (Optional)</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-success " ng-click="search()" ng-disabled = "searchCashTransfers.$invalid "> Search CashTransfers </button>
+                </div>
+
+                <table class="table table-bordered table-condensed table-hover" ng-table="searchTableParams">
+                    <tr ng-repeat="expense in searchExpenses">
+                        <td data-title="'Date'" sortable="'date'" class="clickable-item" >{{expense.date | date}}</td>
+                        <td width="300px" data-title="'Description'" sortable="'description'" class="clickable-item" >{{expense.description}}</td>
+                        <td data-title="'CreatedBy'" class="clickable-item">{{expense.attrs.createdBy}}</td>
+                        <td data-title="'ApprovedBy'" class="clickable-item"><span ng-if="expense.status != 'Auto'">{{expense.attributes.updatedBy}}</span></td>
+                        <td data-title="'Amount'" sortable="'amount'" class="clickable-item" >{{expense.amount|number:2}}</span></td>
+                        <td data-title="'Status'" sortable="'status'" class="clickable-item">
+                            <span ng-if="expense.status">
+                               {{expense.status}}
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr ng-if="!searchExpenses || searchExpenses.length === 0">
+                        <td colspan="8">No Expenses found for office. </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div ng-show="loading">
+    Please wait while the data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+</div>
+
+
+
+
+<!-- ----------------------------- Add Cash Transfer ----------------------------------------------- -->
+
+<script type="text/ng-template" id="add-cashTransfer-modal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Add</h3>
+        </div>
+    <div class="modal-body">
+    <!-- ---------------------------------------------------------------------------- -->
+        <form name="addNewExpenseForm" class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="createdAt">Date</label>
+                    <div class="col-sm-6">
+                        <p class="input-group">
+                            <input type="text" id="createdAt" class="form-control" uib-datepicker-popup="{{format}}"
+                                   ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions"
+                                   ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Description</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="description" class="form-control" ng-model="cashTransfer.description" placeholder="Description">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="amount">Amount</label>
+                    <div class="col-sm-6">
+                        <input type="number" id="amount" class="form-control" ng-model="cashTransfer.amount" placeholder="Amount" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="fromUser">From User</label>
+                    <div class="col-sm-6">
+                        <span id="fromUser">{{user.firstName}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="toUser">To User</label>
+                    <div class="col-sm-6">
+                        <select id="toUser" ng-options="use.id as use.fullName for use in users" class="form-control" ng-model="cashTransfer.toUserId"  required></select>
+                    </div>
+                </div>
+
+            </div>
+         </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="add()">Save</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

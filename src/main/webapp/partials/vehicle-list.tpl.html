@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="page-header">
+        <h3>Vehicles</h3>
+    </div>
+</div>
+
+<!--<legend>Vehicles</legend>-->
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="col-lg-2">
+                        <label class="ls text-uppercase text-600 font-weight-semi-bold control-label">Count: </label><span>  {{ count }}</span>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <!--<label class="col-sm-2 control-label ls text-uppercase text-600 font-weight-semi-bold">Search:</label>-->
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search.." ng-model="searchQuery.searchText">
+                                    </div>
+                                </div>
+
+                               <!-- <div class="col-sm-2">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary" id="basic-addon2" ng-click="init(searchText)">Search</button>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <!--<label class="col-sm-2 control-label ls text-uppercase text-600 font-weight-semi-bold">Search:</label>-->
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <select ng-model="searchQuery.type" class="form-control">
+                                            <option value="" selected>--Select--</option>
+                                            <option value="rcCopy">NoRC</option>
+                                            <option value="fcCopy">NoFitness</option>
+                                            <option value="permitCopy">NoPermit</option>
+                                            <option value="authCopy">NoAuth</option>
+                                            <option value="insuranceCopy">NoInsurance</option>
+                                            <option value="pollutionCopy">NoPollutionExpiry</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary" id="basic-addon2" ng-click="init()">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="addVehicleOnClick()">
+                                <span class="glyphicon glyphicon-plus"></span> Add Vehicle
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="vehicleContentTableParams">
+                <tr ng-repeat="vehicle in vehicles" ng-class="vehicle.active?'':'bg-danger'">
+                    <td data-title="'S No'">{{(vehicleContentTableParams.page() - 1) * vehicleContentTableParams.count() + $index + 1 }}</td>
+                    <td data-title="'Vehicle Type'" sortable="'vehicleType'" class="clickable-item">{{ vehicle.vehicleType }}</td>
+                    <td data-title="'Registration #'" sortable="'regNo'" class="clickable-item">{{ vehicle.regNo }}</td>
+                    <td data-title="'Chasis #'" sortable="'chasisNumber'" class="clickable-item">{{ vehicle.chasisNumber }}</td>
+                    <td data-title="'Permit Exipry'" class="clickable-item">{{ vehicle.permitExpiry|date }}</td>
+                    <td data-title="'Fitness Exipry'" class="clickable-item">{{ vehicle.fitnessExpiry|date }}</td>
+                    <td data-title="'Insurance Exipry'" class="clickable-item">{{ vehicle.insuranceExpiry|date }}</td>
+                    <td data-title="'Auth Exipry'" class="clickable-item">{{ vehicle.authExpiry|date }}</td>
+                    <td data-title="'Polution Exipry'" class="clickable-item">{{ vehicle.pollutionExpiry|date }}</td>
+                    <td class="ed-btn" data-title="'Action'">
+                        <md-icon type="button" class="btn btn-xs" ng-click="updateVehicleOnClick(vehicle.id)" title="Edit Job">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </md-icon>
+                        <md-icon type="button" class="btn btn-xs" ng-click="deleteVehicleOnClick(vehicle.id)" title="Delete Job">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </md-icon>
+                        <md-icon type="button" class="btn btn-xs" ng-click="viewJob(vehicle.id)" title="View Job">
+                            <i class="glyphicon glyphicon-eye-open"></i>
+                        </md-icon>
+                    </td>
+                </tr>
+                <tr ng-if="!vehicles || vehicles.length === 0">
+                    <td colspan="6">No Vehicle exist. Please add some.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

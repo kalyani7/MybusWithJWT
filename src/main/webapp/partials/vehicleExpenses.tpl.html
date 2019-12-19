@@ -1,0 +1,191 @@
+<div ng-show="!loading" class="container">
+    <legend ng-if="!user.admin">Vehicle Expences for office : <b>{{user.attrs.branchName}}</b></legend>
+    <legend ng-if="user.admin">Vehicle Expences</legend>
+
+    <div class="toolbar-button-div pull-right">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="handleClickAddPayment()" ng-if="canAddPayment()"><span class="glyphicon glyphicon-plus"></span> Add</button>
+    </div>
+    Total {{count}}
+    <table class="table table-bordered table-condensed table-hover" ng-table="paymentTableParams">
+        <tr ng-repeat="payment in currentPageOfPayments">
+            <td data-title="'Expense Date'" sortable="'date'" class="clickable-item" ng-click="goToExpense(expense.id)">{{payment.date | date}}</td>
+            <td data-title="'Vehicle RegNo'" class="clickable-item" sortable="'vehicleId'" >{{payment.attrs.vehicleRegNo}}</td>
+            <td data-title="'Description'" class="clickable-item" ng-click="goToExpense(expense.id)">
+                <a ng-if="payment.serviceFormId" href="#!/serviceform/{{payment.serviceFormId}}">{{payment.description}}</a>
+                <span ng-if="!payment.serviceFormId">{{payment.description}}</span>
+            </td>
+            <!--
+            <td data-title="'Income'" sortable="'amount'" class="clickable-item" ng-click="goToExpense(expense.id)"> <span ng-if="payment.type=='INCOME'">{{payment.amount}}</span></td>
+           -->
+            <td data-title="'Expesnse'" sortable="'amount'" class="clickable-item" ng-click="goToExpense(expense.id)" ><span ng-if="payment.type=='EXPENSE'">{{payment.amount}}</span></td>
+            <td data-title="'CreatedBy'" class="clickable-item">{{payment.attrs.createdBy}}</td>
+            <td data-title="'Status'" sortable="'status'" class="clickable-item" ng-if="user.admin">
+                <span ng-if="!payment.status">
+                    <a ng-click="approveOrRejectPayment(payment,'Approve')">Approve</a>
+                    <a ng-click="approveOrRejectPayment(payment)">Reject</a>
+                </span>
+                <span ng-if="payment.status">
+                   {{payment.status}}
+                </span>
+            </td>
+            <td style="width:10%">
+                <md-icon type="button" class="btn" ng-click="handleClickUpdatePayment(payment.id)">
+                    <span class="glyphicon glyphicon-pencil" ng-if="payment.status == null"></span></md-icon>
+                <md-icon type="button" class="btn" ng-click="delete(payment.id)" ng-if="payment.status == null">
+                    <span class="glyphicon glyphicon-trash"></span></md-icon>
+
+            </td>
+
+        </tr>
+        <tr ng-if="!currentPageOfPayments || currentPageOfPayments.length === 0">
+            <td colspan="7">No entries exist.  Please add some.</td>
+        </tr>
+    </table>
+</div>
+
+
+<div ng-show="loading">
+    Please wait while the agents data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+</div>
+
+
+<!-------------------------------- add ----------------------------------->
+<script type="text/ng-template" id="add-expense-modal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Add</h3>
+    </div>
+    <div class="modal-body">
+
+        <!-- ---------------------------------------------------------------------------- -->
+        <form name="addNewExpenseForm" class="form-horizontal" role="form">
+            <div class="form-group">
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="expenseDate">Date</label>
+                    <div class="col-sm-6">
+                        <p class="input-group">
+                            <input type="text" id="expenseDate" class="form-control" uib-datepicker-popup="{{format}}"
+                                   ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions"
+                                   ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">vehicle RegNo</label>
+                    <div class="col-sm-6">
+                        <select id="vehicleid" ng-options="vehicle.id as vehicle.regNo for vehicle in vehicles" class="form-control" ng-model="payment.vehicleId" requried>
+                            <option value=null></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Description</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="description" class="form-control" ng-model="payment.description" placeholder="Description">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="expenseAmount" requried>Amount</label>
+                    <div class="col-sm-6">
+                        <input type="number" id="expenseAmount" class="form-control" ng-model="payment.amount" placeholder="Amount" required>
+                    </div>
+                </div>
+
+                <!-- <div class="form-group">
+                    <label class="col-sm-3 control-label">Type</label>
+                    <div class="col-sm-6">
+                        <p class="input-group">
+                           <input type="radio" ng-model="payment.type" value="EXPENSE" value="EXPENSE"> ExpenseType
+                            <input type="radio" ng-model="payment.type" value="INCOME" value="INCOME"> Income
+
+                        </p>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="branchOffice">Branch</label>
+                    <div class="col-sm-6">
+                        <select id="branchOffice" ng-options="office.id as office.name for office in offices" class="form-control" ng-model="payment.branchOfficeId" ng-if="user.admin" requried></select>
+                        <input ng-if="!user.admin" class="form-control" value="{{ user.attrs.branchName }}" readonly>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="add()" ng-disabled ="addNewExpenseForm.$invalid">Save</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+<!----------------------------------- Update -------------------------------------------->
+
+<script type="text/ng-template" id="update-payment-modal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Add</h3>
+    </div>
+    <div class="modal-body">
+
+        <!-- ---------------------------------------------------------------------------- -->
+        <form name="addNewExpenseForm" class="form-horizontal" role="form">
+            <div class="form-group">
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="expenseDate">Date</label>
+                    <div class="col-sm-6">
+                        <p class="input-group">
+                            <input type="text" id="updateexpenseDate" class="form-control" uib-datepicker-popup="{{format}}"
+                                   ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions"
+                                   ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">vehicle RegNo</label>
+                    <div class="col-sm-6">
+                        <select id="updateVehicleId" ng-options="vehicle.id as vehicle.regNo for vehicle in vehicles" class="form-control" ng-model="payment.vehicleId" requried>
+                            <option value=null></option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Description</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="updateDescription" class="form-control" ng-model="payment.description" placeholder="Description">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="expenseAmount">Amount</label>
+                    <div class="col-sm-6">
+                        <input type="number" id="updateExpenseAmount" class="form-control" ng-model="payment.amount" placeholder="Amount" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="branchOffice">Branch</label>
+                    <div class="col-sm-6">
+                        <select id="updateBranchOffice" ng-options="office.id as office.name for office in offices" class="form-control" ng-model="payment.branchOfficeId" ng-if="user.admin"></select>
+                        <input ng-if="!user.admin" class="form-control" value="{{ user.attrs.branchName }}" readonly>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="add()">Save</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

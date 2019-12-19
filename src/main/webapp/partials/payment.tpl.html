@@ -1,0 +1,174 @@
+<legend>{{ headline }}</legend>
+
+<form class="form-horizontal" autocomplete="off" role="form" >
+<div class="col-sm-6">
+	<div class="form-group">
+		<div class="col-sm-6">
+            <input type="double" class="form-control" placeholder="Amount" ng-model="payment.amount" ng-required ng-init="payment.amount = 1200.00"/>
+            <span></span>
+        </div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-sm-6">
+            <input type="text" class="form-control" placeholder="First Name"  ng-model="payment.firstName" ng-required ng-init="payment.firstName='Srini'"/>
+            <span></span>
+        </div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-6">
+            <input type="text" class="form-control" placeholder="Last Name" ng-model="payment.lastName" ng-required ng-init="payment.lastName='M'"/>
+            <span></span>
+        </div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-6">
+            <input type="email" class="form-control" placeholder="Email" ng-model="payment.email" ng-required ng-init="payment.email='srinu.yks@gmail.com'"/>
+            <span></span>
+        </div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-6">
+            <input type="number" class="form-control" placeholder="Phone No" ng-model="payment.phoneNo" "ng-required ng-init="payment.phoneNo=9492541342"/>
+            <span></span>
+        </div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-6">
+            <!-- <input type="text" class="form-control" placeholder="BookingPayment Type" ng-model="payment.paymentType" ng-required ng-initAbhibus="payment.paymentType='payu'" /> -->
+            <select class="form-control" ng-model="payment.paymentType" >
+            	<option value="" class="" selected="selected">--- Payment Type ---</option>
+            	<option value="PAYU">PAYU</option>
+            	<option value="EBS">EBS</option>
+            </select>
+            <span></span>
+        </div> 
+	</div>
+</div>
+<div class="col-sm-6"> 
+	
+	
+	<div class="form-group">
+		<div class="col-sm-6">
+            <input type="text" class="form-control" placeholder="Address" ng-model="payment.address" ng-required  ng-init="payment.address= 'kphp'"/>
+            <span></span>
+        </div> 
+	</div>
+	
+	<div class="form-group">
+		<div class="col-sm-6">
+            <input type="text" class="form-control" placeholder="City" ng-model="payment.city" ng-required ng-init="payment.city='hyderabad'"/>
+            <span></span>
+        </div> 
+	</div>
+	
+		<div class="form-group">
+		<div class="col-sm-6">
+            <input type="text" class="form-control" placeholder="state" ng-model="payment.state" ng-required ng-init="payment.state='Telangana'"/>
+            <span></span>
+        </div> 
+	</div>
+	
+	<div class="form-group">
+		<div class="col-sm-6">
+            <input type="text" class="form-control" placeholder="Country" ng-model="payment.country" ng-required ng-init="payment.country='IND'"/>
+            <span></span>
+        </div> 
+	</div>
+		
+	<div class="form-group">
+		<div class="col-sm-6">
+            <input type="number" class="form-control" placeholder="Postal Code " ng-model="payment.postalCode" ng-required ng-init="payment.postalCode=500072"/>
+            <span></span>
+        </div>
+	</div>
+	
+    <div class="form-group row">
+        <div class="col-sm-4 text-right">
+            <button class="btn btn-primary" ng-click="paymentButtonClicked()" >Make Pay</button>
+        </div>
+        <div class="col-sm-3 next">
+            <button  class="btn btn-danger" ng-click="paymentButtonResetFields()">Reset</button>
+        </div>
+    </div>
+</div>
+
+</form>
+
+
+<legend>{{ paymentsDetails }}</legend>
+
+<div>
+	<table class="table">
+		<thead>
+			<th>ID</th>
+			<th>Merchant RefNo</th>
+			<th>Payment Id</th>
+			<th>Amount</th>
+			<th>payment Type</th>
+			<th></th>
+			<th>Refund status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="payment in payments">
+				<td>{{payment.id}}</td>
+				<td>{{payment.merchantrefNo}}</td>
+				<td>{{payment.paymentId}}</td>
+				<td>{{payment.amount}}</td>
+				<td>{{payment.paymentName}}</td>
+				<td><button class="btn btn-danger" ng-disabled="payment.status.success && !payment.refundResponse ==''" ng-click="paymentButtonForRefund(payment.id)">Refund</td>
+				<td>{{payment.refundResponse.status.statusMessage}}</td>
+			</tr>
+		</tbody>
+		</tbody>
+</div>
+
+<script type="text/ng-template" id="payment-refund-amount.html">
+  <div class="modal-header">
+        <div class="row">
+            <div class="col-sm-11">
+                <h3 class="modal-title">Refund Amount</h3>
+            </div>
+            <div class="col-sm-1">
+                <md-button>
+                    <md-icon type="button" class="btn-sm" ng-click="cancel()">
+                        <span class="glyphicon glyphicon-remove"></span></md-icon>
+                </md-button>
+            </div>
+        </div>
+    </div>
+
+	<div class="modal-body">
+
+        <form name="refundForm" class="form-horizontal" role="form" autocomplete="off">
+
+            <div class="form-group">
+                 <div class="col-sm-7 col-xs-offset-2">
+                     <input name="refundAmount" type="number" class="form-control" ng-model="refundResponse.refundAmount" placeholder="Enter Amount to be Refund">
+                 </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-7 col-xs-offset-2">
+                    <input type="textarea" name="desc" placeholder="Discretion" ng-model="refundResponse.disc"  class="form-control" >
+                    <input type="hidden" ng-model="refundResponse.pID" ng-init="refundResponse.pID=pID">
+
+                </div>
+            </div>
+		</form>
+	</div>
+ 	<div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="!isInputValid()" ng-click="proceedToRefund(refundResponse)">Make Refund</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+
+</script>
+
+<!-- This is a payu form directive which need to be submitted to payu payment gateway -->
+<form-submitter></form-submitter>
+
+<!-- This is a Ebs form directive which need to be submitted to EBS payment gateway -->
+<ebs-form-submitter></ebs-form-submitter>

@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <label class="ls text-uppercase text-600 font-weight-semi-bold">Total: </label>
+                    <span>{{ count }}</span>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="addoperatoraccounts()">
+                            <span class="glyphicon glyphicon-plus"></span> New Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="accountTableParams">
+                <tr ng-repeat="account in accounts">
+                    <td data-title="'Name'" class="" sortable="'name'">{{ account.name }}</td>
+                    <td data-title="'URL'" class="" sortable="'attrs.cityName'">{{ account.domainName }}</td>
+                    <td data-title="'Manager'" class="" >{{ account.apiURL }}</td>
+                    <td data-title="'Contact'" class="" sortable="'contact'">{{ account.providerType }}</td>
+                    <td data-title="'Action'" class="ed-btn">
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="editoperatoraccounts(account.id)">
+                                <span class="glyphicon glyphicon-pencil"></span></md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10 p-0">
+        <div class="ae-box">
+            <form name="userForm" class="form-horizontal ad-form" autocomplete="off" role="form" unsaved-warning-form >
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom" ng-class="{ 'has-error': userForm.usernameInput.$invalid && userForm.usernameInput.$dirty }">
+                        <label class="ls text-600 font-weight-semi-bold" for="editUsernameInput">Username<span class="data-required">*</span></label>
+                        <input type="text" id="editUsernameInput" name="usernameInput" class="form-control" ng-model="user.userName"  ng-mouseleave="onMouseLeave(user.userName)"
+                               placeholder="UserName" required>
+                        <span ng-show="(userForm.usernameInput.$dirty || userForm.submitted) && userForm.usernameInput.$error.required">Username required</span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom" ng-class="{ 'has-error': userForm.contactInput.$invalid && userForm.contactInput.$dirty }">
+                        <label class="ls text-600 font-weight-semi-bold" for="editContactInput">Contact<span class="data-required">*</span></label>
+                        <input type="number" id="editContactInput" name="contactInput" class="form-control" ng-model="user.contact" ng-minlength="10" ng-maxlength="10" placeholder="contact number" required>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="editFirstNameInput">First Name<span class="data-required">*</span></label>
+                        <input type="text" id="editFirstNameInput" class="form-control" ng-model="user.firstName" placeholder="First Name" required >
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="editLastNameInput">Last Name<span class="data-required">*</span></label>
+                        <input type="text" id="editLastNameInput" class="form-control" ng-model="user.lastName" placeholder="Last Name" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="editPasswordInput">Password<span class="data-required">*</span></label>
+                        <input type="password" id="editPasswordInput" name="passwordInput" class="form-control" ng-model="user.password" placeholder="Password" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="editConfirmPasswordInput">Confirm Password<span class="data-required">*</span></label>
+                        <input type="password" id="editConfirmPasswordInput" name="confirmPasswordInput" class="form-control" ng-model="confirmPassword"
+                               pw-check="editPasswordInput" placeholder="Confirm Password" required>
+                        <div class="msg-block" ng-show="user.password !== confirmPassword">
+                            <span class="msg-error" ng-show="userForm.confirmPasswordInput.$error.pwmatch">Passwords don't match.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom" ng-class="{ 'has-error': userForm.emailInput.$invalid && userForm.emailInput.$dirty }">
+                        <label class="ls text-600 font-weight-semi-bold" for="editEmailInput">Email<span class="data-required">*</span></label>
+                        <input type="email" id="editEmailInput" name="emailInput" class="form-control" ng-model="user.email" placeholder="Email" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom" ng-class="{ 'has-error': userForm.secondaryContact.$invalid && userForm.secondaryContact.$dirty }">
+                        <label class="ls text-600 font-weight-semi-bold" for="editEmailInput">Secondary contact</label>
+                        <input type="number" id="secondaryContact" name="secondaryContact" class="form-control" ng-model="user.secondaryContact" placeholder="Secondary contact">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold" for="editAddressInput">Address</label>
+                        <input type="text" id="editAddressInput" class="form-control" ng-model="user.address1" placeholder="Address">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">User Type<span class="data-required">*</span></label>
+                        <select ng-options="role.id as role.name for role in roles" class="form-control" ng-model="user.role" required></select>
+                        <small><a ng-click="launchRoleAdd()">Add New Role</a></small>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Branch Office<span class="data-required">*</span></label>
+                        <select id="branchOffice" ng-options="office.id as office.name for office in offices" class="form-control" ng-model="user.branchOfficeId" required></select>
+                        <small><a ng-click="launchAddBranchOffice()">Add New Branch</a></small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold checkbox" for="editActiveInput">
+                            <input type="checkbox" id="editActiveInput" class="custom-check" ng-model="user.active">
+                            Active
+                        </label>
+                    </div>
+                    <div class="col-lg-12 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold checkbox" for="editActiveInput1">
+                            <input type="checkbox" id="editActiveInput1" class="custom-check" ng-model="user.cancelCargoBookings">
+                            CancelCargoBookings
+                        </label>
+                    </div>
+                </div>
+                <div class="row" ng-if="currentUser.admin">
+                    <div class="col-sm-2"></div>
+                    <div class="col-xs-8">
+                        <label style="padding-left: 10px;" ng-repeat="module in allModules">
+                            <input
+                                    type="checkbox"
+                                    name="selectedModules[]"
+                                    value="{{module}}"
+                                    ng-checked="user.accessibleModules.indexOf(module) > -1"
+                                    ng-click="toggleSelection(module)"
+                            > {{module}}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4"> </div>
+                    <div class="col-xs-2 text-right">
+                        <button class="btn btn-primary" ng-click="save()">Save</button>
+                    </div>
+                    <div class="col-xs-2 next">
+                        <button  class="btn btn-danger" ng-click="cancelUser(userForm)">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--<div class="col-lg-2"></div>-->
+</div>
+

@@ -1,0 +1,155 @@
+<div>
+<legend>{{ headline }}</legend>
+<div class="toolbar-button-div pull-right">
+    <button type="button" class="btn btn-sm btn-primary" ng-click="addPersonOnClick()"><span class="glyphicon glyphicon-plus"></span> Add Person</button>
+</div>
+ <br/>
+ <br>
+    
+<table class="table table-bordered table-condensed table-hover" ng-table="personContentTableParams">
+    <tr ng-repeat="person in currentPageOfPerson">
+        <td data-title="'ID'"   class="clickable-item col-md-3" >{{ person.id }}</td>
+        <td data-title="'Name'" sortable="'id'" class="clickable-item col-md-3">{{person.name}}</td>
+        <td data-title="'Age'" class="clickable-item col-md-2">{{person.age}}</td>
+        <td data-title="'Phone'" class="clickable-item col-md-2">{{person.phone}}</td>
+        <td class="col-md-1">
+	        <md-button>
+	            <md-icon type="button" class="btn" ng-click="updatePersonOnClick(person.id)">
+	            <span class="glyphicon glyphicon-pencil"></span></md-icon>
+	        </md-button>
+        </td>
+        <td class="col-md-1">
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="deletePersonOnClick(person.id)">
+                    <span class="glyphicon glyphicon-remove"></span></md-icon>
+            </md-button>
+        </td>
+    </tr>
+    <tr ng-if="!currentPageOfPerson || currentPageOfPerson.length === 0">
+        <td colspan="4">No Person exist.  Please add some.</td>
+    </tr>
+</table>
+
+<!-- Modal popup for adding a Person -->
+
+<script type="text/ng-template" id="add-person-modal.html">
+
+	<div class="modal-header">
+		<div class="row">
+            <div class="col-sm-11">
+        		<h3 class="modal-title">Add a Person</h3>
+    		</div>
+ 			<div class="col-sm-1">
+        		<md-button>
+            		<md-icon type="button" class="btn-sm" ng-click="cancel()">
+               			<span class="glyphicon glyphicon-remove"></span>
+					</md-icon>
+           		</md-button>
+        	</div>
+		</div>
+	</div>
+
+    <div class="modal-body">
+        <form name="personDetailsForm" class="form-horizontal" role="form">
+            <div class="form-group">
+                <!-- <label class="col-sm-3 control-label">Name</label> -->
+                    <div class="col-sm-7 col-xs-offset-2">
+                        <input type="text" placeholder="Name" id="personNameInput" class="form-control" ng-model="person.name">
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <!-- <label class="col-sm-3 control-label">Age</label> -->
+                <div class="col-sm-7 col-xs-offset-2">
+                    <input type="text" placeholder="Age"id="personAgeInput" class="form-control" ng-model="person.age">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- <label class="col-sm-3 control-label">Phone</label> -->
+                <div class="col-sm-7 col-xs-offset-2">
+                    <input type="text" placeholder="Phone" id="personPhoneInput" class="form-control" ng-model="person.phone">
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()" ng-disabled="!isInputValid()">Add</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+<!-- Model popup for Updating a person -->
+
+<script type="text/ng-template" id="update-person-modal.html">
+
+	<div class="modal-header">
+		<div class="row">
+            <div class="col-sm-11">
+        		<h3 class="modal-title">Update a Person</h3>
+    		</div>
+ 			<div class="col-sm-1">
+        		<md-button>
+            		<md-icon type="button" class="btn-sm" ng-click="cancel()">
+               			<span class="glyphicon glyphicon-remove"></span>
+					</md-icon>
+           		</md-button>
+        	</div>
+		</div>
+	</div>
+
+
+    <div class="modal-body">
+        <form name="personDetailsForm" class="form-horizontal col-xs-offset-2" role="form">
+            <div class="form-group">
+                <!-- <label class="col-sm-3 control-label">Name</label> -->
+               
+                    <div class="col-sm-7">
+                        <input type="text" placeholder="Name" id="updatePersonNameInput" class="form-control" ng-model="person.name" required ng-valid="person.name != ''">
+                        <!--<state-options id="modalStateInput" class="field" name="modalStateInput" ng-model="person.name" required></state-options>-->
+                    </div>
+               
+            </div>
+
+            <div class="form-group">
+                <!-- <label class="col-sm-3 control-label">Age</label> -->
+                <div class="col-sm-7">
+                    <input type="text" placeholder="Age" id="updatePersonAgeInput" class="form-control" ng-model="person.age">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- <label class="col-sm-3 control-label">Phone</label> -->
+                <div class="col-sm-7">
+                    <input type="text" placeholder="Phone" id="updatePersonPhoneInput" class="form-control" ng-model="person.phone">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Cities Lived</label>
+                <div class="col-sm-4">
+                    <select name="allCities" class="form-control" id="allCities" ng-model="citySelected">
+						<option ng-repeat="city in cities" value="{{city}}">{{city.name}}</option>
+                    </select>
+                    <button ng-click="addLivingCity(citySelected)" class="btn btn-primary btn-xs">Add</button>
+                    <br/>
+                    Cities Selected
+                    <div>
+                        <span ng-repeat="city in citySelectedForUi" ng-click="removeLivingCity(city.id)" class="bg-danger"> {{city.name}} </span>
+                        <br/>
+                       
+                    </div>
+                    <br/>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok(person.id)" ng-disabled="!isInputValid()">Update</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

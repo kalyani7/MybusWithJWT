@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.mybus.service.CargoBookingManagerTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 1.798 s - in com.mybus.service.CargoBookingManagerTest

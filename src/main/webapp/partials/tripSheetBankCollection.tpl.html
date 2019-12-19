@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="page-header">
+        <h3>Bank details</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 p-0">
+        <div class="ae-box">
+            <form name="tsBankTransferForm" class="form-horizontal ad-form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Bank:</label>
+                        <select class="form-control" ng-options="bank.id as bank.bankName for bank in allBankes" ng-model="tsBankTransfer.bankId" id="vehicle">
+                            <option value="" selected>--Select Bank--</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Amount:</label>
+                        <input type="number" class="form-control" ng-model="tsBankTransfer.amount" placeholder="Amount" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Date:</label>
+                        <my-datepicker ng-model="tsBankTransfer.date"></my-datepicker>
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Remarks:</label>
+                        <input type="text" class="form-control" ng-model="tsBankTransfer.remarks" placeholder="Remarks" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Description:</label>
+                        <input type="text" class="form-control" ng-model="tsBankTransfer.description" placeholder="Description" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4"> </div>
+                    <div class="col-xs-2 text-right">
+                        <button class="btn btn-primary" ng-click="bankCollectionData()">Save</button>
+                    </div>
+                    <div class="col-xs-2 next">
+                        <button  class="btn btn-danger" ng-click="cancelBankCollectionData()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

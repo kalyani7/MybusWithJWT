@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="page-header">
+        <h3>{{headline}}</h3>
+    </div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-inline">
+                        <label class="ls text-uppercase text-600 font-weight-semi-bold">Total Roles: </label>
+                        <span>{{ count }}</span>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="handleClickAddNewRole()">
+                                <span class="glyphicon glyphicon-plus"></span> Add New Role
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="roleContentTableParams">
+                <tr ng-repeat="role in currentPageOfRoles" ng-class="role.name?'':'bg-danger'">
+                    <td  class="col-xs-4" data-title="'Role Name'" sortable="'name'" class="clickable-item" >{{role.name}}</td>
+                    <td class="col-xs-2" data-title="'Action'" class="ed-btn">
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="initForUpdateRole(role.id)">
+                                <span class="glyphicon glyphicon-pencil"></span></md-icon>
+                        </md-button>
+                        <md-button>
+                            <md-icon type="button" class="btn" ng-click="deleteRole(role.id)">
+                                <span class="glyphicon glyphicon-remove"></span></md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+                <tr ng-if="!currentPageOfRoles || currentPageOfRoles.length === 0">
+                    <td colspan="4">No expenses exist.  Please add some.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- modal popup for adding new Role -->
+
+<script type="text/ng-template" id="addOrUpdate-newRoles.html">
+
+	<div class="modal-header">
+		<div class="row">
+            <div class="col-sm-11">
+        		<h3 class="modal-title">Add a New Role</h3>
+    		</div>
+ 			<div class="col-sm-1">
+        		<md-button>
+            		<md-icon type="button" class="btn-sm" ng-click="cancel()">
+               			<span class="glyphicon glyphicon-remove"></span>
+					</md-icon>
+           		</md-button>
+        	</div>
+		</div>
+	</div>
+    <div class="modal-body">
+
+        <!-- ---------------------------------------------------------------------------- -->
+        <form name="newRoleNeighForm" class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="col-sm-7 col-xs-offset-2">
+                    <input type="text" id="roleName" class="form-control" ng-model="role.name" placeholder="Role Name">
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-if="isForRoleUpdate" ng-click="UpdateNewRole(role.id,role)" ng-disabled="!isInputValid()">Update Role</button>
+		<button class="btn btn-primary" ng-if="!isForRoleUpdate" ng-click="addNewRole()" ng-disabled="!isInputValid()">Add Role</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

@@ -1,0 +1,37 @@
+<legend> {{headline}}</legend>
+<div class="row" style="margin-top:20px;">
+    <div class="form-group">
+        <label class="col-sm-1 control-label p-5 " style="width: 86px">Start Date:</label>
+        <div class="col-sm-3">
+            <my-datepicker ng-model="fromDate"></my-datepicker>
+            <span class="input-group-btn">
+                    </span>
+
+        </div>
+
+        <label class="col-sm-1 control-label p-5">End Date:</label>
+        <div class="col-sm-3">
+            <my-datepicker ng-model="toDate"></my-datepicker>
+            <span class="input-group-btn">
+                    </span>
+        </div>
+
+    <button type="button" class="btn btn-sm btn-success " ng-click="filterHaltReports()"> Search</button>
+    </div>
+    <table class="table table-bordered table-condensed table-hover" ng-table="pendingTableParams">
+        <tr ng-repeat="report in haltReports">
+            <td data-title="'Service#'"  sortable="'serviceNumber'" class="clickable-item col-md-2">{{ report.serviceNumber }}</td>
+            <td data-title="'Type'"  sortable="'Type'" class="clickable-item col-md-2">{{ report.busType }}</td>
+            <td data-title="'From'"  sortable="'From'" class="clickable-item col-md-2">{{ report.source }}</td>
+            <td data-title="'To'"  sortable="'To'" class="clickable-item col-md-2">{{ report.destination }}</td>
+            <td data-title="'Date'"  sortable="'jDate'" class="clickable-item col-md-2">{{ report.jDate }}</td>
+            <td data-title="'Amount'"  sortable="'netIncome'" class="clickable-item col-md-2">{{ report.netIncome }}</td>
+            <td>
+            <a href="/homepage.html#!/haltreport/{{report.id}}">View</a>
+            </td>
+        </tr>
+        <tr ng-if="!haltReports || haltReports.length === 0">
+            <td colspan="7">No reports exist. </td>
+        </tr>
+    </table>
+</div>

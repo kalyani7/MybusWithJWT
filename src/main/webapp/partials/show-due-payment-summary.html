@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <div class="row">
+        <div class="col-sm-11">
+            <h3 class="modal-title">Booking Payments</h3>
+        </div>
+        <div class="col-sm-1">
+            <md-button>
+                <md-icon type="button" class="btn-sm" ng-click="cancel()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </md-icon>
+            </md-button>
+        </div>
+    </div>
+</div>
+<div class="modal-body">
+    <table class="table table-bordered table-condensed table-hover">
+        <tr ng-repeat="booking in paidBookings">
+            <td>{{booking.ticketNo}}</td>
+            <td>{{booking.bookedBy}}</td>
+            <td>{{booking.source}} - {{booking.destination}} - {{booking.serviceName}})</td>
+            <td>{{booking.jdate }}</td>
+            <td>{{ booking.netAmt }}</td>
+        </tr>
+        <tr><td colspan="5"><span class="pull-right"> Total paid: {{totalAmount}}</span></td></tr>
+    </table>
+</div>

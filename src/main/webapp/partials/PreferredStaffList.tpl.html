@@ -1,0 +1,65 @@
+<legend>Preferred Staff List</legend>
+<form name="searchFuelBills" class="form-horizontal" autocomplete="off" role="form" unsaved-warning-form >
+<!--<div class="row">-->
+    <div class="form-group">
+        <label class="control-label col-sm-1 p-5">From:</label>
+        <div class="col-sm-4">
+            <select class="form-control" ng-options="city.id as city.name for city in cities"
+                    ng-model="query.sourceId" id="sourceId" name="sourceId">
+                <option value="" selected>&#45;&#45;Select Source&#45;&#45;</option>
+            </select>
+        </div>
+        <label class="control-label col-sm-1 p-5">To:</label>
+        <div class="col-sm-4">
+            <select class="form-control" ng-options="city.id as city.name for city in cities"
+                    ng-model="query.destinationId" id="destinationId" name="destinationId">
+                <option value="" selected>&#45;&#45;Select Destination&#45;&#45;</option>
+            </select>
+        </div>
+    </div>
+<!--</div>-->
+<!--<div class="row">-->
+    <div class="form-group">
+        <label class="control-label col-sm-1 p-5">Vehicle:</label>
+        <div class="col-sm-4">
+            <select class="form-control" ng-options="vehicle.id as vehicle.regNo for vehicle in allVehicles"
+                    ng-model="query.vehicleId" id="vehicle" name="vehicleId">
+                <option value="" selected>&#45;&#45;Select Vehicle&#45;&#45;</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-sm btn-success" ng-click="init()"> Search</button>
+        </button>
+    </div>
+<!--</div>-->
+</form>
+<div class="row form-group">
+    <div class="pull-right">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="addPreferredStaff()"><span
+                class="glyphicon glyphicon-plus"></span> Add Staff
+        </button>
+    </div>
+</div>
+
+<table class="table table-bordered table-condensed table-hover" ng-table="preferredStaffTableParams">
+    <tr ng-repeat="staff in staffList track by $index">
+        <td data-title="'S No'">{{(preferredStaffTableParams.page() - 1) * preferredStaffTableParams.count() +
+            $index + 1 }}
+        </td>
+        <td data-title="'VehicleNo'" sortable="'attrs.RegNo'" class="clickable-item">{{ staff.attrs.RegNo }}</td>
+        <td data-title="'Staff'" sortable="'attrs.staffNames'" class="clickable-item">{{ staff.attrs.staffNames }}</td>
+        <td data-title="'From'" sortable="'attrs.source'" class="clickable-item">{{ staff.attrs.source }}</td>
+        <td data-title="'To'" sortable="'attrs.destination'" class="clickable-item">{{ staff.attrs.destination }}</td>
+
+        <td class="clickable-item col-sm-2" data-title="'Action'">
+            <md-icon type="button" class="btn" ng-click="addPreferredStaff(staff.id)" title="Edit trip">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </md-icon>
+            <md-icon type="button" class="btn" ng-click="deleteStaff(staff.id)" title="Delete trip">
+                <span class="glyphicon glyphicon-remove"></span>
+            </md-icon>
+        </td>
+    </tr>
+    <tr ng-if="!staffList || staffList.length === 0">
+        <td colspan="6">No records exist. Please add some.</td>
+    </tr>
+</table>

@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="page-header">
+        <h3>Documents Upload</h3>
+    </div>
+</div>
+
+<!--<legend>{{ headline }}</legend>-->
+
+<!--- Edit User Form------->
+
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10 p-0">
+        <div class="ae-box">
+            <form name="thisForm" class="form-horizontal ad-form" autocomplete="off" role="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">File Name</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="fuel" ng-model="fileName" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Select File</label>
+                    <div class="col-sm-8">
+                        <input type="file" ng-model="file" ngf-select ngf-multiple="true" class="form-control" id="uploadFiles">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" ng-model="description" rows="4"> </textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row text-center mt-30">
+                    <button class="btn btn-primary" ng-click="upload()">Upload</button>
+                    <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

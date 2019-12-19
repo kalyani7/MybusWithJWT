@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="page-header">
+        <h3>Receipt</h3>
+    </div>
+</div>
+
+<div class="row">
+        <div class="col-lg-2"></div>
+    <div class="col-lg-8 p-0">
+        <div class="ae-box">
+            <form name="tsReceiptForm" class="form-horizontal ad-form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">From:</label>
+                        <input type="text" class="form-control" ng-model="tsReceipt.from" placeholder="From">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">To:</label>
+                        <input type="text" class="form-control" ng-model="tsReceipt.to" placeholder="To">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Party Name:</label>
+                        <select id="fillingStation" ng-options="supplier.id as supplier.name for supplier in suppliers"
+                                class="form-control" ng-model="tsReceipt.partyId">
+                            <option value="" selected>--Select supplier--</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">LoadType:</label>
+                        <input type="text" class="form-control" ng-model="tsReceipt.loadType" placeholder="LoadType">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Remarks:</label>
+                        <input type="text" class="form-control" ng-model="tsReceipt.remarks" placeholder="Remarks">
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Total Fare:</label>
+                        <input type="number" class="form-control" ng-model="tsReceipt.totalFare" placeholder="Total Fare" ng-change="calculateBalance(tsReceipt.totalFare, '')">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Advance Received:</label>
+                        <input type="text" class="form-control" ng-model="tsReceipt.advanceReceived" placeholder="Advance Received" ng-change="calculateBalance(tsReceipt.totalFare, tsReceipt.advanceReceived)">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Balance:</label>
+                        <input type="number" class="form-control" disabled ng-model="tsReceipt.balance" placeholder="Balance to be collected">
+                    </div>
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                        <label class="ls text-600 font-weight-semi-bold">Payment Mode:</label>
+                        <select class="form-control" ng-model="tsReceipt.paymentMode">
+                            <option value="" selected>--select--</option>
+                            <option value="Cash" selected>Cash</option>
+                            <option value="Bank" selected>Bank</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" ng-if="tsReceipt.paymentMode === 'Bank'">
+                    <div class="col-lg-6 col-md-6 padding-bottom">
+                    <label class="ls text-600 font-weight-semi-bold">Bank Account:</label>
+                        <select class="form-control" ng-model="tsReceipt.bankId">
+                            <option value="" selected>--Select Bank--</option>
+                            <option value="{{bank.id}}" ng-repeat="bank in bankAccounts">{{bank.bankName}} - {{bank.accountName}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4"> </div>
+                    <div class="col-xs-2 text-right">
+                        <button class="btn btn-primary" ng-click="saveReceiptData()">Save</button>
+                    </div>
+                    <div class="col-xs-2 next">
+                        <button  class="btn btn-danger" ng-click="cancelReceiptData()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

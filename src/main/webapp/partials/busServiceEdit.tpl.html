@@ -1,0 +1,247 @@
+
+<div ng-class="container">
+    <!--seat arrangement-->
+    <form name="serviceForm">
+        <div class="form-group">
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <input type="text" placeholder="Service Name" class="form-control" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'" data-ng-model="busServiceEditCtrl.busService.serviceName" required>
+                    <br>
+                </div>
+                <div class="col-sm-4">
+                    <number model="busServiceEditCtrl.busService.serviceNumber" minlength="4" placeholder="Service Number"/> 
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                	 <number model="busServiceEditCtrl.busService.phoneEnquiry" minlength="10" placeholder="Enquiry Phone Number"/>
+                    <br>
+                </div>
+                <div class="col-sm-4">
+                    <number model="busServiceEditCtrl.busService.cutoffTime" minlength ="1" placeholder="Cutoff-Time(Hours):"/>
+                    <br>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-4">
+                  <number model="busServiceEditCtrl.busService.serviceTax" placeholder="Service Tax"/>
+                  <br/>
+                </div>
+
+                <label class="col-sm-1 control-label checkbox" for="serviceActiveInactive">Active</label>
+                <div class="col-sm-1">
+                	<div class="col-sm-8">
+                    	<input id="serviceActiveInactive" type="checkbox"  ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'" class="form-control" data-ng-checked="busServiceEditCtrl.busService.active"  data-ng-model="busServiceEditCtrl.busService.active">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="serviceTaxMode">Service Tax Mode:</label>
+                    <select id="serviceTaxMode" class="form-control" data-ng-model="busServiceEditCtrl.busService.serviceTaxType" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'" required>
+                        <option ng-repeat="taxMode in busServiceEditCtrl.taxModes" values="{{taxMode.id}}">{{taxMode.name}}</option>
+                    </select>
+                    <br>
+                </div>
+                
+                <div class="col-sm-4">
+                    <label for="serviceLayoutName">Layout Name:</label>
+
+                    <select id="serviceLayoutName" class="form-control" ng-model="busServiceEditCtrl.busService.layoutId" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'">
+                        <option ng-repeat="layout in busServiceEditCtrl.layouts" value="{{layout.id}}">{{layout.name}} </option>
+                    </select>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="serviceJourneyFromDate">Service Start Date :</label>
+                    <input id="serviceJourneyFromDate" type="date" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'"
+                           ng-model="busServiceEditCtrl.busService.schedule.startDate"
+                           options="dateOptions" class="form-control" opened="opened"
+                           ng-blur="onSelectServiceStartDate(busServiceEditCtrl.busService.schedule.startDate)"/>
+                    <br>
+                </div>
+                <div class="col-sm-4">
+                    <label for="serviceJourneyToDate">Service End Date :</label>
+                    <input id="serviceJourneyToDate" type="date" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'"
+                           class="form-control" options="dateOptions" opened="opened"  ng-model="busServiceEditCtrl.busService.schedule.endDate"/>
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Service Mode :</label>
+                    <input id="serviceFrequencyDaily" type="radio" name="serviceMode" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'" ng-model="busServiceEditCtrl.busService.schedule.frequency" value="DAILY" ng-click="dailyService()">
+                    <label>Daily</label>
+                    <input id="serviceFrequencyWeekly" type="radio" name="serviceMode" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'" ng-model="busServiceEditCtrl.busService.schedule.frequency" value="WEEKLY">
+                    <label>Weekly</label>
+                    <input id="serviceFrequencySpecial" type="radio" name="serviceMode" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'" ng-model="busServiceEditCtrl.busService.schedule.frequency" value="SPECIAL">
+                    <label>Special</label>
+                    <br>
+                </div>
+                
+                <div class="col-sm-4">
+                	 <label for="serviceAmenities">Amenities:</label></br>
+                        <span ng-repeat="amenity in busServiceEditCtrl.amenities">
+                	 	<input id="serviceAmenities" type="checkbox" data-ng-checked="amenity.active" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'" ng-model='checkedOrUnchecked' checklist-value="{{amenity.id}}" ng-click="addOrRemoveAmenitiesToService(checkedOrUnchecked,amenity.id)"/>
+                	 	{{amenity.name}}
+                	 </span>
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col-sm-4" ng-show="busServiceEditCtrl.busService.schedule.frequency=='DAILY'">
+                	<span ng-repeat="day in busServiceEditCtrl.weeklyDays">
+                	 	<input type="checkbox" data-ng-checked="true" disabled="true" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'"
+                               checklist-model="busServiceEditCtrl.busService.frequency.DAILY" checklist-value="{{day}}">
+                	 	{{day}}
+                	 </span>
+                </div>
+            
+                <div class="col-sm-4" ng-show="busServiceEditCtrl.busService.schedule.frequency=='WEEKLY'">
+                	<span ng-repeat="day in busServiceEditCtrl.weeklyDays">
+                	 	<input type="checkbox" name="{{day}}" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'"
+                               ng-model='checkedOrUnchecked' checklist-model="busServiceEditCtrl.busService.frequency.weeklyDays"
+                               checklist-value="{{day}}" ng-click=weeklyDays(checkedOrUnchecked,$index)>
+                	 	{{day}}
+                	 </span>
+                </div>
+           
+                <div class="col-sm-4" ng-show="busServiceEditCtrl.busService.schedule.frequency=='SPECIAL'">
+                	 	<span>
+                	 		<input type="date" class="form-control" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'" ng-model="busServiceEditCtrl.specialServiceDate">
+                	 		<input type="submit" class="btn btn-primary btn-xs" ng-disabled="!busServiceEditCtrl.specialServiceDate" value="add" ng-click="busServiceEditCtrl.specialServiceDate = specialServiceDates(busServiceEditCtrl.specialServiceDate)" >
+                	 	</span>
+                    <div ng-repeat="specialDay in sSDates">
+                		<!-- <span ng-if="specialDay != ''">
+                			{{specialDay}}
+                	 		<input type="submit" value="Delete" class="btn btn-warning" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'" ng-click="removeSpecialServiceDatesFromList(busServiceEditCtrl.specialServiceDate)">
+                	 	</span> -->
+                	 	
+                	 	{{specialDay}}
+                		<md-button>
+                            <md-icon type="button" class="btn-sm" ng-click="removeSpecialServiceDatesFromList(busServiceEditCtrl.specialServiceDate)">
+                                <span class="glyphicon glyphicon-remove"></span></md-icon>
+                        </md-button>
+                        <br/>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                
+                    <label for="route">Route Name : </label>
+                    <input id="route" list="routes" ng-model="busServiceEditCtrl.busService.routeName" name="route" class="form-control" placeholder="Route Name">
+                    <datalist id="routes">
+                        <option ng-repeat="route in busServiceEditCtrl.routes" data-value="{{route.id}}">{{route.name}}</option>
+                    </datalist>
+                    <br>
+                </div>
+                  <div class="col-sm-4">
+                  	<label  for="busServiceFare">&nbsp;</label>
+                	<input id="busServiceFare" type="number" class="form-control" placeholder="Service Fare" ng-disabled="busServiceEditCtrl.busService.status=='PUBLISHED'" ng-model="busServiceEditCtrl.busService.fare"/>
+                	</br>
+                </div>
+            </div>
+            <div class="row" ng-if="busServiceEditCtrl.routeCities">
+				<br>	         
+	            <div class="col-md-9">
+	            	<label  for="sel1">Service Fares</label>
+	            	  <table class="table table-bordered table-condensed table-hover" ng-table="">
+		            	  <tr ng-repeat="viaCities in serviceFares">
+		            	  	<td data-title="'Source City'" sortable="'name'" class="col-md-2">{{viaCities.sourceCityId.name}}</td>
+		            	  	<td data-title="'Destination City'" sortable="'name'" class="col-md-2">{{viaCities.destinationCityId.name}}</td>
+		            	  	<td data-title="'Arrival Time'" class="col-md-2">
+		            	  		<input type="time" placeholder="" class="form-control" name="arrivalTime" ng-model="serviceFare.arrivalTime" ng-change="addServiceFare(viaCities.sourceCityId.id, viaCities.destinationCityId.id, serviceFare.arrivalTime, 'at')">
+		            	  	</td>
+		            	  	<td data-title="'Separture Time'" class="col-md-2">
+		            	  		<input type="time" placeholder="" class="form-control" name="departureTime" ng-model="serviceFare.departureTime" ng-change="addServiceFare(viaCities.sourceCityId.id, viaCities.destinationCityId.id, serviceFare.departureTime, 'dt')">
+		            	  	</td>
+		            	  	<td data-title="'Fare '" class="col-md-2">
+		            	  		<input type="number" placeholder="" class="form-control" name="Fare" ng-model="serviceFare.fare" ng-change="addServiceFare(viaCities.sourceCityId.id, viaCities.destinationCityId.id, serviceFare.fare, 'fare')">
+		            	  	</td>
+		            	  	<td data-title="'Status '" class="col-md-1">
+		            	  		<div class="col-sm-8">
+		            	  			<input type="checkbox" placeholder="" data-ng-checked="viaCities.active" class="form-control" name="Fare" ng-model="serviceFare.active" ng-change="addServiceFare(viaCities.sourceCityId.id, viaCities.destinationCityId.id, serviceFare.active, 'active')">
+		            	  		</div>
+		            	  	</td>
+		            	  </tr>
+	                  </table>
+	            </div>
+			</div>
+            
+            <div class="row" ng-if="busServiceEditCtrl.routeCities">
+                <div class="col-md-9">
+                    <div class="bpdp-tab" ng-init="tab=1">
+                        <ul>
+                            <li class="tab"  ng-class="{active:tab==1}">
+                                <a href ng-click="tab = 1">Boarding Points</a>
+                            </li>
+                            <li class="tab" ng-class="{active:tab==2}">
+                                <a href ng-click="tab = 2">Dropping Points</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" ng-show="tab==1">
+                            <table class="table table-bordered table-condensed table-hover" ng-table="boardingPointContentTableParams">
+                                <tr ng-repeat="boardingPoint in boardingPoints" ng-class="boardingPoint.active?'':'bg-danger'">
+                                    <td data-title="'Boarding Point Names'" sortable="'name'" class="clickable-item col-md-6">{{ boardingPoint.name }}</td>
+                                    <td data-title="'Provide Stop'" class="clickable-item col-md-2">
+                                    	<div class="col-sm-5">
+                                        	<input type="checkbox" data-ng-checked="boardingPoint.active" class="form-control" data-ng-model="boardingPoint.active" ng-click="addOrRemoveDropingtime(boardingPoint.id,boardingPoint.active,'bp',boardingPoint.time,$index,boardingPoint.name)">
+                                        </div>
+                                    </td>
+                                    <td data-title="'Departure Time'" class="col-md-2">
+                                        <div ng-show="boardingPoint.active">
+                                            <input type="time" class="form-control " ng-model="boardingPoint.time" ng-change="addOrRemoveDropingtime(boardingPoint.id,boardingPoint.active,'bp',boardingPoint.time,$index,boardingPoint.name)">
+                                        </div>
+                                    </td>
+                                    <td data-title="'Day'" class="col-md-2">0</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tab-content" ng-show="tab==2">
+                            <table class="table table-bordered table-condensed table-hover" ng-table="dropingPointContentTableParams">
+                                <tr ng-repeat="dropingPoint in dropingPoints" ng-class="dropingPoint.active?'':'bg-danger'">
+                                    <td data-title="'Droping Point Names'" sortable="'name'" class="col-md-6">{{ dropingPoint.name }}</td>
+                                    <td data-title="'Provide Stop'" class="col-md-2">
+                                    	<div class="col-sm-5">
+                                        	<input type="checkbox" data-ng-checked="dropingPoint.active" class="form-control" data-ng-model="dropingPoint.active" ng-click="addOrRemoveDropingtime(dropingPoint.id,dropingPoint.active,'dp',dropingPoint.time,$index,dropingPoint.name)">
+                                        </div>
+                                    </td>
+                                    <td data-title="'Departure Time'" class="col-md-2">
+                                        <div ng-show="dropingPoint.active">
+                                            <input type="time" class="form-control" ng-model="dropingPoint.time" ng-change="addOrRemoveDropingtime(dropingPoint.id,dropingPoint.active,'dp',dropingPoint.time,$index,dropingPoint.name)">
+                                        </div>
+                                    </td>
+                                    <td data-title="'Day'"  class="col-md-2">0</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+      		 </div>
+	         
+        </div>
+        <div ng-if="!updateServiceButton" >
+            <input type="submit" class="btn btn-primary" ng-disabled="busServiceEditCtrl.$valid" ng-click="saveService()" value="Save Service" />
+            <input type="button" class="btn btn-primary" ng-click="cancelServiceEdit(serviceForm)" value="Cancel" />
+        </div>
+        <div ng-if="updateServiceButton">
+            <input type="submit" class="btn btn-warning" ng-if="busServiceEditCtrl.busService.status=='PUBLISHED'" ng-click="editPublishedService()" value="Edit Service" />
+            <input type="submit" class="btn btn-primary" ng-click="updateService()" value="UpDate Service" />
+            <input type="button" class="btn btn-primary" ng-click="cancelServiceEdit(serviceForm)" value="Cancel" />
+        </div>
+
+        <hr>
+    </form>
+
+
+</div>

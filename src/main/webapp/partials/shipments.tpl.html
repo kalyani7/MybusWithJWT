@@ -1,0 +1,31 @@
+<legend>{{ headline }}</legend>
+
+<br/>
+
+<span class="small-text">Total: {{ shipmentCount }}</span>
+<div class="toolbar-button-div pull-right">
+    <button type="button" class="btn btn-sm btn-primary" ng-click="addShipment()"><span class="glyphicon glyphicon-plus"></span> Add Shipment</button>
+</div>
+
+
+<table class="table table-bordered table-condensed table-hover table-striped" ng-table="userContentTableParams">
+    <tr ng-repeat="user in currentPageOfUsers">
+        <td data-title="'Last Name'" class="col-sm-3" sortable="'lastName'">{{ user.lastName }}</td>
+        <td data-title="'First Name'" class="col-sm-3"sortable="'firstName'">{{ user.firstName }}</td>
+        <td data-title="'Username'" class="col-sm-3" sortable="'userName'">{{ user.userName }}</td>
+        <td data-title="'Contact'" class="col-sm-3" sortable="'contact'">{{ user.contact }}</td>
+        <td data-title="'Type'" class="col-sm-3" sortable="'type'">{{ user.userType }}</td>
+        <td class="col-sm-2" ng-show="isAdmin()">
+            <md-button>
+                <md-icon type="button" class="btn" ng-click="editUser(user.id)">
+                    <span class="glyphicon glyphicon-pencil"></span></md-icon>
+            </md-button>
+        </td>
+        <td class="col-sm-2" ng-show="isAdmin()">
+            <md-button >
+                <md-icon type="button" class="btn" ng-click="deleteUser(user.id)">
+                    <span class="glyphicon glyphicon-remove"></span></md-icon>
+            </md-button>
+        </td>
+    </tr>
+</table>

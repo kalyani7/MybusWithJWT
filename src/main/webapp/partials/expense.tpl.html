@@ -1,0 +1,108 @@
+<div class="row">
+    <div class="page-header">
+        <h3 ng-if="!user.admin">Expense</h3>
+    </div>
+</div>
+
+<!--<legend ng-if="!user.admin">Expense</legend>-->
+
+<div class="row">
+    <div class="box-body">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="col-lg-3">
+                        <label class="ls text-uppercase text-600 font-weight-semi-bold control-label">Count: </label><span>  {{ count }}</span>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label ls text-uppercase text-600 font-weight-semi-bold">Search:</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search by Types.." ng-model="query">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary" ng-click="init(query)">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="handleClickAddExpense()">
+                                <span class="glyphicon glyphicon-plus"></span> Add Expense
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="expenseTableParams">
+                <tr ng-repeat="expense in currentPageOfExpense">
+                    <td data-title="'S No'">{{(expenseTableParams.page() - 1) * expenseTableParams.count() + $index + 1 }}</td>
+                    <td data-title="'Types'" sortable="'types'" class="clickable-item">{{expense.types}}</td>
+                    <td data-title="'Action'" class="ed-btn">
+                        <md-button>
+                            <md-icon type="button" class="btn btn-xs" ng-click="handleClickUpdateExpense(expense.id)">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </md-icon>
+                        </md-button>
+                        <md-button>
+                            <md-icon type="button" class="btn btn-xs" ng-click="delete(expense.id)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+                <tr ng-if="!currentPageOfExpense || currentPageOfExpense.length === 0">
+                    <td colspan="3">No Vehicle exist. Please add some.</td>
+                </tr>
+            </table>
+            <div ng-show="loading">
+                Please wait while the payments data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="expense-modal.html">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-sm-11">
+                <h3 class="modal-title">Add/Edit Expense</h3>
+            </div>
+            <div class="col-sm-1">
+                <md-button>
+                    <md-icon type="button" class="btn-sm" ng-click="cancel()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </md-icon>
+                </md-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+        <form name="expenseDetails" class="form-horizontal" autocomplete="off" role="form" >
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Types :</label>
+                    <div class="col-sm-6"><input type="text" class="form-control" ng-model="expense.types"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="button" class="btn btn btn-sm btn-danger pull-right" ng-click="cancel(expenseDetails.id)">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn btn-sm btn-success pull-right" ng-click="addExpense(expenseDetails)">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</script>

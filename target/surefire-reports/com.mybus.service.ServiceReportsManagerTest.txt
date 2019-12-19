@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.mybus.service.ServiceReportsManagerTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.591 s - in com.mybus.service.ServiceReportsManagerTest

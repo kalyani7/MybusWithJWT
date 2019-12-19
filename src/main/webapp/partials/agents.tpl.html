@@ -1,0 +1,80 @@
+<!--<legend>{{ headline }}</legend>-->
+
+<div class="row">
+    <div class="page-header">
+        <h3>{{ headline }}</h3>
+    </div>
+</div>
+<div class="row">
+    <span ng-show="!loading">
+        <div class="box-body">
+            <div class="filter-form">
+                <form name="shipments">
+                    <div class="row filter-btn">
+                        <div class="col-lg-3 col-md-3 col-xs-12">
+                            <div class="">
+                                <label class="ls text-uppercase text-600 font-weight-semi-bold">Count: </label>
+                                <span>{{count}}</span>
+                            </div>
+                            <div class="">
+                                <label class="ls text-uppercase text-600 font-weight-semi-bold">Show Invalid: </label>
+                                <input type="checkbox" ng-model="showInvalid" ng-change="init('', showInvalid)">
+                            </div>
+                            <div class="">
+                                <label class="ls text-uppercase text-600 font-weight-semi-bold">Invalid count: </label> {{invalidCount}}
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-xs-12 agent-form-btn" style="margin-top: 42px">
+                            <div class="col-lg-9 col-md-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" placeholder="Search by Name.." ng-model="query">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-info btn-sm" id="basic-addon2" ng-click="init(query, '')">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4" ng-if="isAdmin()">
+                                <div class="me-btn">
+                                    <button type="button" class="btn btn-sm btn-primary" ng-click="handleClickAddNewAgent()">
+                                        <span class="glyphicon glyphicon-plus"></span> New Agent
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger" ng-click="refreshAgents()">
+                                      <span class="glyphicon glyphicon-refresh"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="table-responsive">
+                <table class="table table-condensed table-hover text-center bg-th table-sm fs--1" ng-table="agentTableParams"
+                       hide-pagination="false">
+                    <tr ng-repeat="agent in currentPageOfAgents">
+                        <td data-title="'UserName'" sortable="'username'" class="clickable-item">{{ agent.username }}</td>
+                        <td data-title="'Mobile'" sortable="'mobile'" class="clickable-item">{{ agent.mobile }}</td>
+                        <td data-title="'Landline'" sortable="'landline'" class="clickable-item">{{ agent.landline }}</td>
+                        <td data-title="'CreatedOn'" sortable="'createdAt'"
+                            class="clickable-item">{{ agent.createdAt|date }}</td>
+                        <td data-title="'Branchname'" sortable="'agent.attrs.branchName'" class="clickable-item">{{ agent.attrs.branchName }}</td>
+                        <td data-title="'Commission'" sortable="'agent.commission'" class="clickable-item">{{ agent.commission }}</td>
+                        <td data-title="'Action'">
+                            <md-button>
+                                <md-icon type="button" class="btn" ng-click="editAgent(agent.id)">
+                                    <span class="glyphicon glyphicon-pencil"></span></md-icon>
+                            </md-button>
+                        </td>
+                    </tr>
+                    <tr ng-if="!currentPageOfAgents || currentPageOfAgents.length === 0">
+                        <td colspan="7">No Agent exist.  </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </span>
+    <div ng-show="loading">
+        Please wait while the agents data is loaded <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+    </div>
+</div>

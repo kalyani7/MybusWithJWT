@@ -1,0 +1,67 @@
+<div ng-controller="EditExpenseController">
+    <div class="row">
+        <h3>{{title}}</h3>
+    </div>
+    <form name="addNewExpenseForm" role="form">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <label class=" control-label" for="expenseDate">Date</label>
+                <my-datepicker id="expenseDate" ng-model="dt"></my-datepicker>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <label class=" control-label">Description</label>
+                <input type="text" id="description" class="form-control" ng-model="expense.description"
+                       placeholder="Description">
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <label class="control-label" for="expenseAmount">Amount</label>
+                <input type="number" id="expenseAmount" class="form-control" ng-model="expense.amount"
+                       placeholder="Amount" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <label class=" control-label" for="branchOffice">Expense Type</label>
+                <select id="expenseType" ng-options="e for e in expenseTypes" class="form-control form-group"
+                        ng-model="expense.expenseType"></select>
+            </div>
+
+            <div class="col-sm-4 col-xs-12">
+                <label class=" control-label" for="branchOffice">Branch</label>
+                <select id="branchOffice" ng-options="office.id as office.name for office in offices"
+                        class="form-control" ng-model="expense.branchOfficeId" ng-if="user.admin"></select>
+                <input ng-if="!user.admin" class="form-control" value="{{ user.attrs.branchName }}" readonly>
+            </div>
+            <div class="col-sm-4 col-xs-12" ng-show="expense.expenseType == 'SALARY' || expense.expenseType == 'VEHICLE MAINTENANCE' || expense.expenseType === 'DIESEL' || expense.expenseType === 'TRIP ADVANCE'">
+                <label class=" control-label" for="vehicleNumber">Vehicle</label>
+                <select id="vehicleNumber" ng-options="vehicle.id as vehicle.regNo for vehicle in vehicles"
+                        class="form-control" ng-model="expense.vehicleId"></select>
+            </div>
+
+        </div>
+        <div class="row"  ng-show="expense.id">
+           <file-upload ng-model="files" type="'ExpenseType'"></file-upload>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-4" ng-show="expense.expenseType == 'SALARY'">
+                <label class=" control-label" for="branchOffice">From Date</label>
+                <my-datepicker id="fromDate" ng-model="expense.fromDate"></my-datepicker>
+            </div>
+            <div class="col-xs-12 col-sm-4" ng-show="expense.expenseType == 'SALARY'">
+                <label class=" control-label" for="branchOffice">To Date</label>
+                <my-datepicker id="toDate" ng-model="expense.toDate"></my-datepicker>
+            </div>
+            <div class="col-xs-12 col-sm-4" ng-if="expense.expenseType === 'DIESEL'">
+                <label class=" control-label" for="fillingStation">Filling Station</label>
+                <select id="fillingStation" ng-options="f.id as f.name for f in suppliers" class="form-control"
+                        ng-model="expense.supplierId"/>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-sm-4 pull-right text-right">
+            <button type="submit" class="btn btn-primary" ng-click="add();">Save</button>&nbsp;&nbsp;
+            <button type="submit" class="btn btn-danger" ui-sref="officeexpenses">Cancel</button>
+        </div>
+    </div>
+</div>

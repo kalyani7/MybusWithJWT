@@ -1,0 +1,211 @@
+<div class="row" style="margin-top: 10px;">
+    <legend>Trip Sheet Search</legend>
+
+    <div class="bpdp-tab" ng-init="tab=1">
+        <ul>
+            <li class="tab" ng-class="{active:tab==1}">
+                <a href ng-click="tab = 1">Trip Receipts</a>
+            </li>
+            <li class="tab" ng-class="{active:tab==2}">
+                <a href ng-click="tab = 2">Trip Expenses</a>
+            </li>
+            <li class="tab" ng-class="{active:tab==3}">
+                <a href ng-click="tab = 3">Bank Transfers</a>
+            </li>
+        </ul>
+    </div>
+    <div class="box-body box-body-windo" ng-show="tab==1">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-lg-12 mtb-5" style="padding: 0;">
+                    <div class="col-lg-3">
+                        <label class="ls text-600 font-weight-semi-bold">Start Date</label>
+                        <my-datepicker ng-model="receiptQuery.startDate"></my-datepicker>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="ls text-600 font-weight-semi-bold">End Date</label>
+                        <my-datepicker ng-model="receiptQuery.endDate"></my-datepicker>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="ls text-600 font-weight-semi-bold">Payment Mode</label>
+                        <select ng-model="receiptQuery.paymentMode" class="form-control">
+                            <option value="" selected>--Select--</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Bank">Bank</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2" style="margin-top: 26px;">
+                        <button class="btn btn-sm" ng-click="filterTripReceipts()">Search</button>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <table class="table table-condensed table-hover text-center bg-th table-sm fs--1"
+                           ng-table="">
+                        <tr ng-repeat="receipt in receipts">
+                            <td data-title="'From'" class="clickable-item" sortable="'from'">{{ receipt.from
+                                }}
+                            </td>
+                            <td data-title="'To'" class="clickable-item" sortable="'to'">{{ receipt.to}}</td>
+                            <td data-title="'Party'" class="clickable-item" sortable="'partyName'">{{ receipt.attrs.partyName}}</td>
+                            <td data-title="'Payment Mode'" class="clickable-item" sortable="'paymentType'">{{
+                                receipt.paymentMode }}
+                            </td>
+                            <td data-title="'Bank'" class="clickable-item" sortable="'bankName'">{{
+                                receipt.attrs.bankName || '---' }} - {{receipt.attrs.accountName || '---'}}
+                            </td>
+                            <td data-title="'Total'" class="clickable-item" sortable="'totalFare'">{{
+                                receipt.totalFare }}
+                            </td>
+                            <td data-title="'Advance'" class="clickable-item" sortable="'advanceReceived'">{{
+                                receipt.advanceReceived }}
+                            </td>
+                            <td data-title="'Balance'" class="clickable-item" sortable="'balance'">{{
+                                receipt.balance }}
+                            </td>
+                        </tr>
+                        <tr ng-if="receipts.length > 0">
+                            <td colspan="2"><b>Total Amounts</b></td>
+                            <td></td>
+                            <td></td>
+                            <td style="font-size: 14px;"><b>{{totalTripAmount}}</b></td>
+                            <td style="font-size: 14px;"><b>{{totalTripAdvance}}</b></td>
+                            <td style="font-size: 14px;"><b>{{totalReceiptsSum}}</b></td>
+                            <td></td>
+                        </tr>
+                        <tr ng-if="!receipts || receipts.length === 0">
+                            <td colspan="8">No receipts exist.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-body box-body-windo" ng-show="tab==2">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-lg-12 mtb-5" style="padding: 0;">
+                    <div class="col-lg-3">
+                        <label class="ls text-600 font-weight-semi-bold">Start Date</label>
+                        <my-datepicker ng-model="tripExpenseQuery.startDate"></my-datepicker>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="ls text-600 font-weight-semi-bold">End Date</label>
+                        <my-datepicker ng-model="tripExpenseQuery.endDate"></my-datepicker>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="ls text-600 font-weight-semi-bold">Expense Type</label>
+                        <select ng-options="expenseType.id as expenseType.types for expenseType in expenseTypes"
+                                class="form-control" ng-model="tripExpenseQuery.expenseType">
+                            <option value="" selected>Select Expense Type</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2" style="padding: 0;">
+                        <label class="ls text-600 font-weight-semi-bold">Party Name</label>
+                        <select id="fillingStation" ng-options="supplier.id as supplier.name for supplier in suppliers"
+                                class="form-control" ng-model="tripExpenseQuery.partyId">
+                            <option value="" selected>Select Party</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-1" style="margin-top: 26px;">
+                        <button class="btn btn-sm" ng-click="filterTripExpenses()">Search</button>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <table class="table table-condensed table-hover text-center bg-th table-sm fs--1"
+                           ng-table="">
+                        <tr ng-repeat="expense in tripExpenses">
+                            <td data-title="'Expense Type'" class="clickable-item" sortable="'expenseType'">{{
+                                expense.attrs.expenseType }}
+                            </td>
+                            <td data-title="'Party'" class="clickable-item" sortable="'party'">{{
+                                expense.attrs.partyName}}
+                            </td>
+                            <td data-title="'Payment Mode'" class="clickable-item" sortable="'paymentMode'">{{
+                                expense.paymentType }}
+                            </td>
+                            <td data-title="'Date'" class="clickable-item" sortable="'expenseDate'">{{
+                                expense.date | date}}
+                            </td>
+                            <td data-title="'Bill No'" class="clickable-item" sortable="'billNo'">{{
+                                expense.billNo }}
+                            </td>
+                            <td data-title="'Quantity/Amount'" class="clickable-item" sortable="'quantity'">{{
+                                expense.quantity }}/ {{ expense.amountPerQuantity }}
+                            </td>
+                            <td data-title="'Amount'" class="clickable-item" sortable="'expenseAmount'">{{
+                                expense.amount }}
+                            </td>
+                        </tr>
+                        <tr ng-if="tripExpenses.length > 0">
+                            <td colspan="2"><b>Total Trip Expense</b></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="font-size: 14px;"><b>{{totalExpenseAmount}}</b></td>
+                            <td></td>
+                        </tr>
+                        <tr ng-if="!tripExpenses || tripExpenses.length === 0">
+                            <td colspan="9">No Trip Expenses exist.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-body box-body-windo" ng-show="tab==3">
+        <div class="filter-form">
+            <div class="row">
+                <div class="col-lg-12 mtb-5" style="padding: 0;">
+                    <div class="col-lg-3">
+                        <label class="ls text-600 font-weight-semi-bold">Start Date</label>
+                        <my-datepicker ng-model="tripBankQuery.startDate"></my-datepicker>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="ls text-600 font-weight-semi-bold">End Date</label>
+                        <my-datepicker ng-model="tripBankQuery.endDate"></my-datepicker>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="ls text-600 font-weight-semi-bold">Bank</label>
+                        <select class="form-control" ng-options="bank.id as bank.bankName for bank in bankAccounts"
+                                ng-model="tripBankQuery.bankId">
+                            <option value="" selected>Select Bank</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-1" style="margin-top: 26px;">
+                        <button class="btn btn-sm" ng-click="filterBankTransfers()">Search</button>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <table class="table table-condensed table-hover text-center bg-th table-sm fs--1"
+                           ng-table="">
+                        <tr ng-repeat="tsBankTransfer in tsBankTransfers">
+                            <td data-title="'Bank Name'" class="clickable-item" sortable="'bankName'">{{
+                                tsBankTransfer.attrs.bankName }} - ({{tsBankTransfer.attrs.accountName}})
+                            </td>
+                            <td data-title="'Date'" class="clickable-item" sortable="'party'">{{
+                                tsBankTransfer.date | date}}
+                            </td>
+                            <td data-title="'Amount'" class="clickable-item" sortable="'paymentMode'">{{
+                                tsBankTransfer.amount }}
+                            </td>
+                            <td data-title="'Remarks'" class="clickable-item" sortable="'remarks'">{{
+                                tsBankTransfer.remarks }}
+                            </td>
+                        </tr>
+                        <tr ng-if="tsBankTransfers.length > 0">
+                            <td colspan="2"><b>Total Amounts</b></td>
+                            <td style="font-size: 14px;"><b>{{totalBankAmount}}</b></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr ng-if="!tsBankTransfers || tsBankTransfers.length === 0">
+                            <td colspan="9">No transfers exist.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
