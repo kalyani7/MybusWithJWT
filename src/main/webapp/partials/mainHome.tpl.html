@@ -1,0 +1,525 @@
+<nav class="navbar navbar-cus navbar-fixed-top nav-box-shadow" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html" title="HOME" ng-if="!operatorAccount.name">
+                <i class="fa fa-bus"></i> Sri Krishna <span>travels</span>
+            </a>
+            <a class="navbar-brand" href="index.html" title="HOME" ng-if="operatorAccount.name">
+                <i class="fa fa-bus"></i>
+                {{operatorAccount.name}}
+            </a>
+            <span id="category-tabs">
+                <button href="#menu-toggle" class="btn side-menu-btn navbar-btn" id="menu-toggle">
+                    <i class="fa fa-times toggle-btn"></i>
+                </button>
+            </span>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- ngIf: privlgeAndCheck.showInchargeAmounts -->
+                <li>
+                    <a href="#!/payments"> Cash Balance: {{amountToBePaid()|number:2}}</a>
+                </li>
+                <li on-toggle="toggled(open)">
+                    <a href="#" class="dropdown-toggle panel_title_color" dropdown-toggle="" role="button"
+                       data-toggle="modal" data-target="#myModal" aria-expanded="false" aria-haspopup="true">
+                        <i class="ace-icon fa fa-bell icon-animated-bell"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-caret navbar-pink dropdown-navbar" role="menu">
+                        <li class="dropdown-header ng-binding">
+                            <i class="ace-icon fa fa-exclamation-triangle"></i>
+                            Pending Tasks To Do
+                        </li>
+                        <li class="dropdown-content ace-scroll">
+                            <div class="scroll-track show h_154">
+                                <div class="scroll-bar h_132 top_0"></div>
+                            </div>
+                            <div class="scroll-content">
+                                <ul class="dropdown-menu dropdown-navbar navbar-pink">
+
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- ngIf: totalCount>0 -->
+                    </ul>
+                </li>
+                <li>
+                    <a class="nav-link welcome panel_title_color ng-binding">
+                        <i class="fa fa-calendar bigger-110"></i>
+                        &nbsp;{{currentDate()}} &nbsp;
+
+                    </a>
+                </li>
+                <li class="dropdown" dropdown="" on-toggle="toggled(open)">
+                    <a href="#" class="dropdown-toggle ng-binding" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Welcome &nbsp;
+                        <b href="" ui-sref-active="active" class="handCursor ng-binding">
+                            {{userName()}}
+                        </b>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a ui-sref="updatepassword" class="ng-binding" href="#/updatepassword">
+                                Change Password
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item header_li_border">
+                    <a class="nav-link welcome panel_title_color ng-binding" ui-sref-active="active"
+                       href="perform_logout">
+                        <i class="fa fa-power-off panel_title_color"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+
+        <!-- /.container-fluid -->
+    </div>
+</nav>
+
+<div id="wrapper" class="toggled">
+
+    <div id="sidebar-wrapper" class="nav-side-menu">
+        <div class="menu-list">
+            <ul id="menu-content" class="menu-content ">
+                <li data-target="#cargo" class="sidebar-dropdown" ng-show="canAccessModule('cargodashboard')">
+                    <a>
+                        <i class="fa fa-globe fa-lg"></i>
+                        <span> Cargo </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul id="cargo">
+                            <my-menu url="cargodashboard" label="CargoDashBoard"></my-menu>
+                            <my-menu url="newBooking" label="NewBooking"
+                                     ng-if="canAccessModule('cargodashboard')"></my-menu>
+                            <my-menu url="cargoBookings" label="CargoBookings"
+                                     ng-if="canAccessModule('cargobookings')"></my-menu>
+                            <my-menu url="cargobookingchart" label="CargoBookingChart"
+                                     ng-if="canAccessModule('cargobookings')"></my-menu>
+                            <my-menu url="branchbookingsummary" label="BranchBookingSummary"
+                                     ng-if="canAccessModule('branchbookingsummary')"></my-menu>
+                            <my-menu url="loadingsheet" label="LoadingSheet" ng-if="canAccessModule('cargobookings')"></my-menu>
+                            <my-menu url="unloadingsheet" label="UnloadingSheet" ng-if="canAccessModule('cargobookings')"></my-menu>
+                            <my-menu url="deliverysheet" label="DeliverySheet" ng-if="canAccessModule('cargobookings')"></my-menu>
+                            <my-menu url="cancellations" label="Cancellations"></my-menu>
+                        </ul>
+                    </div>
+                </li>
+
+                <li data-target="#analytics" class="sidebar-dropdown" ng-show="canAccessModule('analytics')">
+                    <a>
+                        <i class="fa fa-pie-chart fa-lg"></i>
+                        <span> Analytics </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul id="analytics">
+                            <my-menu url="bookingAnalytics" label="BookingAnalytics"
+                                     ng-if="canAccessModule('bookinganalytics')"></my-menu>
+                        </ul>
+                    </div>
+                </li>
+
+                <li data-target="#master" class="sidebar-dropdown">
+                    <a>
+                        <i class="fa  fa-universal-access fa-lg"></i>
+                        <span> Master </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul id="master">
+                            <my-menu label="Agents"
+                                     ng-if="canAccessModule('agents')"></my-menu>
+                            <my-menu label="Amenities"
+                                     ng-if="canAccessModule('amenities')"></my-menu>
+                            <my-menu label="Banks"
+                                     ng-if="canAccessModule('banks')"></my-menu>
+                            <my-menu label="BranchOffices"
+                                     ng-if="canAccessModule('branchoffices')"></my-menu>
+                            <my-menu label="Cities"
+                                     ng-if="canAccessModule('cities')"></my-menu>
+                            <!--my-menu label="CollectionZones"></my-menu -->
+                            <my-menu label="GSTFilters" ng-if="canAccessModule('GSTFilters')"></my-menu>
+                            <my-menu label="Suppliers"
+                                     ng-if="canAccessModule('suppliers')"></my-menu>
+                            <my-menu label="OperatorAccounts"
+                                     ng-if="currentuser.superAdmin"></my-menu>
+                            <my-menu label="Roles" ng-if="canAccessModule('roles')"></my-menu>
+                            <my-menu label="ManageRoles"
+                                     ng-if="canAccessModule('manageRoles')"></my-menu>
+                            <my-menu label="Routes"
+                                     ng-if="canAccessModule('routes')"></my-menu>
+                            <my-menu label="ServiceCombo"
+                                     ng-if="canAccessModule('servicecombo')"></my-menu>
+                            <my-menu label="TripCombo"
+                                     ng-if="canAccessModule('tripcombo')"></my-menu>
+                            <my-menu label="Users" ng-if="canAccessModule('users')"></my-menu>
+                            <my-menu label="Vehicles"
+                                     ng-if="canAccessModule('vehicles')"></my-menu>
+                            <my-menu label="Staff" ng-if="canAccessModule('staff')"></my-menu>
+                            <my-menu label="ExpensesType"
+                                     ng-if="canAccessModule('expensestype')"></my-menu>
+                            <my-menu label="SearchService"
+                                     ng-if="canAccessModule('searchServices')"></my-menu>
+                            <my-menu label="DocumentsUpload"
+                                     ng-if="canAccessModule('documentsUpload')"></my-menu>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li data-target="#reports" class="sidebar-dropdown">
+                    <a>
+                        <i class="fa fa-book fa-lg"></i>
+                        <span> Reports </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul id="reports">
+                            <my-menu url="tripreports" label="TripReports"
+                                     ng-if="canAccessModule('tripreports')"></my-menu>
+                            <my-menu url="serviceIncomeReport" label="ServiceIncomeReport"
+                                     ng-if="canAccessModule('servicereports')"></my-menu>
+                            <my-menu url="serviceReports" label="ServiceReports"
+                                     ng-if="canAccessModule('servicereports')"></my-menu>
+                            <my-menu label="PreferredStaff"
+                                     ng-if="canAccessModule('preferredstaff')"></my-menu>
+                            <my-menu label="DailyTrips"
+                                     ng-if="canAccessModule('dailytrips')"></my-menu>
+                            <my-menu label="SalaryReports"
+                                     ng-if="canAccessModule('salaryreports')"></my-menu>
+                            <my-menu url="fulltrips"
+                                     label="FullTrips" ng-if="canAccessModule('fulltrips')"></my-menu>
+                            <my-menu label="FuelExpenseReports"
+                                     ng-if="canAccessModule('fuelexpensereports')"></my-menu>
+                            <my-menu label="DueReport"
+                                     ng-if="canAccessModule('duereport')"></my-menu>
+                            <my-menu label="CashTransfers"
+                                     ng-if="canAccessModule('cashtransfers')">Cash Transfers
+                            </my-menu>
+                            <my-menu label="Payments"  ng-if="canAccessModule('payments')">
+                                Payments
+                            </my-menu>
+                            <my-menu label="OfficeExpenses"
+                                     ng-if="canAccessModule('officeexpenses')"></my-menu>
+                            <my-menu label="ExpensesIncomesReports"
+                                     ng-if="canAccessModule('expensesincomesreports')"></my-menu>
+                            <my-menu label="ReturnTickets" ng-if="canAccessModule('returnTickets')"></my-menu>
+                            <my-menu label="CashBalances"
+                                     ng-if="canAccessModule('cashbalances')"></my-menu>
+                            <my-menu label="Invoices" ng-if="canAccessModule('invoices')"></my-menu>
+                            <!--my-menu label="ShipmentSequence" ></my-menu -->
+                            <my-menu label="VerifyInvoice"
+                                     ng-if="canAccessModule('verifyInvoice')"></my-menu>
+                            <my-menu label="TripSheet"
+                                     ng-if="canAccessModule('tripsheet')"></my-menu>
+                            <my-menu label="TripSheetFilters" ng-if="canAccessModule('tripsheetfilters')"></my-menu>
+                        </ul>
+                    </div>
+                </li>
+
+                <li data-target="#checklist" class="sidebar-dropdown" ng-show="canAccessModule('checkList')">
+                    <a>
+                        <i class="fa fa-tasks fa-lg"></i>
+                        <span> Check List</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul id="checklist">
+                            <my-menu url="pendingreports" label="PendingReports"
+                                     ng-if="canAccessModule('pendingreports')"></my-menu>
+                            <my-menu url="reportstobereviewed" label="ReportsToBeReviewed"
+                                     ng-if="canAccessModule('reportstobereviewed')"></my-menu>
+                            <my-menu url="haltreports" label="HaltReports" ></my-menu>
+                        </ul>
+                    </div>
+                </li>
+
+                <li data-target="#profile" class="sidebar-dropdown">
+                    <a>
+                        <i class="fa fa-user fa-lg"></i>
+                        <span> Profile </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul id="profile">
+                            <my-menu url="updatePassword" label="UpdatePassword" ></my-menu>
+                        </ul>
+                    </div>
+                </li>
+
+                <li data-target="#maintenance" class="sidebar-dropdown">
+                    <a>
+                        <i class="fa fa-database fa-lg"></i>
+                        <span> Maintenance </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul id="maintenance">
+                            <my-menu label="Inventories"
+                                     ng-if="canAccessModule('inventories')"></my-menu>
+                            <my-menu label="Jobs" ng-if="canAccessModule('jobs')"></my-menu>
+                            <my-menu label="Reminders"
+                                     ng-if="canAccessModule('reminders')"></my-menu>
+                            <my-menu label="StaffComplaints"
+                                     ng-if="canAccessModule('staffcomplaints')"></my-menu>
+                        </ul>
+                    </div>
+                </li>
+
+                <li data-target="#config" class="sidebar-dropdown" ng-show="canAccessModule('config')">
+                    <a>
+                        <i class="fa fa-database fa-lg"></i>
+                        <span> Config </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul id="config">
+                            <my-menu label="layouts"
+                                     ng-if="canAccessModule('layouts')"></my-menu>
+                            <my-menu label="addservice"
+                                     ng-if="canAccessModule('addservice')"></my-menu>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+        <!---------OnLoadig PopUp only For Vehice accessing Use-->
+
+        <div id="myModal" class="modal fade loading-popup" tabindex='-1'
+             ng-if="canAccessModule('vehicles') && viewModal" style="padding-top: 30px;">
+            <div class="modal-dialog custom-modal">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">reminders</h4>
+                    </div>
+                    <div class="modal-body">
+                                    <span ng-show="authExpiringVehicles.length>0">
+                                    <h4 class="modal-title">Auth Expiring vehicles</h4>
+                                    <table class="table table-bordered table-condensed table-hover">
+                                        <tr>
+                                            <th>Vehicle Number</th>
+                                            <th>vehicleType</th>
+                                            <th>Auth Expiry Date</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr ng-repeat="vehicle in authExpiringVehicles">
+                                        <td>{{vehicle.regNo}}</td>
+                                        <td>{{vehicle.vehicleType}}</td>
+                                        <td>{{vehicle.authExpiry | date: "dd-MM-y"}}</td>
+                                            <td>
+                                                <md-icon type="button" class="btn" ng-click="updateVehicle(vehicle.id)">
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            </md-icon>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </span>
+                        <span ng-show="pollutionExpiringVehicles.length>0">
+                                    <h4 class="modal-title">Pollution Expiring vehicles</h4>
+                                    <table class="table table-bordered table-condensed table-hover">
+                                        <tr>
+                                            <th>Vehicle Number</th>
+                                            <th>vehicleType</th>
+                                            <th> Pollution Expiry Date</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr ng-repeat="vehicle in pollutionExpiringVehicles">
+                                            <td>{{vehicle.regNo}}</td>
+                                            <td>{{vehicle.vehicleType}}</td>
+                                            <td>{{vehicle.pollutionExpiry | date: "dd-MM-y"}}</td>
+                                            <td>
+                                                <md-icon type="button" class="btn" ng-click="updateVehicle(vehicle.id)">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </md-icon>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </span>
+                        <span ng-show="fitnessExpiringVehicles.length>0">
+                                    <h4 class="modal-title">Fitness Expiring vehicles</h4>
+                                    <table class="table table-bordered table-condensed table-hover">
+                                        <tr>
+                                            <th>Vehicle Number</th>
+                                            <th>vehicleType</th>
+                                            <th>Fitness Expiry Date</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr ng-repeat="vehicle in fitnessExpiringVehicles">
+                                            <td>{{vehicle.regNo}}</td>
+                                            <td>{{vehicle.vehicleType}}</td>
+                                            <td>{{vehicle.fitnessExpiry | date: "dd-MM-y"}}</td>
+                                            <td>
+                                                <md-icon type="button" class="btn" ng-click="updateVehicle(vehicle.id)">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </md-icon>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </span>
+                        <span ng-show="insuranceExpiringVehicles.length>0">
+                                    <h4 class="modal-title">Insurance Expiring vehicles</h4>
+                                    <table class="table table-bordered table-condensed table-hover">
+                                        <tr>
+                                            <th>Vehicle Number</th>
+                                            <th>vehicleType</th>
+                                            <th>Insurance Expiry Date</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr ng-repeat="vehicle in insuranceExpiringVehicles">
+                                            <td>{{vehicle.regNo}}</td>
+                                            <td>{{vehicle.vehicleType}}</td>
+                                            <td>{{vehicle.insuranceExpiry | date: "dd-MM-y"}}</td>
+                                            <td>
+                                                <md-icon type="button" class="btn" ng-click="updateVehicle(vehicle.id)">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </md-icon>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </span>
+                        <span ng-show="permitExpiringVehicles.length>0">
+                                    <h4 class="modal-title">Permit Expiring vehicles</h4>
+                                    <table class="table table-bordered table-condensed table-hover">
+                                        <tr>
+                                            <th>Vehicle Number</th>
+                                            <th>vehicleType</th>
+                                            <th>Permit Expiry Date</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr ng-repeat="vehicle in permitExpiringVehicles">
+                                            <td>{{vehicle.regNo}}</td>
+                                            <td>{{vehicle.vehicleType}}</td>
+                                            <td>{{vehicle.permitExpiry | date: "dd-MM-y"}}</td>
+                                            <td>
+                                                <md-icon type="button" class="btn" ng-click="updateVehicle(vehicle.id)">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </md-icon>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </span>
+                        <span ng-show="haltedVehicles.length>0">
+                                       <h4 class="modal-title">Halted services
+                                       <a href="/homepage.html#!/haltreports"
+                                          style="float: right; font-size: 12px;margin-top: 8px;">View</a>
+                                       </h4>
+
+                                        <table class="table table-bordered table-condensed table-hover">
+                                        <tr>
+                                            <th>Service#</th>
+                                            <th>Type</th>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th>Date</th>
+                                        </tr>
+                                        <tr ng-repeat="serviceReport in haltedVehicles">
+                                            <td>{{serviceReport.serviceNumber}}</td>
+                                            <td>{{serviceReport.busType}}</td>
+                                            <td>{{serviceReport.source}}</td>
+                                            <td>{{serviceReport.destination}}</td>
+                                            <td>{{serviceReport.jDate}}</td>
+                                        </tr>
+                                    </table>
+                                    </span>
+                        <span ng-show="reminders.length>0">
+                                       <h4 class="modal-title">Job reminders
+                                       <a href="/homepage.html#!/reminders"
+                                          style="float: right; font-size: 12px;margin-top: 8px;">View</a>
+                                       </h4>
+
+                                        <table class="table table-bordered table-condensed table-hover">
+                                        <tr>
+                                            <th>S No</th>
+                                            <th>Remainder Date</th>
+                                            <th>For User</th>
+                                            <th>Description</th>
+                                            <th>Completed(Status)</th>
+                                        </tr>
+                                        <tr ng-repeat="remainder in reminders">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{remainder.reminderDate | date}}</td>
+                                            <td>{{remainder.attrs.userName}}</td>
+                                            <td>{{remainder.description}}</td>
+                                            <td>{{remainder.completed}}</td>
+                                        </tr>
+                                    </table>
+                                    </span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <main class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <breadscrumb class="ng-scope">
+                        <div class="breadcrumbs printhide" ng-click="breadscrumb_print_fn()">
+                            <ui-view>Select from Menu-------------------------------------</ui-view>
+                        </div>
+                    </breadscrumb>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+
+<!-- /#wrapper -->
+
+<script>
+
+    $(".sidebar-dropdown > a").click(function() {
+        $(".sidebar-submenu").slideUp(200);
+        if (
+            $(this)
+                .parent()
+                .hasClass("active")
+        ) {
+            $(".sidebar-dropdown").removeClass("active");
+            $(this)
+                .parent()
+                .removeClass("active");
+        } else {
+            $(".sidebar-dropdown").removeClass("active");
+            $(this)
+                .next(".sidebar-submenu")
+                .slideDown(200);
+            $(this)
+                .parent()
+                .addClass("active");
+        }
+    });
+
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    $('#category-tabs button').click(function () {
+        $(this).find('i').toggleClass('fa fa-times fa fa-th-large')
+    });
+</script>
