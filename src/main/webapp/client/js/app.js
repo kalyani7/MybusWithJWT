@@ -719,7 +719,7 @@ var busServiceEditResolver = {
 };
 
 
-myBus.run(function ($rootScope, $state, $location, appConfigManager, userManager, opratingAccountsManager) {
+/*myBus.run(function ($rootScope, $state, $location, appConfigManager, userManager, opratingAccountsManager) {
     $rootScope.menus = [];
     appConfigManager.fetchAppSettings(function (err, cfg) {
         $rootScope.appConfigManager = appConfigManager;
@@ -736,7 +736,7 @@ myBus.run(function ($rootScope, $state, $location, appConfigManager, userManager
         }
     });
 
-});
+});*/
 
 myBus.config(['$httpProvider', function ($httpProvider) {
     // Interceptor
