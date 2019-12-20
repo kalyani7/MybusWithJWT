@@ -4,706 +4,715 @@
 
 var myBus = angular.module('myBus', [
     'ui.router',
+    'ngCookies',
     'ngTable',
     'ui.select',
     'angularFileUpload',
-    'ngFileUpload'
+    'ngFileUpload',
 ]);
 
 myBus.config(['$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('newbooking', {
+            .state('login', {
+            url: '/login',
+            templateUrl: 'partials/login.tpl.html',
+            controller: 'LoginUserController'
+        }).state('home', {
+            url: '/home',
+            templateUrl: 'partials/mainHome.tpl.html',
+            controller: 'HomeController'
+        }).state('home.newbooking', {
                 level: 1,
                 url: '/newbooking',
                 templateUrl: 'partials/cargoBooking.tpl.html',
                 controller: 'CargoBookingController'
-            }).state('viewcargobooking/:id', {
+            }).state('home.viewcargobooking/:id', {
             url: '/viewcargobooking/:id',
             templateUrl: 'partials/cargoBookingDetails.tpl.html',
             controller: 'CargoBookingController'
-        }).state('cargobookings', {
+        }).state('home.cargobookings', {
             level: 1,
             url: '/cargobookings',
             templateUrl: 'partials/cargoBookingsSearch.tpl.html'
-        }).state('cargobookingchart', {
+        }).state('home.cargobookingchart', {
             level: 1,
             url: '/cargobookingchart',
             templateUrl: 'partials/cargoBookingChart.tpl.html',
             controller: 'CargoBookingChartController'
         })
-            .state('branchbookingsummary', {
+            .state('home.branchbookingsummary', {
                 level: 1,
                 url: '/branchbookingsummary',
                 templateUrl: 'partials/branchBookingSummary.tpl.html'
             })
-            .state('unloadingsheet', {
+            .state('home.unloadingsheet', {
                 level: 1,
                 url: '/unloadingsheet',
                 templateUrl: 'partials/cargoUnloadingSheet.tpl.html'
             })
-            .state('deliverysheet', {
+            .state('home.deliverysheet', {
                 level: 1,
                 url: '/deliverysheet',
                 templateUrl: 'partials/cargoDeliverySheet.tpl.html'
             })
-            .state('cancellations', {
+            .state('home.cancellations', {
                 level: 1,
                 url: '/cancellations',
                 templateUrl: 'partials/cargoCancellations.tpl.html'
             })
-            .state('collectionzones', {
+            .state('home.collectionzones', {
                 url: '/collectionZones',
                 templateUrl: 'partials/collectionZones.tpl.html',
                 controller: 'CollectionZonesController'
             })
-            .state('agents', {
+            .state('home.agents', {
                 level: 1,
                 url: '/agents',
                 templateUrl: 'partials/agents.tpl.html',
                 controller: 'AgentController'
-            }).state('agentsedit', {
+            }).state('home.agentsedit', {
             level: 1,
             url: '/agentsedit/:id',
             templateUrl: 'partials/agentsEdit.tpl.html',
             controller: 'AddAgentController'
-        }).state('operatoraccounts', {
+        }).state('home.operatoraccounts', {
             url: '/operatoraccounts',
             templateUrl: 'partials/operatoraccounts.tpl.html',
             controller: 'OperatorAccountsController'
-        }).state('addoperatoraccounts', {
+        }).state('home.addoperatoraccounts', {
             url: '/addoperatoraccounts',
             templateUrl: 'partials/addEditOperatorAccounts.tpl.html',
             controller: 'AddAccountController'
-        }).state('editoperatoraccounts', {
+        }).state('home.editoperatoraccounts', {
             url: '/editoperatoraccounts/:id',
             templateUrl: 'partials/addEditOperatorAccounts.tpl.html',
             controller: 'EditAccountController'
-        }).state('invoices', {
+        }).state('home.invoices', {
             url: '/inovices',
             templateUrl: 'partials/invoice.tpl.html',
             controller: 'InvoiceController'
-        }).state('verifyinvoice', {
+        }).state('home.verifyinvoice', {
             url: '/verifyInvoice',
             templateUrl: 'partials/verifyInvoice.tpl.html',
             controller: 'VerifyInvoiceController'
         })
-            .state('amenities', {
+            .state('home.amenities', {
                 level: 1,
                 url: '/amenities',
                 templateUrl: 'partials/amenities.tpl.html',
                 controller: 'AmenitiesController'
             })
-            .state('cashbalances', {
+            .state('home.cashbalances', {
                 level: 1,
                 url: '/cashbalances',
                 templateUrl: 'partials/cashBalances.tpl.html',
                 controller: 'CashBalancesController'
             })
-            .state('bookinganalytics', {
+            .state('home.bookinganalytics', {
                 url: '/bookinganalytics',
                 templateUrl: 'partials/bookingtotalsbyphone.tpl.html',
                 controller: 'BookingAnalyticsController'
             })
-            .state('bookingsbyphone', {
+            .state('home.bookingsbyphone', {
                 url: '/bookingsbyphone',
                 templateUrl: 'partials/bookingsbyphone.tpl.html',
                 controller: 'BookingsByPhoneController',
                 params: {phoneNumber: null, totalBookings: 0}
             })
-            .state('cashtransfers', {
+            .state('home.cashtransfers', {
                 level: 1,
                 url: '/cashtransfers',
                 templateUrl: 'partials/cashTransfers.tpl.html',
                 controller: 'cashTransfersController'
             })
-            .state('dashboard', {
+            .state('home.dashboard', {
                 level: 1,
                 url: '/dashboard',
                 templateUrl: 'partials/home.tpl.html',
                 controller: 'HomeController'
             })
-            .state('cargodashboard', {
+            .state('home.cargodashboard', {
                 level: 1,
                 url: '/cargodashboard',
                 templateUrl: 'partials/cargoDashBoard.tpl.html',
                 controller: 'CargoDashboardController'
             })
-            .state('duereport', {
+            .state('home.duereport', {
                 level: 1,
                 url: '/duereport',
                 templateUrl: 'partials/duereport.tpl.html',
                 controller: 'DueReportController'
             })
-            .state('expensesincomesreports', {
+            .state('home.expensesincomesreports', {
                 level: 1,
                 url: '/expensesincomesreports',
                 templateUrl: 'partials/expensesIncomesReports.tpl.html',
                 controller: 'expensesIncomesReportsCtrl'
             })
-            .state('expensesincomesreports/:date', {
+            .state('home.expensesincomesreports/:date', {
                 url: '/expensesincomesreports/:date',
                 templateUrl: 'partials/expensesIncomesReports.tpl.html',
                 controller: 'expensesIncomesReportsCtrl'
             })
-            .state('fuelexpensereports', {
+            .state('home.fuelexpensereports', {
                 level: 1,
                 url: '/fuelexpensereports',
                 templateUrl: 'partials/fuelExpenseReports.tpl.html',
                 controller: 'fuelExpenseReportsCtrl'
             })
-            .state('addfuelexpensereports', {
+            .state('home.addfuelexpensereports', {
                 level: 2,
                 url: '/addfuelexpensereports',
                 templateUrl: 'partials/addFuelExpense.tpl.html',
                 controller: 'editFuelExpenseReportController'
             })
-            .state('editfuelexpensereports', {
+            .state('home.editfuelexpensereports', {
                 level: 2,
                 url: '/editfuelexpensereports/:id',
                 templateUrl: 'partials/addFuelExpense.tpl.html',
                 controller: 'editFuelExpenseReportController'
             })
-            .state('fuelexpensereports/:date', {
+            .state('home.fuelexpensereports/:date', {
                 level: 2,
                 url: '/fuelexpensereports/:date',
                 templateUrl: 'partials/fuelExpenseReports.tpl.html',
                 controller: 'fuelExpenseReportsCtrl'
             })
-            .state('officeduereport/:id', {
+            .state('home.officeduereport/:id', {
                 level: 2,
                 url: '/officeduereport/:id',
                 templateUrl: 'partials/officeduereport.tpl.html',
                 controller: 'OfficeDueReportController'
             })
-            .state('officeduereport/:id/:date', {
+            .state('home.officeduereport/:id/:date', {
                 level: 2,
                 url: '/officeduereport/:id/:date',
                 templateUrl: 'partials/officeduereportByDate.tpl.html',
                 controller: 'OfficeDueByDateReportController'
             })
-            .state('officeduereportbyservice/:serviceNumber', {
+            .state('home.officeduereportbyservice/:serviceNumber', {
                 level: 2,
                 url: '/officeduereportbyservice/:serviceNumber',
                 templateUrl: 'partials/officeDueReportByService.tpl.html',
                 controller: 'OfficeDueByServiceController'
             })
-            .state('officeduereportbyagent/:agentName', {
+            .state('home.officeduereportbyagent/:agentName', {
                 level: 2,
                 url: '/officeduereportbyagent/:agentName',
                 templateUrl: 'partials/officeDueReportByAgent.tpl.html',
             })
-            .state('returnTicketsByDate/:date', {
+            .state('home.returnTicketsByDate/:date', {
                 url: '/returnTicketsByDate/:date',
                 templateUrl: 'partials/returnTicketsByDate.tpl.html',
                 controller: 'returnTicketsByDateController'
             })
-            .state('returnTicketsByAgent/:agent', {
+            .state('home.returnTicketsByAgent/:agent', {
                 url: '/returnTicketsByAgent/:agent',
                 templateUrl: 'partials/returnTicketsByAgent.tpl.html',
                 controller: 'returnTicketsByAgentController'
             })
-            .state('returntickets', {
+            .state('home.returntickets', {
                 url: '/returntickets',
                 templateUrl: 'partials/returnTickets.tpl.html',
                 controller: 'returnTicketsController'
             })
-            .state('servicereport', {
+            .state('home.servicereport', {
                 level: 2,
                 url: '/servicereport/:id',
                 templateUrl: 'partials/serviceReport.tpl.html',
                 controller: 'ServiceReportController'
             })
-            .state('serviceform', {
+            .state('home.serviceform', {
                 level: 2,
                 url: '/serviceform/:id',
                 templateUrl: 'partials/serviceform.tpl.html',
                 controller: 'ServiceFormController'
             })
-            .state('servicereports', {
+            .state('home.servicereports', {
                 level: 1,
                 url: '/serviceReports',
                 templateUrl: 'partials/serviceReports.tpl.html',
                 controller: 'ServiceReportsController'
             })
-            .state('serviceReports/:date', {
+            .state('home.serviceReports/:date', {
                 level: 2,
                 url: '/serviceReports/:date',
                 templateUrl: 'partials/serviceReports.tpl.html',
                 controller: 'ServiceReportsController'
             })
-            .state('shipmentsequence', {
+            .state('home.shipmentsequence', {
                 level: 2,
                 url: '/shipmentSequence',
                 templateUrl: 'partials/shipmentSequence.tpl.html',
                 controller: 'sequenceController'
             })
-            .state('pendingreports', {
+            .state('home.pendingreports', {
                 level: 1,
                 url: '/pendingReports',
                 templateUrl: 'partials/pendingReports.tpl.html',
                 controller: 'pendingReportController'
             })
-            .state('reportstobereviewed', {
+            .state('home.reportstobereviewed', {
                 level: 1,
                 url: '/reportstobereviewed',
                 templateUrl: 'partials/pendingReports.tpl.html',
                 controller: 'ReportsToBeReviewedController'
             })
-            .state('haltreports', {
+            .state('home.haltreports', {
                 level: 1,
                 url: '/haltreports',
                 templateUrl: 'partials/haltReports.tpl.html',
                 controller: 'HaltReportsController'
             })
-            .state('haltReport', {
+            .state('home.haltReport', {
                 level: 2,
                 url: '/haltreport/:id',
                 templateUrl: 'partials/haltReport.tpl.html',
                 controller: 'ServiceReportController'
             })
-            .state('servicecombo', {
+            .state('home.servicecombo', {
                 level: 1,
                 url: '/servicecombo',
                 templateUrl: 'partials/serviceCombo.tpl.html',
                 controller: 'ServiceComboController'
             })
-            .state('tripcombo', {
+            .state('home.tripcombo', {
                 level: 1,
                 url: '/tripcombo',
                 templateUrl: 'partials/tripCombo.tpl.html',
                 controller: 'TripComboController'
             })
-            .state('cities', {
+            .state('home.cities', {
                 url: '/cities',
                 level: 1,
                 templateUrl: 'partials/cities-list.tpl.html',
                 controller: 'CitiesController'
             })
-            .state('routes', {
+            .state('home.routes', {
                 url: '/routes',
                 level: 1,
                 templateUrl: 'partials/routes-list.tpl.html',
                 controller: 'RoutesController'
             })
-            .state('createRoute', {
+            .state('home.createRoute', {
                 url: '/addRoute/:id',
                 templateUrl: 'partials/addorUpdateRoute.tpl.html',
             })
-            .state('persons', {
+            .state('home.persons', {
                 level: 1,
                 url: '/persons',
                 templateUrl: 'partials/person.html',
                 controller: 'PersonController'
             })
-            .state('states', {
+            .state('home.states', {
                 url: '/states',
                 level: 1,
                 templateUrl: 'partials/states.html',
                 controller: 'CitiesController'
             })
-            .state('payments', {
+            .state('home.payments', {
                 level: 1,
                 url: '/payments',
                 templateUrl: 'partials/payments-list.tpl.html',
                 controller: 'PaymentController'
             })
-            .state('payment', {
+            .state('home.payment', {
                 level: 2,
                 url: '/payment',
                 templateUrl: 'partials/paymentAdd.tpl.html',
                 controller: 'EditPaymentController'
             })
-            .state('city/:id', {
+            .state('home.city/:id', {
                 level: 2,
                 url: '/city/:id',
                 templateUrl: 'partials/boardingpoints-list.tpl.html',
                 controller: 'BoardingPointsListController'
             })
-            .state('vehicles', {
+            .state('home.vehicles', {
                 level: 1,
                 url: '/vehicles',
                 templateUrl: 'partials/vehicle-list.tpl.html',
                 controller: 'VehicleController'
-            }).state('staff', {
+            }).state('home.staff', {
             level: 1,
             url: '/staff',
             templateUrl: 'partials/staff-list.tpl.html',
             controller: 'StaffListController'
-        }).state('editstaff/:id', {
+        }).state('home.editstaff/:id', {
             level: 2,
             url: '/editstaff/:id',
             templateUrl: 'partials/edit-staff.tpl.html',
             controller: 'EditStaffController'
         })
-            .state('createvehicle', {
+            .state('home.createvehicle', {
                 level: 2,
                 url: '/createvehicle',
                 templateUrl: 'partials/vehicle-edit.tpl.html',
                 controller: 'EditVehicleController'
             })
-            .state('vehicle/:id', {
+            .state('home.vehicle/:id', {
                 level: 2,
                 url: '/vehicle/:id',
                 templateUrl: 'partials/vehicle-edit.tpl.html',
                 controller: 'EditVehicleController'
             })
-            .state('officeexpenses', {
+            .state('home.officeexpenses', {
                 level: 1,
                 url: '/officeexpenses',
                 templateUrl: 'partials/officeExpenses.tpl.html',
                 controller: 'OfficeExpensesController'
             })
-            .state('layouts', {
+            .state('home.layouts', {
                 level: 1,
                 url: '/layouts',
                 templateUrl: 'partials/buslayout.tpl.html',
                 controller: 'BusLayoutController'
             })
-            .state('addLayouts', {
+            .state('home.addLayouts', {
                 level: 2,
                 url: '/addLayouts',
                 templateUrl: 'partials/buslayoutedit.tpl.html',
                 controller: 'BusLayoutEditController'
             })
-            .state('layouts/:id', {
+            .state('home.layouts/:id', {
                 level: 2,
                 url: '/layouts/:id',
                 templateUrl: 'partials/buslayoutedit.tpl.html',
                 controller: 'BusLayoutEditController'
             })
-            .state('services', {
+            .state('home.services', {
                 url: '/services',
                 templateUrl: 'partials/busService.tpl.html',
                 controller: 'BusServiceController as busServiceCtrl'
             })
-            .state('services/:id', {
+            .state('home.services/:id', {
                 level: 3,
                 url: '/services/:id',
                 templateUrl: 'partials/busServiceEdit.tpl.html',
                 controller: 'BusServiceEditController as busServiceEditCtrl',
                 resolve: busServiceEditResolver
             })
-            .state('roles', {
+            .state('home.roles', {
                 level: 1,
                 url: '/roles',
                 templateUrl: 'partials/roles.tpl.html',
                 controller: 'RoleController'
             })
-            .state('busdetails', {
+            .state('home.busdetails', {
                 level: 1,
                 url: '/busdetails',
                 templateUrl: 'partials/busdetails.tpl.html',
                 contro2ler: 'BusDetailsController'
             })
-            .state('users', {
+            .state('home.users', {
                 level: 1,
                 url: '/users',
                 templateUrl: 'partials/users.tpl.html',
                 controller: 'UsersController'
             })
-            .state('user', {
+            .state('home.user', {
                 level: 2,
                 url: '/user/',
                 templateUrl: 'partials/user-editDetails.tpl.html',
                 controller: 'UserAddController'
             })
-            .state('useredit', {
+            .state('home.useredit', {
                 level: 3,
                 url: '/user/:id',
                 templateUrl: 'partials/user-editDetails.tpl.html',
                 controller: 'UpdateUserController'
             })
-            .state('plans', {
+            .state('home.plans', {
                 level: 2,
                 url: '/plans',
                 templateUrl: 'partials/agentPlan-details.tpl.html',
                 controller: 'AgentPlanController'
             })
-            .state('plan', {
+            .state('home.plan', {
                 level: 3,
                 url: '/plan',
                 templateUrl: 'partials/agentPlanEdit-details.tpl.html',
                 controller: 'AddAgentPlanTypeController'
             })
-            .state('docs', {
+            .state('home.docs', {
                 level: 2,
                 url: '/docs',
                 templateUrl: 'partials/api-docs.tpl.html',
                 controller: 'APIDocsController'
             })
-            .state('account', {
+            .state('home.account', {
                 level: 2,
                 url: '/account',
                 templateUrl: 'partials/account.tpl.html',
                 controller: 'AccountController'
             })
-            .state('trip', {
+            .state('home.trip', {
                 level: 2,
                 url: '/trip',
                 templateUrl: 'partials/trip.tpl.html',
                 controller: 'TripController as tripCtrl'
             })
-            .state('manageroles', {
+            .state('home.manageroles', {
                 level: 1,
                 url: '/manageroles',
                 templateUrl: 'partials/managing-roles.tpl.html',
                 controller: 'ManagingRolesController'
             })
-            .state('booking', {
+            .state('home.booking', {
                 level: 2,
                 url: '/booking',
                 templateUrl: 'partials/booking-info.tpl.html',
                 controller: 'BookingController as bookingCtrl'
             })
-            .state('inventories', {
+            .state('home.inventories', {
                 level: 1,
                 url: '/inventories',
                 templateUrl: 'partials/inventoriesList.tpl.html',
                 controller: 'InventoriesController'
             })
-            .state('add-editInventory', {
+            .state('home.add-editInventory', {
                 url: '/add-editInventory/:id',
                 templateUrl: 'partials/add-editInventory.tpl.html',
                 controller: 'addInventoryController'
             })
-            .state('shipments', {
+            .state('home.shipments', {
                 level: 1,
                 url: '/shipments',
                 templateUrl: 'partials/shipments.tpl.html',
                 controller: 'ShipmentsController'
             })
-            .state('shipment', {
+            .state('home.shipment', {
                 url: '/shipment/:id',
                 templateUrl: 'partials/shipmentedit.tpl.html',
                 controller: 'EditShipmentController'
             })
-            .state('editshipment', {
+            .state('home.editshipment', {
                 url: '/shipment',
                 templateUrl: 'partials/shipmentedit.tpl.html',
                 controller: 'EditShipmentController'
             })
-            .state('branchoffices', {
+            .state('home.branchoffices', {
                 level: 1,
                 url: '/branchoffices',
                 templateUrl: 'partials/branchOffices.tpl.html',
                 controller: 'BranchOfficesController'
             })
-            .state('branchoffice', {
+            .state('home.branchoffice', {
                 url: '/branchoffice/:id',
                 templateUrl: 'partials/branchOfficeEdit.tpl.html',
                 controller: 'EditBranchOfficeController'
             })
-            .state('editbranchoffice', {
+            .state('home.editbranchoffice', {
                 url: '/branchoffice',
                 templateUrl: 'partials/branchOfficeEdit.tpl.html',
                 controller: 'EditBranchOfficeController'
             })
-            .state('gstfilters', {
+            .state('home.gstfilters', {
                 url: '/gstfilters',
                 templateUrl: 'partials/gstFilters.tpl.html',
                 controller: 'GSTFiltersController'
             })
-            .state('suppliers', {
+            .state('home.suppliers', {
                 level: 1,
                 url: '/suppliers',
                 templateUrl: 'partials/suppliers.tpl.html',
                 controller: 'SuppliersListController'
             })
-            .state('tripreports', {
+            .state('home.tripreports', {
                 level: 1,
                 url: '/tripreports',
                 templateUrl: 'partials/tripReports.tpl.html',
                 controller: 'TripReportsController'
             })
-            .state('tripreports/:date', {
+            .state('home.tripreports/:date', {
                 level: 2,
                 url: '/tripReports/:date',
                 templateUrl: 'partials/tripReports.tpl.html',
                 controller: 'TripReportsController'
             })
-            .state('updatepassword', {
+            .state('home.updatepassword', {
                 level: 1,
                 url: '/updatepassword',
                 templateUrl: 'partials/updatePassword.tpl.html'
-            }).state('serviceincomereport', {
+            }).state('home.serviceincomereport', {
             level: 1,
             url: '/serviceincomereport',
             templateUrl: 'partials/serviceIncomeReport.tpl.html'
-        }).state('loadingsheet', {
+        }).state('home.loadingsheet', {
             level: 1,
             url: '/loadingsheet',
             templateUrl: 'partials/cargoLoadingSheet.tpl.html'
-        }).state('fulltrips', {
+        }).state('home.fulltrips', {
             level: 1,
             url: '/fulltrips',
             templateUrl: 'partials/fullTrips.tpl.html'
-        }).state('addFullTrip', {
+        }).state('home.addFullTrip', {
             url: '/addFullTrip',
             templateUrl: 'partials/addFullTrip-details.tpl.html'
-        }).state('editFullTrip', {
+        }).state('home.editFullTrip', {
             url: '/editFullTrip/:id',
             templateUrl: 'partials/addFullTrip-details.tpl.html'
-        }).state('servcieReportsByService', {
+        }).state('home.servcieReportsByService', {
             url: '/servcieReportsByService/:id/:source/:destination',
             templateUrl: 'partials/serviceReports-byService.tpl.html',
             controller: 'ServiceIncomeReportByServiceController'
-        }).state('addOfficeExpenses', {
+        }).state('home.addOfficeExpenses', {
             url: '/addOfficeExpenses',
             templateUrl: 'partials/addOfficeExpenses.tpl.html'
-        }).state('updateOfficeExpenses', {
+        }).state('home.updateOfficeExpenses', {
             url: '/updateOfficeExpenses/:id',
             templateUrl: 'partials/addOfficeExpenses.tpl.html'
-        }).state('addJob', {
+        }).state('home.addJob', {
             url: '/addJob/:id',
             templateUrl: 'partials/addorEditJob.tpl.html',
             controller: 'addorEditJobController'
-        }).state('jobs', {
+        }).state('home.jobs', {
             level: 1,
             url: '/jobs',
             templateUrl: 'partials/jobsList.tpl.html',
             controller: 'jobListController'
-        }).state('reminders', {
+        }).state('home.reminders', {
             level: 1,
             url: '/reminders',
             templateUrl: 'partials/reminders.tpl.html',
             controller: 'RemindersController'
-        }).state('editreminders', {
+        }).state('home.editreminders', {
             url: '/reminders/:id',
             templateUrl: 'partials/remindersEdit.tpl.html',
             controller: 'EditremindersController'
-        }).state('expensestype', {
+        }).state('home.expensestype', {
             level: 1,
             url: '/expense',
             templateUrl: 'partials/expense.tpl.html',
             controller: 'expenseController'
-        }).state('staffcomplaints', {
+        }).state('home.staffcomplaints', {
             level: 1,
             url: '/staffComplaints',
             templateUrl: 'partials/staffComplaints.tpl.html',
             controller: 'StaffComplaintsController'
-        }).state('addStaffComplaint', {
+        }).state('home.addStaffComplaint', {
             url: '/addStaffComplaint',
             templateUrl: 'partials/addEditStaffComplaint.tpl.html',
             controller: 'addEditStaffComplaintController'
-        }).state('jobViewByVehicleId', {
+        }).state('home.jobViewByVehicleId', {
             url: '/jobViewByVehicleId/:id',
             templateUrl: 'partials/jobViewByVehicleId.tpl.html'
-        }).state('salaryreports', {
+        }).state('home.salaryreports', {
             level: 1,
             url: '/salaryReports',
             templateUrl: 'partials/salaryReport.tpl.html',
             controller: 'salaryReportController'
-        }).state('dailytrips', {
+        }).state('home.dailytrips', {
             level: 1,
             url: '/dailyTrips',
             templateUrl: 'partials/dailyTripsList.tpl.html',
             controller: 'DailyTripsController'
-        }).state('addDailyTrip', {
+        }).state('home.addDailyTrip', {
             url: '/add-editDailyTrips/:tripId',
             templateUrl: 'partials/addDailyTrip.tpl.html',
             controller: 'AddDailyTripController'
-        }).state('preferredstaff', {
+        }).state('home.preferredstaff', {
             url: '/preferredstaffList',
             templateUrl: 'partials/PreferredStaffList.tpl.html',
             controller: 'PreferredStaffListController'
-        }).state('add-editpreferredStaff', {
+        }).state('home.add-editpreferredStaff', {
             url: '/add-editpreferredStaff/:staffId',
             templateUrl: 'partials/add-editPreferredStaff.tpl.html',
             controller: 'Add-EditPreferredStaffController'
-        }).state('searchservice', {
+        }).state('home.searchservice', {
             url: '/searchServices',
             templateUrl: 'partials/searchServices.tpl.html',
             controller: 'SearchServiceController'
-        }).state('verificationDetails', {
+        }).state('home.verificationDetails', {
             url: '/verificationDetails/:verificationId',
             templateUrl: 'partials/verificationDetails.tpl.html',
             controller: 'verificationDetailsController'
-        }).state('addservice', {
+        }).state('home.addservice', {
             level: 1,
             url: '/addService',
             templateUrl: 'partials/addService.tpl.html'
-        }).state('banks', {
+        }).state('home.banks', {
             level: 1,
             url: '/banks',
             templateUrl: 'partials/banksList.tpl.html',
             controller: 'bankController'
-        }).state('bankAdd', {
+        }).state('home.bankAdd', {
             url: '/bankAdd',
             templateUrl: 'partials/addEditBank.tpl.html',
             controller: 'addEditBankController'
-        }).state('bankEdit', {
+        }).state('home.bankEdit', {
             url: '/bankEdit:id',
             templateUrl: 'partials/addEditBank.tpl.html',
             controller: 'addEditBankController'
-        }).state('tripsheet', {
+        }).state('home.tripsheet', {
             level: 1,
             url: '/tripSheet',
             templateUrl: 'partials/tripSheetList.tpl.html',
             controller: 'tripSheetController'
-        }).state('checkList', {
+        }).state('home.checkList', {
             level: 1,
             url: '/checkList'
-        }).state('cargo', {
+        }).state('home.cargo', {
             level: 1,
             url: '/cargo'
-        }).state('analytics', {
+        }).state('home.analytics', {
             level: 1,
             url: '/analytics'
-        }).state('config', {
+        }).state('home.config', {
             level: 1,
             url: '/configuration'
-        }).state('addTripSheet', {
+        }).state('home.addTripSheet', {
             level: 1,
             url: '/addTripSheet',
             templateUrl: 'partials/addEditTripSheet.tpl.html',
             controller: 'addEditTripSheetController'
-        }).state('tripSheetReceipts', {
+        }).state('home.tripSheetReceipts', {
             url: '/tripSheetReceipts:id',
             templateUrl: 'partials/tripSheetReceipts.tpl.html',
             controller: 'receiptsTripSheetController'
-        }).state('tripSheetBankCollection', {
+        }).state('home.tripSheetBankCollection', {
             url: '/tripSheetBankCollection:id',
             templateUrl: 'partials/tripSheetBankCollection.tpl.html',
             controller: 'bankTripSheetController'
-        }).state('tripSheetPayments', {
+        }).state('home.tripSheetPayments', {
             url: '/tripSheetPayments:id',
             templateUrl: 'partials/tripSheetPayments.tpl.html',
             controller: 'paymentsTripSheetController'
-        }).state('tripSheetOtherExpenses', {
+        }).state('home.tripSheetOtherExpenses', {
             url: '/tripSheetOtherExpenses:id',
             templateUrl: 'partials/tripSheetOtherExpenses.tpl.html',
             controller: 'otherTripSheetController'
-        }).state('tripSheetTripExpenses', {
+        }).state('home.tripSheetTripExpenses', {
             url: '/tripSheetTripExpenses:id',
             templateUrl: 'partials/tripExpenses.tpl.html',
             controller: 'tripExpensesController'
-        }).state('editTripSheet', {
+        }).state('home.editTripSheet', {
             url: '/editTripSheet:id',
             templateUrl: 'partials/addEditTripSheet.tpl.html',
             controller: 'addEditTripSheetController'
-        }).state('tripsheetfilters', {
+        }).state('home.tripsheetfilters', {
             url: '/tripSheetFilters',
             level: 1,
             templateUrl: 'partials/tripSheetFilters.tpl.html',
             controller: 'addEditTripSheetController'
-        }).state('documentsupload', {
+        }).state('home.documentsupload', {
             url: '/documentsUploadList',
             level: 1,
             templateUrl: 'partials/documentsUploadList.tpl.html',
             controller: 'DocumentsUploadListController'
-        }).state('uploadDocument', {
+        }).state('home.uploadDocument', {
             url: '/documentsUpload',
             level: 1,
             templateUrl: 'partials/documentsUpload.tpl.html',
             controller: 'DocumentsUploadController'
-        }).state('viewJobsByInventory', {
+        }).state('home.viewJobsByInventory', {
             level: 1,
             url: '/viewJobsByInventory/:inventoryId',
             templateUrl: 'partials/viewJobsByInventory.tpl.html',
             controller: 'viewJobsByInventoryController'
         });
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/login');
     }]);
 
 var busServiceEditResolver = {
@@ -719,12 +728,13 @@ var busServiceEditResolver = {
 };
 
 
-/*myBus.run(function ($rootScope, $state, $location, appConfigManager, userManager, opratingAccountsManager) {
+
+myBus.run(function ($rootScope, $state, $location, appConfigManager) {
     $rootScope.menus = [];
     appConfigManager.fetchAppSettings(function (err, cfg) {
         $rootScope.appConfigManager = appConfigManager;
     }, true);
-    userManager.getCurrentUser(function (err, data) {
+    /*userManager.getCurrentUser(function (err, data) {
         if (!err) {
             userManager.getGroupsForCurrentUser();
             myBus.constant('currentuser', data);
@@ -734,9 +744,9 @@ var busServiceEditResolver = {
                 $rootScope.operatorAccount = operatorAccount;
             });
         }
-    });
+    });*/
 
-});*/
+});
 
 myBus.config(['$httpProvider', function ($httpProvider) {
     // Interceptor
