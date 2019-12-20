@@ -87,6 +87,7 @@ angular.module('myBus.header', ['ngTable','ui.bootstrap'])
 
         $scope.canAccessModule = function(moduleName){
             if($scope.currentUser && $scope.currentUser.superAdmin){
+                console.log('dfkjbdkbnkbnkbnkbnkdfbnkbn')
                 return true;
             } else {
                 if($scope.currentUser){
