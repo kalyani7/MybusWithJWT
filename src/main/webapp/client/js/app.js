@@ -728,6 +728,7 @@ var busServiceEditResolver = {
 };
 
 
+
 myBus.run(function ($rootScope, $state, $location, appConfigManager) {
     $rootScope.menus = [];
     appConfigManager.fetchAppSettings(function (err, cfg) {
