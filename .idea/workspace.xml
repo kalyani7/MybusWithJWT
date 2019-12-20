@@ -6,6 +6,14 @@
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/homeModule.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/loginModule.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/angular-cookies/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/angular-cookies/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/angular-cookies/angular-cookies.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/angular-cookies/angular-cookies.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/angular-cookies/angular-cookies.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/angular-cookies/bower.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/angular-cookies/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/angular-cookies/package.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/webapp/partials/login.tpl.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/webapp/partials/mainHome.tpl.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
@@ -166,7 +174,7 @@
       <workItem from="1576755844745" duration="277000" />
       <workItem from="1576756185315" duration="908000" />
       <workItem from="1576820686189" duration="378000" />
-      <workItem from="1576821552956" duration="19424000" />
+      <workItem from="1576821552956" duration="20021000" />
     </task>
     <servers />
   </component>
