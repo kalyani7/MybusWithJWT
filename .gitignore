@@ -1,0 +1,10 @@
+
+/.idea/**
+/target/
+/backend.iml
+/Mybusw-backend.iml
+/src/main/webapp/client/package-lock.json
+/src/main/webapp/client/node_modules/
+/src/main/resources/static/node_modules/
+**/.DS_Store
+**/node_nodules
