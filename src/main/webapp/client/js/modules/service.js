@@ -23,10 +23,11 @@ myBus.factory('services', function ($http, $log, $cookies, $location, Upload, $r
                 errorCallback(error)
             });
         },
-        get: function (url, successCallback, errorCallback) {
+        get: function (url, data, successCallback, errorCallback) {
             $http({
                 method: 'get',
                 url: url,
+                data: data,
                 headers: {
                     "Authorization": sendToken
                 }

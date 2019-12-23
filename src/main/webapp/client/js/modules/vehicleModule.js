@@ -268,9 +268,13 @@ myBus.controller('VehicleController', function ($scope,$rootScope, $state,$http,
             console.log("url....",url);
           $scope.url = url;
         };
-    }).factory('vehicleManager', function ($rootScope, $http, $log,$q,Upload) {
+    }).factory('vehicleManager', function ($rootScope, $http, $log,$q,Upload, $cookies, services) {
+    var token = $cookies.get('token');
+    var tokenType = $cookies.get('tokenType');
+    var sendToken = tokenType + ' ' + token;
         var vehicles = {}
             , rawChildDataWithGeoMap = {};
+        var data = '';
         return {
             getVehicles: function ( pageable, callback) {
                 $http.post('/api/v1/vehicles', pageable).then(function (response) {
@@ -281,9 +285,9 @@ myBus.controller('VehicleController', function ($scope,$rootScope, $state,$http,
             },
             getExpiringVehicles: function (pageable,today) {
                 var deferred = $q.defer();
-                $q.all([$http({url:'/api/v1/vehicles/expiring',method:"GET", params: pageable}),
-                    $http.get('/api/v1/serviceReport/haltedServices?date=' + today),
-                    $http({url:'/api/v1/reminders/getUpcoming',method:"GET",params: pageable })]).then(
+                $q.all([$http({url:'/api/v1/vehicles/expiring',method:"GET", params: pageable, headers: {"Authorization": sendToken}}),
+                    $http({url: '/api/v1/serviceReport/haltedServices?date=' + today, method: "GET", headers: {"Authorization": sendToken}}),
+                    $http({url:'/api/v1/reminders/getUpcoming',method:"GET",params: pageable, headers: {"Authorization": sendToken} })]).then(
                     function(results) {
                         deferred.resolve(results)
                     },

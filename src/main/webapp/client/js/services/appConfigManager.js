@@ -9,14 +9,14 @@ portalApp.factory('appConfigManager', function ($http, $log, services) {
     // var sendToken = tokenType + ' ' + token;
 
     var appConfigProperties = null;
+    var data = '';
 
     return {
 
         fetchAppSettings: function (callback, forceRefresh) {
             if (appConfigProperties === null || forceRefresh) {
-                services.get('api/v1/appconfig', function (response) {
+                services.get('api/v1/appconfig', data, function (response) {
                     if (response) {
-                        console.log(response)
                         appConfigProperties = response.data;
                     }
                 })

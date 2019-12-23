@@ -728,23 +728,24 @@ var busServiceEditResolver = {
 };
 
 
-myBus.run(function ($rootScope, $state, $location, appConfigManager, userManager) {
-    $rootScope.menus = [];
-    appConfigManager.fetchAppSettings(function (err, cfg) {
-        $rootScope.appConfigManager = appConfigManager;
-    }, true);
-    userManager.getCurrentUser(function (err, data) {
-        if (!err) {
-            userManager.getGroupsForCurrentUser();
-            myBus.constant('currentuser', data);
-            $rootScope.currentuser = data;
-            $rootScope.$broadcast("currentuserLoaded");
-            opratingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
-                $rootScope.operatorAccount = operatorAccount;
-            });
-        }
-    });
-
+myBus.run(function ($rootScope, $state, $location, $cookies, appConfigManager, userManager) {
+    if ($cookies.get('token')) {
+        $rootScope.menus = [];
+        appConfigManager.fetchAppSettings(function (err, cfg) {
+            $rootScope.appConfigManager = appConfigManager;
+        }, true);
+        userManager.getCurrentUser(function (err, data) {
+            if (!err) {
+                userManager.getGroupsForCurrentUser();
+                myBus.constant('currentuser', data);
+                $rootScope.currentuser = data;
+                $rootScope.$broadcast("currentuserLoaded");
+                opratingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
+                    $rootScope.operatorAccount = operatorAccount;
+                });
+            }
+        });
+    }
 });
 
 myBus.config(['$httpProvider', function ($httpProvider) {
