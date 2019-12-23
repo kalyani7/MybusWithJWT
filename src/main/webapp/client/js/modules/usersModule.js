@@ -1,12 +1,12 @@
 "use strict";
 /*global angular, _*/
 
-angular.module('myBus.userModule', ['ngTable', 'ui.bootstrap'])
+// angular.module('myBus.userModule', ['ngTable', 'ui.bootstrap'])
 
   //
   // ============================= List All ===================================
   //
-    .controller('UsersController', function($scope,$state, $http, $log, $filter, NgTableParams, $location,userManager, roleManager) {
+    myBus.controller('UsersController', function($scope,$state, $http, $log, $filter, NgTableParams, $location,userManager, roleManager) {
       $scope.headline = "Users";
       //$scope.users = [];
       $scope.userCount = 0;
@@ -299,7 +299,7 @@ angular.module('myBus.userModule', ['ngTable', 'ui.bootstrap'])
     $scope.getBranchOffice();
 
 
-}).factory('userManager', function ($http, $log,$rootScope) {
+}).factory('userManager', function ($http, $log,$rootScope, services) {
 
         var GRP_READ_ONLY = "Read-only"
             , GRP_AUTHOR = "Author"
@@ -427,17 +427,23 @@ angular.module('myBus.userModule', ['ngTable', 'ui.bootstrap'])
 
             getCurrentUser: function (callback, forceRefresh) {
                 if (currentUser === null || forceRefresh) {
-                    $http.get('/api/v1/user/me')
-                        .then(function (response) {
+                    services.get('/api/v1/user/me', function (response) {
+                        if (response) {
+                            console.log(response.data)
                             currentUser = response.data;
-                            return angular.isFunction(callback) && callback(null, currentUser);
-                        },function (err, status) {
-                            $log.error('Error getting current user. Status code ' + status + ".  " + angular.toJson(err));
-                            //angular.isFunction(callback) && callback(err);
-                            document.location = "/"; // redirect to login
-                        });
+                        }
+                    })
+                    // $http.get('/api/v1/user/me')
+                    //     .then(function (response) {
+                    //         currentUser = response.data;
+                    //         return angular.isFunction(callback) && callback(null, currentUser);
+                    //     },function (err, status) {
+                    //         $log.error('Error getting current user. Status code ' + status + ".  " + angular.toJson(err));
+                    //         //angular.isFunction(callback) && callback(err);
+                    //         document.location = "/"; // redirect to login
+                    //     });
                 } else {
-                    return angular.isFunction(callback) && callback(null, currentUser);
+                    // return angular.isFunction(callback) && callback(null, currentUser);
                 }
             },
             getUser: function(){

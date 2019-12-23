@@ -23,7 +23,7 @@ myBus.controller('LoginUserController', function($scope,$state, $http, $log, $co
                 }
             }, function (error, status) {
                 errorCallback(error)
-                swal("Error", error, 'error');
+                // swal("Error", error, 'error');
             });
         },
     }

@@ -728,13 +728,12 @@ var busServiceEditResolver = {
 };
 
 
-
-myBus.run(function ($rootScope, $state, $location, appConfigManager) {
+myBus.run(function ($rootScope, $state, $location, appConfigManager, userManager) {
     $rootScope.menus = [];
     appConfigManager.fetchAppSettings(function (err, cfg) {
         $rootScope.appConfigManager = appConfigManager;
     }, true);
-    /*userManager.getCurrentUser(function (err, data) {
+    userManager.getCurrentUser(function (err, data) {
         if (!err) {
             userManager.getGroupsForCurrentUser();
             myBus.constant('currentuser', data);
@@ -744,7 +743,7 @@ myBus.run(function ($rootScope, $state, $location, appConfigManager) {
                 $rootScope.operatorAccount = operatorAccount;
             });
         }
-    });*/
+    });
 
 });
 
