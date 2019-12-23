@@ -317,6 +317,7 @@
             , hasRoleBusinessAdmin = null;
 
         var users = {};
+        var data = '';
 
         return {
             validateUserInfo: function(user, confirmPassword) {
@@ -427,10 +428,10 @@
 
             getCurrentUser: function (callback, forceRefresh) {
                 if (currentUser === null || forceRefresh) {
-                    services.get('/api/v1/user/me', function (response) {
+                    services.get('/api/v1/user/me', data,function (response) {
+                        console.log(response)
                         if (response) {
-                            console.log(response.data)
-                            currentUser = response.data;
+                            callback(response)
                         }
                     })
                     // $http.get('/api/v1/user/me')
