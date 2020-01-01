@@ -1,4 +1,146 @@
-<nav class="navbar navbar-cus navbar-fixed-top nav-box-shadow" role="navigation">
+<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html lang="en" ng-app="myBus" ng-cloak>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Bus </title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="client/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <%--<link rel="stylesheet" href="client/node_modules/bootstrap/dist/css/bootstrap-theme.css">--%>
+    <%--<script src="client/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>--%>
+    <link rel="stylesheet" href="client/node_modules/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" href="client/node_modules/ng-table/bundles/ng-table.css">
+    <link rel="stylesheet" href="client/node_modules/ui-select/dist/select.css">
+
+
+    <link rel="stylesheet" href="client/css/select2.css">
+    <link href="client/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="client/js/s-chat/s-chat-support.css" rel="stylesheet">
+    <script src="client/js/s-chat/s-chat-support.js"></script>
+    <script src="client/lib/underscore-min-1.5.2.js"></script>
+    <script src="client/node_modules/jquery/dist/jquery.js"></script>
+    <script src="client/lib/jquery.table2excel.js"></script>
+    <script src="client/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="client/node_modules/angular/angular.js"></script>
+    <script src="client/node_modules/angular-animate/angular-animate.js"></script>
+    <script src="client/node_modules/ui-select/dist/select.js" type="text/javascript"></script>
+    <script src="client/node_modules/angular-sanitize/angular-sanitize.js" type="text/javascript"></script>
+    <script src="client/node_modules/angular-file-upload/dist/angular-file-upload.js" type="text/javascript"></script>
+    <script src="client/node_modules/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"
+            type="text/javascript"></script>
+
+    <script src="client/node_modules/ng-file-upload/dist/ng-file-upload.js" type="text/javascript"></script>
+
+    <script src="client/js/directives/menu.js"></script>
+
+    <script src="client/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="client/node_modules/angular-strap/dist/angular-strap.js"></script>
+    <script src="client/node_modules/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="client/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="client/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="client/node_modules/ng-table/bundles/ng-table.js"></script>
+    <script src="client/js/app.js"></script>
+    <script src="client/js/modules/usersModule.js"></script>
+    <script src="client/js/services/appConfigManager.js"></script>
+    <script src="client/js/modules/amenitiesModule.js"></script>
+    <script src="client/js/modules/cityModule.js"></script>
+    <script src="client/js/modules/vehicleModule.js"></script>
+    <script src="client/js/modules/branchOfficeModules.js"></script>
+    <script src="client/js/modules/serviceReportsModule.js"></script>
+    <script src="client/js/modules/paymentModule.js"></script>
+    <script src="client/js/modules/routeModule.js"></script>
+    <script src="client/js/modules/cancelModule.js"></script>
+    <script src="client/js/modules/roleModule.js"></script>
+    <script src="client/js/modules/agentModule.js"></script>
+    <script src="client/js/modules/dueReportModule.js"></script>
+    <script src="client/js/modules/serviceComboModule.js"></script>
+    <script src="client/js/modules/tripComboModule.js"></script>
+    <script src="client/js/modules/cashTransfersModule.js"></script>
+    <script src="client/js/modules/vehicleExpensesModule.js"></script>
+    <script src="client/js/modules/expensesIncomesReportsModule.js"></script>
+    <script src="client/js/modules/officeExpensesModule.js"></script>
+    <script src="client/js/services/paginationService.js"></script>
+    <script src="client/js/modules/returnTicketsModule.js"></script>
+    <script src="client/js/modules/bookingModule.js"></script>
+    <script src="client/js/modules/sequenceModule.js"></script>
+    <script src="client/js/modules/fuelExpenseReportModule.js"></script>
+    <script src="client/js/modules/invoiceModule.js"></script>
+    <script src="client/js/modules/verifyInvoiceModule.js"></script>
+    <script src="client/js/modules/gstFiltersModule.js"></script>
+    <script src="client/js/modules/suppliersModule.js"></script>
+    <script src="client/js/modules/tripReportsModule.js"></script>
+    <script src="client/js/modules/cargoBookingModule.js"></script>
+    <script src="client/js/modules/cargoBookingChartModule.js"></script>
+    <script src="client/js/modules/collectionZoneModule.js"></script>
+    <script src="client/js/modules/operatorAccountsModule.js"></script>
+    <script src="client/js/modules/staffModule.js"></script>
+    <script src="client/js/modules/cargoDashboardModule.js"></script>
+    <script src="client/js/modules/cargoBrachSummaryModule.js"></script>
+    <script src="client/js/modules/fullTripModule.js"></script>
+    <script src="client/js/modules/inventoriesModule.js"></script>
+    <script src="client/js/modules/jobsModule.js"></script>
+    <script src="client/js/modules/staffComplaintsModule.js"></script>
+    <script src="client/js/modules/remindersModule.js"></script>
+    <script src="client/js/modules/salaryReportModule.js"></script>
+    <script src="client/js/modules/dailyTripModule.js"></script>
+    <script src="client/js/modules/expenseModule.js"></script>
+    <script src="client/js/modules/headerNavBarhomeCtrl.js"></script>
+    <script src="client/js/modules/serviceConfigurationModule.js"></script>
+    <script src="client/js/directives/ng-really.js"></script>
+    <script src="client/js/directives/pwCheck.js"></script>
+    <script src="client/js/directives/stateOptions.js"></script>
+    <script src="client/js/directives/datePicker.js"></script>
+    <script src="client/js/directives/myMenu.js"></script>
+    <script src="client/js/directives/someDirectives.js"></script>
+    <script src="client/js/directives/fileUpload.js"></script>
+    <script src="client/js/modules/bankModule.js"></script>
+    <script src="client/js/modules/tripSheetModule.js"></script>
+    <script src="client/js/modules/documentsUploadModule.js"></script>
+
+    <script src="client/js/filters/arrayNoneFilter.js"></script>
+    <script src="client/js/filters/range.js"></script>
+    <script src="client/js/modules/preferredStaffModule.js"></script>
+    <script src="client/js/modules/busLayoutModule.js"></script>
+    <script src="client/js/modules/searchServiceModule.js"></script>
+    <script src="client/js/providers/stateValueProvider.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="client/css/ionicons.min.css" type="text/css">
+    <script src="client/js/filters/someFilters.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="client/css/app.css" type="text/css">
+
+    <script src="client/node_modules/moment/moment.js"></script>
+    <script src="client/node_modules/moment/locale/de.js"></script>
+    <script src="client/node_modules/angular-moment/angular-moment.js"></script>
+
+    <script src="client/node_modules/d3/d3.min.js"></script>
+    <script src="client/node_modules/d3/d3.js"></script>
+    <script src="client/node_modules/n3-charts/build/LineChart.js"></script>
+    <link rel="stylesheet" href="client/node_modules/n3-charts/build/LineChart.css">
+
+    <script>
+        sChat.init('ZTmyJTKcxMoHTTshK', {
+            ssl: true,
+            welcomeMessage: 'Hi, how can I help you?',
+            hostName: 'www.simplechat.support',
+            labels: {
+                sendPlaceholder: 'Send the message...',
+                headerTitle: 'Welcome to Srikrishna Travels!'
+            }
+        });
+    </script>
+</head>
+<body>
+<div class="loader" ng-show="loading">
+    <img src="client/images/Spinner.svg">
+</div>
+
+<nav class="navbar navbar-cus navbar-fixed-top nav-box-shadow" role="navigation"
+     ng-controller="headerNavBarhomeCtrl">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -74,7 +216,8 @@
                     </ul>
                 </li>
                 <li class="nav-item header_li_border">
-                    <a class="nav-link welcome panel_title_color ng-binding" ng-click="logOut()">
+                    <a class="nav-link welcome panel_title_color ng-binding" ui-sref-active="active"
+                       href="perform_logout">
                         <i class="fa fa-power-off panel_title_color"></i>
                         Logout
                     </a>
@@ -89,44 +232,44 @@
 
 <div id="wrapper" class="toggled">
 
-    <div id="sidebar-wrapper" class="nav-side-menu">
+    <div id="sidebar-wrapper" class="nav-side-menu" ng-controller="MenuBarController">
         <div class="menu-list">
             <ul id="menu-content" class="menu-content ">
-                <li data-target="#cargo" class="sidebar-dropdown" ng-show="canAccessModule('home.cargodashboard')">
+                <li data-target="#cargo" class="sidebar-dropdown" ng-show="canAccessModule('cargodashboard')">
                     <a>
                         <i class="fa fa-globe fa-lg"></i>
                         <span> Cargo </span>
-<!--                        <span class="arrow"></span>-->
+                        <%--<span class="arrow"></span>--%>
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="cargo">
                             <my-menu url="cargodashboard" label="CargoDashBoard"></my-menu>
                             <my-menu url="newBooking" label="NewBooking"
-                                     ng-if="canAccessModule('home.cargodashboard')"></my-menu>
+                                     ng-if="canAccessModule('cargodashboard')"></my-menu>
                             <my-menu url="cargoBookings" label="CargoBookings"
-                                     ng-if="canAccessModule('home.cargobookings')"></my-menu>
+                                     ng-if="canAccessModule('cargobookings')"></my-menu>
                             <my-menu url="cargobookingchart" label="CargoBookingChart"
-                                     ng-if="canAccessModule('home.cargobookings')"></my-menu>
+                                     ng-if="canAccessModule('cargobookings')"></my-menu>
                             <my-menu url="branchbookingsummary" label="BranchBookingSummary"
-                                     ng-if="canAccessModule('home.branchbookingsummary')"></my-menu>
-                            <my-menu url="loadingsheet" label="LoadingSheet" ng-if="canAccessModule('home.cargobookings')"></my-menu>
-                            <my-menu url="unloadingsheet" label="UnloadingSheet" ng-if="canAccessModule('home.cargobookings')"></my-menu>
-                            <my-menu url="deliverysheet" label="DeliverySheet" ng-if="canAccessModule('home.cargobookings')"></my-menu>
+                                     ng-if="canAccessModule('branchbookingsummary')"></my-menu>
+                            <my-menu url="loadingsheet" label="LoadingSheet" ng-if="canAccessModule('cargobookings')"></my-menu>
+                            <my-menu url="unloadingsheet" label="UnloadingSheet" ng-if="canAccessModule('cargobookings')"></my-menu>
+                            <my-menu url="deliverysheet" label="DeliverySheet" ng-if="canAccessModule('cargobookings')"></my-menu>
                             <my-menu url="cancellations" label="Cancellations"></my-menu>
                         </ul>
                     </div>
                 </li>
 
-                <li data-target="#analytics" class="sidebar-dropdown" ng-show="canAccessModule('home.analytics')">
+                <li data-target="#analytics" class="sidebar-dropdown" ng-show="canAccessModule('analytics')">
                     <a>
                         <i class="fa fa-pie-chart fa-lg"></i>
                         <span> Analytics </span>
-<!--                        <span class="arrow"></span>-->
+                        <%--<span class="arrow"></span>--%>
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="analytics">
                             <my-menu url="bookingAnalytics" label="BookingAnalytics"
-                                     ng-if="canAccessModule('home.bookinganalytics')"></my-menu>
+                                     ng-if="canAccessModule('bookinganalytics')"></my-menu>
                         </ul>
                     </div>
                 </li>
@@ -135,45 +278,45 @@
                     <a>
                         <i class="fa  fa-universal-access fa-lg"></i>
                         <span> Master </span>
-<!--                        <span class="arrow"></span>-->
+                        <%--<span class="arrow"></span>--%>
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="master">
                             <my-menu label="Agents"
-                                     ng-if="canAccessModule('home.agents')"></my-menu>
+                                     ng-if="canAccessModule('agents')"></my-menu>
                             <my-menu label="Amenities"
-                                     ng-if="canAccessModule('home.amenities')"></my-menu>
+                                     ng-if="canAccessModule('amenities')"></my-menu>
                             <my-menu label="Banks"
-                                     ng-if="canAccessModule('home.banks')"></my-menu>
+                                     ng-if="canAccessModule('banks')"></my-menu>
                             <my-menu label="BranchOffices"
-                                     ng-if="canAccessModule('home.branchoffices')"></my-menu>
+                                     ng-if="canAccessModule('branchoffices')"></my-menu>
                             <my-menu label="Cities"
-                                     ng-if="canAccessModule('home.cities')"></my-menu>
+                                     ng-if="canAccessModule('cities')"></my-menu>
                             <!--my-menu label="CollectionZones"></my-menu -->
-                            <my-menu label="GSTFilters" ng-if="canAccessModule('home.GSTFilters')"></my-menu>
+                            <my-menu label="GSTFilters" ng-if="canAccessModule('GSTFilters')"></my-menu>
                             <my-menu label="Suppliers"
-                                     ng-if="canAccessModule('home.suppliers')"></my-menu>
+                                     ng-if="canAccessModule('suppliers')"></my-menu>
                             <my-menu label="OperatorAccounts"
                                      ng-if="currentuser.superAdmin"></my-menu>
-                            <my-menu label="Roles" ng-if="canAccessModule('home.roles')"></my-menu>
+                            <my-menu label="Roles" ng-if="canAccessModule('roles')"></my-menu>
                             <my-menu label="ManageRoles"
-                                     ng-if="canAccessModule('home.manageRoles')"></my-menu>
+                                     ng-if="canAccessModule('manageRoles')"></my-menu>
                             <my-menu label="Routes"
-                                     ng-if="canAccessModule('home.routes')"></my-menu>
+                                     ng-if="canAccessModule('routes')"></my-menu>
                             <my-menu label="ServiceCombo"
-                                     ng-if="canAccessModule('home.servicecombo')"></my-menu>
+                                     ng-if="canAccessModule('servicecombo')"></my-menu>
                             <my-menu label="TripCombo"
-                                     ng-if="canAccessModule('home.tripcombo')"></my-menu>
-                            <my-menu label="Users" ng-if="canAccessModule('home.users')"></my-menu>
+                                     ng-if="canAccessModule('tripcombo')"></my-menu>
+                            <my-menu label="Users" ng-if="canAccessModule('users')"></my-menu>
                             <my-menu label="Vehicles"
-                                     ng-if="canAccessModule('home.vehicles')"></my-menu>
-                            <my-menu label="Staff" ng-if="canAccessModule('home.staff')"></my-menu>
+                                     ng-if="canAccessModule('vehicles')"></my-menu>
+                            <my-menu label="Staff" ng-if="canAccessModule('staff')"></my-menu>
                             <my-menu label="ExpensesType"
-                                     ng-if="canAccessModule('home.expensestype')"></my-menu>
+                                     ng-if="canAccessModule('expensestype')"></my-menu>
                             <my-menu label="SearchService"
-                                     ng-if="canAccessModule('home.searchServices')"></my-menu>
+                                     ng-if="canAccessModule('searchServices')"></my-menu>
                             <my-menu label="DocumentsUpload"
-                                     ng-if="canAccessModule('home.documentsUpload')"></my-menu>
+                                     ng-if="canAccessModule('documentsUpload')"></my-menu>
 
                         </ul>
                     </div>
@@ -183,64 +326,64 @@
                     <a>
                         <i class="fa fa-book fa-lg"></i>
                         <span> Reports </span>
-<!--                        <span class="arrow"></span>-->
+                        <%--<span class="arrow"></span>--%>
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="reports">
                             <my-menu url="tripreports" label="TripReports"
-                                     ng-if="canAccessModule('home.tripreports')"></my-menu>
+                                     ng-if="canAccessModule('tripreports')"></my-menu>
                             <my-menu url="serviceIncomeReport" label="ServiceIncomeReport"
-                                     ng-if="canAccessModule('home.servicereports')"></my-menu>
+                                     ng-if="canAccessModule('servicereports')"></my-menu>
                             <my-menu url="serviceReports" label="ServiceReports"
-                                     ng-if="canAccessModule('home.servicereports')"></my-menu>
+                                     ng-if="canAccessModule('servicereports')"></my-menu>
                             <my-menu label="PreferredStaff"
-                                     ng-if="canAccessModule('home.preferredstaff')"></my-menu>
+                                     ng-if="canAccessModule('preferredstaff')"></my-menu>
                             <my-menu label="DailyTrips"
-                                     ng-if="canAccessModule('home.dailytrips')"></my-menu>
+                                     ng-if="canAccessModule('dailytrips')"></my-menu>
                             <my-menu label="SalaryReports"
-                                     ng-if="canAccessModule('home.salaryreports')"></my-menu>
+                                     ng-if="canAccessModule('salaryreports')"></my-menu>
                             <my-menu url="fulltrips"
-                                     label="FullTrips" ng-if="canAccessModule('home.fulltrips')"></my-menu>
+                                     label="FullTrips" ng-if="canAccessModule('fulltrips')"></my-menu>
                             <my-menu label="FuelExpenseReports"
-                                     ng-if="canAccessModule('home.fuelexpensereports')"></my-menu>
+                                     ng-if="canAccessModule('fuelexpensereports')"></my-menu>
                             <my-menu label="DueReport"
-                                     ng-if="canAccessModule('home.duereport')"></my-menu>
+                                     ng-if="canAccessModule('duereport')"></my-menu>
                             <my-menu label="CashTransfers"
-                                     ng-if="canAccessModule('home.cashtransfers')">Cash Transfers
+                                     ng-if="canAccessModule('cashtransfers')">Cash Transfers
                             </my-menu>
-                            <my-menu label="Payments"  ng-if="canAccessModule('home.payments')">
+                            <my-menu label="Payments"  ng-if="canAccessModule('payments')">
                                 Payments
                             </my-menu>
                             <my-menu label="OfficeExpenses"
-                                     ng-if="canAccessModule('home.officeexpenses')"></my-menu>
+                                     ng-if="canAccessModule('officeexpenses')"></my-menu>
                             <my-menu label="ExpensesIncomesReports"
-                                     ng-if="canAccessModule('home.expensesincomesreports')"></my-menu>
-                            <my-menu label="ReturnTickets" ng-if="canAccessModule('home.returnTickets')"></my-menu>
+                                     ng-if="canAccessModule('expensesincomesreports')"></my-menu>
+                            <my-menu label="ReturnTickets" ng-if="canAccessModule('returnTickets')"></my-menu>
                             <my-menu label="CashBalances"
-                                     ng-if="canAccessModule('home.cashbalances')"></my-menu>
-                            <my-menu label="Invoices" ng-if="canAccessModule('home.invoices')"></my-menu>
+                                     ng-if="canAccessModule('cashbalances')"></my-menu>
+                            <my-menu label="Invoices" ng-if="canAccessModule('invoices')"></my-menu>
                             <!--my-menu label="ShipmentSequence" ></my-menu -->
                             <my-menu label="VerifyInvoice"
-                                     ng-if="canAccessModule('home.verifyInvoice')"></my-menu>
+                                     ng-if="canAccessModule('verifyInvoice')"></my-menu>
                             <my-menu label="TripSheet"
-                                     ng-if="canAccessModule('home.tripsheet')"></my-menu>
-                            <my-menu label="TripSheetFilters" ng-if="canAccessModule('home.tripsheetfilters')"></my-menu>
+                                     ng-if="canAccessModule('tripsheet')"></my-menu>
+                            <my-menu label="TripSheetFilters" ng-if="canAccessModule('tripsheetfilters')"></my-menu>
                         </ul>
                     </div>
                 </li>
 
-                <li data-target="#checklist" class="sidebar-dropdown" ng-show="canAccessModule('home.checkList')">
+                <li data-target="#checklist" class="sidebar-dropdown" ng-show="canAccessModule('checkList')">
                     <a>
                         <i class="fa fa-tasks fa-lg"></i>
                         <span> Check List</span>
-<!--                        <span class="arrow"></span>-->
+                        <%--<span class="arrow"></span>--%>
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="checklist">
                             <my-menu url="pendingreports" label="PendingReports"
-                                     ng-if="canAccessModule('home.pendingreports')"></my-menu>
+                                     ng-if="canAccessModule('pendingreports')"></my-menu>
                             <my-menu url="reportstobereviewed" label="ReportsToBeReviewed"
-                                     ng-if="canAccessModule('home.reportstobereviewed')"></my-menu>
+                                     ng-if="canAccessModule('reportstobereviewed')"></my-menu>
                             <my-menu url="haltreports" label="HaltReports" ></my-menu>
                         </ul>
                     </div>
@@ -250,7 +393,7 @@
                     <a>
                         <i class="fa fa-user fa-lg"></i>
                         <span> Profile </span>
-<!--                        <span class="arrow"></span>-->
+                        <%--<span class="arrow"></span>--%>
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="profile">
@@ -263,33 +406,33 @@
                     <a>
                         <i class="fa fa-database fa-lg"></i>
                         <span> Maintenance </span>
-<!--                        <span class="arrow"></span>-->
+                        <%--<span class="arrow"></span>--%>
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="maintenance">
                             <my-menu label="Inventories"
-                                     ng-if="canAccessModule('home.inventories')"></my-menu>
-                            <my-menu label="Jobs" ng-if="canAccessModule('home.jobs')"></my-menu>
+                                     ng-if="canAccessModule('inventories')"></my-menu>
+                            <my-menu label="Jobs" ng-if="canAccessModule('jobs')"></my-menu>
                             <my-menu label="Reminders"
-                                     ng-if="canAccessModule('home.reminders')"></my-menu>
+                                     ng-if="canAccessModule('reminders')"></my-menu>
                             <my-menu label="StaffComplaints"
-                                     ng-if="canAccessModule('home.staffcomplaints')"></my-menu>
+                                     ng-if="canAccessModule('staffcomplaints')"></my-menu>
                         </ul>
                     </div>
                 </li>
 
-                <li data-target="#config" class="sidebar-dropdown" ng-show="canAccessModule('home.config')">
+                <li data-target="#config" class="sidebar-dropdown" ng-show="canAccessModule('config')">
                     <a>
                         <i class="fa fa-database fa-lg"></i>
                         <span> Config </span>
-<!--                        <span class="arrow"></span>-->
+                        <%--<span class="arrow"></span>--%>
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="config">
                             <my-menu label="layouts"
-                                     ng-if="canAccessModule('home.layouts')"></my-menu>
+                                     ng-if="canAccessModule('layouts')"></my-menu>
                             <my-menu label="addservice"
-                                     ng-if="canAccessModule('home.addservice')"></my-menu>
+                                     ng-if="canAccessModule('addservice')"></my-menu>
                         </ul>
                     </div>
                 </li>
@@ -300,7 +443,7 @@
         <!---------OnLoadig PopUp only For Vehice accessing Use-->
 
         <div id="myModal" class="modal fade loading-popup" tabindex='-1'
-             ng-if="canAccessModule('home.vehicles') && viewModal" style="padding-top: 30px;">
+             ng-if="canAccessModule('vehicles') && viewModal" style="padding-top: 30px;">
             <div class="modal-dialog custom-modal">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -469,124 +612,19 @@
         </div>
 
     </div>
+    <!-- /#sidebar-wrapper -->
+    <%--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="position: relative;top: 65px;z-index: 2;"><i class="fa fa-bars fa-2x toggle-btn"></i> </a>--%>
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <main class="content">
             <div class="container-fluid">
-                <div class="row">
-                    <breadscrumb class="ng-scope">
-                        <div class="breadcrumbs printhide" ng-click="breadscrumb_print_fn()">
-                            <ui-view>
-                                <div class="row">
-                                    <div class="page-header">
-                                        <h3>Dashboard</h3>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-5 col-md-8 col-lg-9"></div>
-                                    <div class="col-xs-7 col-md-4 col-lg-3">
-                                        <my-datepicker ng-model="dt"></my-datepicker>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-6 col-xs-12 padding-bottom">
-                                        <div class="card">
-                                            <div class="bg-holder bg-card" style="background-image:url(client/assets/img/corner-2.png); border-radius: 1rem"></div>
-                                            <div class="card-body position-relative">
-                                                <label class="ls text-uppercase text-600 font-weight-semi-bold">Paid Bookings</label>
-                                                <div class="row">
-                                                    <div class="col-xs-5 dash-am"><i class="fa fa-car fa-3x" style="color: #337ab7"></i></i></div>
-                                                    <div class="col-xs-7 dash-am"><span class="fa-2x" style="color: #337ab7">85</span></div>
-                                                </div>
-                                                <div class="row">
-                                                    <a href="/home#/busdetails">
-                                                        <div class="col-xs-10">
-                                                            <h6 class="">View Details</h6>
-                                                        </div>
-                                                        <div class="col-xs-2">
-                                                            <h6 class=""><i class="fa fa-arrow-circle-right"></i></h6>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-6 col-xs-12 padding-bottom">
-                                        <div class="card">
-                                            <div class="bg-holder bg-card" style="background-image:url(client/assets/img/corner-3.png); border-radius: 1rem"></div>
-                                            <div class="card-body position-relative">
-                                                <label class="ls text-uppercase text-600 font-weight-semi-bold">To Pay Bookings</label>
-                                                <div class="row">
-                                                    <div class="col-xs-5 dash-am"><i class="fa fa-ticket fa-3x" style="color: #3c763d"></i></i></div>
-                                                    <div class="col-xs-7 dash-am"><span class="fa-2x" style="color: #3c763d">3400</span></div>
-                                                </div>
-                                                <div class="row">
-                                                    <a href="/home#/busdetails">
-                                                        <div class="col-xs-10">
-                                                            <h6 class="">View Details</h6>
-                                                        </div>
-                                                        <div class="col-xs-2">
-                                                            <h6 class=""><i class="fa fa-arrow-circle-right"></i></h6>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-6 col-xs-12 padding-bottom">
-                                        <div class="card">
-                                            <div class="bg-holder bg-card" style="background-image:url(client/assets/img/corner-3.png); border-radius: 1rem"></div>
-                                            <div class="card-body position-relative">
-                                                <label class="ls text-uppercase text-600 font-weight-semi-bold">Free Bookings</label>
-                                                <div class="row">
-                                                    <div class="col-xs-5 dash-am"><i class="fa fa-shopping-cart fa-3x" style="color: #8a6d3b"></i></i>
-                                                    </div>
-                                                    <div class="col-xs-7 dash-am "><span class="fa-2x" style="color: #8a6d3b">28</span></div>
-                                                </div>
-                                                <div class="row">
-                                                    <a href="/home#/busdetails">
-                                                        <div class="col-xs-10">
-                                                            <h6 class="">View Details</h6>
-                                                        </div>
-                                                        <div class="col-xs-2">
-                                                            <h6 class=""><i class="fa fa-arrow-circle-right"></i></h6>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-6 col-xs-12 padding-bottom">
-                                        <div class="card">
-                                            <div class="bg-holder bg-card" style="background-image:url(client/assets/img/corner-1.png); border-radius: 1rem"></div>
-                                            <div class="card-body position-relative">
-                                                <label class="ls text-uppercase text-600 font-weight-semi-bold">On Account</label>
-                                                <div class="row">
-                                                    <div class="col-xs-5 dash-am"><i class="fa fa-ticket fa-3x" style="color: #a94442"></i></i></div>
-                                                    <div class="col-xs-7 dash-am"><span class="fa-2x" style="color: #a94442">59</span></div>
-                                                </div>
-                                                <div class="row">
-                                                    <a href="/home#/busdetails">
-                                                        <div class="col-xs-10">
-                                                            <h6 class="">View Details</h6>
-                                                        </div>
-                                                        <div class="col-xs-2">
-                                                            <h6 class=""><i class="fa fa-arrow-circle-right"></i></h6>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </ui-view>
-                        </div>
-                    </breadscrumb>
-                </div>
+                <%--<div class="row">--%>
+                <breadscrumb class="ng-scope">
+                    <div class="breadcrumbs printhide" ng-click="breadscrumb_print_fn()">
+                        <ui-view>Select from Menu</ui-view>
+                    </div>
+                </breadscrumb>
+                <%--</div>--%>
             </div>
         </main>
     </div>
@@ -629,3 +667,6 @@
         $(this).find('i').toggleClass('fa fa-times fa fa-th-large')
     });
 </script>
+
+</body>
+</html>

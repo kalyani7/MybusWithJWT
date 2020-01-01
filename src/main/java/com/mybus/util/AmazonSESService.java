@@ -90,6 +90,51 @@ public class AmazonSESService {
     }
   }
 
+  public void sendEmail(String to, String content, String subject)  throws  Exception{
+    try {
+      // Create a new MimeMessage object.
+      MimeMessage message = new MimeMessage(session);
+
+      // Add subject, from and to lines.
+      message.setSubject(subject, "UTF-8");
+      message.setFrom(new InternetAddress("support@srikrishnatravels.in"));
+      message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+      //message.setRecipients(Message.RecipientType.CC, InternetAddress.parse("srikritravels@gmail.com"));
+
+      // Create a multipart/alternative child container.
+      MimeMultipart msg_body = new MimeMultipart("alternative");
+
+      // Create a wrapper for the HTML and text parts.
+      MimeBodyPart wrap = new MimeBodyPart();
+
+      // Define the HTML part.
+      MimeBodyPart htmlPart = new MimeBodyPart();
+      htmlPart.setContent(content,"text/html; charset=UTF-8");
+
+      msg_body.addBodyPart(htmlPart);
+
+      // Add the child container to the wrapper object.
+      wrap.setContent(msg_body);
+
+      // Create a multipart/mixed parent container.
+      MimeMultipart msg = new MimeMultipart("mixed");
+
+      // Add the parent container to the message.
+      message.setContent(msg);
+
+      // Add the multipart/alternative part to the message.
+      msg.addBodyPart(wrap);
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      message.writeTo(outputStream);
+      RawMessage rawMessage =
+              new RawMessage(ByteBuffer.wrap(outputStream.toByteArray()));
+      SendRawEmailRequest rawEmailRequest = new SendRawEmailRequest(rawMessage);
+      sesClient.sendRawEmail(rawEmailRequest);
+    }catch (Exception e){
+      e.printStackTrace();
+    }
+  }
+
 
 
 

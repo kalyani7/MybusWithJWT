@@ -396,13 +396,21 @@ public class BookingMongoDAO {
         return names;
     }
 
-    public List<Booking> findBookingsForTaxInvoice(String Id) {
+    public List<Booking> findBookingsForTaxInvoice(String operatorId) {
         Query query = new Query();
-        query.addCriteria(where("operatorId").is(Id));
-
-        query.addCriteria(where("bookedBy").is("REDBUS-API"));
+        query.addCriteria(where("operatorId").is(operatorId));
+        //query.addCriteria(where("bookedBy").is("REDBUS-API"));
         query.addCriteria(where("emailID").exists(true)
                 .orOperator(where("emailedTaxInvoice").exists(false), where("emailedTaxInvoice").is(false)));
+        query.limit(10);
+        return mongoTemplate.find(query,Booking.class);
+    }
+
+    public List<Booking> findBookingsForGreeting(String operatorId) {
+        Query query = new Query();
+        query.addCriteria(where("operatorId").is(operatorId));
+        query.addCriteria(where("emailID").exists(true)
+                .orOperator(where("sendGreeting").exists(false), where("sendGreeting").is(false)));
         query.limit(10);
         return mongoTemplate.find(query,Booking.class);
     }
@@ -489,6 +497,14 @@ public class BookingMongoDAO {
         query.addCriteria(where("_id").in(ids));
         Update update = new Update();
         update.set("emailedTaxInvoice",true);
+        UpdateResult ur = mongoTemplate.updateMulti(query, update, Booking.class);
+    }
+
+    public void updateGreetingSent(List<String> ids){
+        Query query=new Query();
+        query.addCriteria(where("_id").in(ids));
+        Update update = new Update();
+        update.set("sendGreeting",true);
         UpdateResult ur = mongoTemplate.updateMulti(query, update, Booking.class);
     }
     public List<VerifyInvoice> getVerifyInvoiceEntries() {

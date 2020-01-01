@@ -83,6 +83,7 @@ myBus.controller('HomeController', function ($scope, $state, $http, $log, $cooki
     });
 
     $scope.canAccessModule = function (moduleName) {
+        console.log('moduleName ' + moduleName);
         if ($scope.currentUser && $scope.currentUser.superAdmin) {
             return true;
         } else {

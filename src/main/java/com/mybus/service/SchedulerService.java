@@ -131,22 +131,38 @@ public class SchedulerService {
     public void sendTaxInvoice() {
         if(systemProperties.getBooleanProperty(SystemProperties.SysProps.SEND_EMAIL_ENABLED)){
             List<OperatorAccount> operatorAccounts = operatorAccountMongoDAO.getOperatorAccountsSendEmailTrue();
-            operatorAccounts.parallelStream().forEach(operatorAccount -> {
+            operatorAccounts.stream().forEach(operatorAccount -> {
                 logger.info("Sending tax invoice to bookings in account ", operatorAccount.getDomainName());
                 List<Booking> bookings = bookingMongoDAO.findBookingsForTaxInvoice(operatorAccount.getId());
                 List<String> ids = new ArrayList<>();
                 bookings.parallelStream().forEach(booking -> {
-                    if(booking.getServiceTax() > 0) {
+                    //if(booking.getServiceTax() > 0) {
                         //send email to
-//                        sendTaxInvoice.emailTaxInvoice(operatorAccount, booking, "bookingTaxInvoice.html");
+                        sendTaxInvoice.emailTaxInvoice(booking, "bookingTaxInvoice.html");
                         ids.add(booking.getId());
-                    }
+                    //}
                 });
                 bookingMongoDAO.updateEmailedTaxInvoice(ids);
             });
         }
     }
-        @Scheduled(cron = "0 1 1 * * *")
+
+
+    @Scheduled(cron = "*/10 * * * * *")
+    public void sendNewYearGreeting() {
+        if(systemProperties.getBooleanProperty(SystemProperties.SysProps.SEND_EMAIL_ENABLED)){
+            List<OperatorAccount> operatorAccounts = operatorAccountMongoDAO.getOperatorAccountsSendEmailTrue();
+            operatorAccounts.stream().forEach(operatorAccount -> {
+                List<Booking> bookings = bookingMongoDAO.findBookingsForGreeting(operatorAccount.getId());List<String> ids = new ArrayList<>();
+                bookings.parallelStream().forEach(booking -> {
+                    sendTaxInvoice.emailGreeting(booking, "happyNewYear.html");
+                    ids.add(booking.getId());
+                });
+                bookingMongoDAO.updateGreetingSent(ids);
+            });
+        }
+    }
+    @Scheduled(cron = "0 1 1 * * *")
     public void saveCargoBookingDailyTotals()throws ParseException{
             SimpleDateFormat formatter=new SimpleDateFormat("dd-MM-yyyy");
         List<Document> results= cargoBookingMongoDAO.groupByOffice();

@@ -86,5 +86,7 @@ public class Booking extends AbstractDocument {
 
     }
     private boolean emailedTaxInvoice;
+    private boolean sendGreeting;
+
 
 }

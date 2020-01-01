@@ -83,6 +83,16 @@ public class SendTaxInvoice {
     }
 
 
+    public void emailGreeting(Booking booking, String fileName) {
+        try {
+            String folderPath = "emailTemplates/srikrishna";
+            InputStream messageBody = getClass().getClassLoader().getResourceAsStream(folderPath+"/"+ fileName);
+            String emailBody = IOUtils.toString(messageBody, "UTF-8");
+            sesService.sendEmail(booking.getEmailID(), emailBody, booking.getTicketNo() + "- Srikrishna Travels wishing you Happy New Year 2020");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
