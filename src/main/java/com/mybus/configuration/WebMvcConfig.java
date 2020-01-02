@@ -1,6 +1,7 @@
 package com.mybus.configuration;
 
 import com.mybus.interceptor.AuthenticationInterceptor;
+import com.mybus.interceptor.DomainFilterInterceptor;
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
@@ -28,10 +29,16 @@ public class WebMvcConfig implements AsyncConfigurer, WebMvcConfigurer {
     @Autowired
     private AuthenticationInterceptor authenticationInterceptor;
 
+    @Autowired
+    private DomainFilterInterceptor domainFilterInterceptor;
+
     @Override
     public void addInterceptors(final InterceptorRegistry registry) {
+        registry.addInterceptor(domainFilterInterceptor)
+                .addPathPatterns("/**");
         registry.addInterceptor(authenticationInterceptor).addPathPatterns("/api/v1/**");
     }
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
