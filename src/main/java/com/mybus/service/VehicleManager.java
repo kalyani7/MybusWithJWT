@@ -1,6 +1,7 @@
 package com.mybus.service;
 
 import com.google.common.base.Preconditions;
+import com.google.zxing.WriterException;
 import com.mybus.SystemProperties;
 import com.mybus.dao.VehicleDAO;
 import com.mybus.dao.impl.VehicleMongoDAO;
@@ -13,13 +14,16 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -49,7 +53,22 @@ public class VehicleManager {
     @Autowired
     private AmazonClient amazonClient;
 
-    public Vehicle saveVehicle(Vehicle vehicle){
+    @Autowired
+    private Environment env;
+
+    @Autowired
+    private QRCodeManager qrCodeManager;
+
+
+    private String creteOrUpdateQRCode(String vehicleId)throws IOException, WriterException {
+        if (!Arrays.asList(env.getActiveProfiles()).contains("test")) {
+            byte[] contents = qrCodeManager.getQRCodeImage(vehicleId, 100, 100);
+            amazonClient.uploadFile(ServiceUtils.BUCKET_NAME, vehicleId, contents, MediaType.IMAGE_PNG.toString());
+        }
+        return vehicleId;
+    }
+
+    public Vehicle saveVehicle(Vehicle vehicle) throws IOException, WriterException {
         vehicle.validate();
         Vehicle duplicateVehicle = vehicleDAO.findOneByRegNo(vehicle.getRegNo());
         if (duplicateVehicle != null && !duplicateVehicle.getId().equals(vehicle.getId())) {
@@ -59,10 +78,12 @@ public class VehicleManager {
             logger.debug("Saving Vehicle: [{}]", vehicle);
         }
         vehicle.setOperatorId(sessionManager.getOperatorId());
-        String regno=vehicle.getRegNo();
-        regno=removeSpace(regno);
-        vehicle.setRegNo(regno);
-        return vehicleDAO.save(vehicle);
+        String regNo = vehicle.getRegNo();
+        regNo = removeSpace(regNo);
+        vehicle.setRegNo(regNo);
+        vehicle = vehicleDAO.save(vehicle);
+        creteOrUpdateQRCode(vehicle.getId());
+        return vehicle;
     }
 
 
@@ -75,7 +96,7 @@ public class VehicleManager {
         }
         return withoutspaces;
     }
-    public Vehicle updateVehicle(Vehicle vehicle) {
+    public Vehicle updateVehicle(Vehicle vehicle) throws IOException, WriterException {
         Preconditions.checkNotNull(vehicle.getId(), "Unknown vehicle id");
         Vehicle loadedVehicle = vehicleDAO.findById(vehicle.getId()).get();
         try {

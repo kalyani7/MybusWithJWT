@@ -54,6 +54,15 @@ public class AmazonClient {
         return new JSONObject();
     }
 
+    public JSONObject uploadFile(String bucketName, String fileName, byte[] contents, String contentType) throws IOException {
+        InputStream stream = new ByteArrayInputStream(contents);
+        ObjectMetadata meta = new ObjectMetadata();
+        meta.setContentLength(contents.length);
+        meta.setContentType(contentType);
+        PutObjectResult result = s3Client.putObject(new PutObjectRequest(bucketName, fileName, stream, meta));
+        return new JSONObject();
+    }
+
     public String getSignedURL(String bucketName, String filePath){
         // Set the presigned URL to expire after one hour.
       /*  java.util.Date expiration = new java.util.Date();

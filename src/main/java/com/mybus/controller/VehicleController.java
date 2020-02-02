@@ -1,5 +1,6 @@
 package com.mybus.controller;
 
+import com.google.zxing.WriterException;
 import com.mybus.controller.util.ControllerUtils;
 import com.mybus.model.User;
 import com.mybus.model.Vehicle;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +52,7 @@ public class VehicleController extends MyBusBaseController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Create a new vehicle")
     public ResponseEntity createVehicle(HttpServletRequest request,
-                                        @ApiParam(value = "JSON for Vehicle to be created") @RequestBody final Vehicle vehicle){
+                                        @ApiParam(value = "JSON for Vehicle to be created") @RequestBody final Vehicle vehicle) throws IOException, WriterException {
         logger.debug("create vehicle called");
         return new ResponseEntity<>(vehicleManager.saveVehicle(vehicle), HttpStatus.OK);
     }
@@ -60,7 +62,7 @@ public class VehicleController extends MyBusBaseController {
     @ApiOperation(value ="Update vehicle", response = User.class)
     public ResponseEntity updateVehicle(HttpServletRequest request,
                                         @ApiParam(value = "Id of the vehicle to be found") @PathVariable final String id,
-                                        @ApiParam(value = "Vehicle JSON") @RequestBody final Vehicle vehicle) {
+                                        @ApiParam(value = "Vehicle JSON") @RequestBody final Vehicle vehicle) throws IOException, WriterException {
         logger.debug("update vehicle called");
         return new ResponseEntity<>(vehicleManager.updateVehicle(vehicle), HttpStatus.OK);
     }

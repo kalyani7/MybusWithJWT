@@ -2,11 +2,13 @@ package com.mybus.dao.impl;
 
 import com.mongodb.client.result.UpdateResult;
 import com.mybus.model.Staff;
+import com.mybus.model.StaffCodeSequence;
 import com.mybus.service.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -107,5 +109,17 @@ public class StaffMongoDAO {
         update.set("contactNumber",staff.getContactNumber());
         UpdateResult updateResult = mongoTemplate.updateMulti(query,update,Staff.class);
         return updateResult.getModifiedCount() == 1;
+    }
+    public StaffCodeSequence findTheUniqueCode() {
+        final Query query = new Query();
+        query.with(new Sort(Sort.Direction.DESC, "createdAt"));
+        return mongoTemplate.findOne(query,StaffCodeSequence.class);
+    }
+    public void updateStaffUniqueCodeValue(String id, long value) {
+        final Query query = new Query();
+        query.addCriteria(where("_id").is(id));
+        Update update = new Update();
+        update.set("value",value);
+        mongoTemplate.updateMulti(query,update,StaffCodeSequence.class);
     }
 }
