@@ -1,9 +1,11 @@
 package com.mybus.service;
 
+import com.mybus.dao.StaffCodeSequenceDAO;
 import com.mybus.dao.StaffDAO;
 import com.mybus.dao.impl.StaffMongoDAO;
 import com.mybus.exception.BadRequestException;
 import com.mybus.model.Staff;
+import com.mybus.model.StaffCodeSequence;
 import org.apache.commons.collections.IteratorUtils;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -36,6 +38,9 @@ public class StaffManager {
     @Autowired
     private FileUploadManager fileUploadManager;
 
+    @Autowired
+    private StaffCodeSequenceDAO staffCodeSequenceDAO;
+
     public Staff saveStaff(Staff staff){
         staff.validate();
         Staff savedStaff = staffDAO.findOneByName(staff.getName());
@@ -45,8 +50,17 @@ public class StaffManager {
         if(logger.isDebugEnabled()) {
             logger.debug("Saving staff: [{}]", staff);
         }
-        String uniqueId = new ObjectId().toString();
-        staff.setUniqueId(uniqueId);
+        //generate unique code
+        StaffCodeSequence staffCodeSequence = new StaffCodeSequence();
+        if(staffCodeSequenceDAO.count() == 0){
+            staffCodeSequence.setValue(100);
+            staffCodeSequence = staffCodeSequenceDAO.save(staffCodeSequence);
+        }else{
+            staffCodeSequence = staffMongoDAO.findTheUniqueCode();
+        }
+        staff.setUniqueId("EMP-" + staffCodeSequence.getValue());
+        //Increment the value
+        staffMongoDAO.updateStaffUniqueCodeValue(staffCodeSequence.getId(),staffCodeSequence.getValue()+1);
         staff.setOperatorId(sessionManager.getOperatorId());
         return staffDAO.save(staff);
     }

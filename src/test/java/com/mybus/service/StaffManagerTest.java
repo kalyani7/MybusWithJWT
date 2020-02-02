@@ -2,11 +2,14 @@ package com.mybus.service;
 
 import com.mybus.configuration.ApplicationDataTestConfig;
 import com.mybus.configuration.core.CoreAppConfig;
+import com.mybus.dao.StaffCodeSequenceDAO;
 import com.mybus.dao.StaffDAO;
 import com.mybus.dao.SupplierDAO;
 import com.mybus.model.PartyType;
 import com.mybus.model.Staff;
+import com.mybus.model.StaffCodeSequence;
 import com.mybus.model.Supplier;
+import org.apache.commons.collections.IteratorUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,11 +43,15 @@ public class StaffManagerTest {
     @Autowired
     private SuppliersManager suppliersManager;
 
+    @Autowired
+    private StaffCodeSequenceDAO staffCodeSequenceDAO;
+
     @Before
     @After
     public void clear(){
         staffDAO.deleteAll();
         supplierDAO.deleteAll();
+        staffCodeSequenceDAO.deleteAll();
     }
 
     @Test
@@ -84,6 +91,22 @@ public class StaffManagerTest {
         }
         List<Supplier> suppliers = suppliersManager.getAll(PartyType.DEBTORS.toString());
         assertEquals(2,suppliers.size());
+    }
+
+    @Test
+    public void testAddStaff(){
+        Staff staff1 = new Staff();
+        staff1.setName("Staff1");
+        staff1.setAge(30);
+        staff1 = staffManager.saveStaff(staff1);
+        assertEquals("EMP-100",staff1.getUniqueId());
+        Staff staff2 = new Staff();
+        staff2.setName("Staff2");
+        staff2.setAge(40);
+        staff2 = staffManager.saveStaff(staff2);
+        assertEquals("EMP-101",staff2.getUniqueId());
+        List<StaffCodeSequence> staffCodeSequences = IteratorUtils.toList(staffCodeSequenceDAO.findAll().iterator());
+        assertEquals(102,staffCodeSequences.get(0).getValue());
     }
 
 
