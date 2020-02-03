@@ -126,7 +126,7 @@ public class SchedulerService {
     }
 
 
-    @Scheduled(cron = "*/10 * * * * *")
+   // @Scheduled(cron = "*/10 * * * * *")
 //    @Scheduled(fixedDelay = 5000)
     public void sendTaxInvoice() {
         if(systemProperties.getBooleanProperty(SystemProperties.SysProps.SEND_EMAIL_ENABLED)){
