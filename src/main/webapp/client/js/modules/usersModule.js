@@ -426,12 +426,12 @@
                 })
             },
 
-            getCurrentUser: function (callback, forceRefresh) {
-                if (currentUser === null || forceRefresh) {
+            getCurrentUser: function (successCallback, errorCallback) {
+                // if (currentUser === null) {
                     services.get('/api/v1/user/me', data,function (response) {
-                        console.log(response)
                         if (response) {
-                            callback(response)
+                            console.log(response)
+                            successCallback(response.data)
                         }
                     })
                     // $http.get('/api/v1/user/me')
@@ -443,27 +443,37 @@
                     //         //angular.isFunction(callback) && callback(err);
                     //         document.location = "/"; // redirect to login
                     //     });
-                } else {
+                // } else {
                     // return angular.isFunction(callback) && callback(null, currentUser);
-                }
+                // }
             },
             getUser: function(){
                 return currentUser;
             },
 
-            getGroupsForCurrentUser: function (callback, forceRefresh) {
-                if (currentGroups === null || forceRefresh) {
-                    $http.get('/api/v1/user/groups')
-                        .then(function (response) {
-                            currentGroups = response.data;
-                            return angular.isFunction(callback) && callback(null, currentGroups);
-                        },function (err) {
-                            $log.error('Error getting current user\'s groups. ' + angular.toJson(err));
-                            return angular.isFunction(callback) && callback(err);
-                        });
-                } else {
-                    return angular.isFunction(callback) && callback(null, currentGroups);
-                }
+            getGroupsForCurrentUser: function (successCallback, errorCallback) {
+                services.get('/api/v1/user/groups', {}, function (response) {
+                    if (response) {
+                        currentGroups = response.data;
+                        return angular.isFunction(successCallback) && successCallback(null, currentGroups);
+                    }
+                }, function (error) {
+                    errorCallback(error)
+                    $log.error('Error getting current user\'s groups. ' + angular.toJson(error));
+                    return angular.isFunction(successCallback) && successCallback(error);
+                })
+                // if (currentGroups === null || forceRefresh) {
+                //     $http.get('/api/v1/user/groups')
+                //         .then(function (response) {
+                //             currentGroups = response.data;
+                //             return angular.isFunction(successCallback) && successCallback(null, currentGroups);
+                //         },function (err) {
+                //             $log.error('Error getting current user\'s groups. ' + angular.toJson(err));
+                //             return angular.isFunction(successCallback) && successCallback(err);
+                //         });
+                // } else {
+                //     return angular.isFunction(callback) && callback(null, currentGroups);
+                // }
             },
 
             isReadOnly: function () {
