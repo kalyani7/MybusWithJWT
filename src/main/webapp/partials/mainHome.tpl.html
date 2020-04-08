@@ -1,146 +1,145 @@
-<!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html lang="en" ng-app="myBus" ng-cloak>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Bus </title>
+<!--<!DOCTYPE html>-->
+<!--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>-->
+<!--<html lang="en" ng-app="myBus" ng-cloak>-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <title>My Bus </title>-->
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
+<!--    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">-->
+<!--    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">-->
 
-    <link rel="stylesheet" href="client/node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <%--<link rel="stylesheet" href="client/node_modules/bootstrap/dist/css/bootstrap-theme.css">--%>
-    <%--<script src="client/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>--%>
-    <link rel="stylesheet" href="client/node_modules/sweetalert/dist/sweetalert.css">
-    <link rel="stylesheet" href="client/node_modules/ng-table/bundles/ng-table.css">
-    <link rel="stylesheet" href="client/node_modules/ui-select/dist/select.css">
+<!--    <link rel="stylesheet" href="client/node_modules/bootstrap/dist/css/bootstrap.min.css">-->
+<!--    <%&#45;&#45;<link rel="stylesheet" href="client/node_modules/bootstrap/dist/css/bootstrap-theme.css">&#45;&#45;%>-->
+<!--    <%&#45;&#45;<script src="client/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>&#45;&#45;%>-->
+<!--    <link rel="stylesheet" href="client/node_modules/sweetalert/dist/sweetalert.css">-->
+<!--    <link rel="stylesheet" href="client/node_modules/ng-table/bundles/ng-table.css">-->
+<!--    <link rel="stylesheet" href="client/node_modules/ui-select/dist/select.css">-->
 
 
-    <link rel="stylesheet" href="client/css/select2.css">
-    <link href="client/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="client/js/s-chat/s-chat-support.css" rel="stylesheet">
-    <script src="client/js/s-chat/s-chat-support.js"></script>
-    <script src="client/lib/underscore-min-1.5.2.js"></script>
-    <script src="client/node_modules/jquery/dist/jquery.js"></script>
-    <script src="client/lib/jquery.table2excel.js"></script>
-    <script src="client/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="client/node_modules/angular/angular.js"></script>
-    <script src="client/node_modules/angular-animate/angular-animate.js"></script>
-    <script src="client/node_modules/ui-select/dist/select.js" type="text/javascript"></script>
-    <script src="client/node_modules/angular-sanitize/angular-sanitize.js" type="text/javascript"></script>
-    <script src="client/node_modules/angular-file-upload/dist/angular-file-upload.js" type="text/javascript"></script>
-    <script src="client/node_modules/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"
-            type="text/javascript"></script>
+<!--    <link rel="stylesheet" href="client/css/select2.css">-->
+<!--    <link href="client/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
+<!--    <link href="client/js/s-chat/s-chat-support.css" rel="stylesheet">-->
+<!--    <script src="client/js/s-chat/s-chat-support.js"></script>-->
+<!--    <script src="client/lib/underscore-min-1.5.2.js"></script>-->
+<!--    <script src="client/node_modules/jquery/dist/jquery.js"></script>-->
+<!--    <script src="client/lib/jquery.table2excel.js"></script>-->
+<!--    <script src="client/node_modules/bootstrap/dist/js/bootstrap.js"></script>-->
+<!--    <script src="client/node_modules/angular/angular.js"></script>-->
+<!--    <script src="client/node_modules/angular-animate/angular-animate.js"></script>-->
+<!--    <script src="client/node_modules/ui-select/dist/select.js" type="text/javascript"></script>-->
+<!--    <script src="client/node_modules/angular-sanitize/angular-sanitize.js" type="text/javascript"></script>-->
+<!--    <script src="client/node_modules/angular-file-upload/dist/angular-file-upload.js" type="text/javascript"></script>-->
+<!--    <script src="client/node_modules/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"-->
+<!--            type="text/javascript"></script>-->
 
-    <script src="client/node_modules/ng-file-upload/dist/ng-file-upload.js" type="text/javascript"></script>
+<!--    <script src="client/node_modules/ng-file-upload/dist/ng-file-upload.js" type="text/javascript"></script>-->
 
-    <script src="client/js/directives/menu.js"></script>
+<!--    <script src="client/js/directives/menu.js"></script>-->
 
-    <script src="client/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
-    <script src="client/node_modules/angular-strap/dist/angular-strap.js"></script>
-    <script src="client/node_modules/angular-strap/dist/angular-strap.tpl.min.js"></script>
-    <script src="client/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="client/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="client/node_modules/ng-table/bundles/ng-table.js"></script>
-    <script src="client/js/app.js"></script>
-    <script src="client/js/modules/usersModule.js"></script>
-    <script src="client/js/services/appConfigManager.js"></script>
-    <script src="client/js/modules/amenitiesModule.js"></script>
-    <script src="client/js/modules/cityModule.js"></script>
-    <script src="client/js/modules/vehicleModule.js"></script>
-    <script src="client/js/modules/branchOfficeModules.js"></script>
-    <script src="client/js/modules/serviceReportsModule.js"></script>
-    <script src="client/js/modules/paymentModule.js"></script>
-    <script src="client/js/modules/routeModule.js"></script>
-    <script src="client/js/modules/cancelModule.js"></script>
-    <script src="client/js/modules/roleModule.js"></script>
-    <script src="client/js/modules/agentModule.js"></script>
-    <script src="client/js/modules/dueReportModule.js"></script>
-    <script src="client/js/modules/serviceComboModule.js"></script>
-    <script src="client/js/modules/tripComboModule.js"></script>
-    <script src="client/js/modules/cashTransfersModule.js"></script>
-    <script src="client/js/modules/vehicleExpensesModule.js"></script>
-    <script src="client/js/modules/expensesIncomesReportsModule.js"></script>
-    <script src="client/js/modules/officeExpensesModule.js"></script>
-    <script src="client/js/services/paginationService.js"></script>
-    <script src="client/js/modules/returnTicketsModule.js"></script>
-    <script src="client/js/modules/bookingModule.js"></script>
-    <script src="client/js/modules/sequenceModule.js"></script>
-    <script src="client/js/modules/fuelExpenseReportModule.js"></script>
-    <script src="client/js/modules/invoiceModule.js"></script>
-    <script src="client/js/modules/verifyInvoiceModule.js"></script>
-    <script src="client/js/modules/gstFiltersModule.js"></script>
-    <script src="client/js/modules/suppliersModule.js"></script>
-    <script src="client/js/modules/tripReportsModule.js"></script>
-    <script src="client/js/modules/cargoBookingModule.js"></script>
-    <script src="client/js/modules/cargoBookingChartModule.js"></script>
-    <script src="client/js/modules/collectionZoneModule.js"></script>
-    <script src="client/js/modules/operatorAccountsModule.js"></script>
-    <script src="client/js/modules/staffModule.js"></script>
-    <script src="client/js/modules/cargoDashboardModule.js"></script>
-    <script src="client/js/modules/cargoBrachSummaryModule.js"></script>
-    <script src="client/js/modules/fullTripModule.js"></script>
-    <script src="client/js/modules/inventoriesModule.js"></script>
-    <script src="client/js/modules/jobsModule.js"></script>
-    <script src="client/js/modules/staffComplaintsModule.js"></script>
-    <script src="client/js/modules/remindersModule.js"></script>
-    <script src="client/js/modules/salaryReportModule.js"></script>
-    <script src="client/js/modules/dailyTripModule.js"></script>
-    <script src="client/js/modules/expenseModule.js"></script>
-    <script src="client/js/modules/headerNavBarhomeCtrl.js"></script>
-    <script src="client/js/modules/serviceConfigurationModule.js"></script>
-    <script src="client/js/directives/ng-really.js"></script>
-    <script src="client/js/directives/pwCheck.js"></script>
-    <script src="client/js/directives/stateOptions.js"></script>
-    <script src="client/js/directives/datePicker.js"></script>
-    <script src="client/js/directives/myMenu.js"></script>
-    <script src="client/js/directives/someDirectives.js"></script>
-    <script src="client/js/directives/fileUpload.js"></script>
-    <script src="client/js/modules/bankModule.js"></script>
-    <script src="client/js/modules/tripSheetModule.js"></script>
-    <script src="client/js/modules/documentsUploadModule.js"></script>
+<!--    <script src="client/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>-->
+<!--    <script src="client/node_modules/angular-strap/dist/angular-strap.js"></script>-->
+<!--    <script src="client/node_modules/angular-strap/dist/angular-strap.tpl.min.js"></script>-->
+<!--    <script src="client/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>-->
+<!--    <script src="client/node_modules/sweetalert/dist/sweetalert.min.js"></script>-->
+<!--    <script src="client/node_modules/ng-table/bundles/ng-table.js"></script>-->
+<!--    <script src="client/js/app.js"></script>-->
+<!--    <script src="client/js/modules/usersModule.js"></script>-->
+<!--    <script src="client/js/services/appConfigManager.js"></script>-->
+<!--    <script src="client/js/modules/amenitiesModule.js"></script>-->
+<!--    <script src="client/js/modules/cityModule.js"></script>-->
+<!--    <script src="client/js/modules/vehicleModule.js"></script>-->
+<!--    <script src="client/js/modules/branchOfficeModules.js"></script>-->
+<!--    <script src="client/js/modules/serviceReportsModule.js"></script>-->
+<!--    <script src="client/js/modules/paymentModule.js"></script>-->
+<!--    <script src="client/js/modules/routeModule.js"></script>-->
+<!--    <script src="client/js/modules/cancelModule.js"></script>-->
+<!--    <script src="client/js/modules/roleModule.js"></script>-->
+<!--    <script src="client/js/modules/agentModule.js"></script>-->
+<!--    <script src="client/js/modules/dueReportModule.js"></script>-->
+<!--    <script src="client/js/modules/serviceComboModule.js"></script>-->
+<!--    <script src="client/js/modules/tripComboModule.js"></script>-->
+<!--    <script src="client/js/modules/cashTransfersModule.js"></script>-->
+<!--    <script src="client/js/modules/vehicleExpensesModule.js"></script>-->
+<!--    <script src="client/js/modules/expensesIncomesReportsModule.js"></script>-->
+<!--    <script src="client/js/modules/officeExpensesModule.js"></script>-->
+<!--    <script src="client/js/services/paginationService.js"></script>-->
+<!--    <script src="client/js/modules/returnTicketsModule.js"></script>-->
+<!--    <script src="client/js/modules/bookingModule.js"></script>-->
+<!--    <script src="client/js/modules/sequenceModule.js"></script>-->
+<!--    <script src="client/js/modules/fuelExpenseReportModule.js"></script>-->
+<!--    <script src="client/js/modules/invoiceModule.js"></script>-->
+<!--    <script src="client/js/modules/verifyInvoiceModule.js"></script>-->
+<!--    <script src="client/js/modules/gstFiltersModule.js"></script>-->
+<!--    <script src="client/js/modules/suppliersModule.js"></script>-->
+<!--    <script src="client/js/modules/tripReportsModule.js"></script>-->
+<!--    <script src="client/js/modules/cargoBookingModule.js"></script>-->
+<!--    <script src="client/js/modules/cargoBookingChartModule.js"></script>-->
+<!--    <script src="client/js/modules/collectionZoneModule.js"></script>-->
+<!--    <script src="client/js/modules/operatorAccountsModule.js"></script>-->
+<!--    <script src="client/js/modules/staffModule.js"></script>-->
+<!--    <script src="client/js/modules/cargoDashboardModule.js"></script>-->
+<!--    <script src="client/js/modules/cargoBrachSummaryModule.js"></script>-->
+<!--    <script src="client/js/modules/fullTripModule.js"></script>-->
+<!--    <script src="client/js/modules/inventoriesModule.js"></script>-->
+<!--    <script src="client/js/modules/jobsModule.js"></script>-->
+<!--    <script src="client/js/modules/staffComplaintsModule.js"></script>-->
+<!--    <script src="client/js/modules/remindersModule.js"></script>-->
+<!--    <script src="client/js/modules/salaryReportModule.js"></script>-->
+<!--    <script src="client/js/modules/dailyTripModule.js"></script>-->
+<!--    <script src="client/js/modules/expenseModule.js"></script>-->
+<!--    <script src="client/js/modules/headerNavBarhomeCtrl.js"></script>-->
+<!--    <script src="client/js/modules/serviceConfigurationModule.js"></script>-->
+<!--    <script src="client/js/directives/ng-really.js"></script>-->
+<!--    <script src="client/js/directives/pwCheck.js"></script>-->
+<!--    <script src="client/js/directives/stateOptions.js"></script>-->
+<!--    <script src="client/js/directives/datePicker.js"></script>-->
+<!--    <script src="client/js/directives/myMenu.js"></script>-->
+<!--    <script src="client/js/directives/someDirectives.js"></script>-->
+<!--    <script src="client/js/directives/fileUpload.js"></script>-->
+<!--    <script src="client/js/modules/bankModule.js"></script>-->
+<!--    <script src="client/js/modules/tripSheetModule.js"></script>-->
+<!--    <script src="client/js/modules/documentsUploadModule.js"></script>-->
 
-    <script src="client/js/filters/arrayNoneFilter.js"></script>
-    <script src="client/js/filters/range.js"></script>
-    <script src="client/js/modules/preferredStaffModule.js"></script>
-    <script src="client/js/modules/busLayoutModule.js"></script>
-    <script src="client/js/modules/searchServiceModule.js"></script>
-    <script src="client/js/providers/stateValueProvider.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="client/css/ionicons.min.css" type="text/css">
-    <script src="client/js/filters/someFilters.js" type="text/javascript"></script>
+<!--    <script src="client/js/filters/arrayNoneFilter.js"></script>-->
+<!--    <script src="client/js/filters/range.js"></script>-->
+<!--    <script src="client/js/modules/preferredStaffModule.js"></script>-->
+<!--    <script src="client/js/modules/busLayoutModule.js"></script>-->
+<!--    <script src="client/js/modules/searchServiceModule.js"></script>-->
+<!--    <script src="client/js/providers/stateValueProvider.js" type="text/javascript"></script>-->
+<!--    <link rel="stylesheet" href="client/css/ionicons.min.css" type="text/css">-->
+<!--    <script src="client/js/filters/someFilters.js" type="text/javascript"></script>-->
 
-    <link rel="stylesheet" href="client/css/app.css" type="text/css">
+<!--    <link rel="stylesheet" href="client/css/app.css" type="text/css">-->
 
-    <script src="client/node_modules/moment/moment.js"></script>
-    <script src="client/node_modules/moment/locale/de.js"></script>
-    <script src="client/node_modules/angular-moment/angular-moment.js"></script>
+<!--    <script src="client/node_modules/moment/moment.js"></script>-->
+<!--    <script src="client/node_modules/moment/locale/de.js"></script>-->
+<!--    <script src="client/node_modules/angular-moment/angular-moment.js"></script>-->
 
-    <script src="client/node_modules/d3/d3.min.js"></script>
-    <script src="client/node_modules/d3/d3.js"></script>
-    <script src="client/node_modules/n3-charts/build/LineChart.js"></script>
-    <link rel="stylesheet" href="client/node_modules/n3-charts/build/LineChart.css">
+<!--    <script src="client/node_modules/d3/d3.min.js"></script>-->
+<!--    <script src="client/node_modules/d3/d3.js"></script>-->
+<!--    <script src="client/node_modules/n3-charts/build/LineChart.js"></script>-->
+<!--    <link rel="stylesheet" href="client/node_modules/n3-charts/build/LineChart.css">-->
 
-    <script>
-        sChat.init('ZTmyJTKcxMoHTTshK', {
-            ssl: true,
-            welcomeMessage: 'Hi, how can I help you?',
-            hostName: 'www.simplechat.support',
-            labels: {
-                sendPlaceholder: 'Send the message...',
-                headerTitle: 'Welcome to Srikrishna Travels!'
-            }
-        });
-    </script>
-</head>
-<body>
-<div class="loader" ng-show="loading">
-    <img src="client/images/Spinner.svg">
-</div>
+<!--    <script>-->
+<!--        sChat.init('ZTmyJTKcxMoHTTshK', {-->
+<!--            ssl: true,-->
+<!--            welcomeMessage: 'Hi, how can I help you?',-->
+<!--            hostName: 'www.simplechat.support',-->
+<!--            labels: {-->
+<!--                sendPlaceholder: 'Send the message...',-->
+<!--                headerTitle: 'Welcome to Srikrishna Travels!'-->
+<!--            }-->
+<!--        });-->
+<!--    </script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="loader" ng-show="loading">-->
+<!--    <img src="client/images/Spinner.svg">-->
+<!--</div>-->
 
-<nav class="navbar navbar-cus navbar-fixed-top nav-box-shadow" role="navigation"
-     ng-controller="headerNavBarhomeCtrl">
+<nav class="navbar navbar-cus navbar-fixed-top nav-box-shadow" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -232,26 +231,22 @@
 
 <div id="wrapper" class="toggled">
 
-    <div id="sidebar-wrapper" class="nav-side-menu" ng-controller="MenuBarController">
+    <div id="sidebar-wrapper" class="nav-side-menu">
         <div class="menu-list">
             <ul id="menu-content" class="menu-content ">
                 <li data-target="#cargo" class="sidebar-dropdown" ng-show="canAccessModule('cargodashboard')">
                     <a>
                         <i class="fa fa-globe fa-lg"></i>
                         <span> Cargo </span>
-                        <%--<span class="arrow"></span>--%>
+<!--                        <span class="arrow"></span>-->
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="cargo">
                             <my-menu url="cargodashboard" label="CargoDashBoard"></my-menu>
-                            <my-menu url="newBooking" label="NewBooking"
-                                     ng-if="canAccessModule('cargodashboard')"></my-menu>
-                            <my-menu url="cargoBookings" label="CargoBookings"
-                                     ng-if="canAccessModule('cargobookings')"></my-menu>
-                            <my-menu url="cargobookingchart" label="CargoBookingChart"
-                                     ng-if="canAccessModule('cargobookings')"></my-menu>
-                            <my-menu url="branchbookingsummary" label="BranchBookingSummary"
-                                     ng-if="canAccessModule('branchbookingsummary')"></my-menu>
+                            <my-menu url="newBooking" label="NewBooking" ng-if="canAccessModule('cargodashboard')"></my-menu>
+                            <my-menu url="cargoBookings" label="CargoBookings" ng-if="canAccessModule('cargobookings')"></my-menu>
+                            <my-menu url="cargobookingchart" label="CargoBookingChart" ng-if="canAccessModule('cargobookings')"></my-menu>
+                            <my-menu url="branchbookingsummary" label="BranchBookingSummary" ng-if="canAccessModule('branchbookingsummary')"></my-menu>
                             <my-menu url="loadingsheet" label="LoadingSheet" ng-if="canAccessModule('cargobookings')"></my-menu>
                             <my-menu url="unloadingsheet" label="UnloadingSheet" ng-if="canAccessModule('cargobookings')"></my-menu>
                             <my-menu url="deliverysheet" label="DeliverySheet" ng-if="canAccessModule('cargobookings')"></my-menu>
@@ -264,7 +259,7 @@
                     <a>
                         <i class="fa fa-pie-chart fa-lg"></i>
                         <span> Analytics </span>
-                        <%--<span class="arrow"></span>--%>
+<!--                        <span class="arrow"></span>-->
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="analytics">
@@ -278,7 +273,7 @@
                     <a>
                         <i class="fa  fa-universal-access fa-lg"></i>
                         <span> Master </span>
-                        <%--<span class="arrow"></span>--%>
+<!--                        <span class="arrow"></span>-->
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="master">
@@ -326,7 +321,7 @@
                     <a>
                         <i class="fa fa-book fa-lg"></i>
                         <span> Reports </span>
-                        <%--<span class="arrow"></span>--%>
+<!--                        <span class="arrow"></span>-->
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="reports">
@@ -376,7 +371,7 @@
                     <a>
                         <i class="fa fa-tasks fa-lg"></i>
                         <span> Check List</span>
-                        <%--<span class="arrow"></span>--%>
+<!--                        <span class="arrow"></span>-->
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="checklist">
@@ -393,7 +388,7 @@
                     <a>
                         <i class="fa fa-user fa-lg"></i>
                         <span> Profile </span>
-                        <%--<span class="arrow"></span>--%>
+<!--                        <span class="arrow"></span>-->
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="profile">
@@ -406,7 +401,7 @@
                     <a>
                         <i class="fa fa-database fa-lg"></i>
                         <span> Maintenance </span>
-                        <%--<span class="arrow"></span>--%>
+<!--                        <span class="arrow"></span>-->
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="maintenance">
@@ -425,7 +420,7 @@
                     <a>
                         <i class="fa fa-database fa-lg"></i>
                         <span> Config </span>
-                        <%--<span class="arrow"></span>--%>
+<!--                        <span class="arrow"></span>-->
                     </a>
                     <div class="sidebar-submenu">
                         <ul id="config">
@@ -613,18 +608,18 @@
 
     </div>
     <!-- /#sidebar-wrapper -->
-    <%--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="position: relative;top: 65px;z-index: 2;"><i class="fa fa-bars fa-2x toggle-btn"></i> </a>--%>
+<!--    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="position: relative;top: 65px;z-index: 2;"><i class="fa fa-bars fa-2x toggle-btn"></i> </a>-->
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <main class="content">
             <div class="container-fluid">
-                <%--<div class="row">--%>
+                <div class="row">
                 <breadscrumb class="ng-scope">
                     <div class="breadcrumbs printhide" ng-click="breadscrumb_print_fn()">
                         <ui-view>Select from Menu</ui-view>
                     </div>
                 </breadscrumb>
-                <%--</div>--%>
+                </div>
             </div>
         </main>
     </div>
@@ -668,5 +663,5 @@
     });
 </script>
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->

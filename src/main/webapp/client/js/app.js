@@ -22,6 +22,7 @@ myBus.config(['$stateProvider', '$urlRouterProvider',
             url: '/home',
             templateUrl: 'partials/mainHome.tpl.html',
             controller: 'HomeController'
+            // controller: 'headerNavBarhomeCtrl'
         }).state('home.newbooking', {
                 level: 1,
                 url: '/newbooking',
@@ -728,19 +729,20 @@ var busServiceEditResolver = {
 };
 
 
-myBus.run(function ($rootScope, $state, $location, $cookies, appConfigManager, userManager) {
+myBus.run(function ($rootScope, $state, $location, $cookies, appConfigManager, userManager, opratingAccountsManager) {
     if ($cookies.get('token')) {
         $rootScope.menus = [];
         appConfigManager.fetchAppSettings(function (err, cfg) {
             $rootScope.appConfigManager = appConfigManager;
         }, true);
-        userManager.getCurrentUser(function (err, data) {
-            if (!err) {
+        userManager.getCurrentUser(function (response) {
+            if (response) {
                 userManager.getGroupsForCurrentUser();
-                myBus.constant('currentuser', data);
-                $rootScope.currentuser = data;
+                myBus.constant('currentuser', response);
+                $rootScope.currentuser = response;
                 $rootScope.$broadcast("currentuserLoaded");
                 opratingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
+                    console.log(operatorAccount, '1234567890')
                     $rootScope.operatorAccount = operatorAccount;
                 });
             }

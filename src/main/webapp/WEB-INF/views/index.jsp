@@ -42,7 +42,9 @@
     <script src="client/node_modules/ng-file-upload/dist/ng-file-upload.js" type="text/javascript"></script>
 
     <script src="client/js/services/appConfigManager.js"></script>
+    <script src="client/js/directives/myMenu.js"></script>
     <script src="client/js/modules/loginModule.js"></script>
+    <script src="client/js/modules/homeModule.js"></script>
     <script src="client/js/modules/usersModule.js"></script>
     <script src="client/js/modules/amenitiesModule.js"></script>
     <script src="client/js/modules/cityModule.js"></script>

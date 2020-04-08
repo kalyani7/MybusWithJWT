@@ -92,7 +92,7 @@ angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
         });
 	}
 })
-.factory("opratingAccountsManager",function($rootScope,$http){
+.factory("opratingAccountsDataManager",function($rootScope,$http){
 	var accounts = [];
 	return {
         getAccounts: function (callback) {
