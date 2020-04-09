@@ -1,106 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="784cad37-5bc2-419d-9551-4c8e7f7035e1" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mybus/service/SchedulerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mybus/service/SchedulerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/acorn" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/acorn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/commonize" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/commonize" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/envify" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/envify" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/esparse" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/esparse" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/esvalidate" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/esvalidate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/jstransform" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/jstransform" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/loose-envify" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/loose-envify" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/mkdirp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/mkdirp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/dist/acorn.es.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/dist/acorn.es.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/dist/acorn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/dist/acorn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/amdefine/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/amdefine/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/asap/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/asap/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ast-types/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ast-types/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ast-types/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ast-types/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/balanced-match/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/balanced-match/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.codeclimate.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.codeclimate.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/brace-expansion/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/brace-expansion/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/commander/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/commander/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/commoner/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/commoner/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/concat-map/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/concat-map/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/concat-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/concat-map/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/d3/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/d3/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/d3/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/d3/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/defined/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/defined/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/defined/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/defined/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/detective/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/detective/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/detective/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/detective/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/envify/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/envify/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/esprima-fb/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/esprima-fb/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/fbjs/module-map.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/fbjs/module-map.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/fbjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/fbjs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/glob/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/glob/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/graceful-fs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/graceful-fs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/big5-added.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/big5-added.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp936.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp936.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp949.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp949.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp950.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp950.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/eucjp.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/eucjp.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/gb18030-ranges.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/gb18030-ranges.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/gbk-added.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/gbk-added.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/shiftjis.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/shiftjis.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/inflight/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/inflight/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/inherits/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/inherits/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/js-tokens/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/js-tokens/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/jstransform/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/jstransform/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/jstransform/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/jstransform/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/loose-envify/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/loose-envify/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimatch/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimatch/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimist/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimist/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimist/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimist/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/mkdirp/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/mkdirp/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/mkdirp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/mkdirp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/object-assign/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/object-assign/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/once/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/once/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/path-is-absolute/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/path-is-absolute/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/private/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/private/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/promise/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/promise/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/q/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/q/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/react-dom/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/react-dom/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/react/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/.bin/esparse" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/.bin/esparse" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/.bin/esvalidate" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/.bin/esvalidate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/esprima/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/esprima/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/source-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/source-map/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/safer-buffer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/safer-buffer/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/source-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/source-map/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/through/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/through/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/through/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/through/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/bower.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/browser-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/browser-test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/cpu-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/cpu-test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/device-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/device-test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/engine-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/engine-test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/mediaplayer-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/mediaplayer-test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/os-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/os-test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/whatwg-fetch/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/whatwg-fetch/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/wrappy/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/wrappy/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-    </list>
+    <list default="true" id="784cad37-5bc2-419d-9551-4c8e7f7035e1" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -157,16 +58,25 @@
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="517">
-              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/client/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="584">
-              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="340">
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="157">
+              <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -196,6 +106,7 @@
         <option value="$PROJECT_DIR$/src/main/webapp/client/js/app.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/client/package.json" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -250,57 +161,6 @@
               <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -509,12 +369,20 @@
       <workItem from="1577793584476" duration="17514000" />
       <workItem from="1580663198552" duration="1337000" />
       <workItem from="1586336975082" duration="319000" />
-      <workItem from="1586405736944" duration="1416000" />
+      <workItem from="1586405736944" duration="1656000" />
     </task>
+    <task id="LOCAL-00001" summary="Deleting node_modules">
+      <created>1586421725910</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586421725910</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1416000" />
+    <option name="totallyTimeSpent" value="1656000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="816" extended-state="0" />
@@ -536,10 +404,10 @@
       <window_info anchor="bottom" id="Java Enterprise" />
       <window_info anchor="right" id="Capture Analysis" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" />
+      <window_info active="true" anchor="bottom" id="Version Control" visible="true" weight="0.32884097" />
       <window_info anchor="bottom" id="Spring" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="right" id="Bean Validation" />
       <window_info id="Web" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -593,6 +461,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Deleting node_modules" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deleting node_modules" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1554" height="216" key="GridCell.Tab.0.bottom" timestamp="1586333020061">
@@ -680,14 +552,21 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="517">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/client/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="584">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        <state relative-caret-position="340">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
         </state>
       </provider>
     </entry>
