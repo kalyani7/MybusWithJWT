@@ -62,7 +62,7 @@ public class SchedulerService {
     @Autowired
     private SendTaxInvoice sendTaxInvoice;
 
-    @Scheduled(cron = "0 0 3 * * *")
+    //@Scheduled(cron = "0 0 3 * * *")
     //@Scheduled(fixedDelay = 50000)
     public void checkExpiryDates () {
         logger.info("checking expiry date..." + systemProperties.getProperty(SystemProperties.SysProps.EXPIRATION_BUFFER));
@@ -88,7 +88,7 @@ public class SchedulerService {
         }
     }
 
-    @Scheduled(cron = "0 0 2 * * *")
+    //@Scheduled(cron = "0 0 2 * * *")
     //@Scheduled(fixedDelay = 50000)
     public void checkServiceReportsReview () throws ParseException {
         List<OperatorAccount> operatorAccounts = IteratorUtils.toList(operatorAccountDAO.findAll().iterator());
@@ -148,7 +148,7 @@ public class SchedulerService {
     }
 
 
-    @Scheduled(cron = "*/10 * * * * *")
+   // @Scheduled(cron = "*/10 * * * * *")
     public void sendNewYearGreeting() {
         if(systemProperties.getBooleanProperty(SystemProperties.SysProps.SEND_EMAIL_ENABLED)){
             List<OperatorAccount> operatorAccounts = operatorAccountMongoDAO.getOperatorAccountsSendEmailTrue();
@@ -162,7 +162,7 @@ public class SchedulerService {
             });
         }
     }
-    @Scheduled(cron = "0 1 1 * * *")
+    //@Scheduled(cron = "0 1 1 * * *")
     public void saveCargoBookingDailyTotals()throws ParseException{
             SimpleDateFormat formatter=new SimpleDateFormat("dd-MM-yyyy");
         List<Document> results= cargoBookingMongoDAO.groupByOffice();

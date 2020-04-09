@@ -2,7 +2,7 @@
 /*global angular, _*/
 
 angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
-.controller("OperatorAccountsController",function($rootScope, $scope, $uibModal, $filter, $log, $state ,NgTableParams,opratingAccountsManager){
+.controller("OperatorAccountsController",function($rootScope, $scope, $uibModal, $filter, $log, $state ,NgTableParams,operatingAccountsManager){
 	$scope.headline = "OperatorAccounts";
     $scope.loading = false;
     $scope.accounts = [];
@@ -10,7 +10,7 @@ angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
     $scope.count = 0;
     var loadTableData = function (tableParams) {
 		$scope.loading = true;
-        opratingAccountsManager.getAccounts( function(response){
+        operatingAccountsManager.getAccounts( function(response){
 			if(angular.isArray(response)){
 				$scope.loading = false;
 				$scope.accounts = response;
@@ -52,11 +52,11 @@ angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
     };
 })
 // ========================== Modal - Update Amenity  =================================
-    .controller('AddAccountController', function ($scope, $rootScope, $uibModal, $http, $state , opratingAccountsManager) {
+    .controller('AddAccountController', function ($scope, $rootScope, $uibModal, $http, $state , operatingAccountsManager) {
         $scope.account = {};
         $scope.headline = "Add Operator Account";
         $scope.saveAccount =function() {
-            opratingAccountsManager.saveAccount($scope.account, function (res) {
+            operatingAccountsManager.saveAccount($scope.account, function (res) {
                 swal("Great", "Your account has been sucessfully added", "success");
                 $state.go('operatoraccounts');
             }, function (error) {
@@ -69,11 +69,11 @@ angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
     })
 
 
-.controller('EditAccountController', function ($scope, $rootScope, $uibModal, $http, $state, opratingAccountsManager, $stateParams) {
+.controller('EditAccountController', function ($scope, $rootScope, $uibModal, $http, $state, operatingAccountsManager, $stateParams) {
 	$scope.account = {};
     $scope.headline = "Edit Operator Account";
 	$scope.saveAccount =function(){
-        opratingAccountsManager.saveAccount($scope.account,function(res){
+        operatingAccountsManager.saveAccount($scope.account,function(res){
             swal("Great","Your account has been sucessfully added","success");
             $state.go('operatoraccounts');
         }, function (error) {
@@ -87,12 +87,12 @@ angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
      var accountId = $stateParams.id;
 
     if(accountId){
-        opratingAccountsManager.getAccount(accountId,function(data){
+        operatingAccountsManager.getAccount(accountId,function(data){
             $scope.account = data;
         });
 	}
 })
-.factory("opratingAccountsDataManager",function($rootScope,$http){
+.factory("operatingAccountsManager",function($rootScope,$http){
 	var accounts = [];
 	return {
         getAccounts: function (callback) {

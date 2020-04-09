@@ -2,37 +2,312 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="784cad37-5bc2-419d-9551-4c8e7f7035e1" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mybus/service/SchedulerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mybus/service/SchedulerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/directives/myMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/directives/myMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/headerNavBarhomeCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/headerNavBarhomeCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/homeModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/homeModule.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/usersModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/usersModule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/mainHome.tpl.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/mainHome.tpl.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/acorn" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/acorn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/commonize" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/commonize" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/envify" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/envify" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/esparse" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/esparse" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/esvalidate" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/esvalidate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/jstransform" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/jstransform" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/loose-envify" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/loose-envify" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/mkdirp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/.bin/mkdirp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/dist/acorn.es.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/dist/acorn.es.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/dist/acorn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/dist/acorn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/acorn/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/amdefine/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/amdefine/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/asap/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/asap/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ast-types/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ast-types/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ast-types/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ast-types/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/balanced-match/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/balanced-match/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.codeclimate.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.codeclimate.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/base62/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/brace-expansion/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/brace-expansion/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/commander/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/commander/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/commoner/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/commoner/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/concat-map/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/concat-map/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/concat-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/concat-map/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/d3/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/d3/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/d3/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/d3/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/defined/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/defined/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/defined/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/defined/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/detective/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/detective/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/detective/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/detective/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/envify/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/envify/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/esprima-fb/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/esprima-fb/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/fbjs/module-map.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/fbjs/module-map.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/fbjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/fbjs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/glob/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/glob/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/graceful-fs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/graceful-fs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/big5-added.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/big5-added.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp936.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp936.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp949.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp949.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp950.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/cp950.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/eucjp.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/eucjp.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/gb18030-ranges.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/gb18030-ranges.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/gbk-added.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/gbk-added.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/shiftjis.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/encodings/tables/shiftjis.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/iconv-lite/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/inflight/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/inflight/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/inherits/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/inherits/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/js-tokens/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/js-tokens/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/jstransform/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/jstransform/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/jstransform/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/jstransform/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/loose-envify/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/loose-envify/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimatch/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimatch/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimist/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimist/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimist/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/minimist/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/mkdirp/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/mkdirp/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/mkdirp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/mkdirp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/object-assign/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/object-assign/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/once/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/once/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/path-is-absolute/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/path-is-absolute/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/private/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/private/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/promise/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/promise/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/q/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/q/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/react-dom/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/react-dom/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/react/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/.bin/esparse" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/.bin/esparse" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/.bin/esvalidate" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/.bin/esvalidate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/esprima/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/esprima/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/source-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/node_modules/source-map/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/recast/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/safer-buffer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/safer-buffer/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/source-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/source-map/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/through/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/through/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/through/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/through/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/browser-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/browser-test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/cpu-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/cpu-test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/device-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/device-test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/engine-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/engine-test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/mediaplayer-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/mediaplayer-test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/os-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/ua-parser-js/test/os-test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/whatwg-fetch/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/whatwg-fetch/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/node_modules/wrappy/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/node_modules/wrappy/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="SchedulerService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mybus/service/SchedulerService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="164" column="6" selection-start-line="164" selection-start-column="6" selection-end-line="164" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="operatorAccountsModule.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="44" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="13374">
+              <caret line="743" column="40" selection-start-line="743" selection-start-column="40" selection-end-line="743" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.tpl.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.tpl.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="home.tpl.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/home.tpl.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="517">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="584">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>operatorAccountsModule</find>
+      <find>opratingAccountsManager</find>
+      <find>opera</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/mybus/service/SchedulerService.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/client/js/app.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/client/package.json" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
   </component>
   <component name="PhpServers">
     <servers />
   </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="816" />
+  </component>
   <component name="ProjectId" id="1aFglFtWF6sCvhMEs7711QjCpT6" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <autoscrollFromSource ProjectPane="true" />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -40,10 +315,11 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="SMS&#9;PSI&#9;JAVA://com.mybus.service.SMSManager&#10;vehicle&#9;PSI&#9;JAVA://com.mybus.controller.VehicleController&#10;Schedu&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/java/com/mybus/service/SchedulerService.java&#10;branch&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/webapp/client/js/modules/branchOfficeModules.js&#10;BranchOff&#9;PSI&#9;JAVA://com.mybus.controller.BranchOfficeController&#10;SchedulerService&#9;PSI&#9;JAVA://com.mybus.service.SchedulerService&#10;home&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/webapp/partials/home.tpl.html&#10;User&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/java/com/mybus/model/User.java" />
+    <property name="SearchEverywhereHistoryKey" value="sche&#9;PSI&#9;JAVA://com.mybus.service.SchedulerService&#10;SMS&#9;PSI&#9;JAVA://com.mybus.service.SMSManager&#10;vehicle&#9;PSI&#9;JAVA://com.mybus.controller.VehicleController&#10;Schedu&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/java/com/mybus/service/SchedulerService.java&#10;branch&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/webapp/client/js/modules/branchOfficeModules.js&#10;BranchOff&#9;PSI&#9;JAVA://com.mybus.controller.BranchOfficeController&#10;SchedulerService&#9;PSI&#9;JAVA://com.mybus.service.SchedulerService&#10;home&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/webapp/partials/home.tpl.html&#10;User&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/java/com/mybus/model/User.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="eu.ydp.idea.ts.spec.generator.settings.spec.template" value="import {$ClassName$} from '$TestsRelativePath$../src/$classRelativePath$/$ClassName$';&#10;&#10;describe('$ClassName$', () =&gt; {&#10;  let $ObjName$:$ClassName$;&#10;&#10;  beforeEach(() =&gt; {&#10;    $ObjName$ = new $ClassName$();&#10;  });&#10;&#10;  describe('', () =&gt; {&#10;    it('', () =&gt; {&#10;      // given&#10;&#10;      // when&#10;&#10;      // then&#10;    });&#10;  });&#10;});&#10;" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="$USER_HOME$/n/bin/node" />
@@ -64,17 +340,41 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager" selected="Maven.spring">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
+      <method>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+      <method>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
@@ -101,23 +401,93 @@
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
-      <method v="2" />
     </configuration>
     <configuration name="MyBusApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="MybusWithJWT" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.mybus.MyBusApplication" />
-      <method v="2">
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+      <method>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_regexPattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Twisted Trial">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <list>
       <item itemvalue="Maven.spring" />
@@ -139,11 +509,90 @@
       <workItem from="1577793584476" duration="17514000" />
       <workItem from="1580663198552" duration="1337000" />
       <workItem from="1586336975082" duration="319000" />
+      <workItem from="1586405736944" duration="1416000" />
     </task>
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1416000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="816" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info id="Capture Tool" />
+      <window_info id="Designer" />
+      <window_info anchor="right" id="Database" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="UI Designer" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39892185" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info id="Image Layers" />
+      <window_info anchor="bottom" id="Java Enterprise" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Spring" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info anchor="right" id="Bean Validation" />
+      <window_info id="Web" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Designer" order="0" />
+      <window_info anchor="right" id="Palette" order="0" />
+      <window_info anchor="bottom" id="Run" order="8" />
+      <window_info anchor="bottom" id="Spring" order="0" />
+      <window_info id="Image Layers" order="1" />
+      <window_info anchor="right" id="Commander" order="8" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="9" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="1" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="10" weight="0.25" />
+      <window_info anchor="bottom" id="Java Enterprise" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="4" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="5" />
+      <window_info anchor="right" id="Maven Projects" order="2" />
+      <window_info anchor="bottom" id="Find" order="7" />
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Message" order="6" />
+      <window_info id="Web" order="5" side_tool="true" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Debug" order="9" visible="true" weight="0.39892185" />
+      <window_info anchor="right" id="Bean Validation" order="7" />
+    </layout-to-restore>
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1554" height="216" key="GridCell.Tab.0.bottom" timestamp="1586333020061">
@@ -185,15 +634,63 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/mybus/service/VehicleManager.java</url>
           <line>168</line>
+          <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/mybus/dao/impl/VehicleMongoDAO.java</url>
           <line>70</line>
+          <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mybus/service/SchedulerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="164" column="6" selection-start-line="164" selection-start-column="6" selection-end-line="164" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13374">
+          <caret line="743" column="40" selection-start-line="743" selection-start-column="40" selection-end-line="743" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.tpl.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/home.tpl.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="44" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="584">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>

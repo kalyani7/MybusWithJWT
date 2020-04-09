@@ -729,7 +729,7 @@ var busServiceEditResolver = {
 };
 
 
-myBus.run(function ($rootScope, $state, $location, $cookies, appConfigManager, userManager, opratingAccountsManager) {
+myBus.run(function ($rootScope, $state, $location, $cookies, appConfigManager, userManager, operatingAccountsManager) {
     if ($cookies.get('token')) {
         $rootScope.menus = [];
         appConfigManager.fetchAppSettings(function (err, cfg) {
@@ -741,7 +741,7 @@ myBus.run(function ($rootScope, $state, $location, $cookies, appConfigManager, u
                 myBus.constant('currentuser', response);
                 $rootScope.currentuser = response;
                 $rootScope.$broadcast("currentuserLoaded");
-                opratingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
+                operatingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
                     console.log(operatorAccount, '1234567890')
                     $rootScope.operatorAccount = operatorAccount;
                 });

@@ -30,6 +30,8 @@
     <script src="client/assets-new/js/jquery.flexslider.js"></script>
     <script src="client/assets-new/js/script.js"></script>
     <script src="client/node_modules/ng-table/bundles/ng-table.js"></script>
+    <script src="client/js/modules/operatorAccountsModule.js"></script>
+
     <script src="client/js/app.js"></script>
     <script src="client/js/modules/service.js"></script>
 
@@ -74,7 +76,6 @@
     <script src="client/js/modules/cargoBookingModule.js"></script>
     <script src="client/js/modules/cargoBookingChartModule.js"></script>
     <script src="client/js/modules/collectionZoneModule.js"></script>
-    <script src="client/js/modules/operatorAccountsModule.js"></script>
     <script src="client/js/modules/staffModule.js"></script>
     <script src="client/js/modules/cargoDashboardModule.js"></script>
     <script src="client/js/modules/cargoBrachSummaryModule.js"></script>
