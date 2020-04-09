@@ -4,7 +4,7 @@
 "use strict";
 /*global angular, _*/
 
-angular.module('myBus.dueReportModule', ['ngTable', 'ngAnimate', 'ui.bootstrap'])
+angular.module('myBus.dueReportModule', ['ngTable','ui.bootstrap'])
     .controller('DueReportController', function($scope, dueReportManager, NgTableParams, $filter, $location, userManager) {
         $scope.headline = "Due Report";
         $scope.currentPageOfDues = [];

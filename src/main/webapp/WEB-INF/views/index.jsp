@@ -9,14 +9,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>SriKrishna Travels</title>
-
     <link href="client/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="client/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="client/assets-new/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="client/css/ionicons.min.css" type="text/css">
-    <link rel="stylesheet" href="client/assets-new/css/owl.carousel.css" type="text/css">
-    <link rel="stylesheet" href="client/assets-new/css/owl.theme.css" type="text/css">
-    <link rel="stylesheet" href="client/assets-new/css/flexslider.css" type="text/css">
-    <link rel="stylesheet" href="client/assets-new/css/main.css" type="text/css">
     <link rel="stylesheet" href="client/css/app.css" type="text/css">
     <link rel="stylesheet" href="client/node_modules/sweetalert/dist/sweetalert.css">
 
@@ -24,16 +20,14 @@
     <script src="client/node_modules/jquery/dist/jquery.js"></script>
     <script src="client/node_modules/angular/angular.js"></script>
     <script src="client/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="client/assets-new/js/menu_jquery.js" type="text/javascript"></script>
-    <script src="client/assets-new/js/bootstrap.min.js"></script>
-    <script src="client/assets-new/js/owl.carousel.min.js"></script>
-    <script src="client/assets-new/js/jquery.flexslider.js"></script>
-    <script src="client/assets-new/js/script.js"></script>
     <script src="client/node_modules/ng-table/bundles/ng-table.js"></script>
+    <script src="client/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+
     <script src="client/js/modules/operatorAccountsModule.js"></script>
 
     <script src="client/js/app.js"></script>
     <script src="client/js/modules/service.js"></script>
+    <script src="client/js/modules/headerNavBarhomeCtrl.js"></script>
 
     <link rel="stylesheet" href="client/node_modules/ui-select/dist/select.css">
     <script src="client/node_modules/angular-cookies/angular-cookies.min.js"></script>
@@ -51,6 +45,7 @@
     <script src="client/js/modules/amenitiesModule.js"></script>
     <script src="client/js/modules/cityModule.js"></script>
     <script src="client/js/modules/vehicleModule.js"></script>
+    <script src="client/js/modules/branchOfficeModules.js"></script>
     <script src="client/js/modules/serviceReportsModule.js"></script>
     <script src="client/js/modules/paymentModule.js"></script>
     <script src="client/js/modules/routeModule.js"></script>
@@ -64,6 +59,7 @@
     <script src="client/js/modules/vehicleExpensesModule.js"></script>
     <script src="client/js/modules/expensesIncomesReportsModule.js"></script>
     <script src="client/js/modules/officeExpensesModule.js"></script>
+    <script src="client/js/services/paginationService.js"></script>
     <script src="client/js/modules/returnTicketsModule.js"></script>
     <script src="client/js/modules/bookingModule.js"></script>
     <script src="client/js/modules/sequenceModule.js"></script>
@@ -96,6 +92,15 @@
     <script src="client/js/modules/searchServiceModule.js"></script>
     <script src="client/js/modules/homeModule.js"></script>
 
+
+    <script src="client/node_modules/moment/moment.js"></script>
+    <script src="client/node_modules/moment/locale/de.js"></script>
+    <script src="client/node_modules/angular-moment/angular-moment.js"></script>
+
+    <script src="client/node_modules/d3/d3.min.js"></script>
+    <script src="client/node_modules/d3/d3.js"></script>
+    <script src="client/node_modules/n3-charts/build/LineChart.js"></script>
+    <link rel="stylesheet" href="client/node_modules/n3-charts/build/LineChart.css">
 
 </head>
 <body ng-cloak>

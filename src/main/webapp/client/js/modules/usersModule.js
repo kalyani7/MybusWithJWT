@@ -1,13 +1,13 @@
 "use strict";
 /*global angular, _*/
 
-// angular.module('myBus.userModule', ['ngTable', 'ui.bootstrap'])
+angular.module('myBus.userModule', ['ngTable'])
 
-  //
-  // ============================= List All ===================================
-  //
-    myBus.controller('UsersController', function($scope,$state, $http, $log, $filter, NgTableParams, $location,userManager, roleManager) {
-      $scope.headline = "Users";
+//
+// ============================= List All ===================================
+//
+    .controller('UsersController', function($scope,$state, $http, $log, $filter, NgTableParams, $location,userManager, roleManager) {
+        $scope.headline = "Users";
       //$scope.users = [];
       $scope.userCount = 0;
 

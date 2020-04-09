@@ -1,7 +1,7 @@
 "use strict";
 /*global angular, _*/
 
-angular.module('myBus.businessModule', ['ngAnimate', 'ngTouch', 'ngTable', 'angularFileUpload', 'ui.bootstrap'])
+angular.module('myBus.businessModule', [ 'ngTouch', 'ngTable', 'angularFileUpload', 'ui.bootstrap'])
 
 
   //

@@ -4,7 +4,7 @@
 "use strict";
 /*global angular, _*/
 
-angular.module('myBus.serviceReportsModule', ['ngTable', 'ngAnimate', 'ui.bootstrap'])
+angular.module('myBus.serviceReportsModule', ['ngTable', 'ui.bootstrap'])
 
 //
 // ============================= List All ===================================

@@ -1,7 +1,7 @@
 "use strict";
 /*global angular, _*/
 
-angular.module('myBus.cargoBookingChart', ['ngTable', 'ui.bootstrap','angularMoment', 'n3-line-chart'])
+angular.module('myBus.cargoBookingChart', ['ngTable', 'ui.bootstrap', 'n3-line-chart'])
     .controller("CargoBookingChartController", function ($rootScope, $scope, moment, cargoBookingChartManager) {
         $scope.headline = 'CargoBookingChart';
 

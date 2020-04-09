@@ -1,8 +1,8 @@
 'use strict';
 /*global angular,_*/
 
-// angular.module('myBus.vehicleModule', ['ngTable', 'ui.bootstrap'])
-myBus.controller('VehicleController', function ($scope,$rootScope, $state,$http, $log,paginationService, $uibModal, $filter,$stateParams, vehicleManager, $location, NgTableParams, jobManager) {
+angular.module('myBus.vehicleModule', ['ngTable', 'ui.bootstrap'])
+.controller('VehicleController', function ($scope,$rootScope, $state,$http, $log,paginationService, $uibModal, $filter,$stateParams, vehicleManager, $location, NgTableParams, jobManager) {
         $log.debug('vehicleController');
         $scope.count = 0;
         $scope.loading = false;

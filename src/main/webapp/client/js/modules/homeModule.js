@@ -1,4 +1,4 @@
-// angular.module('myBus.homeModule', ['ngTable', 'ui.bootstrap'])
+angular.module('myBus.homeModule', ['ngTable', 'ui.bootstrap'])
 myBus.controller('HomeController', function ($scope, $state, $http, $log, $cookies, homeManager, vehicleManager) {
 
     $scope.branchOffice = {};

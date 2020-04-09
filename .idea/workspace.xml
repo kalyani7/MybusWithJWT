@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="784cad37-5bc2-419d-9551-4c8e7f7035e1" name="Default" comment="" />
+    <list default="true" id="784cad37-5bc2-419d-9551-4c8e7f7035e1" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/dist/scripts/mybus-0.1.0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/controllers/businessController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/controllers/businessController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/cargoBookingChartModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/cargoBookingChartModule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/dueReportModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/dueReportModule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/headerNavBarhomeCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/headerNavBarhomeCtrl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/homeModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/homeModule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/serviceReportsModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/serviceReportsModule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/usersModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/usersModule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/vehicleModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/vehicleModule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/documentsUploadList.tpl.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/documentsUploadList.tpl.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/mainHome.tpl.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/mainHome.tpl.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/serviceform.tpl.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/serviceform.tpl.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/vehicle-edit.tpl.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/vehicle-edit.tpl.html" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -12,53 +31,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SchedulerService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mybus/service/SchedulerService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="164" column="6" selection-start-line="164" selection-start-column="6" selection-end-line="164" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="operatorAccountsModule.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="44" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13374">
-              <caret line="743" column="40" selection-start-line="743" selection-start-column="40" selection-end-line="743" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.tpl.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.tpl.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="home.tpl.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/home.tpl.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="168">
+              <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-528">
+              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -66,19 +52,51 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/client/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="247">
+              <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="cargoBookingChartModule.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/cargoBookingChartModule.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+            <state relative-caret-position="54">
+              <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="serviceReportsModule.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/serviceReportsModule.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dueReportModule.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/dueReportModule.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="51" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="businessController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/controllers/businessController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="paginationService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/services/paginationService.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -88,6 +106,19 @@
       <find>operatorAccountsModule</find>
       <find>opratingAccountsManager</find>
       <find>opera</find>
+      <find>file</find>
+      <find>href=</find>
+      <find>angularFileUpload</find>
+      <find>f</find>
+      <find>headerNavBarhomeCtrl</find>
+      <find>userModule</find>
+      <find>boots</find>
+      <find>ngAnimate</find>
+      <find>vehi</find>
+      <find>angularMoment</find>
+      <find>officeE</find>
+      <find>moment</find>
+      <find>feed</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -103,10 +134,18 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/mybus/service/SchedulerService.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/homeModule.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/headerNavBarhomeCtrl.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/usersModule.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/client/js/app.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/vehicleModule.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/serviceReportsModule.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/dueReportModule.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/client/js/controllers/businessController.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/cargoBookingChartModule.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/client/package.json" />
-        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -122,6 +161,9 @@
         <option name="importAutomatically" value="true" />
       </MavenImportingSettings>
     </option>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/src/main/webapp/client/node_modules" />
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
@@ -162,6 +204,106 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="angular-ui-bootstrap" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="angular-ui-bootstrap" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -175,7 +317,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="sche&#9;PSI&#9;JAVA://com.mybus.service.SchedulerService&#10;SMS&#9;PSI&#9;JAVA://com.mybus.service.SMSManager&#10;vehicle&#9;PSI&#9;JAVA://com.mybus.controller.VehicleController&#10;Schedu&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/java/com/mybus/service/SchedulerService.java&#10;branch&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/webapp/client/js/modules/branchOfficeModules.js&#10;BranchOff&#9;PSI&#9;JAVA://com.mybus.controller.BranchOfficeController&#10;SchedulerService&#9;PSI&#9;JAVA://com.mybus.service.SchedulerService&#10;home&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/webapp/partials/home.tpl.html&#10;User&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/java/com/mybus/model/User.java" />
+    <property name="SearchEverywhereHistoryKey" value="packa&#9;FILE&#9;file:///Users/srinikandula/code/kalyani/MybusWithJWT/src/main/webapp/client/package.json&#10;cargoBoo&#9;FILE&#9;file:///Users/srinikandula/code/kalyani/MybusWithJWT/src/main/webapp/client/js/modules/cargoBookingChartModule.js&#10;branchOfficeModule&#9;FILE&#9;file:///Users/srinikandula/code/kalyani/MybusWithJWT/src/main/webapp/client/js/modules/branchOfficeModules.js&#10;vehicleModule&#9;FILE&#9;file:///Users/srinikandula/code/kalyani/MybusWithJWT/src/main/webapp/client/js/modules/vehicleModule.js&#10;sche&#9;PSI&#9;JAVA://com.mybus.service.SchedulerService&#10;SMS&#9;PSI&#9;JAVA://com.mybus.service.SMSManager&#10;vehicle&#9;PSI&#9;JAVA://com.mybus.controller.VehicleController&#10;Schedu&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/java/com/mybus/service/SchedulerService.java&#10;branch&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/webapp/client/js/modules/branchOfficeModules.js&#10;BranchOff&#9;PSI&#9;JAVA://com.mybus.controller.BranchOfficeController&#10;SchedulerService&#9;PSI&#9;JAVA://com.mybus.service.SchedulerService&#10;home&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/webapp/partials/home.tpl.html&#10;User&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/java/com/mybus/model/User.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="eu.ydp.idea.ts.spec.generator.settings.spec.template" value="import {$ClassName$} from '$TestsRelativePath$../src/$classRelativePath$/$ClassName$';&#10;&#10;describe('$ClassName$', () =&gt; {&#10;  let $ObjName$:$ClassName$;&#10;&#10;  beforeEach(() =&gt; {&#10;    $ObjName$ = new $ClassName$();&#10;  });&#10;&#10;  describe('', () =&gt; {&#10;    it('', () =&gt; {&#10;      // given&#10;&#10;      // when&#10;&#10;      // then&#10;    });&#10;  });&#10;});&#10;" />
@@ -369,7 +511,7 @@
       <workItem from="1577793584476" duration="17514000" />
       <workItem from="1580663198552" duration="1337000" />
       <workItem from="1586336975082" duration="319000" />
-      <workItem from="1586405736944" duration="1656000" />
+      <workItem from="1586405736944" duration="4258000" />
     </task>
     <task id="LOCAL-00001" summary="Deleting node_modules">
       <created>1586421725910</created>
@@ -382,7 +524,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1656000" />
+    <option name="totallyTimeSpent" value="4258000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="816" extended-state="0" />
@@ -404,10 +546,10 @@
       <window_info anchor="bottom" id="Java Enterprise" />
       <window_info anchor="right" id="Capture Analysis" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Version Control" visible="true" weight="0.32884097" />
+      <window_info anchor="bottom" id="Version Control" visible="true" weight="0.32884097" />
       <window_info anchor="bottom" id="Spring" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="right" id="Bean Validation" />
       <window_info id="Web" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -526,20 +668,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13374">
-          <caret line="743" column="40" selection-start-line="743" selection-start-column="40" selection-end-line="743" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.tpl.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/home.tpl.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js">
@@ -549,24 +681,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        <state relative-caret-position="157">
+          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/dailyTripModule.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/homeModule.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/headerNavBarhomeCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/usersModule.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="47" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="47" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/vehicleModule.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/branchOfficeModules.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="40" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/serviceReportsModule.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/dueReportModule.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="51" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/dist/scripts/mybus-0.1.0.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/controllers/businessController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/services/paginationService.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/cargoBookingChartModule.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/client/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        <state relative-caret-position="247">
+          <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+        <state relative-caret-position="168">
+          <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-528">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
         </state>
       </provider>
     </entry>
