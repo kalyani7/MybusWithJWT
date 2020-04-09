@@ -1,5 +1,5 @@
 angular.module('myBus.homeModule', ['ngTable', 'ui.bootstrap'])
-myBus.controller('HomeController', function ($scope, $state, $http, $log, $cookies, homeManager, vehicleManager) {
+myBus.controller('HomeController', function ($scope, $state, $http, $log, $cookies, $rootScope, homeManager, userManager, operatingAccountsManager, vehicleManager) {
 
     $scope.branchOffice = {};
     $scope.user = {};
@@ -44,13 +44,26 @@ myBus.controller('HomeController', function ($scope, $state, $http, $log, $cooki
             return false;
         }
     }
+
+    userManager.getCurrentUser(function (response) {
+        if (response) {
+            userManager.getGroupsForCurrentUser();
+            myBus.constant('currentuser', response);
+            $rootScope.currentuser = response;
+            $rootScope.$broadcast("currentuserLoaded");
+            operatingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
+                $rootScope.operatorAccount = operatorAccount;
+                $state.go('home')
+            });
+        }
+    });
+
     $scope.updateHeader = function () {
         var data = '';
         if ($scope.user && $scope.user.branchOfficeId) {
             /*branchOfficeManager.load($scope.user.branchOfficeId, function(data){
                 $scope.branchOffice = data;
             });*/
-            console.log('updating header');
             // homeManager.getCurrentUser(null, true);
             userManager.getCurrentUser(function (response) {
                 if (response) {
@@ -71,7 +84,6 @@ myBus.controller('HomeController', function ($scope, $state, $http, $log, $cooki
     };
 
     $scope.$on('currentuserLoaded', function () {
-        console.log($rootScope.currentuser)
         $scope.currentUser = $rootScope.currentuser;
         if ($scope.currentUser.accessibleModules.length > 0) {
             var accessibleModules = $scope.currentUser.accessibleModules;
@@ -116,6 +128,7 @@ myBus.controller('HomeController', function ($scope, $state, $http, $log, $cooki
             // console.log(response)
             $scope.haltedVehicles = response[1].data;
             $scope.reminders = response[2].data;
+            console.log(Object.getOwnPropertyNames(response[0].data).length, $scope.haltedVehicles.length != 0)
             if (Object.getOwnPropertyNames(response[0].data).length !== 0 || $scope.haltedVehicles.length != 0) {
                 $scope.viewModal = true;
                 $scope.authExpiringVehicles = response[0].data.authExpiring;
@@ -149,6 +162,7 @@ myBus.controller('HomeController', function ($scope, $state, $http, $log, $cooki
     }
 
     $scope.logOut = function () {
+        console.log('wertyuiopoiohutyfyuguihijopiiuyutdufgihij')
         var t = '';
         $cookies.remove('token');
         $cookies.remove('tokenType');
@@ -157,8 +171,7 @@ myBus.controller('HomeController', function ($scope, $state, $http, $log, $cooki
             $state.go('login');
             // }
         }
-    };
-
+    }
 
 })
 //     .controller('MenuBarController', function ($scope, $rootScope, $location, $stateParams, userManager, vehicleManager, remainderManager) {

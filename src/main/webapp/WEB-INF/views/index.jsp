@@ -11,13 +11,15 @@
     <title>SriKrishna Travels</title>
     <link href="client/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="client/node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="client/assets-new/css/bootstrap.min.css" type="text/css">
+
     <link rel="stylesheet" href="client/css/ionicons.min.css" type="text/css">
     <link rel="stylesheet" href="client/css/app.css" type="text/css">
     <link rel="stylesheet" href="client/node_modules/sweetalert/dist/sweetalert.css">
 
-    <script src="client/node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="client/node_modules/jquery/dist/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
     <script src="client/node_modules/angular/angular.js"></script>
     <script src="client/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="client/node_modules/ng-table/bundles/ng-table.js"></script>

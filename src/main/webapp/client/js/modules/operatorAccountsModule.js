@@ -92,7 +92,7 @@ angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
         });
 	}
 })
-.factory("operatingAccountsManager",function($rootScope,$http){
+.factory("operatingAccountsManager",function($rootScope, $http, services){
 	var accounts = [];
 	return {
         getAccounts: function (callback) {
@@ -113,11 +113,16 @@ angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
             })
         },
         getAccount: function (id, callback) {
-            $http.get("/api/v1/operatorAccount/" + id).then(function (response) {
-                callback(response.data);
-            }, function (error) {
-                swal("oops", error, "error");
+            services.get('/api/v1/operatorAccount/' + id, {}, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
             })
+            // $http.get("/api/v1/operatorAccount/" + id).then(function (response) {
+            //     callback(response.data);
+            // }, function (error) {
+            //     swal("oops", error, "error");
+            // })
         }
     }
 });
