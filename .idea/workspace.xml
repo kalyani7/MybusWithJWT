@@ -1,172 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="784cad37-5bc2-419d-9551-4c8e7f7035e1" name="Default" comment="">
+    <list default="true" id="784cad37-5bc2-419d-9551-4c8e7f7035e1" name="Default" comment="fix menu">
+      <change beforePath="$PROJECT_DIR$/.idea/MybusWithJWT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MybusWithJWT.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/dist/scripts/mybus-0.1.0.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/controllers/businessController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/controllers/businessController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/cargoBookingChartModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/cargoBookingChartModule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/dueReportModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/dueReportModule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/headerNavBarhomeCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/headerNavBarhomeCtrl.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/homeModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/homeModule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/serviceReportsModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/serviceReportsModule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/usersModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/usersModule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/vehicleModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/vehicleModule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/documentsUploadList.tpl.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/documentsUploadList.tpl.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/mainHome.tpl.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/mainHome.tpl.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/serviceform.tpl.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/serviceform.tpl.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/vehicle-edit.tpl.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/vehicle-edit.tpl.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/target/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-528">
-              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cargoBookingChartModule.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/cargoBookingChartModule.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="serviceReportsModule.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/serviceReportsModule.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dueReportModule.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/dueReportModule.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="51" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="businessController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/controllers/businessController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="paginationService.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/services/paginationService.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-    </leaf>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>operatorAccountsModule</find>
-      <find>opratingAccountsManager</find>
-      <find>opera</find>
-      <find>file</find>
-      <find>href=</find>
-      <find>angularFileUpload</find>
-      <find>f</find>
-      <find>headerNavBarhomeCtrl</find>
-      <find>userModule</find>
-      <find>boots</find>
-      <find>ngAnimate</find>
-      <find>vehi</find>
-      <find>angularMoment</find>
-      <find>officeE</find>
-      <find>moment</find>
-      <find>feed</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/mybus/service/SchedulerService.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/homeModule.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/headerNavBarhomeCtrl.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/usersModule.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/client/js/app.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/vehicleModule.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/serviceReportsModule.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/dueReportModule.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/client/js/controllers/businessController.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/client/js/modules/cargoBookingChartModule.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/client/package.json" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-      </MavenImportingSettings>
-    </option>
-  </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/src/main/webapp/client/node_modules" />
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpServers">
     <servers />
@@ -177,139 +38,6 @@
     <option name="height" value="816" />
   </component>
   <component name="ProjectId" id="1aFglFtWF6sCvhMEs7711QjCpT6" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <autoscrollFromSource ProjectPane="true" />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-ui-bootstrap" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-ui-bootstrap" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MybusWithJWT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MybusWithJWT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -318,6 +46,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SearchEverywhereHistoryKey" value="packa&#9;FILE&#9;file:///Users/srinikandula/code/kalyani/MybusWithJWT/src/main/webapp/client/package.json&#10;cargoBoo&#9;FILE&#9;file:///Users/srinikandula/code/kalyani/MybusWithJWT/src/main/webapp/client/js/modules/cargoBookingChartModule.js&#10;branchOfficeModule&#9;FILE&#9;file:///Users/srinikandula/code/kalyani/MybusWithJWT/src/main/webapp/client/js/modules/branchOfficeModules.js&#10;vehicleModule&#9;FILE&#9;file:///Users/srinikandula/code/kalyani/MybusWithJWT/src/main/webapp/client/js/modules/vehicleModule.js&#10;sche&#9;PSI&#9;JAVA://com.mybus.service.SchedulerService&#10;SMS&#9;PSI&#9;JAVA://com.mybus.service.SMSManager&#10;vehicle&#9;PSI&#9;JAVA://com.mybus.controller.VehicleController&#10;Schedu&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/java/com/mybus/service/SchedulerService.java&#10;branch&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/webapp/client/js/modules/branchOfficeModules.js&#10;BranchOff&#9;PSI&#9;JAVA://com.mybus.controller.BranchOfficeController&#10;SchedulerService&#9;PSI&#9;JAVA://com.mybus.service.SchedulerService&#10;home&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/webapp/partials/home.tpl.html&#10;User&#9;FILE&#9;file:///Users/srinikandula/code/MybusWithJWT/src/main/java/com/mybus/model/User.java" />
+    <property name="ToolWindowCommit.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="eu.ydp.idea.ts.spec.generator.settings.spec.template" value="import {$ClassName$} from '$TestsRelativePath$../src/$classRelativePath$/$ClassName$';&#10;&#10;describe('$ClassName$', () =&gt; {&#10;  let $ObjName$:$ClassName$;&#10;&#10;  beforeEach(() =&gt; {&#10;    $ObjName$ = new $ClassName$();&#10;  });&#10;&#10;  describe('', () =&gt; {&#10;    it('', () =&gt; {&#10;      // given&#10;&#10;      // when&#10;&#10;      // then&#10;    });&#10;  });&#10;});&#10;" />
@@ -326,6 +55,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="$USER_HOME$/n/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -342,97 +72,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="Maven.spring">
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method>
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-      <method>
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="spring" type="MavenRunConfiguration" factoryName="Maven">
-      <MavenSettings>
-        <option name="myGeneralSettings" />
-        <option name="myRunnerSettings" />
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list>
-                <option value="spring-boot:run" />
-              </list>
-            </option>
-            <option name="pomFileName" />
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$PROJECT_DIR$" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-    </configuration>
-    <configuration name="MyBusApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="MybusWithJWT" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mybus.MyBusApplication" />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <properties />
-      <listeners />
-      <method>
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="tests" factoryName="Nosetests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -491,6 +131,62 @@
       <option name="_new_target" value="&quot;&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="spring" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="spring-boot:run" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="MyBusApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="MybusWithJWT" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mybus.MyBusApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Maven.spring" />
       <item itemvalue="Spring Boot.MyBusApplication" />
@@ -512,6 +208,7 @@
       <workItem from="1580663198552" duration="1337000" />
       <workItem from="1586336975082" duration="319000" />
       <workItem from="1586405736944" duration="4258000" />
+      <workItem from="1586429677556" duration="8131000" />
     </task>
     <task id="LOCAL-00001" summary="Deleting node_modules">
       <created>1586421725910</created>
@@ -523,124 +220,70 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4258000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="816" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info id="Capture Tool" />
-      <window_info id="Designer" />
-      <window_info anchor="right" id="Database" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="UI Designer" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39892185" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info id="Image Layers" />
-      <window_info anchor="bottom" id="Java Enterprise" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" visible="true" weight="0.32884097" />
-      <window_info anchor="bottom" id="Spring" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info anchor="right" id="Bean Validation" />
-      <window_info id="Web" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-    </layout>
-    <layout-to-restore>
-      <window_info id="Designer" order="0" />
-      <window_info anchor="right" id="Palette" order="0" />
-      <window_info anchor="bottom" id="Run" order="8" />
-      <window_info anchor="bottom" id="Spring" order="0" />
-      <window_info id="Image Layers" order="1" />
-      <window_info anchor="right" id="Commander" order="8" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="9" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="1" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="TODO" order="12" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="10" weight="0.25" />
-      <window_info anchor="bottom" id="Java Enterprise" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="4" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="5" />
-      <window_info anchor="right" id="Maven Projects" order="2" />
-      <window_info anchor="bottom" id="Find" order="7" />
-      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Message" order="6" />
-      <window_info id="Web" order="5" side_tool="true" />
-      <window_info anchor="right" id="Palette&#9;" order="5" />
-      <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Debug" order="9" visible="true" weight="0.39892185" />
-      <window_info anchor="right" id="Bean Validation" order="7" />
-    </layout-to-restore>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Deleting node_modules" />
-    <option name="LAST_COMMIT_MESSAGE" value="Deleting node_modules" />
+    <MESSAGE value="fix menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix menu" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1554" height="216" key="GridCell.Tab.0.bottom" timestamp="1586333020061">
+    <state x="258" y="121" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586429918856">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1554" height="216" key="GridCell.Tab.0.bottom/0.27.1600.873@0.27.1600.873" timestamp="1586333020061" />
-    <state width="1554" height="216" key="GridCell.Tab.0.center" timestamp="1586333020050">
+    <state x="258" y="121" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1600.873@0.27.1600.873" timestamp="1586429918856" />
+    <state x="339" y="27" width="912" height="873" key="CommitChangelistDialog2" timestamp="1586437959037">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1554" height="216" key="GridCell.Tab.0.center/0.27.1600.873@0.27.1600.873" timestamp="1586333020050" />
-    <state width="1554" height="216" key="GridCell.Tab.0.left" timestamp="1586333020048">
+    <state x="339" y="27" width="912" height="873" key="CommitChangelistDialog2/0.27.1600.873@0.27.1600.873" timestamp="1586437959037" />
+    <state width="1554" height="49" key="GridCell.Tab.0.bottom" timestamp="1586437920493">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1554" height="216" key="GridCell.Tab.0.left/0.27.1600.873@0.27.1600.873" timestamp="1586333020048" />
-    <state width="1554" height="216" key="GridCell.Tab.0.right" timestamp="1586333020059">
+    <state width="1554" height="49" key="GridCell.Tab.0.bottom/0.27.1600.873@0.27.1600.873" timestamp="1586437920493" />
+    <state width="1554" height="49" key="GridCell.Tab.0.center" timestamp="1586437920491">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1554" height="216" key="GridCell.Tab.0.right/0.27.1600.873@0.27.1600.873" timestamp="1586333020059" />
+    <state width="1554" height="49" key="GridCell.Tab.0.center/0.27.1600.873@0.27.1600.873" timestamp="1586437920491" />
+    <state width="1554" height="49" key="GridCell.Tab.0.left" timestamp="1586437920490">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state width="1554" height="49" key="GridCell.Tab.0.left/0.27.1600.873@0.27.1600.873" timestamp="1586437920490" />
+    <state width="1554" height="49" key="GridCell.Tab.0.right" timestamp="1586437920492">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state width="1554" height="49" key="GridCell.Tab.0.right/0.27.1600.873@0.27.1600.873" timestamp="1586437920492" />
+    <state x="526" y="147" width="538" height="640" key="RollbackChangesDialog" timestamp="1586434767555">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state x="526" y="147" width="538" height="640" key="RollbackChangesDialog/0.27.1600.873@0.27.1600.873" timestamp="1586434767555" />
     <state x="453" y="81" width="683" height="771" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586340096628">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
     <state x="453" y="81" width="683" height="771" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1600.873@0.27.1600.873" timestamp="1586340096628" />
-    <state x="445" y="202" width="710" height="522" key="find.popup" timestamp="1586344149406">
+    <state x="445" y="202" width="710" height="544" key="find.popup" timestamp="1586435614045">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state x="445" y="202" width="710" height="522" key="find.popup/0.27.1600.873@0.27.1600.873" timestamp="1586344149406" />
+    <state x="445" y="202" width="710" height="544" key="find.popup/0.27.1600.873@0.27.1600.873" timestamp="1586435614045" />
     <state x="464" y="207" key="run.anything.popup" timestamp="1586343966643">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
     <state x="464" y="207" key="run.anything.popup/0.27.1600.873@0.27.1600.873" timestamp="1586343966643" />
-    <state x="463" y="214" width="672" height="678" key="search.everywhere.popup" timestamp="1586343495920">
+    <state x="463" y="214" width="672" height="678" key="search.everywhere.popup" timestamp="1586437723176">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state x="463" y="214" width="672" height="678" key="search.everywhere.popup/0.27.1600.873@0.27.1600.873" timestamp="1586343495920" />
+    <state x="463" y="214" width="672" height="678" key="search.everywhere.popup/0.27.1600.873@0.27.1600.873" timestamp="1586437723176" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -648,154 +291,15 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/mybus/service/VehicleManager.java</url>
           <line>168</line>
-          <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/mybus/dao/impl/VehicleMongoDAO.java</url>
           <line>70</line>
-          <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mybus/service/SchedulerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="164" column="6" selection-start-line="164" selection-start-column="6" selection-end-line="164" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.tpl.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/home.tpl.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/operatorAccountsModule.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="44" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/dailyTripModule.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/homeModule.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/headerNavBarhomeCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/usersModule.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="47" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="47" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/vehicleModule.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/branchOfficeModules.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="40" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/serviceReportsModule.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/dueReportModule.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="51" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/dist/scripts/mybus-0.1.0.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/controllers/businessController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/services/paginationService.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/modules/cargoBookingChartModule.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/client/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-528">
-          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>
