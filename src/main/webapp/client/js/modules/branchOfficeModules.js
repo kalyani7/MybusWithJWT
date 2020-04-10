@@ -124,7 +124,7 @@ angular.module('myBus.branchOfficeModule', ['ngTable', 'ui.bootstrap'])
             });
         }
     })
-    .factory('branchOfficeManager', function ($http, $log,$rootScope) {
+    .factory('branchOfficeManager', function ($http, $log,$rootScope, services) {
         var branchOffices = {};
         return {
             loadAll: function ( pageable, callback) {
@@ -135,14 +135,23 @@ angular.module('myBus.branchOfficeModule', ['ngTable', 'ui.bootstrap'])
                         swal("oops", error, "error");
                     });
             },
-            loadNames: function (callback) {
-                $http.get('/api/v1/branchOffice/names')
-                    .then(function (response) {
-                        callback(response.data);
+            loadNames: function (successCallback, errorCallback) {
+                services.get('/api/v1/branchOffice/names', '', function (response) {
+                    if (response) {
+                        successCallback(response.data)
                         $rootScope.$broadcast('BranchOfficesLoadComplete');
-                    },function (error) {
-                        $log.debug("error retrieving branchOffices");
-                    });
+                    }
+                }, function (error) {
+                    errorCallback(error)
+                    $log.debug("error retrieving branchOffices");
+                })
+                // $http.get('/api/v1/branchOffice/names')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //         $rootScope.$broadcast('BranchOfficesLoadComplete');
+                //     },function (error) {
+                //         $log.debug("error retrieving branchOffices");
+                //     });
             },
             save: function(branchOffice, callback) {
                 if(branchOffice.id) {

@@ -234,7 +234,7 @@
     <div id="sidebar-wrapper" class="nav-side-menu">
         <div class="menu-list">
             <ul id="menu-content" class="menu-content ">
-                <li data-target="#cargo" class="sidebar-dropdown" ng-show="canAccessModule('cargodashboard')">
+                <li data-target="#cargo" class="sidebar-dropdown">
                     <a>
                         <i class="fa fa-globe fa-lg"></i>
                         <span> Cargo </span>
@@ -243,19 +243,19 @@
                     <div class="sidebar-submenu">
                         <ul id="cargo">
                             <my-menu url="cargodashboard" label="CargoDashBoard"></my-menu>
-                            <my-menu url="newBooking" label="NewBooking" ng-if="canAccessModule('cargodashboard')"></my-menu>
-                            <my-menu url="cargoBookings" label="CargoBookings" ng-if="canAccessModule('cargobookings')"></my-menu>
-                            <my-menu url="cargobookingchart" label="CargoBookingChart" ng-if="canAccessModule('cargobookings')"></my-menu>
-                            <my-menu url="branchbookingsummary" label="BranchBookingSummary" ng-if="canAccessModule('branchbookingsummary')"></my-menu>
-                            <my-menu url="loadingsheet" label="LoadingSheet" ng-if="canAccessModule('cargobookings')"></my-menu>
-                            <my-menu url="unloadingsheet" label="UnloadingSheet" ng-if="canAccessModule('cargobookings')"></my-menu>
-                            <my-menu url="deliverysheet" label="DeliverySheet" ng-if="canAccessModule('cargobookings')"></my-menu>
+                            <my-menu url="newBooking" label="NewBooking"></my-menu>
+                            <my-menu url="cargoBookings" label="CargoBookings"></my-menu>
+                            <my-menu url="cargobookingchart" label="CargoBookingChart"></my-menu>
+                            <my-menu url="branchbookingsummary" label="BranchBookingSummary"></my-menu>
+                            <my-menu url="loadingsheet" label="LoadingSheet"></my-menu>
+                            <my-menu url="unloadingsheet" label="UnloadingSheet"></my-menu>
+                            <my-menu url="deliverysheet" label="DeliverySheet"></my-menu>
                             <my-menu url="cancellations" label="Cancellations"></my-menu>
                         </ul>
                     </div>
                 </li>
 
-                <li data-target="#analytics" class="sidebar-dropdown" ng-show="canAccessModule('analytics')">
+                <li data-target="#analytics" class="sidebar-dropdown">
                     <a>
                         <i class="fa fa-pie-chart fa-lg"></i>
                         <span> Analytics </span>
@@ -264,7 +264,7 @@
                     <div class="sidebar-submenu">
                         <ul id="analytics">
                             <my-menu url="bookingAnalytics" label="BookingAnalytics"
-                                     ng-if="canAccessModule('bookinganalytics')"></my-menu>
+                                    ></my-menu>
                         </ul>
                     </div>
                 </li>
@@ -278,40 +278,40 @@
                     <div class="sidebar-submenu">
                         <ul id="master">
                             <my-menu label="Agents"
-                                     ng-if="canAccessModule('agents')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="Amenities"
-                                     ng-if="canAccessModule('amenities')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="Banks"
-                                     ng-if="canAccessModule('banks')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="BranchOffices"
-                                     ng-if="canAccessModule('branchoffices')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="Cities"
-                                     ng-if="canAccessModule('cities')"></my-menu>
+                                    ></my-menu>
                             <!--my-menu label="CollectionZones"></my-menu -->
-                            <my-menu label="GSTFilters" ng-if="canAccessModule('GSTFilters')"></my-menu>
+                            <my-menu label="GSTFilters"></my-menu>
                             <my-menu label="Suppliers"
-                                     ng-if="canAccessModule('suppliers')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="OperatorAccounts"
                                      ng-if="currentuser.superAdmin"></my-menu>
-                            <my-menu label="Roles" ng-if="canAccessModule('roles')"></my-menu>
+                            <my-menu label="Roles"></my-menu>
                             <my-menu label="ManageRoles"
-                                     ng-if="canAccessModule('manageRoles')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="Routes"
-                                     ng-if="canAccessModule('routes')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="ServiceCombo"
-                                     ng-if="canAccessModule('servicecombo')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="TripCombo"
-                                     ng-if="canAccessModule('tripcombo')"></my-menu>
-                            <my-menu label="Users" ng-if="canAccessModule('users')"></my-menu>
+                                    ></my-menu>
+                            <my-menu label="Users"></my-menu>
                             <my-menu label="Vehicles"
-                                     ng-if="canAccessModule('vehicles')"></my-menu>
-                            <my-menu label="Staff" ng-if="canAccessModule('staff')"></my-menu>
+                                    ></my-menu>
+                            <my-menu label="Staff"></my-menu>
                             <my-menu label="ExpensesType"
-                                     ng-if="canAccessModule('expensestype')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="SearchService"
-                                     ng-if="canAccessModule('searchServices')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="DocumentsUpload"
-                                     ng-if="canAccessModule('documentsUpload')"></my-menu>
+                                    ></my-menu>
 
                         </ul>
                     </div>
@@ -326,48 +326,48 @@
                     <div class="sidebar-submenu">
                         <ul id="reports">
                             <my-menu url="tripreports" label="TripReports"
-                                     ng-if="canAccessModule('tripreports')"></my-menu>
+                                    ></my-menu>
                             <my-menu url="serviceIncomeReport" label="ServiceIncomeReport"
-                                     ng-if="canAccessModule('servicereports')"></my-menu>
+                                    ></my-menu>
                             <my-menu url="serviceReports" label="ServiceReports"
-                                     ng-if="canAccessModule('servicereports')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="PreferredStaff"
-                                     ng-if="canAccessModule('preferredstaff')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="DailyTrips"
-                                     ng-if="canAccessModule('dailytrips')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="SalaryReports"
-                                     ng-if="canAccessModule('salaryreports')"></my-menu>
+                                    ></my-menu>
                             <my-menu url="fulltrips"
-                                     label="FullTrips" ng-if="canAccessModule('fulltrips')"></my-menu>
+                                     label="FullTrips"></my-menu>
                             <my-menu label="FuelExpenseReports"
-                                     ng-if="canAccessModule('fuelexpensereports')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="DueReport"
-                                     ng-if="canAccessModule('duereport')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="CashTransfers"
-                                     ng-if="canAccessModule('cashtransfers')">Cash Transfers
+                                    h Transfers
                             </my-menu>
-                            <my-menu label="Payments"  ng-if="canAccessModule('payments')">
+                            <my-menu label="Payments" ayments')">
                                 Payments
                             </my-menu>
                             <my-menu label="OfficeExpenses"
-                                     ng-if="canAccessModule('officeexpenses')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="ExpensesIncomesReports"
-                                     ng-if="canAccessModule('expensesincomesreports')"></my-menu>
-                            <my-menu label="ReturnTickets" ng-if="canAccessModule('returnTickets')"></my-menu>
+                                    ></my-menu>
+                            <my-menu label="ReturnTickets"></my-menu>
                             <my-menu label="CashBalances"
-                                     ng-if="canAccessModule('cashbalances')"></my-menu>
-                            <my-menu label="Invoices" ng-if="canAccessModule('invoices')"></my-menu>
+                                    ></my-menu>
+                            <my-menu label="Invoices"></my-menu>
                             <!--my-menu label="ShipmentSequence" ></my-menu -->
                             <my-menu label="VerifyInvoice"
-                                     ng-if="canAccessModule('verifyInvoice')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="TripSheet"
-                                     ng-if="canAccessModule('tripsheet')"></my-menu>
-                            <my-menu label="TripSheetFilters" ng-if="canAccessModule('tripsheetfilters')"></my-menu>
+                                    ></my-menu>
+                            <my-menu label="TripSheetFilters"></my-menu>
                         </ul>
                     </div>
                 </li>
 
-                <li data-target="#checklist" class="sidebar-dropdown" ng-show="canAccessModule('checkList')">
+                <li data-target="#checklist" class="sidebar-dropdown">
                     <a>
                         <i class="fa fa-tasks fa-lg"></i>
                         <span> Check List</span>
@@ -376,9 +376,9 @@
                     <div class="sidebar-submenu">
                         <ul id="checklist">
                             <my-menu url="pendingreports" label="PendingReports"
-                                     ng-if="canAccessModule('pendingreports')"></my-menu>
+                                    ></my-menu>
                             <my-menu url="reportstobereviewed" label="ReportsToBeReviewed"
-                                     ng-if="canAccessModule('reportstobereviewed')"></my-menu>
+                                    ></my-menu>
                             <my-menu url="haltreports" label="HaltReports" ></my-menu>
                         </ul>
                     </div>
@@ -406,17 +406,17 @@
                     <div class="sidebar-submenu">
                         <ul id="maintenance">
                             <my-menu label="Inventories"
-                                     ng-if="canAccessModule('inventories')"></my-menu>
-                            <my-menu label="Jobs" ng-if="canAccessModule('jobs')"></my-menu>
+                                    ></my-menu>
+                            <my-menu label="Jobs"></my-menu>
                             <my-menu label="Reminders"
-                                     ng-if="canAccessModule('reminders')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="StaffComplaints"
-                                     ng-if="canAccessModule('staffcomplaints')"></my-menu>
+                                    ></my-menu>
                         </ul>
                     </div>
                 </li>
 
-                <li data-target="#config" class="sidebar-dropdown" ng-show="canAccessModule('config')">
+                <li data-target="#config" class="sidebar-dropdown">
                     <a>
                         <i class="fa fa-database fa-lg"></i>
                         <span> Config </span>
@@ -425,9 +425,9 @@
                     <div class="sidebar-submenu">
                         <ul id="config">
                             <my-menu label="layouts"
-                                     ng-if="canAccessModule('layouts')"></my-menu>
+                                    ></my-menu>
                             <my-menu label="addservice"
-                                     ng-if="canAccessModule('addservice')"></my-menu>
+                                    ></my-menu>
                         </ul>
                     </div>
                 </li>
@@ -438,7 +438,7 @@
         <!---------OnLoadig PopUp only For Vehice accessing Use-->
 
         <div id="myModal" class="modal fade loading-popup" tabindex='-1'
-             ng-if="canAccessModule('vehicles') && viewModal" style="padding-top: 30px;">
+            tyle="padding-top: 30px;">
             <div class="modal-dialog custom-modal">
                 <!-- Modal content-->
                 <div class="modal-content">

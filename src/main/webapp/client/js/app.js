@@ -785,17 +785,17 @@ myBus.run(function ($rootScope, $state, $location, $cookies, appConfigManager, u
         appConfigManager.fetchAppSettings(function (err, cfg) {
             $rootScope.appConfigManager = appConfigManager;
         }, true);
-        // userManager.getCurrentUser(function (response) {
-        //     if (response) {
-        //         userManager.getGroupsForCurrentUser();
-        //         myBus.constant('currentuser', response);
-        //         $rootScope.currentuser = response;
-        //         $rootScope.$broadcast("currentuserLoaded");
-        //         operatingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
-        //             $rootScope.operatorAccount = operatorAccount;
-        //         });
-        //     }
-        // });
+        userManager.getCurrentUser(function (response) {
+            if (response) {
+                userManager.getGroupsForCurrentUser();
+                myBus.constant('currentuser', response);
+                $rootScope.currentuser = response;
+                $rootScope.$broadcast("currentuserLoaded");
+                operatingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
+                    $rootScope.operatorAccount = operatorAccount;
+                });
+            }
+        });
     }
 });
 

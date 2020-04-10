@@ -284,11 +284,13 @@ angular.module('myBus.vehicleModule', ['ngTable', 'ui.bootstrap'])
                 });
             },
             getExpiringVehicles: function (pageable,today) {
+                // console.log(pageable,today)
                 var deferred = $q.defer();
                 $q.all([$http({url:'/api/v1/vehicles/expiring',method:"GET", params: pageable, headers: {"Authorization": sendToken}}),
                     $http({url: '/api/v1/serviceReport/haltedServices?date=' + today, method: "GET", headers: {"Authorization": sendToken}}),
                     $http({url:'/api/v1/reminders/getUpcoming',method:"GET",params: pageable, headers: {"Authorization": sendToken} })]).then(
                     function(results) {
+                        // console.log(results, 'results')
                         deferred.resolve(results)
                     },
                     function(errors) {

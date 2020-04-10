@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="pull-right" ng-if="isAdmin()">
-                            <button type="button" class="btn btn-sm btn-primary" ng-click="addUser()"><span class="glyphicon glyphicon-plus"></span> Add User</button>
+                            <button class="btn btn-sm btn-primary" ng-click="addUser()"><span class="glyphicon glyphicon-plus"></span> Add User</button>
                         </div>
                     </div>
                 </div>
@@ -46,12 +46,12 @@
                     <td data-title="'CashBalance'" sortable="'amountToBePaid'" class="col-sm-1" sortable="'active'">
                         {{user.amountToBePaid | number : 2}}
                     </td> <td data-title="'Action'" class="ed-btn" ng-if="isAdmin()">
-                        <md-icon type="button" class="btn btn-xs" ng-click="editUser(user.id)">
+                        <button class="btn btn-sm btn-primary" ng-click="editUser(user.id)">
                             <span class="glyphicon glyphicon-pencil"></span>
-                        </md-icon>
-                        <md-icon type="button" class="btn btn-xs" ng-click="deleteUser(user.id)">
+                        </button>
+                        <button class="btn btn-sm btn-danger" ng-click="deleteUser(user.id)">
                             <span class="glyphicon glyphicon-trash"></span>
-                        </md-icon>
+                        </button>
                     </td>
                 </tr>
             </table>

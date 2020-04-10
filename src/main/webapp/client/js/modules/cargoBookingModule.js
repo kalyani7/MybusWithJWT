@@ -794,7 +794,7 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
         $scope.sendSMS = function (shipmentId) {
             cargoBookingManager.sendSMSForCargoBooking(shipmentId);
         };
-}).factory('cargoBookingManager', function ($rootScope, $q, $uibModal, $http, $log, $location) {
+}).factory('cargoBookingManager', function ($rootScope, $q, $uibModal, $http, $log, $location, services) {
     return {
         findContactInfoFromPreviousBookings: function (contactType, contact, callback) {
             $http.get('/api/v1/shipment/findContactInfo?contactType=' + contactType + "&contact=" + contact)
@@ -824,13 +824,20 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
                     swal("oops", error, "error");
                 })
         },
-        getShipmentTypes: function (callback) {
-            $http.get("/api/v1/shipment/types")
-                .then(function (response) {
-                    callback(response.data)
-                }, function (error) {
-                    swal("oops", error, "error");
-                })
+        getShipmentTypes: function (successCallback, errorCallback) {
+            services.get('/api/v1/shipment/types', '', function (response) {
+                if (response) {
+                    successCallback(response.data)
+                }
+            }, function (error) {
+                errorCallback(error)
+            })
+            // $http.get("/api/v1/shipment/types")
+            //     .then(function (response) {
+            //         callback(response.data)
+            //     }, function (error) {
+            //         swal("oops", error, "error");
+            //     })
         }, createShipment: function (cargoBooking, successcallback) {
             $http.post("/api/v1/shipment", cargoBooking)
                 .then(function (response) {
