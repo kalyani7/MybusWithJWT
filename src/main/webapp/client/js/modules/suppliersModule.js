@@ -80,15 +80,23 @@ angular.module('myBus.suppliers', ['ngTable', 'ui.bootstrap'])
     $scope.reset = function(){
 		$scope.supplier= {};
 	};
-}).factory("suppliersManager",function($rootScope,$http,$log){
+}).factory("suppliersManager",function($rootScope,$http,$log, services){
 	return {
 
-        getSuppliers: function (callback) {
-            $http.get("/api/v1/suppliers/").then(function (response) {
-                callback(response.data);
-            }, function (error) {
-                swal("oops", error, "error");
-            });
+        getSuppliers: function (successCallback, errorCallback) {
+        	services.get('/api/v1/suppliers/', '', function (response) {
+        		if (response) {
+					successCallback(response);
+				}
+			}, function (error) {
+				errorCallback(error)
+				swal("oops", error, "error");
+			})
+            // $http.get("/api/v1/suppliers/").then(function (response) {
+            //     callback(response.data);
+            // }, function (error) {
+            //     swal("oops", error, "error");
+            // });
         },
 
 		addSupplier: function(fillingStation,callback) {

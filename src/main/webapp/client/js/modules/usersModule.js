@@ -328,13 +328,20 @@ angular.module('myBus.userModule', ['ngTable'])
             },
             fetchAllUsers: function () {
                 $log.debug("fetching routes data ...");
-                $http.get('/api/v1/users')
-                    .then(function (response) {
-                        users=response.data;
-                        $rootScope.$broadcast('UsersInitComplete');
-                    },function (error) {
-                        $log.debug("error retrieving users");
-                    });
+                services.get('/api/v1/users', '', function (response) {
+                    users = response.data
+                    $rootScope.$broadcast('UsersInitComplete');
+                }, function (error) {
+                    $log.debug("error retrieving users");
+                })
+                // $http.get('/api/v1/users')
+                //     .then(function (response) {
+                //         console.log(response)
+                //         users=response.data;
+                //         $rootScope.$broadcast('UsersInitComplete');
+                //     },function (error) {
+                //         $log.debug("error retrieving users");
+                //     });
             },
             getUsers: function (callback) {
                 if(users) {
@@ -351,14 +358,22 @@ angular.module('myBus.userModule', ['ngTable'])
                 }
 
             },
-            getUserNames: function (callback) {
-                $http.get('/api/v1/userNames')
-                    .then(function (response) {
-                        callback(response.data);
+            getUserNames: function (successCallback, errorCallback) {
+                services.get('/api/v1/userNames', '', function (response) {
+                    if (response) {
+                        successCallback(response.data);
                         $rootScope.$broadcast('FetchingUserNamesComplete');
-                    },function (error) {
-                        $log.debug("error retrieving user names");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving user names");
+                })
+                // $http.get('/api/v1/userNames')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //         $rootScope.$broadcast('FetchingUserNamesComplete');
+                //     },function (error) {
+                //         $log.debug("error retrieving user names");
+                //     });
             },
             getUserCashbalances: function (query, callback) {
                 $http.get('/api/v1/user/cashBalances')
@@ -430,8 +445,10 @@ angular.module('myBus.userModule', ['ngTable'])
                 // if (currentUser === null) {
                     services.get('/api/v1/user/me', data,function (response) {
                         if (response) {
-                            console.log(response)
+                            // console.log(response)
+                            currentUser = response.data;
                             successCallback(response.data)
+                            return angular.isFunction(successCallback) && successCallback(null, currentUser);
                         }
                     })
                     // $http.get('/api/v1/user/me')
@@ -448,6 +465,7 @@ angular.module('myBus.userModule', ['ngTable'])
                 // }
             },
             getUser: function(){
+                console.log(currentUser, '000000000000000000000000')
                 return currentUser;
             },
 
