@@ -123,7 +123,7 @@ angular.module('myBus.officeExpensesModule', ['ngTable', 'ui.bootstrap'])
             //         }
             //     }
             // });
-            $state.go('addOfficeExpenses');
+            $state.go('home.addOfficeExpenses');
         };
         $rootScope.$on('UpdateHeader', function (e, value) {
             $scope.init();
@@ -133,7 +133,7 @@ angular.module('myBus.officeExpensesModule', ['ngTable', 'ui.bootstrap'])
 
         $scope.handleClickUpdateExpense = function (expenseId) {
             if(expenseId){
-                $state.go('updateOfficeExpenses', {id: expenseId});
+                $state.go('home.updateOfficeExpenses', {id: expenseId});
             }
         };
         $scope.delete = function (expenseId) {
@@ -272,120 +272,203 @@ angular.module('myBus.officeExpensesModule', ['ngTable', 'ui.bootstrap'])
                 $scope.expense.date = $scope.dt;
                 officeExpensesManager.save($scope.expense, function (data) {
                     swal("Great", "Saved successfully", "success");
-                    $location.url('/officeexpenses');
+                    // $location.url('/officeexpenses');
+                    $state.go('home.officeexpenses')
                 });
             }
         };
 
-    }).factory('officeExpensesManager', function ($rootScope, $http, $log) {
+    }).factory('officeExpensesManager', function ($rootScope, $http, $log, services) {
     return {
         loadExpenseTypes: function (callback) {
-            $http({url: '/api/v1/officeExpenses/types', method: "GET"})
-                .then(function (response) {
-                    callback(response);
-                }, function (error) {
-                    $log.debug("error retrieving expense types");
-                });
+            services.get('/api/v1/officeExpenses/types', '', function (response) {
+                if (response) {
+                    callback(response)
+                }
+            }, function (error) {
+                $log.debug("error retrieving expense types");
+            })
+            // $http({url: '/api/v1/officeExpenses/types', method: "GET"})
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function (error) {
+            //         $log.debug("error retrieving expense types");
+            //     });
         },
         pendingOfficeExpenses: function (pageable, callback) {
-            $http({url: '/api/v1/officeExpenses/pending', method: "GET", params: pageable})
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    $log.debug("error retrieving expenses");
-                });
+            services.get('/api/v1/officeExpenses/pending', pageable, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                $log.debug("error retrieving expenses");
+            })
+            // $http({url: '/api/v1/officeExpenses/pending', method: "GET", params: pageable})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         $log.debug("error retrieving expenses");
+            //     });
         },
         approvedOfficeExpenses: function (pageable, callback) {
-            $http({url: '/api/v1/officeExpenses/approved', method: "GET", params: pageable})
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    $log.debug("error retrieving expenses");
-                });
+            services.get('/api/v1/officeExpenses/approved', pageable, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                $log.debug("error retrieving expenses");
+            });
+            // $http({url: '/api/v1/officeExpenses/approved', method: "GET", params: pageable})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         $log.debug("error retrieving expenses");
+            //     });
         },
         searchExpenses: function (searchExpense, callback) {
-            $http.post('/api/v1/officeExpenses/search', searchExpense).then(function (response) {
-                if (angular.isFunction(callback)) {
-                    callback(response.data);
+            services.post('/api/v1/officeExpenses/search', searchExpense, function (response) {
+                if (response) {
+                    callback(response.data)
                 }
             }, function (err, status) {
                 sweetAlert("Error searching expenses", err.message, "error");
-            });
+            })
+            // $http.post('/api/v1/officeExpenses/search', searchExpense).then(function (response) {
+            //     if (angular.isFunction(callback)) {
+            //         callback(response.data);
+            //     }
+            // }, function (err, status) {
+            //     sweetAlert("Error searching expenses", err.message, "error");
+            // });
         },
 
         count: function (pending, callback) {
-            $http.get('/api/v1/officeExpenses/count?pending=' + pending)
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    $log.debug("error retrieving expenses count");
-                });
+            services.get('/api/v1/officeExpenses/count?pending=' + pending, '', function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                $log.debug("error retrieving expenses count");
+            })
+            // $http.get('/api/v1/officeExpenses/count?pending=' + pending)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         $log.debug("error retrieving expenses count");
+            //     });
         },
         delete: function (expenseId, callback) {
-            swal({
-                title: "Are you sure?",
-                text: "Are you sure you want to delete this expense?",
-                type: "warning",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                confirmButtonText: "Yes, delete it!",
-                confirmButtonColor: "#ec6c62"
-            }, function () {
-
-                $http.delete('/api/v1/officeExpense/' + expenseId)
-                    .then(function (response) {
-                        callback(response.data);
-                        swal("Great", "Saved Deleted", "success");
-                    }, function (error) {
-                        $log.debug("error deleting expense");
-                        sweetAlert("Error", err.message, "error");
-                    });
+            services.delete('/api/v1/officeExpense/' + expenseId, function (response) {
+                if (response) {
+                    callback(response.data);
+                    swal("Great", "Saved Deleted", "success");
+                }
+            }, function (error) {
+                $log.debug("error deleting expense");
+                sweetAlert("Error", err.message, "error");
             })
+            // swal({
+            //     title: "Are you sure?",
+            //     text: "Are you sure you want to delete this expense?",
+            //     type: "warning",
+            //     showCancelButton: true,
+            //     closeOnConfirm: false,
+            //     confirmButtonText: "Yes, delete it!",
+            //     confirmButtonColor: "#ec6c62"
+            // }, function () {
+            //
+            //     $http.delete('/api/v1/officeExpense/' + expenseId)
+            //         .then(function (response) {
+            //             callback(response.data);
+            //             swal("Great", "Saved Deleted", "success");
+            //         }, function (error) {
+            //             $log.debug("error deleting expense");
+            //             sweetAlert("Error", err.message, "error");
+            //         });
+            // })
 
         },
         getExpenseById: function (id, callback) {
             $log.debug("fetching expense data ...");
-            $http.get('/api/v1/officeExpense/' + id)
-                .then(function (response) {
-                    callback(response.data);
-                }, function (err, status) {
-                    sweetAlert("Error", err.message, "error");
-                });
+            services.get('/api/v1/officeExpense/' + id, '', function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (err, status) {
+                sweetAlert("Error", err.message, "error");
+            })
+            // $http.get('/api/v1/officeExpense/' + id)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (err, status) {
+            //         sweetAlert("Error", err.message, "error");
+            //     });
         },
         save: function (officeExpense, callback) {
             if (!officeExpense.id) {
-                $http.post('/api/v1/officeExpense/', officeExpense).then(function (response) {
-                    if (angular.isFunction(callback)) {
+                services.post('/api/v1/officeExpense/', officeExpense, function (response) {
+                    if (response) {
                         callback(response.data);
                         $rootScope.$broadcast('UpdateHeader');
                         swal("Great", "Saved successfully", "success");
                     }
-                }, function (err, status) {
-                    sweetAlert("Error", err.data.message, "error");
-                });
+                }, function (error) {
+                    sweetAlert("Error", error.data.message, "error");
+                })
+                // $http.post('/api/v1/officeExpense/', officeExpense).then(function (response) {
+                //     if (angular.isFunction(callback)) {
+                //         callback(response.data);
+                //         $rootScope.$broadcast('UpdateHeader');
+                //         swal("Great", "Saved successfully", "success");
+                //     }
+                // }, function (err, status) {
+                //     sweetAlert("Error", err.data.message, "error");
+                // });
             } else {
-                $http.put('/api/v1/officeExpense/', officeExpense).then(function (response) {
-                    if (angular.isFunction(callback)) {
-                        callback(response.data);
-                        $rootScope.$broadcast('UpdateHeader');
-                        swal("Great", "Updated successfully", "success");
+                services.put('/api/v1/officeExpense/', '', officeExpense, function (response) {
+                    if (response) {
+                        if (angular.isFunction(callback)) {
+                            callback(response.data);
+                            $rootScope.$broadcast('UpdateHeader');
+                            swal("Great", "Updated successfully", "success");
+                        }
                     }
                 }, function (err, status) {
                     sweetAlert("Error", err.data.message, "error");
-                });
+                })
+                // $http.put('/api/v1/officeExpense/', officeExpense).then(function (response) {
+                //     if (angular.isFunction(callback)) {
+                //         callback(response.data);
+                //         $rootScope.$broadcast('UpdateHeader');
+                //         swal("Great", "Updated successfully", "success");
+                //     }
+                // }, function (err, status) {
+                //     sweetAlert("Error", err.data.message, "error");
+                // });
             }
         },
 
         approveOrRejectExpenses: function (paymentIds, approve, callback) {
-            $http.post('/api/v1/officeExpenses/approveOrReject/' + approve, paymentIds).then(function (response) {
-                if (angular.isFunction(callback)) {
-                    callback(response.data);
-                    $rootScope.$broadcast('UpdateHeader');
-                    $rootScope.modalInstance.dismiss('success');
+            services.post('/api/v1/officeExpenses/approveOrReject/' + approve, paymentIds, function (response) {
+                if (response) {
+                    if (angular.isFunction(callback)) {
+                        callback(response.data);
+                        $rootScope.$broadcast('UpdateHeader');
+                        $rootScope.modalInstance.dismiss('success');
+                    }
                 }
             }, function (err, status) {
                 sweetAlert("Error", err.data.message, "error");
-            });
+            })
+            // $http.post('/api/v1/officeExpenses/approveOrReject/' + approve, paymentIds).then(function (response) {
+            //     if (angular.isFunction(callback)) {
+            //         callback(response.data);
+            //         $rootScope.$broadcast('UpdateHeader');
+            //         $rootScope.modalInstance.dismiss('success');
+            //     }
+            // }, function (err, status) {
+            //     sweetAlert("Error", err.data.message, "error");
+            // });
         }
     };
 }).factory('printManager', function () {
@@ -406,15 +489,22 @@ angular.module('myBus.officeExpensesModule', ['ngTable', 'ui.bootstrap'])
             return true;
         }
     };
-}).factory('S3UploadManager', function ($rootScope, $http, $log) {
+}).factory('S3UploadManager', function ($rootScope, $http, $log, services) {
     return {
         getUploads: function (id, callback) {
-            $http.get('/api/v1/getUploads/?id='+id)
-                .then(function (response) {
+            services.get('/api/v1/getUploads/?id=' + id, '', function (response) {
+                if (response) {
                     callback(response.data);
-                }, function (err, status) {
-                    sweetAlert("Error", err.data.message, "error");
-                });
+                }
+            }, function (err, status) {
+                sweetAlert("Error", err.data.message, "error");
+            })
+            // $http.get('/api/v1/getUploads/?id='+id)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (err, status) {
+            //         sweetAlert("Error", err.data.message, "error");
+            //     });
         }
     }
 });

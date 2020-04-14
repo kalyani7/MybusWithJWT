@@ -140,93 +140,147 @@ angular.module('myBus.amenitiesModule', ['ngTable', 'ui.bootstrap'])
     };
     
 })
-.factory("amenitiesManager",function($rootScope,$http,$window,$log){
+.factory("amenitiesManager",function($rootScope,$http,$window,$log, services){
 	var amenities = [];
 	return {
 
         fechAmenities: function () {
-            $http.get("/api/v1/amenities").then(function (response) {
-                amenities = response.data;
-            }, function (error) {
-                swal("oops", error, "error");
-            });
+        	services.get("/api/v1/amenities", '', function (response) {
+				if (response) {
+					amenities = response.data;
+				}
+			}, function (error) {
+				swal("oops", error, "error");
+			})
+            // $http.get("/api/v1/amenities").then(function (response) {
+            //     amenities = response.data;
+            // }, function (error) {
+            //     swal("oops", error, "error");
+            // });
         },
 
         getAmenities: function () {
             return amenities;
         },
         getAllAmenities: function ( pageable, callback) {
-            $http({url: '/api/v1/amenities', method: "GET", params: pageable})
-				.then(function (response) {
-			callback(response.data);
-        }, function(error){
-            swal("oops", error, "error");
-        });
+        	services.get('/api/v1/amenities', pageable, function (response) {
+				if (response) {
+					callback(response.data);
+				}
+			}, function (error) {
+				swal("oops", error, "error");
+			})
+        //     $http({url: '/api/v1/amenities', method: "GET", params: pageable})
+		// 		.then(function (response) {
+		// 	callback(response.data);
+        // }, function(error){
+        //     swal("oops", error, "error");
+        // });
 		},
         count: function ( callback) {
-            $http.get('/api/v1/amenities/count',{})
-                .then(function (response) {
-                    callback(response.data);
-                },function (error) {
-                    $log.debug("error retrieving amenities");
-                });
+        	services.get('/api/v1/amenities/count', '', function (response) {
+				if (response) {
+					callback(response.data);
+				}
+			}, function (error) {
+				$log.debug("error retrieving amenities");
+			})
+            // $http.get('/api/v1/amenities/count',{})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     },function (error) {
+            //         $log.debug("error retrieving amenities");
+            //     });
         },
 
 		getAmenitiesName : function() {
-			return $http(
-				{
-					method:'GET',
-					url:'/api/v1/amenities'
+        	return services.get('/api/v1/amenities', '', function (response) {
+				if (response) {
+
 				}
-			);
+			})
+			// return $http(
+			// 	{
+			// 		method:'GET',
+			// 		url:'/api/v1/amenities'
+			// 	}
+			// );
 		},
 		addAmenity: function(amenity,callback) {
-			$http.post("/api/v1/amenity",amenity).then(function(response){
-				callback(response.data);
-				$rootScope.$broadcast('amenitiesInitComplete');
-				swal("Great", "Amenity has been successfully added", "success");
-			},function(error){
+        	services.post("/api/v1/amenity", amenity, function (response) {
+				if (response) {
+					callback(response.data);
+					$rootScope.$broadcast('amenitiesInitComplete');
+					swal("Great", "Amenity has been successfully added", "success");
+				}
+			}, function (error) {
 				swal("oops", error, "error");
 			})
+			// $http.post("/api/v1/amenity",amenity).then(function(response){
+			// 	callback(response.data);
+			// 	$rootScope.$broadcast('amenitiesInitComplete');
+			// 	swal("Great", "Amenity has been successfully added", "success");
+			// },function(error){
+			// 	swal("oops", error, "error");
+			// })
 		},
 
 		getAmenityByID : function(amenityID,callback){
-			$http.get("/api/v1/amenity/"+amenityID).then(function(response){
-				callback(response.data);
-			},function(error){
+        	services.get("/api/v1/amenity/" + amenityID, '', function (response) {
+				if (response) {
+					callback(response.data);
+				}
+			}, function (error) {
 				swal("oops", error, "error");
 			})
+			// $http.get("/api/v1/amenity/"+amenityID).then(function(response){
+			// 	callback(response.data);
+			// },function(error){
+			// 	swal("oops", error, "error");
+			// })
 		},
 
 		updateAmenity : function(amenity,callback){
-			$http.put("/api/v1/amenity",amenity).then(function(response){
+        	services.put("/api/v1/amenity", amenity, function (response) {
 				callback(response.data);
 				$rootScope.$broadcast('amenitiesInitComplete');
 				swal("Great", "Amenity has been updated successfully", "success");
-			},function(error){
+			}, function (error) {
 				swal("oops", error, "error");
 			})
+			// $http.put("/api/v1/amenity",amenity).then(function(response){
+			// 	callback(response.data);
+			// 	$rootScope.$broadcast('amenitiesInitComplete');
+			// 	swal("Great", "Amenity has been updated successfully", "success");
+			// },function(error){
+			// 	swal("oops", error, "error");
+			// })
 		},
 		deleteAmenity : function(amenityID,callback){
+        	services.delete("/api/v1/amenity/" + amenityID, function (response) {
+				if (response) {
+					callback(response)
+				}
+			})
 
-			swal({
-				title: "Are you sure?",
-				text: "Are you sure you want to delete this Amenity?",
-				type: "warning",
-				showCancelButton: true,
-				closeOnConfirm: false,
-				confirmButtonText: "Yes, delete it!",
-				confirmButtonColor: "#ec6c62"},function(){
-
-				$http.delete("/api/v1/amenity/"+amenityID).then(function(data){
-					callback(data);
-					$rootScope.$broadcast('amenitiesInitComplete');
-					swal("Deleted!", "Amenity has been deleted successfully!", "success");
-				},function(error){
-					swal("Oops", "We couldn't connect to the server!", "error");
-				});
-
-			});
+			// swal({
+			// 	title: "Are you sure?",
+			// 	text: "Are you sure you want to delete this Amenity?",
+			// 	type: "warning",
+			// 	showCancelButton: true,
+			// 	closeOnConfirm: false,
+			// 	confirmButtonText: "Yes, delete it!",
+			// 	confirmButtonColor: "#ec6c62"},function(){
+			//
+			// 	$http.delete("/api/v1/amenity/"+amenityID).then(function(data){
+			// 		callback(data);
+			// 		$rootScope.$broadcast('amenitiesInitComplete');
+			// 		swal("Deleted!", "Amenity has been deleted successfully!", "success");
+			// 	},function(error){
+			// 		swal("Oops", "We couldn't connect to the server!", "error");
+			// 	});
+			//
+			// });
 		}
 	}
 });

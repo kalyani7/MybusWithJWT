@@ -64,7 +64,8 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
         };
         $scope.init();
         $scope.gotoBooking = function (bookingId) {
-            $location.url('viewcargobooking/' + bookingId);
+            // $location.url('viewcargobooking/' + bookingId);
+            $state.go('home.viewcargobooking', {id: id})
         }
         $scope.search = function () {
             $scope.init($scope.filter);
@@ -124,7 +125,8 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
         };
         $scope.gotoBooking = function (bookingId) {
             $rootScope.modalInstance.dismiss('cancel');
-            $location.url('viewcargobooking/' + bookingId);
+            // $location.url('viewcargobooking/' + bookingId);
+            $state.go('home.viewcargobooking', {id: id})
         }
     })
     .controller("CargoBookingHeaderController", function ($rootScope, $scope, cargoBookingManager, $location) {
@@ -138,7 +140,8 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
             cargoBookingManager.lookupCargoBooking($scope.bookingId);
         }
         $scope.newBooking = function () {
-            $location.url('newbooking');
+            // $location.url('newbooking');
+            $state.go('home.newbooking');
         }
     }).controller("DeliverBookingController", function ($rootScope, $scope, cargoBookingManager, $location, bookingId) {
         $scope.reviewComment = null;
@@ -154,7 +157,8 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
                 return;
             }
             cargoBookingManager.deliverCargoBooking($scope.cargoBookingId, $scope.reviewComment, function () {
-                $location.url('cargobookings');
+                // $location.url('cargobookings');
+                $state.go('home.cargobookings')
                 $rootScope.$broadcast('UpdateCargoBookingList');
             });
         }
@@ -204,7 +208,8 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
         }
         $scope.searchBookingForUnload();
         $scope.gotoBooking = function (bookingId) {
-            $location.url('viewcargobooking/' + bookingId);
+            // $location.url('viewcargobooking/' + bookingId);
+            $state.go('home.viewcargobooking', {id: id})
         }
         $scope.exportToExcel = function (tableId, fileName) {
             paginationService.exportToExcel(tableId, fileName);
@@ -294,7 +299,8 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
         };
 
         $scope.gotoBooking = function (bookingId) {
-            $location.url('viewcargobooking/' + bookingId);
+            // $location.url('viewcargobooking/' + bookingId);
+            $state.go('home.viewcargobooking', {id: id})
         };
 
         $scope.getAllVehicles = function () {
@@ -383,7 +389,8 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
 
         $scope.searchBookingForDelivery();
         $scope.gotoBooking = function (bookingId) {
-            $location.url('viewcargobooking/' + bookingId);
+            // $location.url('viewcargobooking/' + bookingId);
+            $state.go('home.viewcargobooking', {id: id})
         };
         $scope.initiateDeliverCargoBooking = function (bookingId) {
             cargoBookingManager.initiateDeliverCargoBooking(bookingId, function (data) {
@@ -415,6 +422,7 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
             $scope.query.sort = pageable.sort;
             $scope.query.size = pageable.size;
             cargoBookingManager.getDeliveredCargoBookings($scope.query,function(response){
+                console.log(response)
                 $scope.deliveredBookings = response.data.content;
                 tableParams.data = $scope.deliveredBookings;
             });
@@ -743,7 +751,8 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
                 return;
             }
             cargoBookingManager.createShipment($scope.shipment, function (response) {
-                $location.url('viewcargobooking/' + response.id);
+                // $location.url('viewcargobooking/' + response.id);
+                $state.go('home.viewcargobooking', {id: response.id})
                 $rootScope.$broadcast('UpdateHeader');
             });
         }
@@ -769,7 +778,8 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
 
         $scope.cancelCargoBooking = function (bookingId) {
             cargoBookingManager.cancelCargoBooking(bookingId, function () {
-                $location.url('cargobookings');
+                // $location.url('cargobookings');
+                $state.go('home.cargobookings')
                 $rootScope.$broadcast('UpdateCargoBookingList');
             });
         }
@@ -796,33 +806,54 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
         };
 }).factory('cargoBookingManager', function ($rootScope, $q, $uibModal, $http, $log, $location, services) {
     return {
-        findContactInfoFromPreviousBookings: function (contactType, contact, callback) {
-            $http.get('/api/v1/shipment/findContactInfo?contactType=' + contactType + "&contact=" + contact)
-                .then(function (response) {
-                    if (angular.isFunction(callback)) {
-                        callback(response.data);
-                    }
-                }, function (err, status) {
-                    sweetAlert("Error searching cargo contact info", err.message, "error");
-                });
+        findContactInfoFromPreviousBookings: function (contactType, contact, successCallback, errorCallback) {
+            services.get('/api/v1/shipment/findContactInfo?contactType=' + contactType + "&contact=" + contact, '', function (response) {
+                if (angular.isFunction(successCallback)) {
+                    successCallback(response.data)
+                }
+            }, function (error) {
+                sweetAlert("Error searching cargo contact info", error.message, "error");
+            })
+            // $http.get('/api/v1/shipment/findContactInfo?contactType=' + contactType + "&contact=" + contact)
+            //     .then(function (response) {
+            //         if (angular.isFunction(callback)) {
+            //             callback(response.data);
+            //         }
+            //     }, function (err, status) {
+            //         sweetAlert("Error searching cargo contact info", err.message, "error");
+            //     });
         },
         findCargoBookings: function (filter, callback) {
-            $http.post('/api/v1/shipments', filter)
-                .then(function (response) {
-                    if (angular.isFunction(callback)) {
-                        callback(response.data);
-                    }
-                }, function (err, status) {
-                    sweetAlert("Error searching cargo booking", err.message, "error");
-                });
+            services.post('/api/v1/shipments', filter, function (response) {
+                if (angular.isFunction(callback)) {
+                    callback(response.data);
+                }
+            }, function (error) {
+                sweetAlert("Error searching cargo booking", error.message, "error");
+            })
+            // $http.post('/api/v1/shipments', filter)
+            //     .then(function (response) {
+            //         if (angular.isFunction(callback)) {
+            //             callback(response.data);
+            //         }
+            //     }, function (err, status) {
+            //         sweetAlert("Error searching cargo booking", err.message, "error");
+            //     });
         },
         getCargoBooking: function (id, callback) {
-            $http.get("/api/v1/shipment/" + id)
-                .then(function (response) {
+            services.get("/api/v1/shipment/" + id, '', function (response) {
+                if (response) {
                     callback(response.data)
-                }, function (error) {
-                    swal("oops", error, "error");
-                })
+                }
+            }, function (error) {
+                swal("oops", error, "error");
+            })
+            // $http.get("/api/v1/shipment/" + id)
+            //     .then(function (response) {
+            //         callback(response.data)
+            //     }, function (error) {
+            //         swal("oops", error, "error");
+            //     })
         },
         getShipmentTypes: function (successCallback, errorCallback) {
             services.get('/api/v1/shipment/types', '', function (response) {
@@ -839,20 +870,34 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
             //         swal("oops", error, "error");
             //     })
         }, createShipment: function (cargoBooking, successcallback) {
-            $http.post("/api/v1/shipment", cargoBooking)
-                .then(function (response) {
+            services.post('/api/v1/shipment', cargoBooking, function (response) {
+                if (response) {
                     successcallback(response.data)
-                }, function (error) {
-                    swal("oops", error.data.message, "error");
-                })
+                }
+            }, function (error) {
+                swal("oops", error.data.message, "error");
+            })
+            // $http.post("/api/v1/shipment", cargoBooking)
+            //     .then(function (response) {
+            //         successcallback(response.data)
+            //     }, function (error) {
+            //         swal("oops", error.data.message, "error");
+            //     })
         },
         count: function (filter, callback) {
-            $http.post('/api/v1/shipments/count', filter)
-                .then(function (response) {
+            services.post('/api/v1/shipments/count', filter, function (response) {
+                if (response) {
                     callback(response.data);
-                }, function (error) {
-                    $log.debug("error retrieving shipments count");
-                });
+                }
+            }, function (error) {
+                $log.debug("error retrieving shipments count");
+            })
+            // $http.post('/api/v1/shipments/count', filter)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         $log.debug("error retrieving shipments count");
+            //     });
         },
         cancelCargoBooking: function (bookingId, callback) {
             swal({
@@ -862,12 +907,19 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
                 confirmButtonText: "Yes, cancel!",
                 closeOnConfirm: true
             }, function () {
-                $http.put('/api/v1/shipment/cancel/' + bookingId)
-                    .then(function (response) {
+                services.put('/api/v1/shipment/cancel/' + bookingId, status, bookingId, function (response) {
+                    if (response) {
                         callback(response.data);
-                    }, function (error) {
-                        $log.debug("error canceling the booking " + error);
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error canceling the booking " + error);
+                })
+                // $http.put('/api/v1/shipment/cancel/' + bookingId)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function (error) {
+                //         $log.debug("error canceling the booking " + error);
+                //     });
             });
         },
         initiateDeliverCargoBooking: function (bookingId, callback) {
@@ -884,17 +936,24 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
                     swal.showInputError("Identification is required");
                     return false
                 }
-                $http.put('/api/v1/shipment/deliver/' + bookingId, deliveryComment)
-                    .then(function (response) {
+                services.put('/api/v1/shipment/deliver/' + bookingId, status, deliveryComment, function (response) {
+                    if (response) {
                         callback(response.data);
-                    }, function (error) {
-                        $log.debug("error retrieving shipments count");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving shipments count");
+                })
+                // $http.put('/api/v1/shipment/deliver/' + bookingId, deliveryComment)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function (error) {
+                //         $log.debug("error retrieving shipments count");
+                //     });
             });
         },
         lookupCargoBooking: function (LRNumber) {
-            $http.get("/api/v1/shipment/search/byLR?LRNumber=" + LRNumber)
-                .then(function (response) {
+            services.get("/api/v1/shipment/search/byLR?LRNumber=" + LRNumber, '', function (response) {
+                if (response) {
                     if (response.data.length === 0) {
                         swal("Error", "No Cargo Bookings found", "error");
                     } else if (response.data.length === 1) {
@@ -911,66 +970,137 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
                             }
                         });
                     }
-                }, function (error) {
-                    swal("oops", error.data.message, "error");
-                });
+                }
+            }, function (error) {
+                swal("oops", error.data.message, "error");
+            })
+            // $http.get("/api/v1/shipment/search/byLR?LRNumber=" + LRNumber)
+            //     .then(function (response) {
+            //         if (response.data.length === 0) {
+            //             swal("Error", "No Cargo Bookings found", "error");
+            //         } else if (response.data.length === 1) {
+            //             $location.url('viewcargobooking/' + response.data[0].id);
+            //         } else {
+            //             //console.log("found more than one booking " + JSON.stringify(response.data.length));
+            //             $rootScope.modalInstance = $uibModal.open({
+            //                 templateUrl: 'cargobookings-modal.html',
+            //                 controller: 'CargoBookingLookupController',
+            //                 resolve: {
+            //                     bookings: function () {
+            //                         return response.data;
+            //                     }
+            //                 }
+            //             });
+            //         }
+            //     }, function (error) {
+            //         swal("oops", error.data.message, "error");
+            //     });
         },
         sendSMSForCargoBooking: function (shipmentId) {
-            $http.post("/api/v1/shipment/sendSMS/" + shipmentId)
-                .then(function (response) {
+            services.post("/api/v1/shipment/sendSMS/" + shipmentId, '', function (response) {
+                if (response) {
                     console.log('sent SMS');
-                }, function (error) {
-                    swal("oops", error.data.message, "error");
-                });
+                }
+            }, function (error) {
+                swal("oops", error.data.message, "error");
+            })
+            // $http.post("/api/v1/shipment/sendSMS/" + shipmentId)
+            //     .then(function (response) {
+            //         console.log('sent SMS');
+            //     }, function (error) {
+            //         swal("oops", error.data.message, "error");
+            //     });
         },
         getBranchSummary: function (filter, callback) {
-            $http.post('/api/v1/shipment/branchSummary', filter)
-                .then(function (response) {
-                    if (angular.isFunction(callback)) {
-                        callback(response.data);
-                    }
-                }, function (err, status) {
-                    sweetAlert("Error searching branch summary", err.message, "error");
-                });
+            services.post('/api/v1/shipment/branchSummary', filter, function (response) {
+                if (angular.isFunction(callback)) {
+                    callback(response.data);
+                }
+            }, function (error) {
+                sweetAlert("Error searching branch summary", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/branchSummary', filter)
+            //     .then(function (response) {
+            //         if (angular.isFunction(callback)) {
+            //             callback(response.data);
+            //         }
+            //     }, function (err, status) {
+            //         sweetAlert("Error searching branch summary", err.message, "error");
+            //     });
         },
         getBookingsForUnloading: function (filter, callback) {
-            $http.post('/api/v1/shipment/search/unloading', filter)
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    sweetAlert("Error searching for unloading bookings", error.message, "error");
-                });
+            services.post('/api/v1/shipment/search/unloading', filter, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                sweetAlert("Error searching for unloading bookings", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/search/unloading', filter)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         sweetAlert("Error searching for unloading bookings", error.message, "error");
+            //     });
         },
         getBookingsForLoading: function (filter, callback) {
-            $http.post('/api/v1/shipment/search/loading', filter)
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    sweetAlert("Error searching for unloading bookings", error.message, "error");
-                });
+            services.post('/api/v1/shipment/search/loading', filter, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                sweetAlert("Error searching for unloading bookings", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/search/loading', filter)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         sweetAlert("Error searching for unloading bookings", error.message, "error");
+            //     });
         },
         loadBookings: function (vehicleId, bookingIds, callback) {
-            $http.post('/api/v1/shipment/assignVehicle/'+vehicleId, bookingIds)
-                .then(function (response) {
+            services.post('/api/v1/shipment/assignVehicle/' + vehicleId, bookingIds, function (response) {
+                if (response) {
                     callback(response.data);
-                }, function (error) {
-                    sweetAlert("Error unloading bookings", error.message, "error");
-                });
+                }
+            }, function (error) {
+                sweetAlert("Error unloading bookings", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/assignVehicle/'+vehicleId, bookingIds)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         sweetAlert("Error unloading bookings", error.message, "error");
+            //     });
         },
         unloadBookings: function (bookingIds, callback) {
-            $http.post('/api/v1/shipment/unload', bookingIds)
-                .then(function (response) {
+            services.post('/api/v1/shipment/unload', bookingIds, function (response) {
+                if (response) {
                     callback(response.data);
-                }, function (error) {
-                    sweetAlert("Error unloading bookings", error.message, "error");
-                });
+                }
+            }, function (error) {
+                sweetAlert("Error unloading bookings", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/unload', bookingIds)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         sweetAlert("Error unloading bookings", error.message, "error");
+            //     });
         }, getBookingsForDelivery: function (filter, callback) {
-            $http.post('/api/v1/shipment/search/undelivered', filter)
-                .then(function (response) {
+            services.post('/api/v1/shipment/search/undelivered', filter, function (response) {
+                if (response) {
                     callback(response.data);
-                }, function (error) {
-                    sweetAlert("Error searching for undelivered bookings", error.message, "error");
-                });
+                }
+            }, function (error) {
+                sweetAlert("Error searching for undelivered bookings", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/search/undelivered', filter)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         sweetAlert("Error searching for undelivered bookings", error.message, "error");
+            //     });
         },
         addComment: function (bookingId,reviewComment,callback) {
             swal({
@@ -987,69 +1117,125 @@ angular.module('myBus.cargoBooking', ['ngTable', 'ui.bootstrap'])
                     swal.showInputError("provide comment");
                     return false
                 }
-                $http.put('/api/v1/shipment/addCommentToBooking/' + bookingId, comment)
-                    .then(function (response) {
+                services.put('/api/v1/shipment/addCommentToBooking/' + bookingId, status, comment, function (response) {
+                    if (response) {
                         callback(response.data);
-                    }, function (error) {
-                        $log.debug("error retrieving shipments count");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving shipments count");
+                })
+                // $http.put('/api/v1/shipment/addCommentToBooking/' + bookingId, comment)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function (error) {
+                //         $log.debug("error retrieving shipments count");
+                //     });
             });
         },
         getDeliveredCargoBookings: function (query, callback) {
-            $http.post('/api/v1/shipment/deliveredBookings', query)
-                .then(function (response) {
-                    callback(response);
-                }, function (error) {
-                    sweetAlert("Error searching for delivered bookings", error.message, "error");
-                });
+            services.post('/api/v1/shipment/deliveredBookings', query, function (response) {
+                if (response) {
+                    callback(response)
+                }
+            }, function (error) {
+                sweetAlert("Error searching for delivered bookings", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/deliveredBookings', query)
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function (error) {
+            //         sweetAlert("Error searching for delivered bookings", error.message, "error");
+            //     });
         },
         countDeliveredBookings:function (query, callback) {
-            $http.post('/api/v1/shipment/countDeliveredBookings', query)
-                .then(function (response) {
+            services.post('/api/v1/shipment/countDeliveredBookings', query, function (response) {
+                if (response) {
                     callback(response.data);
-                }, function (error) {
-                    sweetAlert("Error searching for delivered bookings", error.message, "error");
-                });
+                }
+            }, function (error) {
+                sweetAlert("Error searching for delivered bookings", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/countDeliveredBookings', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         sweetAlert("Error searching for delivered bookings", error.message, "error");
+            //     });
         },
         searchCancelledBookings:function (query, callback) {
-            $http.post('/api/v1/shipment/search/cancelled', query)
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    sweetAlert("Error searching for delivered bookings", error.message, "error");
-                });
+            services.post('/api/v1/shipment/search/cancelled', query, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                sweetAlert("Error searching for delivered bookings", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/search/cancelled', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         sweetAlert("Error searching for delivered bookings", error.message, "error");
+            //     });
         },
         countCancelledBookings:function (query, callback) {
-            $http.post('/api/v1/shipment/count/cancelled', query)
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    sweetAlert("Error searching for delivered bookings", error.message, "error");
-                });
+            services.post('/api/v1/shipment/count/cancelled', query, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                sweetAlert("Error searching for delivered bookings", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/count/cancelled', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         sweetAlert("Error searching for delivered bookings", error.message, "error");
+            //     });
         },
         countCancellationPendingCargoBookings:function (query, callback) {
-            $http.post('/api/v1/shipment/count/cancellationPendingShipments', query)
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    sweetAlert("Error searching for delivered bookings", error.message, "error");
-                });
+            services.post('/api/v1/shipment/count/cancellationPendingShipments', query, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                sweetAlert("Error searching for delivered bookings", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/count/cancellationPendingShipments', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         sweetAlert("Error searching for delivered bookings", error.message, "error");
+            //     });
         },
         getCancellationPendingBookings:function (query, callback) {
-            $http.post('/api/v1/shipment/get/pendingShipments', query)
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    sweetAlert("Error in fetching data", error.message, "error");
-                });
+            services.post('/api/v1/shipment/get/pendingShipments', query, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                sweetAlert("Error in fetching data", error.message, "error");
+            })
+            // $http.post('/api/v1/shipment/get/pendingShipments', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         sweetAlert("Error in fetching data", error.message, "error");
+            //     });
         },
         approveCancellation:function(data,callback){
-            $http.put('/api/v1/shipment/approveCancellation',data)
-                .then(function (response) {
+            services.put('/api/v1/shipment/approveCancellation', '', data, function (response) {
+                if (response) {
                     callback(response);
-                }, function (error) {
-                    sweetAlert("Error searching for delivered bookings", error.message, "error");
-                });
+                }
+            }, function (error) {
+                sweetAlert("Error searching for delivered bookings", error.message, "error");
+            })
+            // $http.put('/api/v1/shipment/approveCancellation',data)
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function (error) {
+            //         sweetAlert("Error searching for delivered bookings", error.message, "error");
+            //     });
         }
 
     }

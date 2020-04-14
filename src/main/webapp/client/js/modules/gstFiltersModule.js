@@ -42,25 +42,40 @@ angular.module('myBus.gstFilters', ['ngTable', 'ui.bootstrap'])
         }
 
 
-    }).factory('gstFilterManager', function ($http, $log,$rootScope) {
+    }).factory('gstFilterManager', function ($http, $log, $rootScope, services) {
     return {
         getFilters: function (callback) {
-            $http({url:'/api/v1/GSTFilters/',method: "GET"})
-                .then(function (response) {
-                    callback(response.data);
-                },function (error) {
-                    $log.debug("error retrieving filters");
-                });
+            services.get('/api/v1/GSTFilters/', '', function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                $log.debug("error retrieving filters");
+            })
+            // $http({url:'/api/v1/GSTFilters/',method: "GET"})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     },function (error) {
+            //         $log.debug("error retrieving filters");
+            //     });
         },
         save: function(filters, callback) {
-            $http.post('/api/v1/GSTFilters/',filters).then(function(response){
-                if(angular.isFunction(callback)){
-                    callback(response.data);
+            services.post('/api/v1/GSTFilters/', filters, function (response) {
+                if (response) {
+                    callback(response.data)
                 }
                 $rootScope.$broadcast('FiltersUpdated');
-            },function (err,status) {
+            }, function (err,status) {
                 sweetAlert("Error",err.data.message,"error");
-            });
+            })
+            // $http.post('/api/v1/GSTFilters/',filters).then(function(response){
+            //     if(angular.isFunction(callback)){
+            //         callback(response.data);
+            //     }
+            //     $rootScope.$broadcast('FiltersUpdated');
+            // },function (err,status) {
+            //     sweetAlert("Error",err.data.message,"error");
+            // });
 
         }
     }

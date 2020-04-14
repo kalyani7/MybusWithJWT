@@ -266,7 +266,8 @@ angular.module('myBus.paymentModule', ['ngTable', 'ui.bootstrap'])
             $scope.payment.date = $scope.dt;
             paymentManager.save($scope.payment, function (data) {
                 swal("Great", "Saved successfully", "success");
-                $location.url('/payments');
+                // $location.url('/payments');
+                $state.go('home.payments')
             });
         }
 
@@ -329,88 +330,152 @@ angular.module('myBus.paymentModule', ['ngTable', 'ui.bootstrap'])
             $rootScope.modalInstance.dismiss('cancel');
         };
     })
-    .factory('paymentManager', function ($rootScope, $http, $log) {
+    .factory('paymentManager', function ($rootScope, $http, $log, services) {
         var payments = {};
         return {
             pendingPayments: function (pageable, callback) {
-                $http({url:'/api/v1/payments/pending',method:"GET", params: pageable})
-                    .then(function (response) {
+                services.get('/api/v1/payments/pending', pageable, function (response) {
+                    if (response) {
                         payments = response.data;
                         callback(payments);
                         $rootScope.$broadcast('paymentsInitComplete');
-                    }, function (error) {
-                        $log.debug("error retrieving payments");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving payments");
+                });
+                // $http({url:'/api/v1/payments/pending',method:"GET", params: pageable})
+                //     .then(function (response) {
+                //         payments = response.data;
+                //         callback(payments);
+                //         $rootScope.$broadcast('paymentsInitComplete');
+                //     }, function (error) {
+                //         $log.debug("error retrieving payments");
+                //     });
             },
             approvedPayments: function (pageable, callback) {
-                $http({url:'/api/v1/payments/approved',method:"GET", params: pageable})
-                    .then(function (response) {
+                services.get('/api/v1/payments/approved', pageable, function (response) {
+                    if (response) {
                         payments = response.data;
                         callback(payments);
                         $rootScope.$broadcast('paymentsInitComplete');
-                    }, function (error) {
-                        $log.debug("error retrieving payments");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving payments");
+                })
+                // $http({url:'/api/v1/payments/approved',method:"GET", params: pageable})
+                //     .then(function (response) {
+                //         payments = response.data;
+                //         callback(payments);
+                //         $rootScope.$broadcast('paymentsInitComplete');
+                //     }, function (error) {
+                //         $log.debug("error retrieving payments");
+                //     });
             },
             count: function (pendingPayments, callback) {
-                $http.get('/api/v1/payments/count?pending='+pendingPayments)
-                    .then(function (response) {
-                        callback(response.data);
-                    }, function (error) {
-                        $log.debug("error retrieving payments count");
-                    });
+                services.get('/api/v1/payments/count?pending=' + pendingPayments, '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving payments count");
+                })
+                // $http.get('/api/v1/payments/count?pending='+pendingPayments)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function (error) {
+                //         $log.debug("error retrieving payments count");
+                //     });
             },
             countVehicleExpenses: function (query, callback) {
-                $http.get('/api/v1/vehicleExpenses/count')
-                    .then(function (response) {
-                        callback(response.data);
-                    }, function (error) {
-                        $log.debug("error retrieving payments count");
-                    });
+                services.get('/api/v1/vehicleExpenses/count', '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving payments count");
+                })
+                // $http.get('/api/v1/vehicleExpenses/count')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function (error) {
+                //         $log.debug("error retrieving payments count");
+                //     });
             },
             getVehicleExpenses: function (pageable, callback) {
-                $http({url:'/api/v1/vehicleExpenses',method:"GET", params: pageable})
-                    .then(function (response) {
+                services.get('/api/v1/vehicleExpenses', pageable, function (response) {
+                    if (response) {
                         payments = response.data;
                         callback(payments);
                         $rootScope.$broadcast('paymentsInitComplete');
-                    }, function (error) {
-                        $log.debug("error retrieving payments");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving payments");
+                })
+                // $http({url:'/api/v1/vehicleExpenses',method:"GET", params: pageable})
+                //     .then(function (response) {
+                //         payments = response.data;
+                //         callback(payments);
+                //         $rootScope.$broadcast('paymentsInitComplete');
+                //     }, function (error) {
+                //         $log.debug("error retrieving payments");
+                //     });
             },
             delete: function (paymentId, callback) {
-                $http.delete('/api/v1/payment/' + paymentId)
-                    .then(function (response) {
-                        callback(response.data);
-                        swal("Great", "Saved Deleted", "success");
-                    }, function (error) {
-                        $log.debug("error deleting payment");
-                        sweetAlert("Error",err.message,"error");
-                    });
+                services.delete('/api/v1/payment/' + paymentId, function (response) {
+                    callback(response.data);
+                    swal("Great", "Saved Deleted", "success");
+                }, function (error) {
+                    $log.debug("error deleting payment");
+                    sweetAlert("Error",err.message,"error");
+                })
+                // $http.delete('/api/v1/payment/' + paymentId)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //         swal("Great", "Saved Deleted", "success");
+                //     }, function (error) {
+                //         $log.debug("error deleting payment");
+                //         sweetAlert("Error",err.message,"error");
+                //     });
             },
             getPaymentById: function (id,callback) {
                 $log.debug("fetching payment data ...");
-                $http.get('/api/v1/payment/'+id)
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (err,status) {
-                        sweetAlert("Error",err.message,"error");
-                    });
+                services.get('/api/v1/payment/' + id, function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (err,status) {
+                    sweetAlert("Error",err.message,"error");
+                })
+                // $http.get('/api/v1/payment/'+id)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (err,status) {
+                //         sweetAlert("Error",err.message,"error");
+                //     });
             },
             searchPayments: function(searchPayments, callback){
-                $http.post('/api/v1/payment/search', searchPayments)
-                    .then(function (response) {
-                    if (angular.isFunction(callback)) {
-                        callback(response.data);
+                services.post('/api/v1/payment/search', searchPayments, function (response) {
+                    if (response) {
+                        if (angular.isFunction(callback)) {
+                            callback(response.data);
+                        }
                     }
                 }, function (err, status) {
                     sweetAlert("Error searching payments", err.message, "error");
-                });
+                })
+                // $http.post('/api/v1/payment/search', searchPayments)
+                //     .then(function (response) {
+                //     if (angular.isFunction(callback)) {
+                //         callback(response.data);
+                //     }
+                // }, function (err, status) {
+                //     sweetAlert("Error searching payments", err.message, "error");
+                // });
             },
             save: function (payment, callback) {
                 if (!payment.id) {
-                    $http.post('/api/v1/payment/', payment).then(function (response) {
-                        if (angular.isFunction(callback)) {
+                    services.post('/api/v1/payment/', payment, function (response) {
+                        if (response) {
                             callback(response.data);
                             $rootScope.$broadcast('UpdateHeader');
                             swal("Great", "Saved successfully", "success");
@@ -419,9 +484,19 @@ angular.module('myBus.paymentModule', ['ngTable', 'ui.bootstrap'])
                     }, function (err, status) {
                         sweetAlert("Error", err.data.message, "error");
                     });
+                    // $http.post('/api/v1/payment/', payment).then(function (response) {
+                    //     if (angular.isFunction(callback)) {
+                    //         callback(response.data);
+                    //         $rootScope.$broadcast('UpdateHeader');
+                    //         swal("Great", "Saved successfully", "success");
+                    //         $rootScope.modalInstance.dismiss('success');
+                    //     }
+                    // }, function (err, status) {
+                    //     sweetAlert("Error", err.data.message, "error");
+                    // });
                 } else {
-                    $http.put('/api/v1/payment/', payment).then(function (response) {
-                        if (angular.isFunction(callback)) {
+                    services.put('/api/v1/payment/', '', payment, function (response) {
+                        if (response) {
                             callback(response.data);
                             $rootScope.$broadcast('UpdateHeader');
                             swal("Great", "Saved successfully", "success");
@@ -429,7 +504,17 @@ angular.module('myBus.paymentModule', ['ngTable', 'ui.bootstrap'])
                         }
                     }, function (err, status) {
                         sweetAlert("Error", err.data.message, "error");
-                    });
+                    })
+                    // $http.put('/api/v1/payment/', payment).then(function (response) {
+                    //     if (angular.isFunction(callback)) {
+                    //         callback(response.data);
+                    //         $rootScope.$broadcast('UpdateHeader');
+                    //         swal("Great", "Saved successfully", "success");
+                    //         $rootScope.modalInstance.dismiss('success');
+                    //     }
+                    // }, function (err, status) {
+                    //     sweetAlert("Error", err.data.message, "error");
+                    // });
                 }
             },
             getAllData: function () {
@@ -441,15 +526,22 @@ angular.module('myBus.paymentModule', ['ngTable', 'ui.bootstrap'])
                 }));
             },
             approveOrRejectPayments:function(paymentIds, approve, callback) {
-                $http.post('/api/v1/payment/approveOrReject/'+approve, paymentIds).then(function (response) {
-                    if (angular.isFunction(callback)) {
-                        callback(response.data);
-                        $rootScope.$broadcast('UpdateHeader');
-                        $rootScope.modalInstance.dismiss('success');
-                    }
+                services.post('/api/v1/payment/approveOrReject/'+approve, paymentIds, function (response) {
+                    callback(response.data);
+                    $rootScope.$broadcast('UpdateHeader');
+                    $rootScope.modalInstance.dismiss('success');
                 }, function (err, status) {
                     sweetAlert("Error", err.data.message, "error");
-                });
+                })
+                // $http.post('/api/v1/payment/approveOrReject/'+approve, paymentIds).then(function (response) {
+                //     if (angular.isFunction(callback)) {
+                //         callback(response.data);
+                //         $rootScope.$broadcast('UpdateHeader');
+                //         $rootScope.modalInstance.dismiss('success');
+                //     }
+                // }, function (err, status) {
+                //     sweetAlert("Error", err.data.message, "error");
+                // });
             }
         }
     });

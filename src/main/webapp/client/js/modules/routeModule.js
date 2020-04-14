@@ -68,7 +68,7 @@
         };
 
         $scope.handleClickUpdateRoute = function (routeId) {
-          $state.go('createRoute',{id:routeId});
+          $state.go('home.createRoute',{id:routeId});
         };
 
     })
@@ -119,7 +119,7 @@
             console.log("Adding new route initiation");
         }
         $scope.cancel = function () {
-            $state.go('routes');
+            $state.go('home.routes');
         };
         $scope.addTheCity = function (selectedCity) {
             $scope.viaCities = [];
@@ -185,7 +185,7 @@
             if (passId) {
                 routesManager.updateRoute($scope.route, function (data) {
                     if (data) {
-                        $state.go('routes');
+                        $state.go('home.routes');
                     }
                 });
             } else {
@@ -195,7 +195,7 @@
                 } else {
                     routesManager.createRoute($scope.route, function (data) {
                         if(data){
-                            $state.go('routes');
+                            $state.go('home.routes');
                         }
                     });
                 }
@@ -207,7 +207,10 @@
     // ====================================    Routes  Manager (Service)   ========================================= //
     // ============================================================================================================= //
 
-    .factory('routesManager', function ($rootScope,$q, $http, $log) {
+    .factory('routesManager', function ($rootScope,$q, $http, $log, services) {
+        var token = $cookies.get('token');
+        var tokenType = $cookies.get('tokenType');
+        var sendToken = tokenType + ' ' + token;
         var routes = {};
         return{
             /*getRoutes: function (pageable, callback) {
@@ -220,8 +223,8 @@
             },*/
             load: function (pageable) {
                 var deferred = $q.defer();
-                $q.all([$http({url: '/api/v1/routes', method: "GET", params: pageable}),
-                    $http.get('/api/v1/activeCityNames')]).then(
+                $q.all([$http({url: '/api/v1/routes', method: "GET", params: pageable, headers: {"Authorization": sendToken}}),
+                    $http.get({url: '/api/v1/activeCityNames', methed: 'GET', headers: {"Authorization": sendToken}})]).then(
                     function (results) {
                         deferred.resolve(results)
                     },
@@ -234,20 +237,34 @@
                 return deferred.promise;
             },
             getActiveRouteNames: function(callback) {
-                $http.get('/api/v1/routes')
-                    .then(function(response){
-                        callback(response.data);
-                    },function (error) {
-                        $log.debug("error retrieving routes");
-                    });
+                services.get('/api/v1/routes', '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving routes");
+                })
+                // $http.get('/api/v1/routes')
+                //     .then(function(response){
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error retrieving routes");
+                //     });
             },
-            getRoute: function(routeId,callback){
-                $http.get('/api/v1/route/'+routeId)
-                    .then(function(response){
-                        callback(response.data);
-                    },function (error) {
-                        $log.debug("error retrieving cities");
-                    });
+            getRoute: function(routeId, callback) {
+                services.get('/api/v1/route/' + routeId, '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving cities");
+                })
+                // $http.get('/api/v1/route/'+routeId)
+                //     .then(function(response){
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error retrieving cities");
+                //     });
             },
             count: function (callback) {
                 $http.get('/api/v1/routes/count')

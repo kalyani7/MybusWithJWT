@@ -197,105 +197,177 @@ angular.module('myBus.roleModule', ['ngTable', 'ui.bootstrap'])
 			$scope.isEditable = $scope.isEditable?false:true;
 			$log.debug("edit managing roles");
 		}
-	}).factory('roleManager', function ($rootScope, $http,$filter,$log) {
+	}).factory('roleManager', function ($rootScope, $http, $filter, $log, services) {
 	var roles=[];
 	return {
 
-		getAllRoles : function(pageable, callback){
-			$http({url:'/api/v1/roles',method: "GET",params: pageable})
-				.then(function (response) {
-                    callback(response.data);
-				},function(err) {
-					sweetAlert("Error",err.message,"error");
-				});
+		getAllRoles : function(pageable, callback) {
+			services.get('/api/v1/roles', pageable, function (response) {
+				if (response) {
+					callback(response.data)
+				}
+			}, function(err) {
+				sweetAlert("Error",err.message,"error");
+			})
+			// $http({url:'/api/v1/roles',method: "GET",params: pageable})
+			// 	.then(function (response) {
+            //         callback(response.data);
+			// 	},function(err) {
+			// 		sweetAlert("Error",err.message,"error");
+			// 	});
 		},
         count: function (callback) {
-            $http.get('/api/v1/roles/count',{})
-                .then(function (response) {
-                    callback(response.data);
-                },function (error) {
-                    $log.debug("error retrieving roles");
-                });
+			services.get('/api/v1/roles/count', {}, function (response) {
+				if (response) {
+					callback(response.data)
+				}
+			}, function (error) {
+				$log.debug("error retrieving roles");
+			})
+            // $http.get('/api/v1/roles/count',{})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     },function (error) {
+            //         $log.debug("error retrieving roles");
+            //     });
         },
-		createRole : function (role,callback) {
-			$http.post('/api/v1/createRole',role)
-				.then(function (response) {
+		createRole : function (role, callback) {
+			services.post('/api/v1/createRole', role, function (response) {
+				if (response) {
 					callback(response.data);
 					swal("Great", "Role has been successfully added", "success");
-                    $rootScope.$broadcast("roleInit");
-				},function(err) {
-					sweetAlert("Error",err.message,"error");
-				});
+					$rootScope.$broadcast("roleInit");
+				}
+			}, function(err) {
+				sweetAlert("Error",err.message,"error");
+			})
+			// $http.post('/api/v1/createRole',role)
+			// 	.then(function (response) {
+			// 		callback(response.data);
+			// 		swal("Great", "Role has been successfully added", "success");
+            //         $rootScope.$broadcast("roleInit");
+			// 	},function(err) {
+			// 		sweetAlert("Error",err.message,"error");
+			// 	});
 		},
 		updateRole : function (roleID,role,callback) {
-			$http.put('/api/v1/role/'+roleID,role)
-				.then(function (response) {
+			services.put('/api/v1/role/'+roleID, role, function (response) {
+				if (response) {
 					callback(response.data);
 					swal("Great", "Roles has been updated successfully", "success");
 					$rootScope.$broadcast("roleInit");
-				},function(err) {
-					callback(err);
-					sweetAlert("Error",err.message,"error");
-				});
+				}
+			}, function(err) {
+				callback(err);
+				sweetAlert("Error",err.message,"error");
+			})
+			// $http.put('/api/v1/role/'+roleID,role)
+			// 	.then(function (response) {
+			// 		callback(response.data);
+			// 		swal("Great", "Roles has been updated successfully", "success");
+			// 		$rootScope.$broadcast("roleInit");
+			// 	},function(err) {
+			// 		callback(err);
+			// 		sweetAlert("Error",err.message,"error");
+			// 	});
 		},
 		deleteRole : function (roleID,callback) {
-
-			swal({
-				title: "Are you sure?",
-				text: "Are you sure you want to delete this Role?",
-				type: "warning",
-				showCancelButton: true,
-				closeOnConfirm: false,
-				confirmButtonText: "Yes, delete it!",
-				confirmButtonColor: "#ec6c62"},function(){
-
-				$http.delete('/api/v1/role/'+roleID)
-					.then(function (response) {
-                        callback(response.data);
-						swal("Great", "Roles has been updated successfully", "success");
-						$rootScope.modalInstance.dismiss('success');
-						$rootScope.$broadcast("roleInit");
-					},function(err) {
-						callback(err);
-						sweetAlert("Error",err.message,"error");
-					});
-			})
-		},
-		getRoleById : function (roleID,callback) {
-			$http.get('/api/v1/role/'+roleID)
-				.then(function (response) {
-					callback(response.data);
-				},function(err) {
-					sweetAlert("Error",err.message,"error");
-				});
-		},
-		getRoleByRoleName : function (rolesName,callback) {
-			$http.get('/api/v1/roleByName/'+rolesName)
-				.then(function (response) {
-					callback(response.data);
-				},function(err) {
-					sweetAlert("Error",err.message,"error");
-				});
-		},
-		getRoleNames : function (callback) {
-			$http.get('/api/v1/role/names')
-				.then(function (response) {
-					console.log(response);
-					callback(response.data);
-				},function(err) {
-					sweetAlert("Error",err.message,"error");
-				});
-		},
-		updateManageingRole : function (roleID,role,callback) {
-			$http.put('/api/v1/manageRole', role)
-				.then(function (response) {
+			services.delete('/api/v1/role/' + roleID, function (response) {
+				if (response) {
 					callback(response.data);
 					swal("Great", "Roles has been updated successfully", "success");
+					$rootScope.modalInstance.dismiss('success');
 					$rootScope.$broadcast("roleInit");
-				},function(err) {
-					callback(err);
-					sweetAlert("Error",err.message,"error");
-				});
+				}
+			}, function(err) {
+				callback(err);
+				sweetAlert("Error",err.message,"error");
+			})
+			// swal({
+			// 	title: "Are you sure?",
+			// 	text: "Are you sure you want to delete this Role?",
+			// 	type: "warning",
+			// 	showCancelButton: true,
+			// 	closeOnConfirm: false,
+			// 	confirmButtonText: "Yes, delete it!",
+			// 	confirmButtonColor: "#ec6c62"},function(){
+			//
+			// 	$http.delete('/api/v1/role/'+roleID)
+			// 		.then(function (response) {
+            //             callback(response.data);
+			// 			swal("Great", "Roles has been updated successfully", "success");
+			// 			$rootScope.modalInstance.dismiss('success');
+			// 			$rootScope.$broadcast("roleInit");
+			// 		},function(err) {
+			// 			callback(err);
+			// 			sweetAlert("Error",err.message,"error");
+			// 		});
+			// })
+		},
+		getRoleById : function (roleID, callback) {
+			services.get('/api/v1/role/' + roleID, '', function (response) {
+				if (response.data) {
+					callback(response.data)
+				}
+			}, function(err) {
+				sweetAlert("Error",err.message,"error");
+			})
+			// $http.get('/api/v1/role/'+roleID)
+			// 	.then(function (response) {
+			// 		callback(response.data);
+			// 	},function(err) {
+			// 		sweetAlert("Error",err.message,"error");
+			// 	});
+		},
+		getRoleByRoleName : function (rolesName,callback) {
+			services.get('/api/v1/roleByName/' + rolesName, '', function (response) {
+				if (response) {
+					callback(response.data)
+				}
+			}, function (err) {
+				sweetAlert("Error",err.message,"error");
+			})
+			// $http.get('/api/v1/roleByName/'+rolesName)
+			// 	.then(function (response) {
+			// 		callback(response.data);
+			// 	},function(err) {
+			// 		sweetAlert("Error",err.message,"error");
+			// 	});
+		},
+		getRoleNames : function (callback) {
+			services.get('/api/v1/role/names', '', function (response) {
+				if (response) {
+					callback(response.data)
+				}
+			}, function(err) {
+				sweetAlert("Error",err.message,"error");
+			})
+			// $http.get('/api/v1/role/names')
+			// 	.then(function (response) {
+			// 		console.log(response);
+			// 		callback(response.data);
+			// 	},function(err) {
+			// 		sweetAlert("Error",err.message,"error");
+			// 	});
+		},
+		updateManageingRole : function (roleID,role,callback) {
+			services.put('/api/v1/manageRole', '', role, function (response) {
+				callback(response.data);
+				swal("Great", "Roles has been updated successfully", "success");
+				$rootScope.$broadcast("roleInit");
+			},function(err) {
+				callback(err);
+				sweetAlert("Error",err.message,"error");
+			})
+			// $http.put('/api/v1/manageRole', role)
+			// 	.then(function (response) {
+			// 		callback(response.data);
+			// 		swal("Great", "Roles has been updated successfully", "success");
+			// 		$rootScope.$broadcast("roleInit");
+			// 	},function(err) {
+			// 		callback(err);
+			// 		sweetAlert("Error",err.message,"error");
+			// 	});
 		}
 	};
 })

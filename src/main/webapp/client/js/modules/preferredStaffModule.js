@@ -12,7 +12,7 @@ angular.module('myBus.preferredStaffModule', ['ngTable', 'ui.bootstrap'])
             $scope.cities = response;
         });
         $scope.addPreferredStaff = function (id) {
-            $state.go('add-editpreferredStaff',{staffId:id});
+            $state.go('home.add-editpreferredStaff',{staffId:id});
         };
         $scope.deleteStaff = function(staffId){
             PreferredStaffManager.deletePreferredStaff(staffId,function (response) {
@@ -126,83 +126,129 @@ angular.module('myBus.preferredStaffModule', ['ngTable', 'ui.bootstrap'])
                 if ($stateParams.staffId) {
                     PreferredStaffManager.updatePreferredStaff($scope.staff, function (response) {
                         swal("success", "staff Updated", "success");
-                        $state.go('preferredstaff');
+                        $state.go('home.preferredstaff');
                     });
                 } else {
                     PreferredStaffManager.addPreferredStaff($scope.staff, function (response) {
                         swal("success", "staff created", "success");
-                        $state.go('preferredstaff');
+                        $state.go('home.preferredstaff');
                     });
                 }
             }
         };
         $scope.cancel = function(){
-            $state.go('preferredstaff');
+            $state.go('home.preferredstaff');
         };
         $scope.getAllVehicles();
         $scope.getAllStaff();
         $scope.getAllCities();
-}).factory('PreferredStaffManager',function ($http) {
+}).factory('PreferredStaffManager', function ($http, services) {
     return{
         addPreferredStaff:function (staff, callback) {
-            $http.post('/api/v1/preferredStaff/addPreferredStaff', staff)
-                .then(function (response) {
-                    callback(response);
-                }, function (err) {});
+            services.post('/api/v1/preferredStaff/addPreferredStaff', staff, function (response) {
+                if (response) {
+                    callback(response)
+                }
+            }, function (error) {})
+            // $http.post('/api/v1/preferredStaff/addPreferredStaff', staff)
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function (err) {});
         },
         updatePreferredStaff:function (staff, callback) {
-            $http.put('/api/v1/preferredStaff/updatePreferredStaff', staff)
-                .then(function (response) {
-                    callback(response);
-                }, function (err) {});
+            services.put('/api/v1/preferredStaff/updatePreferredStaff', '', staff, function (response) {
+                if (response) {
+                    callback(response)
+                }
+            }, function (error) {})
+            // $http.put('/api/v1/preferredStaff/updatePreferredStaff', staff)
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function (err) {});
         },
-        getAllStaff: function (query,callback) {
-            $http.post('/api/v1/preferredStaff/getAllStaff', query)
-                .then(function (response) {
+        getAllStaff: function (query, callback) {
+            services.post('/api/v1/preferredStaff/getAllStaff', query, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function(error){
+                swal("oops", error, "error");
+            })
+            // $http.post('/api/v1/preferredStaff/getAllStaff', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
+        },
+        deletePreferredStaff: function (id, callback) {
+            services.delete('/api/v1/preferredStaff/delete/' + id, function (response) {
+                if (response) {
                     callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+                    sweetAlert("Great", "successfully deleted", "success");
+                }
+            }, function (error) {
+                sweetAlert("Oops...", "Error!", "error" + angular.toJson(error));
+            })
+            // swal({   title: "Are you sure?",   text: "You will not be able to recover this !",
+            //     type: "warning",
+            //     showCancelButton: true,
+            //     confirmButtonColor: "#DD6B55",
+            //     confirmButtonText: "Yes, delete it!",
+            //     closeOnConfirm: false }, function() {
+            //     $http.delete('/api/v1/preferredStaff/delete/' + id)
+            //         .then(function (response) {
+            //             callback(response.data);
+            //             sweetAlert("Great", "successfully deleted", "success");
+            //         },function (error) {
+            //             sweetAlert("Oops...", "Error!", "error" + angular.toJson(error));
+            //         });
+            // });
         },
-        deletePreferredStaff:function (id,callback) {
-            swal({   title: "Are you sure?",   text: "You will not be able to recover this !",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false }, function() {
-                $http.delete('/api/v1/preferredStaff/delete/' + id)
-                    .then(function (response) {
-                        callback(response.data);
-                        sweetAlert("Great", "successfully deleted", "success");
-                    },function (error) {
-                        sweetAlert("Oops...", "Error!", "error" + angular.toJson(error));
-                    });
-            });
+        getPreferredStaff: function (id, callback) {
+            services.get('/api/v1/preferredStaff/get/' + id, '', function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function(error){
+                swal("oops", error, "error");
+            })
+            // $http.get('/api/v1/preferredStaff/get/'+id)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         },
-        getPreferredStaff: function (id,callback) {
-            $http.get('/api/v1/preferredStaff/get/'+id)
-                .then(function (response) {
-                    callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+        preferredStaffCount: function (query, callback) {
+            services.post('/api/v1/preferredStaff/getCount', query, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                swal("oops", error, "error");
+            })
+            // $http.post('/api/v1/preferredStaff/getCount', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         },
-        preferredStaffCount: function (query,callback) {
-            $http.post('/api/v1/preferredStaff/getCount', query)
-                .then(function (response) {
-                    callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
-        },
-        getStaffForDailyTrips:function (query,callback) {
-            $http.post('/api/v1/preferredStaff/getStaffForDailyTrips', query)
-                .then(function (response) {
-                    callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+        getStaffForDailyTrips: function (query, callback) {
+            services.post('/api/v1/preferredStaff/getStaffForDailyTrips', query, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function(error){
+                swal("oops", error, "error");
+            })
+            // $http.post('/api/v1/preferredStaff/getStaffForDailyTrips', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         }
 
     }

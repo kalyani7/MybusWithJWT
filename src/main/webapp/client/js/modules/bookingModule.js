@@ -47,7 +47,7 @@ angular.module('myBus.bookingModule', ['ngTable', 'ui.bootstrap'])
         };
         $scope.init();
         $scope.showBookingByPhone = function(count){
-            $state.go('bookingsbyphone', {phoneNumber: count._id, totalBookings:count.totalBookings});
+            $state.go('home.bookingsbyphone', {phoneNumber: count._id, totalBookings:count.totalBookings});
         };
 
         $scope.currentPageOfBookings = [];
@@ -111,33 +111,54 @@ angular.module('myBus.bookingModule', ['ngTable', 'ui.bootstrap'])
         };
         $scope.init();
         $scope.search = function(phoneNumber, totalBookings) {
-            $state.go('bookingsbyphone', {phoneNumber: count._id, totalBookings:count.totalBookings});
+            $state.go('home.bookingsbyphone', {phoneNumber: count._id, totalBookings:count.totalBookings});
         }
-    }).factory('bookingManager', function ($http, $log) {
+    }).factory('bookingManager', function ($http, $log, services) {
         return {
             getBookingsCountByPhone: function (pageable, callback) {
-                $http({url:'/api/v1/getBookingCounts',method: "GET",params: pageable})
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (error) {
-                        $log.debug("error getBookingCounts");
-                    });
+                services.get('/api/v1/getBookingCounts', pageable, function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error getBookingCounts");
+                })
+                // $http({url:'/api/v1/getBookingCounts',method: "GET",params: pageable})
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error getBookingCounts");
+                //     });
             },
             getBookingsByPhone: function (phoneNumber, callback) {
-                $http({url:'/api/v1/getBookingsByPhone/'+phoneNumber,method: "GET"})
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (error) {
-                        $log.debug("error getBookingsByPhone");
-                    });
+                services.get('/api/v1/getBookingsByPhone/'+phoneNumber, '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error getBookingsByPhone");
+                })
+                // $http({url:'/api/v1/getBookingsByPhone/'+phoneNumber,method: "GET"})
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error getBookingsByPhone");
+                //     });
             },
             getUniquePhoneNumbers: function (callback) {
-                $http({url:'/api/v1/getUniquePhoneNumbers',method: "GET"})
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (error) {
-                        $log.debug("error getUniquePhoneNumbers");
-                    });
+                services.get('/api/v1/getUniquePhoneNumbers', '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error getUniquePhoneNumbers");
+                })
+                // $http({url:'/api/v1/getUniquePhoneNumbers',method: "GET"})
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error getUniquePhoneNumbers");
+                //     });
             }
         }
 });

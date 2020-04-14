@@ -93,6 +93,7 @@
     <script src="client/js/modules/busLayoutModule.js"></script>
     <script src="client/js/modules/searchServiceModule.js"></script>
     <script src="client/js/modules/homeModule.js"></script>
+    <script src="client/lib/underscore-min-1.5.2.js"></script>
 
 
     <script src="client/node_modules/moment/moment.js"></script>

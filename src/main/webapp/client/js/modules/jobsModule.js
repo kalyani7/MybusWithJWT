@@ -6,7 +6,7 @@ angular.module('myBus.jobsModule', ['ngTable', 'ui.bootstrap'])
         var pageable;
         $scope.query = {};
         $scope.addJob = function () {
-            $state.go('addJob');
+            $state.go('home.addJob');
         };
         inventoryManager.getAllInventories(null,function(response){
             $scope.inventories = response.content;
@@ -82,7 +82,7 @@ angular.module('myBus.jobsModule', ['ngTable', 'ui.bootstrap'])
         $scope.init();
 
         $scope.editJob = function(id){
-            $state.go('addJob',{id:id});
+            $state.go('home.addJob',{id:id});
         };
 
         $scope.deleteJob = function(id){
@@ -175,7 +175,7 @@ angular.module('myBus.jobsModule', ['ngTable', 'ui.bootstrap'])
         $scope.titleName = 'Add Job';
         $scope.odometerReading = 0;
         $scope.cancel = function () {
-            $state.go('jobs');
+            $state.go('home.jobs');
         };
 
         $scope.getVehicles = function () {
@@ -222,11 +222,11 @@ angular.module('myBus.jobsModule', ['ngTable', 'ui.bootstrap'])
             } else {*/
             if ($stateParams.id) {
                 jobManager.updateJob($scope.job, function (response) {
-                    $state.go('jobs');
+                    $state.go('home.jobs');
                 });
             } else {
                 jobManager.addJob($scope.job, function (response) {
-                    $state.go('jobs');
+                    $state.go('home.jobs');
                 });
             }
             //}
@@ -270,73 +270,120 @@ angular.module('myBus.jobsModule', ['ngTable', 'ui.bootstrap'])
                 $scope.job.inventories.splice(index, 1);
             }
         };
-    }).factory("jobManager", function ($http) {
+    }).factory("jobManager", function ($http, services) {
     return {
         addJob: function (job, callback) {
-            $http.post('/api/v1/jobs/addJob', job)
-                .then(function (response) {
-                    callback(response);
-                }, function (err) {
-                });
+            services.post('/api/v1/jobs/addJob', job, function (response) {
+                if (response) {
+                    callback(response)
+                }
+            }, function (error) {})
+            // $http.post('/api/v1/jobs/addJob', job)
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function (err) {
+            //     });
         },
         getPendingJobs: function (pageable, callback) {
-            $http({url: '/api/v1/jobs/getPendingJobs', method: "GET", params:pageable})
-                .then(function (response) {
-                    callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+            services.get('/api/v1/jobs/getPendingJobs', pageable, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function(error){
+                swal("oops", error, "error");
+            })
+            // $http({url: '/api/v1/jobs/getPendingJobs', method: "GET", params:pageable})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         },
         getCompletedJobs: function (pageable, callback) {
-            $http({url: '/api/v1/jobs/getCompletedJobs', method: "GET", params:pageable})
-                .then(function (response) {
-                    callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+            services.get('/api/v1/jobs/getCompletedJobs', pageable, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                swal("oops", error, "error");
+            })
+            // $http({url: '/api/v1/jobs/getCompletedJobs', method: "GET", params:pageable})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         },
-        getJob:function(id,callback){
-            $http.get('/api/v1/jobs/getAJob/'+id)
-                .then(function (response) {
-                    callback(response.data);
-                },function(err) {});
+        getJob: function(id, callback) {
+            services.get('/api/v1/jobs/getAJob/' + id, '', function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {})
+            // $http.get('/api/v1/jobs/getAJob/'+id)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     },function(err) {});
         },
-        updateJob:function(job,callback){
-            $http.put('/api/v1/jobs/updateJob',job)
-                .then(function (response) {
-                    callback(response);
-                },function(err) {});
+        updateJob: function(job, callback) {
+            services.put('/api/v1/jobs/updateJob', '', job,function (response) {
+                if (response) {
+                    callback(response)
+                }
+            }, function (error) {})
+            // $http.put('/api/v1/jobs/updateJob',job)
+            //     .then(function (response) {
+            //         callback(response);
+            //     },function(err) {});
         },
-        count:function (query,callback) {
-            $http.post('/api/v1/jobs/getCount', query)
-                .then(function (response) {
-                    callback(response.data);
-                },function(err) {});
+        count: function (query, callback) {
+            services.post('/api/v1/jobs/getCount', query, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {})
+            // $http.post('/api/v1/jobs/getCount', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     },function(err) {});
         },
         deleteJob: function(id,callback) {
-            swal({   title: "Are you sure?",   text: "You will not be able to recover this Job !",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false
-            }, function() {
-                $http.delete('/api/v1/jobs/delete/' + id)
-                    .then(function (response) {
-                        callback(response);
-                        sweetAlert("Great", "Job successfully deleted", "success");
-                    },function (error) {
-                        sweetAlert("Oops...", "Error finding data!", "error" + angular.toJson(error));
-                    });
-            });
+            services.delete('/api/v1/jobs/delete/' + id, function (response) {
+                callback(response);
+                sweetAlert("Great", "Job successfully deleted", "success");
+            }, function (error) {
+                sweetAlert("Oops...", "Error finding data!", "error" + angular.toJson(error));
+            })
+            // swal({   title: "Are you sure?",   text: "You will not be able to recover this Job !",
+            //     type: "warning",
+            //     showCancelButton: true,
+            //     confirmButtonColor: "#DD6B55",
+            //     confirmButtonText: "Yes, delete it!",
+            //     closeOnConfirm: false
+            // }, function() {
+            //     $http.delete('/api/v1/jobs/delete/' + id)
+            //         .then(function (response) {
+            //             callback(response);
+            //             sweetAlert("Great", "Job successfully deleted", "success");
+            //         },function (error) {
+            //             sweetAlert("Oops...", "Error finding data!", "error" + angular.toJson(error));
+            //         });
+            // });
         },
-        getAllsearchJobs: function (query,callback) {
-            $http.post( '/api/v1/jobs/searchJobs', query)
-                .then(function (response) {
-                    callback(response);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+        getAllsearchJobs: function (query, callback) {
+            services.post('/api/v1/jobs/searchJobs', query, function (response) {
+                if (response) {
+                    callback(response)
+                }
+            }, function(error) {
+                swal("oops", error, "error");
+            })
+            // $http.post( '/api/v1/jobs/searchJobs', query)
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         }
     };
 });

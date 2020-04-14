@@ -81,11 +81,11 @@ angular.module('myBus.remindersModule', ['ngTable', 'ui.bootstrap'])
         };
 
         $scope.addRemainder = function () {
-            $state.go('editreminders');
+            $state.go('home.addreminders');
         };
 
         $scope.edit = function(remainder){
-            $state.go('editreminders',{id:remainder.id} );
+            $state.go('home.editreminders', {id:remainder.id} );
         };
 
         $scope.delete = function(remainder){
@@ -211,7 +211,8 @@ angular.module('myBus.remindersModule', ['ngTable', 'ui.bootstrap'])
                         swal("success","Remainder created","success");
                     });
                 }
-            $location.url('/reminders');
+            // $location.url('/reminders');
+                $state.go('home.reminders')
         };
 
         $scope.cancel = function() {
@@ -219,74 +220,124 @@ angular.module('myBus.remindersModule', ['ngTable', 'ui.bootstrap'])
         };
 
     })
-    .factory('remainderManager', function ($http, $log,$rootScope) {
+    .factory('remainderManager', function ($http, $log,$rootScope, services) {
         var reminders = {};
     return {
 
         loadAll: function (query, callback) {
-            $http.post('/api/v1/reminders/getAll', query)
-                .then(function (response) {
-                    callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+            services.post('/api/v1/reminders/getAll', query, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                swal("oops", error, "error");
+            })
+            // $http.post('/api/v1/reminders/getAll', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         },
-        save: function (remainder, callback){
-          $http.post('/api/v1/reminders/addReminder/', remainder).then(function (response) {
+        save: function (remainder, callback) {
+            services.post('/api/v1/reminders/addReminder/', remainder, function (response) {
+                if (response) {
                     if(angular.isFunction(callback)){
                         callback(response.data);
                     }
                     $rootScope.$broadcast('check');
-                },function (err,status) {
-                    sweetAlert("Error",err.message,"error");
-                });
-            },
-        update: function (remainder, callback){
-            $http.put('/api/v1/reminders/updateReminder/', remainder).then(function (response) {
-                if(angular.isFunction(callback)){
-                    callback(response.data);
                 }
-                $rootScope.$broadcast('check');
-            },function (err,status) {
+            }, function (err,status) {
                 sweetAlert("Error",err.message,"error");
-            });
+            })
+          // $http.post('/api/v1/reminders/addReminder/', remainder).then(function (response) {
+          //           if(angular.isFunction(callback)){
+          //               callback(response.data);
+          //           }
+          //           $rootScope.$broadcast('check');
+          //       },function (err,status) {
+          //           sweetAlert("Error",err.message,"error");
+          //       });
+            },
+        update: function (remainder, callback) {
+            services.put('/api/v1/reminders/updateReminder/', '', remainder, function (response) {
+                if (response) {
+                    if(angular.isFunction(callback)){
+                        callback(response.data);
+                    }
+                    $rootScope.$broadcast('check');
+                }
+            }, function (err, status) {
+                sweetAlert("Error",err.message,"error");
+            })
+            // $http.put('/api/v1/reminders/updateReminder/', remainder).then(function (response) {
+            //     if(angular.isFunction(callback)){
+            //         callback(response.data);
+            //     }
+            //     $rootScope.$broadcast('check');
+            // },function (err,status) {
+            //     sweetAlert("Error",err.message,"error");
+            // });
         },
 
         edit: function (id, callback) {
-            $http({url: 'api/v1/reminders/get/'+id, method: "GET"})
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    swal("oops", error, "error");
-                });
+            services.get('api/v1/reminders/get/' + id, '', function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                swal("oops", error, "error");
+            })
+            // $http({url: 'api/v1/reminders/get/'+id, method: "GET"})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         swal("oops", error, "error");
+            //     });
         },
 
             count: function (query, callback) {
-            $http.post('/api/v1/reminders/getCount', query)
-                .then(function (response) {
-                    callback(response.data);
-                },function (error) {
-                    $log.debug("error retrieving branchOffice count");
-                });
+            services.post('/api/v1/reminders/getCount', query, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                $log.debug("error retrieving branchOffice count");
+            })
+            // $http.post('/api/v1/reminders/getCount', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     },function (error) {
+            //         $log.debug("error retrieving branchOffice count");
+            //     });
         },
 
         deleteRemainder: function (id, callback) {
-            swal({
-                title: "Are you sure?",
-                text: "Are you sure you want to delete this remainder?",
-                type: "warning",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                confirmButtonText: "Yes, delete it!",
-                confirmButtonColor: "#ec6c62"}, function () {
-                    $http.delete('api/v1/reminders/delete/'+id).then(function (response) {
-                        callback(response);
-                        $rootScope.$broadcast('check');
-                        swal("Deleted!", "Remainder was successfully deleted!", "success");
-                    },function () {
-                        swal("Oops", "We couldn't connect to the server!", "error");
-                    });
-                });
+            services.delete('api/v1/reminders/delete/' + id, function (response) {
+                if (response) {
+                    callback(response);
+                    $rootScope.$broadcast('check');
+                    swal("Deleted!", "Remainder was successfully deleted!", "success");
+                }
+            }, function () {
+                swal("Oops", "We couldn't connect to the server!", "error");
+            })
+            // swal({
+            //     title: "Are you sure?",
+            //     text: "Are you sure you want to delete this remainder?",
+            //     type: "warning",
+            //     showCancelButton: true,
+            //     closeOnConfirm: false,
+            //     confirmButtonText: "Yes, delete it!",
+            //     confirmButtonColor: "#ec6c62"}, function () {
+            //         $http.delete('api/v1/reminders/delete/'+id).then(function (response) {
+            //             callback(response);
+            //             $rootScope.$broadcast('check');
+            //             swal("Deleted!", "Remainder was successfully deleted!", "success");
+            //         },function () {
+            //             swal("Oops", "We couldn't connect to the server!", "error");
+            //         });
+            //     });
         }
     }
 });

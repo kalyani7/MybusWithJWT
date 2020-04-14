@@ -277,11 +277,18 @@ angular.module('myBus.vehicleModule', ['ngTable', 'ui.bootstrap'])
         var data = '';
         return {
             getVehicles: function ( pageable, callback) {
-                $http.post('/api/v1/vehicles', pageable).then(function (response) {
-                    callback(response.data);
-                },function (err,status) {
+                services.post('/api/v1/vehicles', pageable, function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
                     swal("oops", error, "error");
-                });
+                })
+                // $http.post('/api/v1/vehicles', pageable).then(function (response) {
+                //     callback(response.data);
+                // },function (err,status) {
+                //     swal("oops", error, "error");
+                // });
             },
             getExpiringVehicles: function (pageable,today) {
                 // console.log(pageable,today)

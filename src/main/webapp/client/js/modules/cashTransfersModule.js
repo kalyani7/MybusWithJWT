@@ -375,7 +375,10 @@ angular.module('myBus.cashTransfersModule', ['ngTable', 'ui.bootstrap'])
 
 
     })
-    .factory('cashTransferManager', function ($rootScope, $q, $http, $log) {
+    .factory('cashTransferManager', function ($rootScope, $q, $http, $log, $cookies, services) {
+        var token = $cookies.get('token');
+        var tokenType = $cookies.get('tokenType');
+        var sendToken = tokenType + ' ' + token;
         var cashTransfer = {};
         return {
             /*load: function (pageable) {
@@ -407,8 +410,9 @@ angular.module('myBus.cashTransfersModule', ['ngTable', 'ui.bootstrap'])
             },*/
             pendingCashTransfers: function (pageable) {
                 var deferred = $q.defer();
-                $q.all([$http({url:'/api/v1/cashTransfer/pending/all',method:"GET", params: pageable}),
-                    $http.get('/api/v1/userNamesMap')]).then(
+
+                $q.all([$http({url: '/api/v1/cashTransfer/pending/all', method: "GET", params: pageable, headers: {"Authorization": sendToken}}),
+                    $http({url: '/api/v1/userNamesMap', method: "GET", headers: {"Authorization": sendToken}})]).then(
                     function(results) {
                         deferred.resolve(results)
                     },
@@ -422,8 +426,8 @@ angular.module('myBus.cashTransfersModule', ['ngTable', 'ui.bootstrap'])
             },
             approvedCashTransfers: function (pageable) {
                 var deferred = $q.defer();
-                $q.all([$http({url:'/api/v1/cashTransfer/nonpending/all',method:"GET", params: pageable}),
-                    $http.get('/api/v1/userNamesMap')]).then(
+                $q.all([$http({url:'/api/v1/cashTransfer/nonpending/all',method:"GET", params: pageable, headers: {"Authorization": sendToken}}),
+                    $http({url: '/api/v1/userNamesMap', method: "GET", headers: {"Authorization": sendToken}})]).then(
                     function(results) {
                         deferred.resolve(results)
                     },
@@ -436,64 +440,102 @@ angular.module('myBus.cashTransfersModule', ['ngTable', 'ui.bootstrap'])
                 return deferred.promise;
             },
             pendingCount: function (callback) {
-                $http.post('/api/v1/cashTransfer/pending/count',{})
-                    .then(function (response) {
+                services.post('/api/v1/cashTransfer/pending/count', {}, function (response) {
+                    if (response) {
                         callback(response.data);
-                    }, function (error) {
-                        $log.debug("error retrieving payments count");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving payments count");
+                })
+                // $http.post('/api/v1/cashTransfer/pending/count',{})
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function (error) {
+                //         $log.debug("error retrieving payments count");
+                //     });
             },
             approvedCount: function (callback) {
-                $http.post('/api/v1/cashTransfer/nonpending/count',{})
-                    .then(function (response) {
+                services.post('/api/v1/cashTransfer/nonpending/count', {}, function (response) {
+                    if (response) {
                         callback(response.data);
-                    },function (error) {
-                        $log.debug("error retrieving cashTransfers");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving cashTransfers");
+                })
+                // $http.post('/api/v1/cashTransfer/nonpending/count',{})
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error retrieving cashTransfers");
+                //     });
             },
-            getCashTransferById : function(cashTransferId,callback){
-                $http.get("/api/v1/cashTransfer/"+cashTransferId)
-                    .then(function(response){
+            getCashTransferById : function(cashTransferId, callback) {
+                services.get("/api/v1/cashTransfer/" + cashTransferId, '', function (response) {
+                    if (response) {
                         callback(response.data)
-                    },function(error){
-                        swal("oops", error, "error");
-                    })
+                    }
+                }, function(error){
+                    swal("oops", error, "error");
+                })
+                // $http.get("/api/v1/cashTransfer/"+cashTransferId)
+                //     .then(function(response){
+                //         callback(response.data)
+                //     },function(error){
+                //         swal("oops", error, "error");
+                //     })
             },
             delete: function (cashTransferId, callback) {
-                swal({
-                        title: "Are you sure?",
-                        text: "Are you sure you want to delete this Cash Transfer?",
-                        type: "warning",
-                        showCancelButton: true,
-                        closeOnConfirm: false,
-                        confirmButtonText: "Yes, delete it!",
-                        confirmButtonColor: "#ec6c62"},function(){
-                            $http.delete('/api/v1/cashTransfer/'+cashTransferId)
-                            .then(function (response) {
-                                callback(response.data);
-                                swal("Deleted!", "Cash Transfer has been deleted successfully!", "success");
-                            },function (error) {
-                                $log.debug("error retrieving cashTransfers");
-                                swal("Oops", "We couldn't connect to the server!", "error");
-                            });
-                            })
-                 },
-            save: function(cashTransfer,callback) {
+                services.delete('/api/v1/cashTransfer/' + cashTransferId, function (response) {
+                    callback(response.data);
+                    swal("Deleted!", "Cash Transfer has been deleted successfully!", "success");
+                }, function (error) {
+                    $log.debug("error retrieving cashTransfers");
+                    swal("Oops", "We couldn't connect to the server!", "error");
+                })
+                // swal({
+                //     title: "Are you sure?",
+                //     text: "Are you sure you want to delete this Cash Transfer?",
+                //     type: "warning",
+                //     showCancelButton: true,
+                //     closeOnConfirm: false,
+                //     confirmButtonText: "Yes, delete it!",
+                //     confirmButtonColor: "#ec6c62"},function(){
+                //         $http.delete('/api/v1/cashTransfer/'+cashTransferId)
+                //         .then(function (response) {
+                //             callback(response.data);
+                //             swal("Deleted!", "Cash Transfer has been deleted successfully!", "success");
+                //         },function (error) {
+                //             $log.debug("error retrieving cashTransfers");
+                //             swal("Oops", "We couldn't connect to the server!", "error");
+                //         });
+                //         })
+            },
+            save: function(cashTransfer, callback) {
                 if (!cashTransfer.id) {
-                    $http.post('/api/v1/cashTransfer/', cashTransfer)
-                        .then(function (response) {
+                    services.post('/api/v1/cashTransfer/', cashTransfer, function (response) {
                         if (angular.isFunction(callback)) {
                             callback(response.data);
                         }
                         swal("Great", "Saved successfully", "success");
                         $rootScope.modalInstance.dismiss('success');
                         $rootScope.$broadcast('UpdateHeader');
-
                     }, function (err, status) {
                         sweetAlert("Error", err.data.message, "error");
-                    });
+                    })
+                    // $http.post('/api/v1/cashTransfer/', cashTransfer)
+                    //     .then(function (response) {
+                    //     if (angular.isFunction(callback)) {
+                    //         callback(response.data);
+                    //     }
+                    //     swal("Great", "Saved successfully", "success");
+                    //     $rootScope.modalInstance.dismiss('success');
+                    //     $rootScope.$broadcast('UpdateHeader');
+                    //
+                    // }, function (err, status) {
+                    //     sweetAlert("Error", err.data.message, "error");
+                    // });
                 } else {
-                    $http.put('/api/v1/cashTransfer/', cashTransfer).then(function (response) {
+                    services.put('/api/v1/cashTransfer/', '', cashTransfer, function (response) {
                         if (angular.isFunction(callback)) {
                             callback(response.data);
                         }
@@ -501,7 +543,16 @@ angular.module('myBus.cashTransfersModule', ['ngTable', 'ui.bootstrap'])
                         $rootScope.modalInstance.dismiss('success');
                     }, function (err, status) {
                         sweetAlert("Error", err.data.message, "error");
-                    });
+                    })
+                    // $http.put('/api/v1/cashTransfer/', cashTransfer).then(function (response) {
+                    //     if (angular.isFunction(callback)) {
+                    //         callback(response.data);
+                    //     }
+                    //     $rootScope.$broadcast('UpdateHeader');
+                    //     $rootScope.modalInstance.dismiss('success');
+                    // }, function (err, status) {
+                    //     sweetAlert("Error", err.data.message, "error");
+                    // });
                 }
             },
             getAllData: function () {
@@ -513,13 +564,20 @@ angular.module('myBus.cashTransfersModule', ['ngTable', 'ui.bootstrap'])
                 }));
             },
             search: function(searchExpense, callback){
-                $http.post('/api/v1/cashTransfer/search', searchExpense).then(function (response) {
+                services.post('/api/v1/cashTransfer/search', searchExpense, function (response) {
                     if (angular.isFunction(callback)) {
                         callback(response.data);
                     }
                 }, function (err, status) {
                     sweetAlert("Error searching cash transfers", err.message, "error");
-                });
+                })
+                // $http.post('/api/v1/cashTransfer/search', searchExpense).then(function (response) {
+                //     if (angular.isFunction(callback)) {
+                //         callback(response.data);
+                //     }
+                // }, function (err, status) {
+                //     sweetAlert("Error searching cash transfers", err.message, "error");
+                // });
             },
         };
     });

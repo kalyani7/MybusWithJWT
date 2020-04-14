@@ -41,17 +41,26 @@ angular.module('myBus.invoiceModule', ['ngTable', 'ui.bootstrap'])
         }
 
     })
-    .factory('invoiceManager', function ($rootScope, $q, $http, $log) {
+    .factory('invoiceManager', function ($rootScope, $q, $http, $log, services) {
         var cashTransfer = {};
         return {
             search: function(query, callback){
-                $http.post('/api/v1/invoice/search', query).then(function (response) {
-                    if (angular.isFunction(callback)) {
-                        callback(response.data);
+                services.post('/api/v1/invoice/search', query, function (response) {
+                    if (response) {
+                        if (angular.isFunction(callback)) {
+                            callback(response.data);
+                        }
                     }
                 }, function (err, status) {
                     sweetAlert("Error searching bookings", err.message, "error");
-                });
+                })
+                // $http.post('/api/v1/invoice/search', query).then(function (response) {
+                //     if (angular.isFunction(callback)) {
+                //         callback(response.data);
+                //     }
+                // }, function (err, status) {
+                //     sweetAlert("Error searching bookings", err.message, "error");
+                // });
             },
         };
     });

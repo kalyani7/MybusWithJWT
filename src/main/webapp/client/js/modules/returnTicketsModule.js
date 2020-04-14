@@ -49,10 +49,12 @@ angular.module('myBus.returnTicketsModule', ['ngTable', 'ui.bootstrap'])
 
 
         $scope.showReturnTicketsByDate = function(date) {
-            $location.url('returnTicketsByDate/'+date);
+            $state.go('home.returnTicketsByDate', {date: date})
+            // $location.url('returnTicketsByDate/'+date);
         };
         $scope.showReturnTicketsByAgent = function(agent) {
-            $location.url('returnTicketsByAgent/'+agent);
+            $state.go('home.returnTicketsByAgent', {agent: agent})
+            // $location.url('returnTicketsByAgent/'+agent);
         }
         $scope.payBooking = returnTicketsManager.payBooking;
     })
@@ -111,23 +113,35 @@ angular.module('myBus.returnTicketsModule', ['ngTable', 'ui.bootstrap'])
         $scope.payBooking = returnTicketsManager.payBooking;
     })
 
-    .factory('returnTicketsManager', function ($rootScope, $http, $log, dueReportManager) {
+    .factory('returnTicketsManager', function ($rootScope, $http, $log, dueReportManager, services) {
         var returnTickets ;
         var returnTicketsByDate ;
         var returnTicketsByAgent ;
     return {
         loadReturnTickets: function (callback, errorcallback) {
-            $http.get('/api/v1/dueReport/returnTickets')
-                .then(function (response) {
-                     returnTickets = response.data;
-                     returnTicketsByDate = returnTickets.allDuesMappedByDate;
-                     returnTicketsByAgent = returnTickets.allDuesMappedByAgent;
-                     $rootScope.$broadcast('ReturnTicketsLoaded');
-                     callback(response.data);
-                }, function (error) {
-                    $log.debug("error retrieving the details");
-                    errorcallback(error);
-                });
+            services.get('/api/v1/dueReport/returnTickets', '', function (response) {
+                if (response) {
+                    returnTickets = response.data;
+                    returnTicketsByDate = returnTickets.allDuesMappedByDate;
+                    returnTicketsByAgent = returnTickets.allDuesMappedByAgent;
+                    $rootScope.$broadcast('ReturnTicketsLoaded');
+                    callback(response.data);
+                }
+            }, function (error) {
+                $log.debug("error retrieving the details");
+                errorcallback(error);
+            })
+            // $http.get('/api/v1/dueReport/returnTickets')
+            //     .then(function (response) {
+            //          returnTickets = response.data;
+            //          returnTicketsByDate = returnTickets.allDuesMappedByDate;
+            //          returnTicketsByAgent = returnTickets.allDuesMappedByAgent;
+            //          $rootScope.$broadcast('ReturnTicketsLoaded');
+            //          callback(response.data);
+            //     }, function (error) {
+            //         $log.debug("error retrieving the details");
+            //         errorcallback(error);
+            //     });
         },
         getAllReturnTickets: function(callback){
           callback(returnTickets);
