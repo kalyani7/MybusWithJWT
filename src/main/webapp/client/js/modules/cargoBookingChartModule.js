@@ -1,7 +1,7 @@
 "use strict";
 /*global angular, _*/
 
-angular.module('myBus.cargoBookingChart', ['ngTable', 'ui.bootstrap', 'n3-line-chart'])
+angular.module('myBus.cargoBookingChart', ['ngTable', 'ui.bootstrap', 'angularMoment', 'n3-line-chart'])
     .controller("CargoBookingChartController", function ($rootScope, $scope, moment, cargoBookingChartManager) {
         $scope.headline = 'CargoBookingChart';
 
@@ -170,16 +170,23 @@ angular.module('myBus.cargoBookingChart', ['ngTable', 'ui.bootstrap', 'n3-line-c
             }
         });
     })
-    .factory('cargoBookingChartManager', function ($rootScope, $q, $http) {
+    .factory('cargoBookingChartManager', function ($rootScope, $q, $http, services) {
         var cashTransfer = {};
         return {
             getAllcargoBookingChart: function (callback) {
-                $http({url: '/api/v1/shipment/groupCargoBookings', method: "GET"})
-                    .then(function (response) {
+                services.get('/api/v1/shipment/groupCargoBookings', '', function (response) {
+                    if (response) {
                         callback(response.data);
-                    }, function(error){
-                        swal("oops", error, "error");
-                    });
+                    }
+                }, function (error) {
+                    swal("oops", error, "error");
+                })
+                // $http({url: '/api/v1/shipment/groupCargoBookings', method: "GET"})
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function(error){
+                //         swal("oops", error, "error");
+                //     });
             },
         };
     });

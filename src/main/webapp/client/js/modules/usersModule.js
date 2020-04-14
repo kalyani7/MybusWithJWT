@@ -376,12 +376,19 @@ angular.module('myBus.userModule', ['ngTable'])
                 //     });
             },
             getUserCashbalances: function (query, callback) {
-                $http.get('/api/v1/user/cashBalances')
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (error) {
-                        $log.debug("error retrieving user balances");
-                    });
+                services.get('/api/v1/user/cashBalances', '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving user balances");
+                })
+                // $http.get('/api/v1/user/cashBalances')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error retrieving user balances");
+                //     });
             },
             getAllUsers: function () {
                 return users;
@@ -465,7 +472,7 @@ angular.module('myBus.userModule', ['ngTable'])
                 // }
             },
             getUser: function(){
-                console.log(currentUser, '000000000000000000000000')
+                // console.log(currentUser, '000000000000000000000000')
                 return currentUser;
             },
 

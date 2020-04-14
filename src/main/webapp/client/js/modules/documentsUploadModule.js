@@ -9,10 +9,10 @@ angular.module('myBus.documentsUploadModule', ['ngTable', 'ui.bootstrap'])
         });
     };
     $scope.cancel = function(){
-        $state.go('documentsupload');
+        $state.go('home.documentsupload');
     };
     $scope.$on('uploadCompleted', function (e, value) {
-        $state.go('documentsupload');
+        $state.go('home.documentsupload');
     });
 }).controller("DocumentsUploadListController",function($scope,DocumentUploadManager,$state,NgTableParams,paginationService,userManager){
     $scope.query = {};
@@ -25,7 +25,7 @@ angular.module('myBus.documentsUploadModule', ['ngTable', 'ui.bootstrap'])
         });
     };
     $scope.uploadDocument = function(){
-        $state.go('uploadDocument');
+        $state.go('home.uploadDocument');
     };
     DocumentUploadManager.getUsers(function(response){
         $scope.users = response;
@@ -70,11 +70,17 @@ angular.module('myBus.documentsUploadModule', ['ngTable', 'ui.bootstrap'])
         });
     };
     $scope.init();
-}).factory("DocumentUploadManager", function ($http,Upload,$rootScope) {
+}).factory("DocumentUploadManager", function ($http,Upload,$rootScope, $cookies, services) {
+    var token = $cookies.get('token');
+    var tokenType = $cookies.get('tokenType');
+    var sendToken = tokenType + ' ' + token;
     return {
         upload:function(fileName,file,description){
             Upload.upload({
                 url: '/api/v1/documentUpload/upload',
+                headers: {
+                    "Authorization": sendToken
+                },
                 data: {
                     fileName: fileName,
                     description: description,
@@ -91,33 +97,61 @@ angular.module('myBus.documentsUploadModule', ['ngTable', 'ui.bootstrap'])
                 }
             });
         },
-        getAllUploads:function(data,callback){
-            $http.post('/api/v1/documentUpload/getAllUploads', data)
-                .then(function (response) {
-                    callback(response);
-                }, function (err) {
-                });
+        getAllUploads: function(data, callback) {
+            services.post('/api/v1/documentUpload/getAllUploads', data, function (response) {
+                if (response) {
+                    callback(response)
+                }
+            }, function (error) {
+
+            })
+            // $http.post('/api/v1/documentUpload/getAllUploads', data)
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function (err) {
+            //     });
         },
-        removeFile:function(data,callback){
-            $http.post('/api/v1/documentUpload/deleteUpload', data)
-                .then(function (response) {
+        removeFile: function(data, callback) {
+            services.post('/api/v1/documentUpload/deleteUpload', data, function (response) {
+                if (response) {
                     callback(response);
-                }, function (err) {
-                });
+                }
+            }, function (error) {
+
+            })
+            // $http.post('/api/v1/documentUpload/deleteUpload', data)
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function (err) {
+            //     });
         },
         count:function(data,callback){
-            $http.post('/api/v1/documentUpload/count', data)
-                .then(function (response) {
-                    callback(response);
-                }, function (err) {
-                });
+            services.post('/api/v1/documentUpload/count', data, function (response) {
+                if (response) {
+                    callback(response)
+                }
+            }, function (error) {
+
+            })
+            // $http.post('/api/v1/documentUpload/count', data)
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function (err) {
+            //     });
         },
         getUsers:function(callback){
-            $http.get('/api/v1/users')
-                .then(function (response) {
-                    callback(response.data);
-                },function (error) {
-                });
+            services.get('/api/v1/users', '', function (response) {
+                if (response) {
+                    callback(response)
+                }
+            }, function (error) {
+
+            })
+            // $http.get('/api/v1/users')
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     },function (error) {
+            //     });
         }
     }
 });

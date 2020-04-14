@@ -23,7 +23,8 @@ angular.module('myBus.fuelExpenseReportModule', ['ngTable','ui.bootstrap'])
                 if (day.length < 2) day = '0' + day;
                 var year = dateObj.getFullYear();
                 var newdate = year + "-" + month + "-" + day;
-                $location.url('fuelexpensereports/' + newdate);
+                // $location.url('fuelexpensereports/' + newdate);
+                $state.go('home.fuelexpensereportsDate', {date: newdate})
             }
             $scope.today = function() {
                 var yesterday = new Date();
@@ -148,7 +149,7 @@ angular.module('myBus.fuelExpenseReportModule', ['ngTable','ui.bootstrap'])
             $scope.init();
 
             $scope.editFuelExpenses = function(id){
-                $state.go('editfuelexpensereports',{id:id});
+                $state.go('editfuelexpensereports', {id:id});
 
             };
             $scope.addOrUpdateFuelExpense = function() {
@@ -383,17 +384,17 @@ angular.module('myBus.fuelExpenseReportModule', ['ngTable','ui.bootstrap'])
                                 if(data.status){
                                     sweetAlert("Great", "Your vehicle "+data.vehicle+" have a remainder ", "error");
                                 }
-                                $state.go('fuelexpensereports');
+                                $state.go('home.fuelexpensereports');
                             })
                         }else{
                         fuelExpensesManager.addFuelExpense($scope.fuelExpense, function (data) {
                            if(data.status){
                                sweetAlert("Great", "Your vehicle "+data.vehicle+" have a remainder ", "error");
                                $rootScope.$broadcast('reloadReminders');
-                               $state.go('fuelexpensereports');
+                               $state.go('home.fuelexpensereports');
 
                            }else{
-                               $state.go('fuelexpensereports');
+                               $state.go('home.fuelexpensereports');
                            }
 
                         })
@@ -407,9 +408,9 @@ angular.module('myBus.fuelExpenseReportModule', ['ngTable','ui.bootstrap'])
                     return $scope.fuelExpense.cost;
                 }
                 $scope.cancel = function () {
-                    $state.go('fuelexpensereports');
+                    $state.go('home.fuelexpensereports');
                 };
-        }).factory('fuelExpensesManager',function ($http,$log,$rootScope) {
+        }).factory('fuelExpensesManager',function ($http,$log,$rootScope, services) {
             var date;
             return{
                 setDate : function(date){
@@ -419,67 +420,126 @@ angular.module('myBus.fuelExpenseReportModule', ['ngTable','ui.bootstrap'])
                     return this.date;
                 },
                 search: function (query,callback) {
-                    $http.post('/api/v1/FuelExpense/search', query).then(function (response) {
+                    services.post('/api/v1/FuelExpense/search', query, function (response) {
                         if (angular.isFunction(callback)) {
                             callback(response.data);
                         }
                     }, function (err, status) {
                         sweetAlert("Error searching expenses", err.message, "error");
-                    });
+                    })
+                    // $http.post('/api/v1/FuelExpense/search', query).then(function (response) {
+                    //     if (angular.isFunction(callback)) {
+                    //         callback(response.data);
+                    //     }
+                    // }, function (err, status) {
+                    //     sweetAlert("Error searching expenses", err.message, "error");
+                    // });
                 },addFuelExpense: function (fuelExpense, callback) {
-                    $http.post('/api/v1/FuelExpense/addFuelExpense',fuelExpense)
-                        .then(function (response) {
-                                 sweetAlert("Great","Your Fuel Consumption successfully added", "success");
-                                callback(response.data);
-                        },function (error) {
-                            $log.debug("error adding Fuel Expense");
-                        });
+                    services.post('/api/v1/FuelExpense/addFuelExpense', fuelExpense, function (response) {
+                        if (response) {
+                            sweetAlert("Great","Your Fuel Consumption successfully added", "success");
+                            callback(response.data);
+                        }
+                    }, function (error) {
+                        $log.debug("error adding Fuel Expense");
+                    })
+                    // $http.post('/api/v1/FuelExpense/addFuelExpense',fuelExpense)
+                    //     .then(function (response) {
+                    //              sweetAlert("Great","Your Fuel Consumption successfully added", "success");
+                    //             callback(response.data);
+                    //     },function (error) {
+                    //         $log.debug("error adding Fuel Expense");
+                    //     });
                 },updateFuelExpense: function (fuelExpense, callback) {
-                    $http.put('/api/v1/FuelExpense/updateFuelExpense', fuelExpense)
-                        .then(function (response) {
-                             sweetAlert("Great", "Your Fuel Consumption successfully updated", "success");
+                    services.put('/api/v1/FuelExpense/updateFuelExpense', '', fuelExpense, function (response) {
+                        if (response) {
+                            sweetAlert("Great", "Your Fuel Consumption successfully updated", "success");
                             callback(response.data);
-                        }, function (error) {
-                            $log.debug("error updating Fuel Expense");
-                        });
+                        }
+                    }, function (error) {
+                        $log.debug("error updating Fuel Expense");
+                    })
+                    // $http.put('/api/v1/FuelExpense/updateFuelExpense', fuelExpense)
+                    //     .then(function (response) {
+                    //          sweetAlert("Great", "Your Fuel Consumption successfully updated", "success");
+                    //         callback(response.data);
+                    //     }, function (error) {
+                    //         $log.debug("error updating Fuel Expense");
+                    //     });
                 },getFuelExpenseReports: function (date,callback) {
-                    $http.get('/api/v1/FuelExpense/getAllByDate?date=' + date)
-                        .then(function (response) {
-                            callback(response.data);
-                        },function (error) {
-                            $log.debug("error retrieving Fuel Expense reports");
-                        });
+                    services.get('/api/v1/FuelExpense/getAllByDate?date=' + date, '', function (response) {
+                        if (response) {
+                            callback(response.data)
+                        }
+                    }, function (error) {
+                        $log.debug("error retrieving Fuel Expense reports");
+                    })
+                    // $http.get('/api/v1/FuelExpense/getAllByDate?date=' + date)
+                    //     .then(function (response) {
+                    //         callback(response.data);
+                    //     },function (error) {
+                    //         $log.debug("error retrieving Fuel Expense reports");
+                    //     });
                 },getFuelExpense:function(id,callback){
-                    $http.get('/api/v1/FuelExpense/getFuelExpense/'+id)
-                        .then(function (response) {
-                            callback(response.data);
-                        },function(err) {});
+                    services.get('/api/v1/FuelExpense/getFuelExpense/' + id, '', function (response) {
+                        if (response) {
+                            callback(response.data)
+                        }
+                    }, function (error) {
+
+                    })
+                    // $http.get('/api/v1/FuelExpense/getFuelExpense/'+id)
+                    //     .then(function (response) {
+                    //         callback(response.data);
+                    //     },function(err) {});
                 },deleteFuelExpense:function(id,callback){
-                    swal({   title: "Are you sure?",   text: "You will not be able to recover this FuelExpense !",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Yes, delete it!",
-                        closeOnConfirm: false
-                    }, function() {
-                        $http.delete('/api/v1/FuelExpense/deleteFuelExpense/' + id)
-                            .then(function (response) {
-                                callback(response);
-                                sweetAlert("Great", "Fuel Expense successfully deleted", "success");
-                            },function (error) {
-                                sweetAlert("Oops...", "Error finding data!", "error" + angular.toJson(error));
-                            });
-                    });
+                    services.delete('/api/v1/FuelExpense/deleteFuelExpense/' + id, function (response) {
+                        if (response) {
+                            callback(response);
+                            sweetAlert("Great", "Fuel Expense successfully deleted", "success");
+                        }
+                    }, function (error) {
+                        sweetAlert("Oops...", "Error finding data!", "error" + angular.toJson(error));
+                    })
+                    // swal({   title: "Are you sure?",   text: "You will not be able to recover this FuelExpense !",
+                    //     type: "warning",
+                    //     showCancelButton: true,
+                    //     confirmButtonColor: "#DD6B55",
+                    //     confirmButtonText: "Yes, delete it!",
+                    //     closeOnConfirm: false
+                    // }, function() {
+                    //     $http.delete('/api/v1/FuelExpense/deleteFuelExpense/' + id)
+                    //         .then(function (response) {
+                    //             callback(response);
+                    //             sweetAlert("Great", "Fuel Expense successfully deleted", "success");
+                    //         },function (error) {
+                    //             sweetAlert("Oops...", "Error finding data!", "error" + angular.toJson(error));
+                    //         });
+                    // });
                 },getCount:function(date,callback){
-                    $http.get('/api/v1/FuelExpense/getCount?date='+date)
-                        .then(function (response) {
-                            callback(response.data);
-                        },function(err) {});
+                    services.get('/api/v1/FuelExpense/getCount?date=' + date, '', function (response) {
+                        if (response) {
+                            callback(response.data)
+                        }
+                    }, function (error) {
+
+                    })
+                    // $http.get('/api/v1/FuelExpense/getCount?date='+date)
+                    //     .then(function (response) {
+                    //         callback(response.data);
+                    //     },function(err) {});
                 },updateServiceName:function(date,callback) {
-                    $http.get('/api/v1/FuelExpense/updateServiceName?date=' + date)
-                        .then(function (response) {
-                            callback(response.data);
-                        }, function (err) { });
+                    services.get('/api/v1/FuelExpense/updateServiceName?date=' + date, '', function (response) {
+                        if (response) {
+                            callback(response.data)
+                        }
+                    }, function (error) {
+
+                    })
+                    // $http.get('/api/v1/FuelExpense/updateServiceName?date=' + date)
+                    //     .then(function (response) {
+                    //         callback(response.data);
+                    //     }, function (err) { });
                 }
             };
         });

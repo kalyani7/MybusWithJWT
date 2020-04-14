@@ -45,18 +45,18 @@ myBus.controller('HomeController', function ($scope, $state, $http, $log, $cooki
         }
     }
 
-    // userManager.getCurrentUser(function (response) {
-    //     if (response) {
-    //         userManager.getGroupsForCurrentUser();
-    //         myBus.constant('currentuser', response);
-    //         $rootScope.currentuser = response;
-    //         $rootScope.$broadcast("currentuserLoaded");
-    //         operatingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
-    //             $rootScope.operatorAccount = operatorAccount;
-    //             $state.go('home')
-    //         });
-    //     }
-    // });
+    userManager.getCurrentUser(function (response) {
+        if (response) {
+            userManager.getGroupsForCurrentUser();
+            myBus.constant('currentuser', response);
+            $rootScope.currentuser = response;
+            $rootScope.$broadcast("currentuserLoaded");
+            operatingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
+                $rootScope.operatorAccount = operatorAccount;
+                // $state.go('home')
+            });
+        }
+    });
 
     $scope.updateHeader = function () {
         var data = '';

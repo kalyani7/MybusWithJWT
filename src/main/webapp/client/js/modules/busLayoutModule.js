@@ -19,12 +19,14 @@ angular.module('myBus.layoutModules', ['ngTable', 'ui.bootstrap'])
         $scope.headline = "Layouts";
 
         $scope.goToBusLayout = function (busId) {
-            $location.url('/layouts/' + busId);
+            $state.go('home.layouts', {id: id})
+            // $location.url('/layouts/' + busId);
         };
 
         $scope.deleteLayout = function (layout) {
             busLayoutManager.deleteLayout(layout.id);
-            $location.url('/layouts');
+            $state.go('home.layouts')
+            // $location.url('/layouts');
         };
 
         $scope.$on('layoutsDeleteComplete', function (e, value) {
@@ -32,7 +34,7 @@ angular.module('myBus.layoutModules', ['ngTable', 'ui.bootstrap'])
         });
 
         $scope.addNewBusLayout = function () {
-            $state.go("addLayouts");
+            $state.go("home.addLayouts");
         }
 
         var pageable;
@@ -188,80 +190,121 @@ angular.module('myBus.layoutModules', ['ngTable', 'ui.bootstrap'])
 
             if (layOutId) {
                 busLayoutManager.updateLayout(layoutToSave);
-                $state.go('layouts');
+                $state.go('home.layouts');
             } else {
                 busLayoutManager.createLayout(layoutToSave, function (data) {
                     if (data) {
-                        $state.go('layouts');
+                        $state.go('home.layouts');
                     }
                 });
             }
         };
 
         $scope.cancel = function () {
-            $state.go('layouts');
+            $state.go('home.layouts');
         };
 
     })
-    .factory('busLayoutManager', function ($rootScope, $http, $log) {
+    .factory('busLayoutManager', function ($rootScope, $http, $log, services) {
         return {
             getAllLayouts: function (pageable, callback) {
-                $http({url: '/api/v1/layouts', method: "GET", params: pageable})
-                    .then(function (response) {
+                services.get('/api/v1/layouts', '', pageable, function (response) {
+                    if (response) {
                         callback(response.data);
-                    }, function (error) {
-                        swal("oops", error, "error");
-                    });
+                    }
+                }, function (error) {
+                    swal("oops", error, "error");
+                })
+                // $http({url: '/api/v1/layouts', method: "GET", params: pageable})
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function (error) {
+                //         swal("oops", error, "error");
+                //     });
             },
             getActiveLayoutNames: function () {
-                return $http({
-                    method: 'GET',
-                    /*url:'/api/v1/documents/layout?fields=id,name'*/
-                    url: '/api/v1/layouts'
-                });
+                return services.get('/api/v1/layouts', '', function (response) {
+                    if (response) {
+
+                    }
+                })
+                // return $http({
+                //     method: 'GET',
+                //     /*url:'/api/v1/documents/layout?fields=id,name'*/
+                //     url: '/api/v1/layouts'
+                // });
             },
             createLayout: function (layout, callback) {
-                $http.post('/api/v1/layout', layout)
-                    .then(function (data) {
+                services.post('/api/v1/layout', layout, function (response) {
+                    if (response) {
                         callback(data);
                         swal("Great", "Layout has been successfully created", "success");
                         $rootScope.$broadcast('layoutsCreateComplete');
-                    }, function (err) {
-                        var errorMsg = "error adding new layout info. " + (err && err.error ? err.error : '');
-                        $log.error(errorMsg);
-                    });
+                    }
+                }, function (err) {
+                    var errorMsg = "error adding new layout info. " + (err && err.error ? err.error : '');
+                    $log.error(errorMsg);
+                })
+                // $http.post('/api/v1/layout', layout)
+                //     .then(function (data) {
+                //         callback(data);
+                //         swal("Great", "Layout has been successfully created", "success");
+                //         $rootScope.$broadcast('layoutsCreateComplete');
+                //     }, function (err) {
+                //         var errorMsg = "error adding new layout info. " + (err && err.error ? err.error : '');
+                //         $log.error(errorMsg);
+                //     });
             },
             layoutById: function (id, callback) {
-                $http.get('/api/v1/layout/' + id).then(function (data) {
+                services.get('/api/v1/layout/' + id, '', function (response) {
                     callback(data);
                     $rootScope.$broadcast('layoutsCreateComplete');
-                });
+                })
+                // $http.get('/api/v1/layout/' + id).then(function (data) {
+                //     callback(data);
+                //     $rootScope.$broadcast('layoutsCreateComplete');
+                // });
             },
             updateLayout: function (layout, callback) {
-                $http.put('/api/v1/layout', layout).then(function (data) {
-                    // callback(data);
-                    swal("Great", ":Layout has been successfully Update", "success");
-                    $rootScope.$broadcast('layoutsCreateComplete');
-                });
+                services.put('/api/v1/layout', layout, '', function (response) {
+                    if (response) {
+                        // callback(response);
+                        swal("Great", ":Layout has been successfully Update", "success");
+                        $rootScope.$broadcast('layoutsCreateComplete');
+                    }
+                })
+                // $http.put('/api/v1/layout', layout).then(function (data) {
+                //     // callback(data);
+                //     swal("Great", ":Layout has been successfully Update", "success");
+                //     $rootScope.$broadcast('layoutsCreateComplete');
+                // });
             },
             deleteLayout: function (id, callback) {
-                swal({
-                    title: "Are you sure?", text: "You will not be able to recover this Job !",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false
-                }, function () {
-                    $http.delete('/api/v1/layout/' + id)
-                        .then(function (response) {
-                            // callback(response);
-                            swal("Great", "Layout has been successfully deleted", "success");
-                            $rootScope.$broadcast('layoutsDeleteComplete');
-                        }, function (error) {
-                            swal("Oops...", "Error finding data!", "error" + angular.toJson(error));
-                        });
-                });
+                services.delete('/api/v1/layout/' + id, function (response) {
+                    if (response) {
+                        swal("Great", "Layout has been successfully deleted", "success");
+                        $rootScope.$broadcast('layoutsDeleteComplete');
+                    }
+                }, function (error) {
+                    swal("Oops...", "Error finding data!", "error" + angular.toJson(error));
+                })
+                // swal({
+                //     title: "Are you sure?", text: "You will not be able to recover this Job !",
+                //     type: "warning",
+                //     showCancelButton: true,
+                //     confirmButtonColor: "#DD6B55",
+                //     confirmButtonText: "Yes, delete it!",
+                //     closeOnConfirm: false
+                // }, function () {
+                //     $http.delete('/api/v1/layout/' + id)
+                //         .then(function (response) {
+                //             // callback(response);
+                //             swal("Great", "Layout has been successfully deleted", "success");
+                //             $rootScope.$broadcast('layoutsDeleteComplete');
+                //         }, function (error) {
+                //             swal("Oops...", "Error finding data!", "error" + angular.toJson(error));
+                //         });
+                // });
             }
         };
     });

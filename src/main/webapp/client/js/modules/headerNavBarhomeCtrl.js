@@ -130,16 +130,19 @@ angular.module('myBus.header', ['ngTable', 'ui.bootstrap'])
     });
 
     $scope.updateVehicle = function(id){
-        $location.url('vehicle/'+id);
+        // $location.url('vehicle/'+id);
+        $state.go('home.vehicle', {id: id})
         setTimeout(function() {
             $('#myModal').modal('hide');
         });
     };
     $scope.goToServiceReport = function (service) {
         if (service.attrs.formId) {
-            $location.url('serviceform/' + service.attrs.formId);
+            // $location.url('serviceform/' + service.attrs.formId);
+            $state.go('home.serviceform', {id: service.attrs.formId})
         } else {
-            $location.url('servicereport/' + service.id);
+            // $location.url('servicereport/' + service.id);
+            $state.go('home.servicereport', {id: service.id})
         }
     }
 });

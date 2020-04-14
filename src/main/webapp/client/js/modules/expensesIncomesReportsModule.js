@@ -23,7 +23,8 @@ angular.module('myBus.expensesIncomesReportsModule', ['ngTable', 'ui.bootstrap']
             var day = dateObj.getDate();
             var year = dateObj.getFullYear();
             var newdate = year + "-" + month + "-" + day;
-            $location.url('expensesincomesreports/' + newdate);
+            // $location.url('expensesincomesreports/' + newdate);
+            $state.go('home.expensesincomesreportsDate', {date: newdate});
         }
         $scope.today = function() {
             //var date =
@@ -192,15 +193,22 @@ angular.module('myBus.expensesIncomesReportsModule', ['ngTable', 'ui.bootstrap']
             $rootScope.modalInstance.dismiss('cancel');
         };
     })
-    .factory('paymentsReportsManager', function ($http, $log) {
+    .factory('paymentsReportsManager', function ($http, $log, services) {
         return {
             getPayments: function (date,pageable, callback) {
-            $http({url:'/api/v1/payments/day?date=' + date,method:"GET",params:pageable})
-                .then(function (response) {
-                    callback(response.data);
+                services.get('/api/v1/payments/day?date=' + date, pageable, function (response) {
+                    if (response) {
+                        callback(response.data);
+                    }
                 }, function (error) {
                     $log.debug("error loading payments");
-                });
+                })
+            // $http({url:'/api/v1/payments/day?date=' + date,method:"GET",params:pageable})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         $log.debug("error loading payments");
+            //     });
             }
         }
     });

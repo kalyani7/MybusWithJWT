@@ -110,18 +110,58 @@ angular.module('myBus.expenseModule', ['ngTable', 'ui.bootstrap'])
         };
     })
 
-.factory('expenseManager', function ($rootScope, $http, $log) {
+.factory('expenseManager', function ($rootScope, $http, $log, services) {
     return {
         getExpense: function (pageable, callback) {
-            $http({url:'/api/v1/expenseType/getAllExpenses',method:"GET",params:pageable})
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    $log.debug("error loading expense");
-                });
+            services.get('/api/v1/expenseType/getAllExpenses', pageable, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                $log.debug("error loading expense");
+            })
+            // $http({url:'/api/v1/expenseType/getAllExpenses',method:"GET",params:pageable})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         $log.debug("error loading expense");
+            //     });
         },
         save: function (expense, callback) {
-            $http.post('/api/v1/expenseType/addtype', expense).then(function (response) {
+            services.post('/api/v1/expenseType/addtype', expense, function (response) {
+                if (response) {
+                    callback(response.data)
+                    $rootScope.$broadcast('check');
+                }
+            }, function (err,status) {
+                sweetAlert("Error",err.message,"error");
+            })
+            // $http.post('/api/v1/expenseType/addtype', expense).then(function (response) {
+            //     if(angular.isFunction(callback)){
+            //         callback(response.data);
+            //     }
+            //     $rootScope.$broadcast('check');
+            // },function (err,status) {
+            //     sweetAlert("Error",err.message,"error");
+            // })
+        },
+        edit: function (id, callback) {
+            services.get('api/v1/expenseType/get/' + id, '', function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                swal("oops", error, "error");
+            })
+            // $http({url: 'api/v1/expenseType/get/'+id, method: "GET"})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         swal("oops", error, "error");
+            //     })
+        },
+        update: function (expense, callback){
+            services.put('/api/v1/expenseType/updatetype', '', expense, function (response) {
                 if(angular.isFunction(callback)){
                     callback(response.data);
                 }
@@ -129,50 +169,56 @@ angular.module('myBus.expenseModule', ['ngTable', 'ui.bootstrap'])
             },function (err,status) {
                 sweetAlert("Error",err.message,"error");
             })
-        },
-        edit: function (id, callback) {
-            $http({url: 'api/v1/expenseType/get/'+id, method: "GET"})
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    swal("oops", error, "error");
-                })
-        },
-        update: function (expense, callback){
-            $http.put('/api/v1/expenseType/updatetype', expense).then(function (response) {
-                if(angular.isFunction(callback)){
-                    callback(response.data);
-                }
-                $rootScope.$broadcast('check');
-            },function (err,status) {
-                sweetAlert("Error",err.message,"error");
-            });
+            // $http.put('/api/v1/expenseType/updatetype', expense).then(function (response) {
+            //     if(angular.isFunction(callback)){
+            //         callback(response.data);
+            //     }
+            //     $rootScope.$broadcast('check');
+            // },function (err,status) {
+            //     sweetAlert("Error",err.message,"error");
+            // });
         },
         count: function (query, callback) {
-            $http.get('/api/v1/expenseType/count?query='+query)
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    $log.debug("error retrieving route count");
-                });
+            services.get('/api/v1/expenseType/count?query=' + query, '', function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                $log.debug("error retrieving route count");
+            })
+            // $http.get('/api/v1/expenseType/count?query='+query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         $log.debug("error retrieving route count");
+            //     });
         },
         deleteExpense: function (expenseID, callback) {
-            swal({
-                title: "Are you sure?",
-                text: "Are you sure you want to delete this expense?",
-                type: "warning",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                confirmButtonText: "Yes, delete it!",
-                confirmButtonColor: "#ec6c62"}, function () {
-                $http.delete('api/v1/expenseType/delete/'+expenseID).then(function (data) {
+            services.delete('api/v1/expenseType/delete/' + expenseID, function (response) {
+                if (response) {
                     callback(data);
                     $rootScope.$broadcast('check');
                     swal("Deleted!", "Office was successfully deleted!", "success");
-                },function (error) {
-                    swal("Oops", "We couldn't connect to the server!", "error");
-                })
+                }
+            }, function (error) {
+                swal("Oops", "We couldn't connect to the server!", "error");
             })
+            // swal({
+            //     title: "Are you sure?",
+            //     text: "Are you sure you want to delete this expense?",
+            //     type: "warning",
+            //     showCancelButton: true,
+            //     closeOnConfirm: false,
+            //     confirmButtonText: "Yes, delete it!",
+            //     confirmButtonColor: "#ec6c62"}, function () {
+            //     $http.delete('api/v1/expenseType/delete/'+expenseID).then(function (data) {
+            //         callback(data);
+            //         $rootScope.$broadcast('check');
+            //         swal("Deleted!", "Office was successfully deleted!", "success");
+            //     },function (error) {
+            //         swal("Oops", "We couldn't connect to the server!", "error");
+            //     })
+            // })
         }
     }
 });

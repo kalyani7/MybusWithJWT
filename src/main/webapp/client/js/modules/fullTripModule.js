@@ -56,7 +56,7 @@ angular.module('myBus.fullTripModule', ['ngTable', 'ui.bootstrap'])
         $scope.init();
 
         $scope.updateFullTrip = function (fullTripId) {
-            $state.go('editFullTrip', {id: fullTripId});
+            $state.go('home.editFullTrip', {id: fullTripId});
         };
 
         $scope.payFullTrip = function (fullTripId) {
@@ -115,79 +115,132 @@ angular.module('myBus.fullTripModule', ['ngTable', 'ui.bootstrap'])
                 fullTripManager.updateFullTripDetails($scope.fullTrip, function (response) {
                     console.log("response",response);
                     swal("success","Full Trip Details Updated Successfully", "success");
-                    $state.go('fulltrips');
+                    $state.go('home.fulltrips');
                 })
             } else {
                 fullTripManager.saveFullTripDetails($scope.fullTrip, function (response) {
                     swal("success","Full Trip Details Added Successfully", "success");
-                    $state.go('fulltrips');
+                    $state.go('home.fulltrips');
                 })
             }
         };
 
 
     })
-    .factory('fullTripManager', function ($rootScope, $q, $uibModal, $http, $log, $location) {
+    .factory('fullTripManager', function ($rootScope, $q, $uibModal, $http, $log, $location, services) {
         return {
             saveFullTripDetails: function (details, successcallback) {
-                $http.post("/api/v1/fullTrip", details)
-                    .then(function (response) {
+                services.post("/api/v1/fullTrip", details, function (response) {
+                    if (response) {
                         successcallback(response.data)
-                    }, function (error) {
-                        swal("oops", error.data.message, "error");
-                    })
+                    }
+                }, function (error) {
+                    swal("oops", error.data.message, "error");
+                })
+                // $http.post("/api/v1/fullTrip", details)
+                //     .then(function (response) {
+                //         successcallback(response.data)
+                //     }, function (error) {
+                //         swal("oops", error.data.message, "error");
+                //     })
             },
             getAllTripDetails: function (filter, callback) {
-                $http.post('/api/v1/fullTrips', filter)
-                    .then(function (response) {
+                services.post('/api/v1/fullTrips', filter, function (response) {
+                    if (response) {
                         if (angular.isFunction(callback)) {
                             callback(response.data.content);
                         }
-                    }, function (err, status) {
-                        sweetAlert("Error searching i Full Trip", err.message, "error");
-                    });
+                    }
+                }, function (err, status) {
+                    sweetAlert("Error searching i Full Trip", err.message, "error");
+                })
+                // $http.post('/api/v1/fullTrips', filter)
+                //     .then(function (response) {
+                //         if (angular.isFunction(callback)) {
+                //             callback(response.data.content);
+                //         }
+                //     }, function (err, status) {
+                //         sweetAlert("Error searching i Full Trip", err.message, "error");
+                //     });
             },
             getTripDetails: function (id, callback) {
-                $http.get('/api/v1/fullTrip/'+id)
-                    .then(function (response) {
+                services.get('/api/v1/fullTrip/' + id, '', function (response) {
+                    if (response) {
                         if (angular.isFunction(callback)) {
                             callback(response.data);
                         }
-                    }, function (err, status) {
-                        sweetAlert("Error searching i Full Trip", err.message, "error");
-                    });
+                    }
+                }, function (err, status) {
+                    sweetAlert("Error searching i Full Trip", err.message, "error");
+                })
+                // $http.get('/api/v1/fullTrip/'+id)
+                //     .then(function (response) {
+                //         if (angular.isFunction(callback)) {
+                //             callback(response.data);
+                //         }
+                //     }, function (err, status) {
+                //         sweetAlert("Error searching i Full Trip", err.message, "error");
+                //     });
             },
             count: function (callback) {
-                $http.get('/api/v1/fullTrips/count')
-                    .then(function (response) {
-                        callback(response.data);
-                    }, function (error) {
-                        swal("oops", error.data.message, "error");
-                    });
+                services.get('/api/v1/fullTrips/count', '', function (response) {
+                    if (response) {
+                        callback(response)
+                    }
+                }, function (error) {
+                    swal("oops", error.data.message, "error");
+                })
+                // $http.get('/api/v1/fullTrips/count')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function (error) {
+                //         swal("oops", error.data.message, "error");
+                //     });
             },
             updateFullTripDetails: function (details, successcallback) {
-                $http.post("/api/v1/fullTrip", details)
-                    .then(function (response) {
+                services.post("/api/v1/fullTrip", details, function (response) {
+                    if (response) {
                         successcallback(response.data)
-                    }, function (error) {
-                        swal("oops", error.data.message, "error");
-                    })
+                    }
+                }, function (error) {
+                    swal("oops", error.data.message, "error");
+                })
+                // $http.post("/api/v1/fullTrip", details)
+                //     .then(function (response) {
+                //         successcallback(response.data)
+                //     }, function (error) {
+                //         swal("oops", error.data.message, "error");
+                //     })
             },
             payFullTrip: function (id, successcallback) {
-                $http.put("/api/v1/fullTrip/pay/"+id)
-                    .then(function (response) {
+                services.put("/api/v1/fullTrip/pay/" + id, '', '', function (response) {
+                    if (response) {
                         successcallback(response.data)
-                    }, function (error) {
-                        swal("oops", error.data.message, "error");
-                    })
+                    }
+                }, function (error) {
+                    swal("oops", error.data.message, "error");
+                })
+                // $http.put("/api/v1/fullTrip/pay/"+id)
+                //     .then(function (response) {
+                //         successcallback(response.data)
+                //     }, function (error) {
+                //         swal("oops", error.data.message, "error");
+                //     })
             },
             deleteFullTripRecord: function (id, callback) {
-                $http.delete('/api/v1/fullTrip/' + id)
-                    .then(function (response) {
-                        callback(response.data);
-                    }, function (error) {
-                        swal("oops", error.data.message, "error");
-                    });
+                services.delete('/api/v1/fullTrip/' + id, function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    swal("oops", error.data.message, "error");
+                })
+                // $http.delete('/api/v1/fullTrip/' + id)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function (error) {
+                //         swal("oops", error.data.message, "error");
+                //     });
             },
         }
 

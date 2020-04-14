@@ -68,11 +68,11 @@ angular.module('myBus.agentModule', ['ngTable', 'ui.bootstrap'])
         };
 
         $scope.handleClickAddNewAgent = function() {
-            $state.go('agentsedit');
+            $state.go('home.agentsadd');
         };
 
         $scope.editAgent = function(agentId){
-            $state.go('agentsedit', {id: agentId});
+            $state.go('home.agentsedit', {id: agentId});
         };
         $scope.$on('AgentUpdated', function (e, value) {
             loadTableData($scope.agentTableParams);
@@ -101,109 +101,174 @@ angular.module('myBus.agentModule', ['ngTable', 'ui.bootstrap'])
         $scope.saveAgent = function(){
             if ($stateParams.id) {
                 agentManager.save($scope.agent, function (response) {
-                    $state.go('agents');
+                    $state.go('home.agents');
                 });
             } else {
                 agentManager.addAgent($scope.agent, function (response) {
                     if(response) {
-                        $state.go('agents');
+                        $state.go('home.agents');
                     }
                 });
             }
         };
         $scope.cancel = function () {
-            $state.go('agents');
+            $state.go('home.agents');
         };
 
         $scope.launchAddBranchOffice = function() {
             $scope.cancel();
-            $location.url('/branchoffice/');
+            $state.go()
+            $location.url('home.branchoffice');
         }
     })
-    .factory('agentManager', function ($http, $log,$rootScope) {
+    .factory('agentManager', function ($http, $log,$rootScope, services) {
     var agents = {};
     return {
         getAgents: function (query, showInvalid, pageable, callback) {
-            $http({url:'/api/v1/agents?query='+query+"&showInvalid="+showInvalid,method: "GET",params: pageable})
-                .then(function (response) {
-                    callback(response.data);
-                },function (error) {
-                    $log.debug("error retrieving agents");
-                });
+            services.get('/api/v1/agents?query='+query+"&showInvalid="+showInvalid, pageable, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                $log.debug("error retrieving agents");
+            })
+            // $http({url:'/api/v1/agents?query='+query+"&showInvalid="+showInvalid,method: "GET",params: pageable})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     },function (error) {
+            //         $log.debug("error retrieving agents");
+            //     });
         },
         count: function (query, showInvalid, callback) {
             if(!showInvalid || showInvalid.trim().length == 0){
                 showInvalid = false;
             }
-            $http.get('/api/v1/agent/count?query='+query+"&showInvalid="+showInvalid)
-                .then(function (response) {
-                    callback(response.data);
-                }, function (error) {
-                    $log.debug("error retrieving route count");
-                });
+            services.get('/api/v1/agent/count?query='+query+"&showInvalid="+showInvalid, '', function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                $log.debug("error retrieving route count");
+            })
+            // $http.get('/api/v1/agent/count?query='+query+"&showInvalid="+showInvalid)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function (error) {
+            //         $log.debug("error retrieving route count");
+            //     });
         },
 
         addAgent : function (agent, callback) {
-            $http.post('/api/v1/agent/addAgent', agent).then(function (response) {
-                if (angular.isFunction(callback)) {
-                    callback(response.data);
+            services.post('/api/v1/agent/addAgent', agent, function (response) {
+                if (response) {
+                    callback(response.data)
+                    $rootScope.$broadcast('AgentAdded');
                 }
-                $rootScope.$broadcast('AgentAdded');
-            }, function (err, status) {
+            }, function (error) {
                 sweetAlert("Error", err.data.message, "error");
-            });
+            })
+            // $http.post('/api/v1/agent/addAgent', agent).then(function (response) {
+            //     if (angular.isFunction(callback)) {
+            //         callback(response.data);
+            //     }
+            //     $rootScope.$broadcast('AgentAdded');
+            // }, function (err, status) {
+            //     sweetAlert("Error", err.data.message, "error");
+            // });
         },
 
         download: function (callback) {
-            $http.get('/api/v1/agent/download')
-                .then(function (response) {
-                    callback(response.data);
-                },function (error) {
-                    $log.debug("error downloading agents");
-                    sweetAlert("Error",error.data.message,"error");
-                });
+            services.get('/api/v1/agent/download', '', function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                $log.debug("error downloading agents");
+                sweetAlert("Error",error.data.message,"error");
+            })
+            // $http.get('/api/v1/agent/download')
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     },function (error) {
+            //         $log.debug("error downloading agents");
+            //         sweetAlert("Error",error.data.message,"error");
+            //     });
         },
         save: function(agent, callback) {
             if(agent.id) {
-                $http.put('/api/v1/agent/update',agent).then(function(response){
+                services.put('/api/v1/agent/update', '', agent, function (response) {
                     if(angular.isFunction(callback)){
                         callback(response.data);
                     }
                     $rootScope.$broadcast('AgentUpdated');
-                },function (err,status) {
-                    sweetAlert("Error",err.data.message,"error");
-                });
+                }, function (error) {
+                    sweetAlert("Error",error.data.message,"error");
+                })
+                // $http.put('/api/v1/agent/update',agent).then(function(response){
+                //     if(angular.isFunction(callback)){
+                //         callback(response.data);
+                //     }
+                //     $rootScope.$broadcast('AgentUpdated');
+                // },function (err,status) {
+                //     sweetAlert("Error",err.data.message,"error");
+                // });
             }
         },
         load: function(agentId,callback) {
-            $http.get('/api/v1/agent/'+agentId)
-                .then(function (response) {
-                    callback(response.data);
+            services.get('/api/v1/agent/'+agentId, function (response) {
+                if (response) {
+                    callback(response.data)
                     $rootScope.$broadcast('AgentLoadComplete');
-                },function (error) {
-                    $log.debug("error retrieving agent info");
-                    sweetAlert("Error",error.data.message,"error");
-                });
+                }
+            }, function (error) {
+                $log.debug("error retrieving agent info");
+                sweetAlert("Error",error.data.message,"error");
+            })
+            // $http.get('/api/v1/agent/'+agentId)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //         $rootScope.$broadcast('AgentLoadComplete');
+            //     },function (error) {
+            //         $log.debug("error retrieving agent info");
+            //         sweetAlert("Error",error.data.message,"error");
+            //     });
         },
         getNames: function(callback) {
-            $http.get('/api/v1/agentNames/')
-                .then(function (response) {
-                    callback(response.data);
+            services.get('/api/v1/agentNames/', '', function (response) {
+                if (response) {
+                    callback(response.data)
                     $rootScope.$broadcast('AgentNamesLoadComplete');
-                },function (error) {
-                    $log.debug("error retrieving agent info");
-                    sweetAlert("Error",error.data.message,"error");
-                });
+                }
+            }, function (error) {
+                $log.debug("error retrieving agent info");
+                sweetAlert("Error",error.data.message,"error");
+            })
+            // $http.get('/api/v1/agentNames/')
+            //     .then(function (response) {
+            //         callback(response.data);
+            //         $rootScope.$broadcast('AgentNamesLoadComplete');
+            //     },function (error) {
+            //         $log.debug("error retrieving agent info");
+            //         sweetAlert("Error",error.data.message,"error");
+            //     });
         },
         updateBranchOffice:function (agent,callback) {
-            $http.put('/api/v1/agent/updateBranchOffice',agent)
-                .then(function (response) {
-                    callback(response.data);
-                    $rootScope.$broadcast('AgentUpdatedInServiceReports');
-                    },function (error) {
-                    $log.debug("error downloading agents");
-                    sweetAlert("Error",error.data.message,"error");
-                });
+            services.put('/api/v1/agent/updateBranchOffice', '', agent, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function (error) {
+                $log.debug("error downloading agents");
+                sweetAlert("Error",error.data.message,"error");
+            })
+            // $http.put('/api/v1/agent/updateBranchOffice',agent)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //         $rootScope.$broadcast('AgentUpdatedInServiceReports');
+            //         },function (error) {
+            //         $log.debug("error downloading agents");
+            //         sweetAlert("Error",error.data.message,"error");
+            //     });
         }
     }
 });

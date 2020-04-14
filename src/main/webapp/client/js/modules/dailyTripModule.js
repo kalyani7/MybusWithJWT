@@ -119,7 +119,7 @@ angular.module('myBus.dailyTripModule', ['ngTable', 'ui.bootstrap'])
             DailyTripManager.updateDailyTrip($scope.trip, function (response) {
             });
             swal("success", "trip Updated", "success");
-            $state.go('dailytrips');
+            $state.go('home.dailytrips');
         } else {
             $scope.trip.vehicleId = $scope.trip.vehicleId.id;
             $scope.trip.serviceName = $scope.trip.service.serviceName;
@@ -127,7 +127,7 @@ angular.module('myBus.dailyTripModule', ['ngTable', 'ui.bootstrap'])
             DailyTripManager.addDailyTrip($scope.trip, function (response) {
             });
             swal("success", "trip added", "success");
-            $state.go('dailytrips');
+            $state.go('home.dailytrips');
         }
     };
     $scope.getStaffFromLastTrip = function(vehicleId){
@@ -145,7 +145,7 @@ angular.module('myBus.dailyTripModule', ['ngTable', 'ui.bootstrap'])
         }
     };
     $scope.cancel = function(){
-        $state.go('dailytrips');
+        $state.go('home.dailytrips');
     };
     $scope.getAllStaff();
 
@@ -221,7 +221,7 @@ angular.module('myBus.dailyTripModule', ['ngTable', 'ui.bootstrap'])
         $scope.init();
     });
     $scope.addDailyTrip = function (id) {
-        $state.go('addDailyTrip',{tripId:id});
+        $state.go('home.addDailyTrip',{tripId:id});
     };
     $scope.deleteDailyTrip = function (id) {
         DailyTripManager.deleteDailyTrip(id,function (response) {});
@@ -249,67 +249,119 @@ angular.module('myBus.dailyTripModule', ['ngTable', 'ui.bootstrap'])
     $scope.init();
 
 
-}).factory('DailyTripManager',function ($http) {
+}).factory('DailyTripManager',function ($http, services) {
     return{
         addDailyTrip:function (trip, callback) {
-            $http.post('/api/v1/dailyTrips/addDailytrip', trip)
-                .then(function (response) {
+            services.post('/api/v1/dailyTrips/addDailytrip', trip, function (response) {
+                if (response) {
                     callback(response);
-                }, function (err) {});
+                }
+            }, function (err) {})
+            // $http.post('/api/v1/dailyTrips/addDailytrip', trip)
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function (err) {});
         },
         updateDailyTrip:function (trip, callback) {
-            $http.put('/api/v1/dailyTrips/updateDailyTrip', trip)
-                .then(function (response) {
+            services.put('/api/v1/dailyTrips/updateDailyTrip', '', trip, function (response) {
+                if (response) {
                     callback(response);
-                }, function (err) {});
+                }
+            }, function (err) {})
+            // $http.put('/api/v1/dailyTrips/updateDailyTrip', trip)
+            //     .then(function (response) {
+            //         callback(response);
+            //     }, function (err) {});
         },
         getAllDailyTrips: function (query,callback) {
-            $http.post('/api/v1/dailyTrips/getAllDailyTrips', query)
-                .then(function (response) {
+            services.post('/api/v1/dailyTrips/getAllDailyTrips', query, function (response) {
+                if (response) {
                     callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+                }
+            }, function(error){
+                swal("oops", error, "error");
+            })
+            // $http.post('/api/v1/dailyTrips/getAllDailyTrips', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         },
         deleteDailyTrip:function (id,callback) {
-            $http.delete('/api/v1/dailyTrips/deleteDailyTrip/'+id)
-                .then(function (response) {
+            services.delete('/api/v1/dailyTrips/deleteDailyTrip/' + id, function (response) {
+                if (response) {
                     callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+                }
+            }, function(error){
+                swal("oops", error, "error");
+            })
+            // $http.delete('/api/v1/dailyTrips/deleteDailyTrip/'+id)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         },
         getTrip: function (id,callback) {
-            $http.get('/api/v1/dailyTrips/getDailyTrip/'+id)
-                .then(function (response) {
+            services.get('/api/v1/dailyTrips/getDailyTrip/' + id, '', function (response) {
+                if (response) {
                     callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+                }
+            }, function(error){
+                swal("oops", error, "error");
+            })
+            // $http.get('/api/v1/dailyTrips/getDailyTrip/'+id)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         },
         getDailyTripsCount:function (query,callback) {
-            $http.post('/api/v1/dailyTrips/getDailyTripsCount', query)
-                .then(function (response) {
+            services.post('/api/v1/dailyTrips/getDailyTripsCount', query, function (response) {
+                if (response) {
                     callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+                }
+            }, function(error){
+                swal("oops", error, "error");
+            })
+            // $http.post('/api/v1/dailyTrips/getDailyTripsCount', query)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         },
         getStaffFromLastTrip:function (tripQuery,callback) {
-            $http.post('/api/v1/dailyTrips/getStaffFromLastTrip',tripQuery)
-                .then(function (response) {
-                    callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+            services.post('/api/v1/dailyTrips/getStaffFromLastTrip', tripQuery, function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function(error){
+                swal("oops", error, "error");
+            })
+            // $http.post('/api/v1/dailyTrips/getStaffFromLastTrip',tripQuery)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         },
         getServices:function (date,callback) {
-            $http.get('/api/v1/dailyTrips/getServices/'+date)
-                .then(function (response) {
-                    callback(response.data);
-                }, function(error){
-                    swal("oops", error, "error");
-                });
+            services.get('/api/v1/dailyTrips/getServices/' + date, '', function (response) {
+                if (response) {
+                    callback(response.data)
+                }
+            }, function(error){
+                swal("oops", error, "error");
+            })
+            // $http.get('/api/v1/dailyTrips/getServices/'+date)
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     }, function(error){
+            //         swal("oops", error, "error");
+            //     });
         }
     }
 

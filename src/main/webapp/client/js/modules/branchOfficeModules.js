@@ -55,11 +55,12 @@ angular.module('myBus.branchOfficeModule', ['ngTable', 'ui.bootstrap'])
         $scope.init();
 
         $scope.addOffice = function () {
-            $state.go('editbranchoffice');
+            $state.go('home.editbranchoffice');
         };
 
         $scope.edit = function(office){
-            $location.url('branchoffice/'+office.id,{'idParam':office.id});
+            $state.go('home.editbranchoffice', {id: id})
+            // $location.url('branchoffice/'+office.id,{'idParam':office.id});
         }
         $scope.delete = function(office){
             branchOfficeManager.deleteOffice(office.id);
@@ -94,7 +95,8 @@ angular.module('myBus.branchOfficeModule', ['ngTable', 'ui.bootstrap'])
             $scope.office.managerId= item.id;
         };
         $scope.launchUserAdd = function() {
-            $location.url('/user/');
+            $state.go('home.user')
+            // $location.url('/user/');
         };
         $scope.save = function() {
             if($scope.thisForm.$dirty){
@@ -111,7 +113,8 @@ angular.module('myBus.branchOfficeModule', ['ngTable', 'ui.bootstrap'])
                     }
                 });
             }
-            $location.url('/branchoffices');
+            // $location.url('/branchoffices');
+            $state.go('home.branchoffices')
         };
         $scope.cancel = function(theForm) {
             cancelManager.cancel(theForm);
@@ -128,12 +131,19 @@ angular.module('myBus.branchOfficeModule', ['ngTable', 'ui.bootstrap'])
         var branchOffices = {};
         return {
             loadAll: function ( pageable, callback) {
-                $http({url: '/api/v1/branchOffices', method: "GET", params: pageable})
-                    .then(function (response) {
+                services.get('/api/v1/branchOffices', pageable, function (response) {
+                    if (response) {
                         callback(response.data);
-                    }, function(error){
-                        swal("oops", error, "error");
-                    });
+                    }
+                }, function (error) {
+                    swal("oops", error, "error");
+                })
+                // $http({url: '/api/v1/branchOffices', method: "GET", params: pageable})
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function(error){
+                //         swal("oops", error, "error");
+                //     });
             },
             loadNames: function (successCallback, errorCallback) {
                 services.get('/api/v1/branchOffice/names', '', function (response) {
@@ -155,58 +165,91 @@ angular.module('myBus.branchOfficeModule', ['ngTable', 'ui.bootstrap'])
             },
             save: function(branchOffice, callback) {
                 if(branchOffice.id) {
-                    $http.put('/api/v1/branchOffice/'+branchOffice.id,branchOffice).then(function(response){
+                    services.put('/api/v1/branchOffice/'+branchOffice.id, branchOffice, function (response) {
+                        if (response) {
+                            callback(response.data);
+                        }
+                    }, function (err,status) {
+                        sweetAlert("Error",err.message,"error");
+                    })
+                    // $http.put('/api/v1/branchOffice/'+branchOffice.id,branchOffice).then(function(response){
+                    //     if(angular.isFunction(callback)){
+                    //         callback(response.data);
+                    //     }
+                    //     $rootScope.$broadcast('check');
+                    // },function (err,status) {
+                    //     sweetAlert("Error",err.message,"error");
+                    // });
+                } else {
+                    services.post('/api/v1/branchOffice', branchOffice, function (response) {
                         if(angular.isFunction(callback)){
                             callback(response.data);
                         }
                         $rootScope.$broadcast('check');
-                    },function (err,status) {
-                        sweetAlert("Error",err.message,"error");
-                    });
-                } else {
-                    $http.post('/api/v1/branchOffice',branchOffice).then(function(response){
-                        if(angular.isFunction(callback)){
-                            callback(response.data);
-                        }
-                            $rootScope.$broadcast('check');
-                    },function (err,status) {
-                        sweetAlert("Error",err.message,"error");
-                    });
+                    }, function (error, status) {
+                        sweetAlert("Error",error.message,"error");
+                    })
+                    // $http.post('/api/v1/branchOffice',branchOffice).then(function(response){
+                    //     if(angular.isFunction(callback)){
+                    //         callback(response.data);
+                    //     }
+                    //         $rootScope.$broadcast('check');
+                    // },function (err,status) {
+                    //     sweetAlert("Error",err.message,"error");
+                    // });
                 }
             },
             count: function (id, callback) {
-                $http.get('/api/v1/branchOffices/count')
-                    .then(function (response) {
+                services.get('/api/v1/branchOffices/count', '', function (response) {
+                    if (response) {
                         callback(response.data);
-                    },function (error) {
-                        $log.debug("error retrieving branchOffice count");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving branchOffice count");
+                })
+                // $http.get('/api/v1/branchOffices/count')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error retrieving branchOffice count");
+                //     });
             },
-            load: function(officeId,callback) {
-                $http.get('/api/v1/branchOffice/'+officeId)
-                    .then(function (response) {
+            load: function(officeId, callback) {
+                services.get('/api/v1/branchOffice/' + officeId, '', function (response) {
+                    if (response) {
                         callback(response.data);
                         $rootScope.$broadcast('check');
-                    },function (error) {
-                        $log.debug("error retrieving branchOffice");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving branchOffice");
+                })
+                // $http.get('/api/v1/branchOffice/'+officeId)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //         $rootScope.$broadcast('check');
+                //     },function (error) {
+                //         $log.debug("error retrieving branchOffice");
+                //     });
             },
             deleteOffice: function(id) {
-                swal({
-                    title: "Are you sure?",
-                    text: "Are you sure you want to delete this office?",
-                    type: "warning",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    confirmButtonText: "Yes, delete it!",
-                    confirmButtonColor: "#ec6c62"},function(){
-                    $http.delete('api/v1/branchOffice/'+id).then(function(response){
-                        $rootScope.$broadcast('check');
-                        swal("Deleted!", "Office was successfully deleted!", "success");
-                    },function () {
-                        swal("Oops", "We couldn't connect to the server!", "error");
-                    });
+                services.delete('api/v1/branchOffice/' + id, function (response) {
+                    if (response) {}
                 })
+                // swal({
+                //     title: "Are you sure?",
+                //     text: "Are you sure you want to delete this office?",
+                //     type: "warning",
+                //     showCancelButton: true,
+                //     closeOnConfirm: false,
+                //     confirmButtonText: "Yes, delete it!",
+                //     confirmButtonColor: "#ec6c62"},function(){
+                //     $http.delete('api/v1/branchOffice/'+id).then(function(response){
+                //         $rootScope.$broadcast('check');
+                //         swal("Deleted!", "Office was successfully deleted!", "success");
+                //     },function () {
+                //         swal("Oops", "We couldn't connect to the server!", "error");
+                //     });
+                // })
             }
         }
     });

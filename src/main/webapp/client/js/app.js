@@ -78,7 +78,7 @@ myBus.config(['$stateProvider', '$urlRouterProvider',
                 url: '/newbooking',
                 templateUrl: 'partials/cargoBooking.tpl.html',
                 controller: 'CargoBookingController'
-            }).state('home.viewcargobooking/:id', {
+            }).state('home.viewcargobooking', {
             url: '/viewcargobooking/:id',
             templateUrl: 'partials/cargoBookingDetails.tpl.html',
             controller: 'CargoBookingController'
@@ -122,8 +122,13 @@ myBus.config(['$stateProvider', '$urlRouterProvider',
                 url: '/agents',
                 templateUrl: 'partials/agents.tpl.html',
                 controller: 'AgentController'
-            }).state('home.agentsedit', {
-            level: 1,
+            }).state('home.agentsadd', {
+            level: 2,
+            url: '/agentsadd',
+            templateUrl: 'partials/agentsEdit.tpl.html',
+            controller: 'AddAgentController'
+        }).state('home.agentsedit', {
+            level: 3,
             url: '/agentsedit/:id',
             templateUrl: 'partials/agentsEdit.tpl.html',
             controller: 'AddAgentController'
@@ -201,8 +206,8 @@ myBus.config(['$stateProvider', '$urlRouterProvider',
                 templateUrl: 'partials/expensesIncomesReports.tpl.html',
                 controller: 'expensesIncomesReportsCtrl'
             })
-            .state('home.expensesincomesreports/:date', {
-                url: '/expensesincomesreports/:date',
+            .state('home.expensesincomesreportsDate', {
+                url: '/expensesincomesreportsDate/:date',
                 templateUrl: 'partials/expensesIncomesReports.tpl.html',
                 controller: 'expensesIncomesReportsCtrl'
             })
@@ -224,36 +229,36 @@ myBus.config(['$stateProvider', '$urlRouterProvider',
                 templateUrl: 'partials/addFuelExpense.tpl.html',
                 controller: 'editFuelExpenseReportController'
             })
-            .state('home.fuelexpensereports/:date', {
+            .state('home.fuelexpensereportsDate', {
                 level: 2,
-                url: '/fuelexpensereports/:date',
+                url: '/fuelexpensereportsDate/:date',
                 templateUrl: 'partials/fuelExpenseReports.tpl.html',
                 controller: 'fuelExpenseReportsCtrl'
             })
-            .state('home.officeduereport/:id', {
+            .state('home.officeduereport', {
                 level: 2,
                 url: '/officeduereport/:id',
                 templateUrl: 'partials/officeduereport.tpl.html',
                 controller: 'OfficeDueReportController'
             })
-            .state('home.officeduereport/:id/:date', {
+            .state('home.officeduereport', {
                 level: 2,
                 url: '/officeduereport/:id/:date',
                 templateUrl: 'partials/officeduereportByDate.tpl.html',
                 controller: 'OfficeDueByDateReportController'
             })
-            .state('home.officeduereportbyservice/:serviceNumber', {
+            .state('home.officeduereportbyservice', {
                 level: 2,
                 url: '/officeduereportbyservice/:serviceNumber',
                 templateUrl: 'partials/officeDueReportByService.tpl.html',
                 controller: 'OfficeDueByServiceController'
             })
-            .state('home.officeduereportbyagent/:agentName', {
+            .state('home.officeduereportbyagent', {
                 level: 2,
                 url: '/officeduereportbyagent/:agentName',
                 templateUrl: 'partials/officeDueReportByAgent.tpl.html',
             })
-            .state('home.returnTicketsByDate/:date', {
+            .state('home.returnTicketsByDate', {
                 url: '/returnTicketsByDate/:date',
                 templateUrl: 'partials/returnTicketsByDate.tpl.html',
                 controller: 'returnTicketsByDateController'
@@ -374,7 +379,7 @@ myBus.config(['$stateProvider', '$urlRouterProvider',
                 templateUrl: 'partials/paymentAdd.tpl.html',
                 controller: 'EditPaymentController'
             })
-            .state('home.city/:id', {
+            .state('home.city', {
                 level: 2,
                 url: '/city/:id',
                 templateUrl: 'partials/boardingpoints-list.tpl.html',
@@ -550,12 +555,12 @@ myBus.config(['$stateProvider', '$urlRouterProvider',
                 controller: 'BranchOfficesController'
             })
             .state('home.branchoffice', {
-                url: '/branchoffice/:id',
+                url: '/branchoffice',
                 templateUrl: 'partials/branchOfficeEdit.tpl.html',
                 controller: 'EditBranchOfficeController'
             })
             .state('home.editbranchoffice', {
-                url: '/branchoffice',
+                url: '/branchoffice/:id',
                 templateUrl: 'partials/branchOfficeEdit.tpl.html',
                 controller: 'EditBranchOfficeController'
             })
@@ -628,6 +633,10 @@ myBus.config(['$stateProvider', '$urlRouterProvider',
             url: '/reminders',
             templateUrl: 'partials/reminders.tpl.html',
             controller: 'RemindersController'
+        }).state('home.addreminders', {
+            url: '/addreminders',
+            templateUrl: 'partials/remindersEdit.tpl.html',
+            controller: 'EditremindersController'
         }).state('home.editreminders', {
             url: '/reminders/:id',
             templateUrl: 'partials/remindersEdit.tpl.html',
@@ -785,17 +794,17 @@ myBus.run(function ($rootScope, $state, $location, $cookies, appConfigManager, u
         appConfigManager.fetchAppSettings(function (err, cfg) {
             $rootScope.appConfigManager = appConfigManager;
         }, true);
-        userManager.getCurrentUser(function (response) {
-            if (response) {
-                userManager.getGroupsForCurrentUser();
-                myBus.constant('currentuser', response);
-                $rootScope.currentuser = response;
-                $rootScope.$broadcast("currentuserLoaded");
-                operatingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
-                    $rootScope.operatorAccount = operatorAccount;
-                });
-            }
-        });
+        // userManager.getCurrentUser(function (response) {
+        //     if (response) {
+        //         userManager.getGroupsForCurrentUser();
+        //         myBus.constant('currentuser', response);
+        //         $rootScope.currentuser = response;
+        //         $rootScope.$broadcast("currentuserLoaded");
+        //         operatingAccountsManager.getAccount($rootScope.currentuser.operatorId, function (operatorAccount) {
+        //             $rootScope.operatorAccount = operatorAccount;
+        //         });
+        //     }
+        // });
     }
 });
 

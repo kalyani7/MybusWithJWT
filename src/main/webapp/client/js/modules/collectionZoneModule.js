@@ -102,70 +102,115 @@ angular.module('myBus.collectionZoneModule', ['ngTable', 'ui.bootstrap'])
 		$scope.collectionZone= {};
 	};
 })
-.factory("collectionZonesManager",function($rootScope,$http,$window,$log){
+.factory("collectionZonesManager",function($rootScope,$http,$window,$log, services){
 	var collectionZones = [];
 	return {
 
         getAll: function (callback) {
-            $http.get("/api/v1/collectionZones/all").then(function (response) {
-                collectionZones = response.data;
-                callback(collectionZones);
-            }, function (error) {
-                swal("oops", error, "error");
-            });
-        },
-        count: function ( callback) {
-            $http.get('/api/v1/collectionZones/count',{})
-                .then(function (response) {
-                    callback(response.data);
-                },function (error) {
-                    $log.debug("error retrieving collectionZones");
-                });
-        },
-		addCollectionZone: function(collectionZone,callback) {
-			$http.post("/api/v1/collectionZones/",collectionZone).then(function(response){
-				callback(response.data);
-				swal("Great", "CollectionZone has been successfully added", "success");
-			},function(error){
+        	services.get("/api/v1/collectionZones/all", '', function (response) {
+				if (response) {
+					collectionZones = response.data;
+					callback(collectionZones);
+				}
+			}, function (error) {
 				swal("oops", error, "error");
 			})
+            // $http.get("/api/v1/collectionZones/all").then(function (response) {
+            //     collectionZones = response.data;
+            //     callback(collectionZones);
+            // }, function (error) {
+            //     swal("oops", error, "error");
+            // });
+        },
+        count: function ( callback) {
+        	services.get('/api/v1/collectionZones/count', {}, function (response) {
+				if (response) {
+					callback(response.data);
+				}
+			}, function (error) {
+				$log.debug("error retrieving collectionZones");
+			})
+            // $http.get('/api/v1/collectionZones/count',{})
+            //     .then(function (response) {
+            //         callback(response.data);
+            //     },function (error) {
+            //         $log.debug("error retrieving collectionZones");
+            //     });
+        },
+		addCollectionZone: function(collectionZone,callback) {
+        	services.post("/api/v1/collectionZones/", collectionZone, function (response) {
+				if (response) {
+					callback(response.data);
+					swal("Great", "CollectionZone has been successfully added", "success");
+				}
+			}, function(error){
+				swal("oops", error, "error");
+			})
+			// $http.post("/api/v1/collectionZones/",collectionZone).then(function(response){
+			// 	callback(response.data);
+			// 	swal("Great", "CollectionZone has been successfully added", "success");
+			// },function(error){
+			// 	swal("oops", error, "error");
+			// })
 		},
 
 		getCollectionZoneByID : function(id,callback){
-			$http.get("/api/v1/collectionZones/"+id).then(function(response){
-				callback(response.data);
-			},function(error){
+        	services.get("/api/v1/collectionZones/" + id, '', function (response) {
+				if (response) {
+					callback(response.data);
+				}
+			}, function(error){
 				swal("oops", error, "error");
 			})
+			// $http.get("/api/v1/collectionZones/"+id).then(function(response){
+			// 	callback(response.data);
+			// },function(error){
+			// 	swal("oops", error, "error");
+			// })
 		},
 
 		updateCollectionZone : function(collectionZone,callback){
-			$http.put("/api/v1/collectionZones/",collectionZone).then(function(response){
-				callback(response.data);
-				swal("Great", "CollectionZone has been updated successfully", "success");
-			},function(error){
+        	services.put("/api/v1/collectionZones/", '', collectionZone, function (response) {
+				if (response) {
+					callback(response.data);
+					swal("Great", "CollectionZone has been updated successfully", "success");
+				}
+			}, function(error){
 				swal("oops", error, "error");
 			})
+			// $http.put("/api/v1/collectionZones/",collectionZone).then(function(response){
+			// 	callback(response.data);
+			// 	swal("Great", "CollectionZone has been updated successfully", "success");
+			// },function(error){
+			// 	swal("oops", error, "error");
+			// })
 		},
 		deleteCollectionZone : function(id,callback){
-
-			swal({
-				title: "Are you sure?",
-				text: "Are you sure you want to delete this CollectionZone?",
-				type: "warning",
-				showCancelButton: true,
-				closeOnConfirm: false,
-				confirmButtonText: "Yes, delete it!",
-				confirmButtonColor: "#ec6c62"},function(){
-
-				$http.delete("/api/v1/collectionZones/"+id).then(function(data){
+			services.delete("/api/v1/collectionZones/" + id, function (response) {
+				if (response) {
 					callback(data);
 					swal("Deleted!", "CollectionZone has been deleted successfully!", "success");
-				},function(error){
-					swal("Oops", "We couldn't connect to the server!", "error");
-				});
-
-			});
+				}
+			}, function(error){
+				swal("Oops", "We couldn't connect to the server!", "error");
+			})
+			// swal({
+			// 	title: "Are you sure?",
+			// 	text: "Are you sure you want to delete this CollectionZone?",
+			// 	type: "warning",
+			// 	showCancelButton: true,
+			// 	closeOnConfirm: false,
+			// 	confirmButtonText: "Yes, delete it!",
+			// 	confirmButtonColor: "#ec6c62"},function(){
+			//
+			// 	$http.delete("/api/v1/collectionZones/"+id).then(function(data){
+			// 		callback(data);
+			// 		swal("Deleted!", "CollectionZone has been deleted successfully!", "success");
+			// 	},function(error){
+			// 		swal("Oops", "We couldn't connect to the server!", "error");
+			// 	});
+			//
+			// });
 		}
 	}
 });

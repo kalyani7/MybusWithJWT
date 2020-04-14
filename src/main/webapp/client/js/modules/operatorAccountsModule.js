@@ -44,11 +44,11 @@ angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
 	});
 
     $scope.addoperatoraccounts = function () {
-        $state.go('addoperatoraccounts');
+        $state.go('home.addoperatoraccounts');
     };
 
     $scope.editoperatoraccounts = function (id) {
-        $state.go('editoperatoraccounts', {id:id});
+        $state.go('home.editoperatoraccounts', {id:id});
     };
 })
 // ========================== Modal - Update Amenity  =================================
@@ -58,13 +58,13 @@ angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
         $scope.saveAccount =function() {
             operatingAccountsManager.saveAccount($scope.account, function (res) {
                 swal("Great", "Your account has been sucessfully added", "success");
-                $state.go('operatoraccounts');
+                $state.go('home.operatoraccounts');
             }, function (error) {
                 console.log('error');
             });
         };
         $scope.cancel = function () {
-            $state.go('operatoraccounts');
+            $state.go('home.operatoraccounts');
         };
     })
 
@@ -75,13 +75,13 @@ angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
 	$scope.saveAccount =function(){
         operatingAccountsManager.saveAccount($scope.account,function(res){
             swal("Great","Your account has been sucessfully added","success");
-            $state.go('operatoraccounts');
+            $state.go('home.operatoraccounts');
         }, function (error) {
             console.log('error');
 		});
 	};
     $scope.cancel = function () {
-        $state.go('operatoraccounts');
+        $state.go('home.operatoraccounts');
     };
 
      var accountId = $stateParams.id;
@@ -96,21 +96,38 @@ angular.module('myBus.operatorAccountsModule', ['ngTable', 'ui.bootstrap'])
 	var accounts = [];
 	return {
         getAccounts: function (callback) {
-            $http.get("/api/v1/operatorAccount/all").then(function (response) {
-                accounts = response.data;
-                callback(accounts);
-            }, function (error) {
-                swal("oops", error, "error");
-            });
-        },
-        saveAccount: function (account, callback) {
-            $http.post("/api/v1/operatorAccount/", account).then(function (response) {
-                callback(response.data);
-                $rootScope.$broadcast('reloadAccounts');
-                swal("Great", "Account has been successfully added", "success");
+            services.get("/api/v1/operatorAccount/all", '', function (response) {
+                if (response) {
+                    accounts = response.data;
+                    callback(accounts);
+                }
             }, function (error) {
                 swal("oops", error, "error");
             })
+            // $http.get("/api/v1/operatorAccount/all").then(function (response) {
+            //     accounts = response.data;
+            //     callback(accounts);
+            // }, function (error) {
+            //     swal("oops", error, "error");
+            // });
+        },
+        saveAccount: function (account, callback) {
+            services.post("/api/v1/operatorAccount/", account, function (response) {
+                if (response) {
+                    callback(response.data);
+                    $rootScope.$broadcast('reloadAccounts');
+                    swal("Great", "Account has been successfully added", "success");
+                }
+            }, function (error) {
+                swal("oops", error, "error");
+            })
+            // $http.post("/api/v1/operatorAccount/", account).then(function (response) {
+            //     callback(response.data);
+            //     $rootScope.$broadcast('reloadAccounts');
+            //     swal("Great", "Account has been successfully added", "success");
+            // }, function (error) {
+            //     swal("oops", error, "error");
+            // })
         },
         getAccount: function (id, callback) {
             services.get('/api/v1/operatorAccount/' + id, {}, function (response) {

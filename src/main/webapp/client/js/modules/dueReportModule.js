@@ -11,7 +11,7 @@ angular.module('myBus.dueReportModule', ['ngTable','ui.bootstrap'])
         $scope.loading = false;
         $scope.user = userManager.getUser();
         if(!$scope.user.admin) {
-            $location.url('officeduereport/'+$scope.user.branchOfficeId);
+            $location.url('home.officeduereport/', { id: $scope.user.branchOfficeId });
         } else{
             var loadTableData = function (tableParams) {
                 $scope.loading = true;
@@ -40,10 +40,12 @@ angular.module('myBus.dueReportModule', ['ngTable','ui.bootstrap'])
 
         $scope.goToDueReport = function(officeId) {
             console.log('relaod report..');
-            $location.url('officeduereport/'+officeId);
+            $state.go('home.officeduereport', {id: officeId})
+            // $location.url('officeduereport/'+officeId);
         }
         $scope.gotoPayments = function(){
-            $location.url('payments');
+            // $location.url('payments');
+            $state.go('home.payments')
         }
     })
     .controller('OfficeDueReportController', function($scope, $rootScope, $stateParams, $uibModal, dueReportManager, branchOfficeManager, userManager, NgTableParams, $filter, $location, paginationService) {
@@ -139,7 +141,8 @@ angular.module('myBus.dueReportModule', ['ngTable','ui.bootstrap'])
             loadTableDataByService($scope.serviceDuesTableParams);
         });
         $scope.showDueReportByDate = function(dueDate) {
-            $location.url('officeduereport/'+$scope.officeId+'/'+dueDate);
+            $location.url('home.officeduereport/'+$scope.officeId+'/'+dueDate);
+            $state.go('home.officeduereport', {id: $scope.officeId, date: dueDate})
         };
         $scope.showDueReportByService = function(serviceNumber) {
             $location.url('officeduereportbyservice/'+serviceNumber);
@@ -387,7 +390,8 @@ angular.module('myBus.dueReportModule', ['ngTable','ui.bootstrap'])
                 closeOnConfirm: true }, function() {
                 dueReportManager.payBooking(bookingId, function(data) {
                     $rootScope.$broadcast('UpdateHeader');
-                    $location.url('/officeduereportbyservice/'+serviceNumber);
+                    // $location.url('/officeduereportbyservice/'+serviceNumber);
+                    $state.go('home.officeduereportbyservice', {serviceNumber: serviceNumber})
                 },function (error) {
                     sweetAlert("Oops...", "Error submitting the report", "error");
                 });
@@ -457,8 +461,8 @@ angular.module('myBus.dueReportModule', ['ngTable','ui.bootstrap'])
                 closeOnConfirm: true }, function() {
                 dueReportManager.payBooking(bookingId, function(data) {
                     $rootScope.$broadcast('UpdateHeader');
-                    $location.url('officeduereportbyagent/'+agentName);
-
+                    // $location.url('officeduereportbyagent/'+agentName);
+                    $state.go('home.officeduereportbyagent', {agentName: agentName})
                 },function (error) {
                     swal("Oops...", "Error submitting the report", "error");
                 });
@@ -487,82 +491,145 @@ angular.module('myBus.dueReportModule', ['ngTable','ui.bootstrap'])
     })
 
 
-    .factory('dueReportManager', function ($http, $rootScope, $log, $uibModal) {
+    .factory('dueReportManager', function ($http, $rootScope, $log, $uibModal, services) {
         var pageable;
 
         return {
             loadReports:function(callback) {
-                $http.get('/api/v1/dueReports')
-                    .then(function (response) {
+                services.get('/api/v1/dueReports', '', function (response) {
+                    if (response) {
                         callback(response.data);
                         console.log(response)
-                    },function (error) {
-                        $log.debug("error loading due reports");
-                        swal("Error",error.data.message,"error");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error loading due reports");
+                    swal("Error",error.data.message,"error");
+                })
+                // $http.get('/api/v1/dueReports')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //         console.log(response)
+                //     },function (error) {
+                //         $log.debug("error loading due reports");
+                //         swal("Error",error.data.message,"error");
+                //     });
             },
             getBranchReport:function(id,callback) {
-                $http.get('/api/v1/dueReport/office/'+id)
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (error) {
-                        $log.debug("error loading due report");
-                        swal("Error",error.data.message,"error");
-                    });
+                services.get('/api/v1/dueReport/office/' + id, '', function (response) {
+                    callback(response.data);
+                }, function (error) {
+                    $log.debug("error loading due report");
+                    swal("Error",error.data.message,"error");
+                })
+                // $http.get('/api/v1/dueReport/office/'+id)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error loading due report");
+                //         swal("Error",error.data.message,"error");
+                //     });
             },
             getReportByService:function(pageable,callback) {
-                $http.get('/api/v1/dueReport/officeDuesByService')
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (error) {
-                        $log.debug("error loading due report");
-                        swal("Error",error.data.message,"error");
-                    });
+                services.get('/api/v1/dueReport/officeDuesByService', '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error loading due report");
+                    swal("Error",error.data.message,"error");
+                })
+                // $http.get('/api/v1/dueReport/officeDuesByService')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error loading due report");
+                //         swal("Error",error.data.message,"error");
+                //     });
             },
             getReportByAgents:function(pageable,callback) {
-                $http.get('/api/v1/dueReport/officeDuesByAgent')
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (error) {
-                        $log.debug("error loading due report");
-                        swal("Error",error.data.message,"error");
-                    });
+                services.get('/api/v1/dueReport/officeDuesByAgent', '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error loading due report");
+                    swal("Error",error.data.message,"error");
+                })
+                // $http.get('/api/v1/dueReport/officeDuesByAgent')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error loading due report");
+                //         swal("Error",error.data.message,"error");
+                //     });
             },
             getBranchReportByDate:function(id,date,callback) {
-                $http.get('/api/v1/dueReport/office/'+id+'/'+date)
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (error) {
-                        $log.debug("error loading due report");
-                        swal("Error",error.data.message,"error");
-                    });
+                services.get('/api/v1/dueReport/office/' + id + '/' + date, '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error loading due report");
+                    swal("Error",error.data.message,"error");
+                })
+                // $http.get('/api/v1/dueReport/office/'+id+'/'+date)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error loading due report");
+                //         swal("Error",error.data.message,"error");
+                //     });
             },
             getBranchReportByService:function(serviceNumber,callback) {
-                $http.get('/api/v1/dueReport/dueBookingByService/'+serviceNumber)
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (error) {
-                        $log.debug("error loading due report");
-                        swal("Error",error.data.message,"error");
-                    });
+                services.get('/api/v1/dueReport/dueBookingByService/' + serviceNumber, '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    $log.debug("error loading due report");
+                    swal("Error",error.data.message,"error");
+                })
+                // $http.get('/api/v1/dueReport/dueBookingByService/'+serviceNumber)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error loading due report");
+                //         swal("Error",error.data.message,"error");
+                //     });
             },
             getDueReportByAgent:function(agentName,callback) {
-                $http.get('/api/v1/dueReport/officeDuesByAgent/'+agentName)
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (err) {
-                        $log.debug("error loading due report");
-                        swal("Error",err.data.message,"error");
-                    });
+                services.get('/api/v1/dueReport/officeDuesByAgent/' + agentName, '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (err) {
+                    $log.debug("error loading due report");
+                    swal("Error",err.data.message,"error");
+                })
+                // $http.get('/api/v1/dueReport/officeDuesByAgent/'+agentName)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (err) {
+                //         $log.debug("error loading due report");
+                //         swal("Error",err.data.message,"error");
+                //     });
             },
             payBooking:function(id, callback, errorCallback) {
-                $http.put('/api/v1/dueReport/payBookingDue/'+id)
-                    .then(function (response) {
+                services.put('/api/v1/dueReport/payBookingDue/' + id, '', function (response) {
+                    if (response) {
                         $rootScope.$broadcast('ReloadOfficeDueReport');
                         callback(response.data);
-                    },function (error) {
-                        errorCallback(error);
-                    });
+                    }
+                }, function (error) {
+                    errorCallback(error);
+                })
+                // $http.put('/api/v1/dueReport/payBookingDue/'+id)
+                //     .then(function (response) {
+                //         $rootScope.$broadcast('ReloadOfficeDueReport');
+                //         callback(response.data);
+                //     },function (error) {
+                //         errorCallback(error);
+                //     });
             },
             showDuePaymentSummary : function(paidBookings) {
                 $rootScope.modalInstance = $uibModal.open({
@@ -581,33 +648,56 @@ angular.module('myBus.dueReportModule', ['ngTable','ui.bootstrap'])
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "Yes, pay now!",
                     closeOnConfirm: true }, function() {
-                    $http.post('/api/v1/dueReport/payBookingDues/', ids).then(function (response) {
-                        callback(response.data);
-                    },function (error) {
-                        errorCallback(error);
-                    });
+                    services.post('/api/v1/dueReport/payBookingDues/', ids, function (response) {
+                        if (response) {
+                            callback(response.data)
+                        }
+                    }, function (error) {
+                        errorCallback(error)
+                    })
+                    // $http.post('/api/v1/dueReport/payBookingDues/', ids).then(function (response) {
+                    //     callback(response.data);
+                    // },function (error) {
+                    //     errorCallback(error);
+                    // });
                 });
             },
 
             searchDues:function(startDate, endDate, branchOfficeId, callback) {
                 var st = startDate.getFullYear()+"-"+[startDate.getMonth()+1]+"-"+startDate.getDate();
                 var end = endDate.getFullYear()+"-"+[endDate.getMonth()+1]+"-"+endDate.getDate();
-                $http.get('/api/v1/dueReport/search?startDate='+st+'&endDate='+end+"&branchOfficeId="+ branchOfficeId)
-                    .then(function (response) {
+                services.get('/api/v1/dueReport/search?startDate=' + st + '&endDate=' + end + "&branchOfficeId=" + branchOfficeId, '', function (response) {
+                    if (response) {
                         callback(response.data);
                         console.log(response)
-                    },function (error) {
-                        swal("Error",error.data.message,"error");
-                    });
+                    }
+                }, function (error) {
+                    swal("Error",error.data.message,"error");
+                })
+                // $http.get('/api/v1/dueReport/search?startDate='+st+'&endDate='+end+"&branchOfficeId="+ branchOfficeId)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //         console.log(response)
+                //     },function (error) {
+                //         swal("Error",error.data.message,"error");
+                //     });
             },
             searchDuesByPNR:function(pnr, callback) {
-                $http.get('/api/v1/dueReport/searchByPNR?pnr='+pnr)
-                    .then(function (response) {
-                        callback(response.data);
-                    },function (error) {
+                services.get('/api/v1/dueReport/searchByPNR?pnr=' + pnr, '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
 
-                        swal("Error",error.data.message,"error");
-                    });
+                    swal("Error",error.data.message,"error");
+                })
+                // $http.get('/api/v1/dueReport/searchByPNR?pnr='+pnr)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //
+                //         swal("Error",error.data.message,"error");
+                //     });
             }
         }
     });

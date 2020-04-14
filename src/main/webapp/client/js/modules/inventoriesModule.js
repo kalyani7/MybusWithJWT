@@ -35,17 +35,17 @@ angular.module('myBus.inventoriesModule', ['ngTable', 'ui.bootstrap'])
             }else {
                 if ($stateParams.id) {
                     inventoryManager.updateInventory($scope.inventory, function (response) {
-                        $state.go('inventories');
+                        $state.go('home.inventories');
                     });
                 } else {
                     inventoryManager.addInventory($scope.inventory, function (response) {
-                        $state.go('inventories');
+                        $state.go('home.inventories');
                     });
                 }
             }
         };
         $scope.cancel = function(){
-            $state.go('inventories');
+            $state.go('home.inventories');
         };
 
     }).controller("InventoriesController",function($scope,inventoryManager,$state,NgTableParams,paginationService){
@@ -86,7 +86,7 @@ angular.module('myBus.inventoriesModule', ['ngTable', 'ui.bootstrap'])
             });
         };
         $scope.editInventory = function(id){
-            $state.go('add-editInventory',{id:id});
+            $state.go('home.add-editInventory', {id:id});
         };
         $scope.init('');
         $scope.deleteInventory = function(id){
@@ -95,7 +95,7 @@ angular.module('myBus.inventoriesModule', ['ngTable', 'ui.bootstrap'])
           });
         };
         $scope.viewJob = function(inventoryId){
-            $state.go('viewJobsByInventory',{inventoryId:inventoryId});
+            $state.go('home.viewJobsByInventory', {inventoryId:inventoryId});
         };
     }).controller("viewJobsByInventoryController",function($scope,$stateParams,jobManager){
         $scope.getQuery = {inventoryId:$stateParams.inventoryId};
@@ -103,56 +103,91 @@ angular.module('myBus.inventoriesModule', ['ngTable', 'ui.bootstrap'])
             $scope.inventoryJobs = response.data.content;
             $scope.jobsCount = $scope.inventoryJobs.length;
         });
-    }).factory("inventoryManager",function($http){
+    }).factory("inventoryManager",function($http, services){
         return{
-            addInventory:function(inventory,callback){
-                $http.post('/api/v1/inventory/addInventory',inventory)
-                    .then(function (response) {
-                        callback(response);
-                        },function(err) {});
+            addInventory: function(inventory, callback) {
+                services.post('/api/v1/inventory/addInventory', inventory, function (response) {
+                    if (response) {
+                        callback(response)
+                    }
+                }, function(err) {})
+                // $http.post('/api/v1/inventory/addInventory',inventory)
+                //     .then(function (response) {
+                //         callback(response);
+                //         },function(err) {});
             },
             getAllInventories: function (pageable, callback) {
-                $http({url: '/api/v1/inventory/getAllInventories', method: "GET", params: pageable})
-                    .then(function (response) {
-                        callback(response.data);
-                    }, function(error){
-                        swal("oops", error, "error");
-                    });
+                services.get('/api/v1/inventory/getAllInventories', pageable, function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {
+                    swal("oops", error, "error");
+                })
+                // $http({url: '/api/v1/inventory/getAllInventories', method: "GET", params: pageable})
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function(error){
+                //         swal("oops", error, "error");
+                //     });
             },
-            getInventory:function(id,callback){
-                $http.get('/api/v1/inventory/get/'+id)
-                    .then(function (response) {
-                        callback(response.data);
-                    },function(err) {});
+            getInventory: function(id, callback) {
+                services.get('/api/v1/inventory/get/' + id, '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function(err) {})
+                // $http.get('/api/v1/inventory/get/'+id)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function(err) {});
             },
-            updateInventory:function(inventory,callback){
-                $http.put('/api/v1/inventory/updateInventory',inventory)
-                    .then(function (response) {
-                        callback(response);
-                    },function(err) {});
+            updateInventory: function(inventory, callback) {
+                services.put('/api/v1/inventory/updateInventory', inventory, '', function (response) {
+                    if (response) {
+                        callback(response)
+                    }
+                }, function (error) {})
+                // $http.put('/api/v1/inventory/updateInventory',inventory)
+                //     .then(function (response) {
+                //         callback(response);
+                //     },function(err) {});
             },
-            count:function (query,callback) {
-                $http.get('/api/v1/inventory/getCount?query=' + query)
-                    .then(function (response) {
-                        callback(response.data);
-                    },function(err) {});
+            count:function (query, callback) {
+                services.get('/api/v1/inventory/getCount?query=' + query, '', function (response) {
+                    if (response) {
+                        callback(response.data)
+                    }
+                }, function (error) {})
+                // $http.get('/api/v1/inventory/getCount?query=' + query)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function(err) {});
             },
             deleteInventory: function(id,callback) {
-                swal({   title: "Are you sure?",   text: "You will not be able to recover this inventory !",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false
-                }, function() {
-                    $http.delete('/api/v1/inventory/delete/' + id)
-                        .then(function (response) {
-                            callback(response);
-                            sweetAlert("Great", "successfully deleted", "success");
-                        },function (error) {
-                            sweetAlert("Oops...", "Error finding data!", "error" + angular.toJson(error));
-                        });
-                });
+                services.delete('/api/v1/inventory/delete/' + id, function (response) {
+                    if (response) {
+                        callback(response);
+                        sweetAlert("Great", "successfully deleted", "success");
+                    }
+                }, function (error) {
+                    sweetAlert("Oops...", "Error finding data!", "error" + angular.toJson(error));
+                })
+                // swal({   title: "Are you sure?",   text: "You will not be able to recover this inventory !",
+                //     type: "warning",
+                //     showCancelButton: true,
+                //     confirmButtonColor: "#DD6B55",
+                //     confirmButtonText: "Yes, delete it!",
+                //     closeOnConfirm: false
+                // }, function() {
+                //     $http.delete('/api/v1/inventory/delete/' + id)
+                //         .then(function (response) {
+                //             callback(response);
+                //             sweetAlert("Great", "successfully deleted", "success");
+                //         },function (error) {
+                //             sweetAlert("Oops...", "Error finding data!", "error" + angular.toJson(error));
+                //         });
+                // });
             }
         }
     });

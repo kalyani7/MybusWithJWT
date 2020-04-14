@@ -14,11 +14,11 @@ angular.module('myBus.bankModule', ['ngTable', 'ui.bootstrap'])
         $scope.bankDetails()
 
         $scope.addBank = function () {
-            $state.go('bankAdd')
+            $state.go('home.bankAdd')
         };
 
         $scope.editBank = function (id) {
-            $state.go('bankEdit', {id:id});
+            $state.go('home.bankEdit', {id:id});
         }
 
         $scope.deleteBank = function (id) {
@@ -46,7 +46,7 @@ angular.module('myBus.bankModule', ['ngTable', 'ui.bootstrap'])
             if ($stateParams.id) {
                 bankManager.updateBank($scope.bank, function (data) {
                     swal("success","Bank Updated","success");
-                    $state.go('banks');
+                    $state.go('home.banks');
                 })
             } else {
                 if (!$scope.bank) {
@@ -54,65 +54,99 @@ angular.module('myBus.bankModule', ['ngTable', 'ui.bootstrap'])
                 } else {
                     bankManager.createBankDetails($scope.bank, function (data) {
                         swal("success", "Bank successfully added", "success");
-                        $state.go('banks');
+                        $state.go('home.banks');
                     });
                 }
             }
         };
 
         $scope.cancelBank = function () {
-            $state.go('banks');
+            $state.go('home.banks');
         }
     })
-    .factory('bankManager', function ($http, $log,$rootScope) {
+    .factory('bankManager', function ($http, $log, $rootScope, services) {
         return {
             createBankDetails: function (user, callback) {
-                $http.post('/api/v1/bank/addBankDetails', user).then(function (response) {
-                    callback(response);
-                    $rootScope.$broadcast('CreateUserCompleted');
-                }, function (err, status) {
-                    sweetAlert("Error", err.message, "error");
-                });
+                services.post('/api/v1/bank/addBankDetails', user, function (response) {
+                    if (response) {
+                        callback(response);
+                        $rootScope.$broadcast('CreateUserCompleted');
+                    }
+                }, function (error) {
+                    sweetAlert("Error", error.message, "error");
+                })
+                // $http.post('/api/v1/bank/addBankDetails', user).then(function (response) {
+                //     callback(response);
+                //     $rootScope.$broadcast('CreateUserCompleted');
+                // }, function (err, status) {
+                //     sweetAlert("Error", err.message, "error");
+                // });
             },
             getBank: function (callback) {
-                $http.get('/api/v1/bank/getAllBankDetails')
-                    .then(function (response) {
+                services.get('/api/v1/bank/getAllBankDetails', '', function (response) {
+                    if (response) {
                         callback(response.data);
                         $rootScope.$broadcast('FetchingUserNamesComplete');
-                    }, function (error) {
-                        $log.debug("error retrieving user names");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving user names");
+                })
+                // $http.get('/api/v1/bank/getAllBankDetails')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //         $rootScope.$broadcast('FetchingUserNamesComplete');
+                //     }, function (error) {
+                //         $log.debug("error retrieving user names");
+                //     });
             },
             getBankWithId:function(bankId, callback){
-                $http.get("/api/v1/bank/getBankInfo/" + bankId).then(function(response){
-                    callback(response.data);
+                services.get("/api/v1/bank/getBankInfo/" + bankId, '', function (response) {
+                    if (response) {
+                        callback(response.data);
+                    }
                 })
+                // $http.get("/api/v1/bank/getBankInfo/" + bankId).then(function(response){
+                //     callback(response.data);
+                // })
             },
             updateBank : function (bank, callback, errorcallback) {
-                $http.put('/api/v1/bank/updateBankInfo/'+bank.id,bank).then(function(response){
-                    callback(response.data);
-                    $rootScope.$broadcast('UpdateUserCompleted');
-                },function (data, status, header, config) {
+                services.put('/api/v1/bank/updateBankInfo/'+bank.id, bank, function (response) {
+                    if (response) {
+                        callback(response.data);
+                        $rootScope.$broadcast('UpdateUserCompleted');
+                    }
+                }, function (data, status, header, config) {
                     errorcallback(data);
-                });
+                })
+                // $http.put('/api/v1/bank/updateBankInfo/'+bank.id,bank).then(function(response){
+                //     callback(response.data);
+                //     $rootScope.$broadcast('UpdateUserCompleted');
+                // },function (data, status, header, config) {
+                //     errorcallback(data);
+                // });
             },
             deleteBank : function (bankId){
-                swal({
-                    title: "Are you sure?",
-                    text: "Are you sure you want to delete this bank?",
-                    type: "warning",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    confirmButtonText: "Yes, delete it!",
-                    confirmButtonColor: "#ec6c62"},function(){
+                services.delete('api/v1/bank/delete/' + bankId, function (response) {
+                    if (response) {
 
-                    $http.delete('api/v1/bank/delete/'+bankId).then(function(response){
-                        $rootScope.$broadcast('DeleteBankCompleted');
-                        swal("Deleted!", "Route was successfully deleted!", "success");
-                    },function () {
-                        swal("Oops", "We couldn't connect to the server!", "error");
-                    });
+                    }
                 })
+                // swal({
+                //     title: "Are you sure?",
+                //     text: "Are you sure you want to delete this bank?",
+                //     type: "warning",
+                //     showCancelButton: true,
+                //     closeOnConfirm: false,
+                //     confirmButtonText: "Yes, delete it!",
+                //     confirmButtonColor: "#ec6c62"},function(){
+                //
+                //     $http.delete('api/v1/bank/delete/'+bankId).then(function(response){
+                //         $rootScope.$broadcast('DeleteBankCompleted');
+                //         swal("Deleted!", "Route was successfully deleted!", "success");
+                //     },function () {
+                //         swal("Oops", "We couldn't connect to the server!", "error");
+                //     });
+                // })
             }
         }
     });

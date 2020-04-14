@@ -66,7 +66,8 @@ angular.module('myBus.cityModule', ['ngTable', 'ui.bootstrap'])
         });
 
         $scope.goToBoardingPointsList = function (id) {
-            $location.url('/city/' + id);
+            $state.go('home.city', {id: id});
+            // $location.url('/city/' + id);
         };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,7 +122,7 @@ angular.module('myBus.cityModule', ['ngTable', 'ui.bootstrap'])
                 $rootScope.modalInstance.close(null);
             }
             cityManager.updateCity($scope.city, function (data) {
-                $state.transitionTo('cities');
+                $state.transitionTo('home.cities');
                 $rootScope.modalInstance.close(data);
             });
         };
@@ -164,33 +165,54 @@ angular.module('myBus.cityModule', ['ngTable', 'ui.bootstrap'])
                     ($scope.city.state || '') !== '';
         };
 
-    }).factory('cityManager', function ($rootScope, $http, $log, $location) {
+    }).factory('cityManager', function ($rootScope, $http, $log, $location, services) {
         var cities = {}
             , rawChildDataWithGeoMap = {}, totalCount = 0;
         return {
             getCities: function ( pageable, callback) {
-                $http({url:'/api/v1/cities',method: "GET",params: pageable})
-                    .then(function (response) {
+                services.get('/api/v1/cities', pageable, function (response) {
+                    if (response) {
                         callback(response.data);
-                    },function (error) {
-                        $log.debug("error retrieving agents");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving agents");
+                })
+                // $http({url:'/api/v1/cities',method: "GET",params: pageable})
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error retrieving agents");
+                //     });
             },
             count: function (callback) {
-                $http.get('/api/v1/cities/count')
-                    .then(function (response) {
+                services.get('/api/v1/cities/count', '', function (response) {
+                    if (response) {
                         callback(response.data);
-                    }, function (error) {
-                        $log.debug("error retrieving route count");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving route count");
+                })
+                // $http.get('/api/v1/cities/count')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     }, function (error) {
+                //         $log.debug("error retrieving route count");
+                //     });
             },
             getActiveCityNames:function(callback) {
-                $http.get('/api/v1/activeCityNames')
-                    .then(function (response) {
+                services.get('/api/v1/activeCityNames', '', function (response) {
+                    if (response) {
                         callback(response.data);
-                    },function (error) {
-                        $log.debug("error retrieving cities");
-                    });
+                    }
+                }, function (error) {
+                    $log.debug("error retrieving cities");
+                })
+                // $http.get('/api/v1/activeCityNames')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         $log.debug("error retrieving cities");
+                //     });
             },
             getAllCities: function () {
                 return cities;
@@ -220,101 +242,172 @@ angular.module('myBus.cityModule', ['ngTable', 'ui.bootstrap'])
                     return value.id === id;
                 })).name;
             },
-            createCity : function (city,callback) {
-                $http.post('/api/v1/city',city)
-                    .then(function (response) {
-                        callback(response.data);
-                        swal("Great", "Your City has been successfully added", "success");
-                        $rootScope.$broadcast('CityCompleteEvent');
-                    },function(err,status) {
-                        sweetAlert("Error",err.data.message,"error");
-                    });
+            createCity : function (city, callback) {
+                services.post('/api/v1/city', city, function (response) {
+                    callback(response.data);
+                    swal("Great", "Your City has been successfully added", "success");
+                    $rootScope.$broadcast('CityCompleteEvent');
+                }, function(err,status) {
+                    sweetAlert("Error",err.data.message,"error");
+                })
+                // $http.post('/api/v1/city',city)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //         swal("Great", "Your City has been successfully added", "success");
+                //         $rootScope.$broadcast('CityCompleteEvent');
+                //     },function(err,status) {
+                //         sweetAlert("Error",err.data.message,"error");
+                //     });
             },
             getCity: function (id, callback) {
-                $http.get('/api/v1/city/' + id)
-                    .then(function (response) {
-                        callback(response.data);
-                        $rootScope.$broadcast('BoardingPointsInitComplete');
-                    },function (error) {
-                        alert("error finding city. " + angular.toJson(error));
-                    });
+                services.get('/api/v1/city/' + id, '', function (response) {
+                    callback(response.data);
+                    $rootScope.$broadcast('BoardingPointsInitComplete');
+                }, function (error) {
+                    alert("error finding city. " + angular.toJson(error));
+                })
+                // $http.get('/api/v1/city/' + id)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //         $rootScope.$broadcast('BoardingPointsInitComplete');
+                //     },function (error) {
+                //         alert("error finding city. " + angular.toJson(error));
+                //     });
             },
             deleteCity: function(id) {
-                swal({   title: "Are you sure?",   text: "You will not be able to recover this City !",   type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false }, function() {
-                    $http.delete('/api/v1/city/' + id)
-                        .then(function (response) {
-                            //callback(response.data);
-                            sweetAlert("Great", "Your City has been successfully deleted", "success");
-                           $location.url("/cities");
-                            $rootScope.$broadcast('CityCompleteEvent');
-                        },function (error) {
-                            sweetAlert("Oops...", "Error finding City data!", "error" + angular.toJson(error));
-                        });
-                });
+                services.delete('/api/v1/city/' + id, function (response) {
+                    if (response) {
+                        sweetAlert("Great", "Your City has been successfully deleted", "success");
+                        $location.url("/cities");
+                        $rootScope.$broadcast('CityCompleteEvent');
+                    }
+                }, function (error) {
+                    sweetAlert("Oops...", "Error finding City data!", "error" + angular.toJson(error));
+                })
+                // swal({   title: "Are you sure?",   text: "You will not be able to recover this City !",   type: "warning",
+                //     showCancelButton: true,
+                //     confirmButtonColor: "#DD6B55",
+                //     confirmButtonText: "Yes, delete it!",
+                //     closeOnConfirm: false }, function() {
+                //     $http.delete('/api/v1/city/' + id)
+                //         .then(function (response) {
+                //             //callback(response.data);
+                //             sweetAlert("Great", "Your City has been successfully deleted", "success");
+                //            $location.url("/cities");
+                //             $rootScope.$broadcast('CityCompleteEvent');
+                //         },function (error) {
+                //             sweetAlert("Oops...", "Error finding City data!", "error" + angular.toJson(error));
+                //         });
+                // });
             },
             updateCity: function(city,callback) {
-                $http.put('/api/v1/city/'+city.id,city).then(function (response) {
-                    callback(response.data);
-                    sweetAlert("Great","Your City has been successfully updated", "success");
-                    $rootScope.$broadcast('CityCompleteEvent');
-                },function (error) {
+                services.put('/api/v1/city/' + city.id, status, city, function (response) {
+                    if (response) {
+                        callback(response.data);
+                        sweetAlert("Great","Your City has been successfully updated", "success");
+                        $rootScope.$broadcast('CityCompleteEvent');
+                    }
+                }, function (error) {
                     console.log(JSON.stringify(error));
                     sweetAlert("Oops..", "Error updating City data!", "error" + angular.toJson(error));
                 })
+                // $http.put('/api/v1/city/'+city.id,city).then(function (response) {
+                //     callback(response.data);
+                //     sweetAlert("Great","Your City has been successfully updated", "success");
+                //     $rootScope.$broadcast('CityCompleteEvent');
+                // },function (error) {
+                //     console.log(JSON.stringify(error));
+                //     sweetAlert("Oops..", "Error updating City data!", "error" + angular.toJson(error));
+                // })
             },
             //----------------------------------------------------------------------
             createBordingPoint: function (cityId,boardingPoint,callback) {
-                $http.post('/api/v1/city/'+cityId+'/boardingpoint',boardingPoint).then(function (response) {
-                    callback(response.data);
-                    sweetAlert("Great","Your BoardingPoint has been successfully added", "success");
-                },function (err,status) {
+                services.post('/api/v1/city/'+cityId+'/boardingpoint', boardingPoint, function (response) {
+                    if (response) {
+                        callback(response.data);
+                        sweetAlert("Great","Your BoardingPoint has been successfully added", "success");
+                    }
+                }, function (err,status) {
                     sweetAlert("Error",err.data.message,"error");
-                });
+                })
+                // $http.post('/api/v1/city/'+cityId+'/boardingpoint',boardingPoint).then(function (response) {
+                //     callback(response.data);
+                //     sweetAlert("Great","Your BoardingPoint has been successfully added", "success");
+                // },function (err,status) {
+                //     sweetAlert("Error",err.data.message,"error");
+                // });
             },
             updateBp: function(cityId,boardingPoint,callback) {
-                $http.put('/api/v1/city/'+cityId+'/boardingpoint',boardingPoint).then(function (response) {
-                    callback(response.data);
-                    sweetAlert("Great","Your BoardingPoint has been successfully updated", "success");
-                    // $rootScope.$broadcast('updateBpCompleteEvent');
-                },function () {
+                services.put('/api/v1/city/'+cityId+'/boardingpoint', '', boardingPoint, function (response) {
+                    if (response) {
+                        callback(response.data);
+                        sweetAlert("Great","Your BoardingPoint has been successfully updated", "success");
+                    }
+                }, function () {
                     sweetAlert("Oops...", "Error updating Bp data!", "error");
-                });
+                })
+                // $http.put('/api/v1/city/'+cityId+'/boardingpoint',boardingPoint).then(function (response) {
+                //     callback(response.data);
+                //     sweetAlert("Great","Your BoardingPoint has been successfully updated", "success");
+                //     // $rootScope.$broadcast('updateBpCompleteEvent');
+                // },function () {
+                //     sweetAlert("Oops...", "Error updating Bp data!", "error");
+                // });
             },
             deleteBp: function(cityId,BpId,callback) {
-                swal({   title: "Are you sure?",   text: "You will not be able to recover this BoardingPoint !",   type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false }, function() {
-                    $http.delete('/api/v1/city/'+cityId+'/boardingpoint/'+BpId)
-                        .then(function (response) {
-                            callback(response.data);
-                            sweetAlert("Great", "Your BoardingPoint has been successfully deleted", "success");
-                            $rootScope.$broadcast('deleteBpCompleteEvent');
-                        },function (error) {
-                            sweetAlert("Oops...", "Error finding City data!", "error" + angular.toJson(error));
-                        });
-                });
+                services.delete('/api/v1/city/'+cityId+'/boardingpoint/'+BpId, function (response) {
+                    if (response) {
+                        callback(response.data);
+                        sweetAlert("Great", "Your BoardingPoint has been successfully deleted", "success");
+                        $rootScope.$broadcast('deleteBpCompleteEvent');
+                    }
+                }, function (error) {
+                    sweetAlert("Oops...", "Error finding City data!", "error" + angular.toJson(error));
+                })
+                // swal({   title: "Are you sure?",   text: "You will not be able to recover this BoardingPoint !",   type: "warning",
+                //     showCancelButton: true,
+                //     confirmButtonColor: "#DD6B55",
+                //     confirmButtonText: "Yes, delete it!",
+                //     closeOnConfirm: false }, function() {
+                //     $http.delete('/api/v1/city/'+cityId+'/boardingpoint/'+BpId)
+                //         .then(function (response) {
+                //             callback(response.data);
+                //             sweetAlert("Great", "Your BoardingPoint has been successfully deleted", "success");
+                //             $rootScope.$broadcast('deleteBpCompleteEvent');
+                //         },function (error) {
+                //             sweetAlert("Oops...", "Error finding City data!", "error" + angular.toJson(error));
+                //         });
+                // });
             },
             getBp: function (id,BpId, callback) {
-                $http.get('/api/v1/city/'+id+'/boardingpoint/'+BpId)
-                    .then(function (response) {
+                services.get('/api/v1/city/'+id+'/boardingpoint/'+BpId, '', function (response) {
+                    if (response) {
                         callback(response.data);
-                    },function (error) {
-                        sweetAlert("Oops...", "Error finding BoardingPoint data!", "error" + angular.toJson(error));
-                    });
+                    }
+                }, function (error) {
+                    sweetAlert("Oops...", "Error finding BoardingPoint data!", "error" + angular.toJson(error));
+                })
+                // $http.get('/api/v1/city/'+id+'/boardingpoint/'+BpId)
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         sweetAlert("Oops...", "Error finding BoardingPoint data!", "error" + angular.toJson(error));
+                //     });
             },
             getBoardingPoints: function (cityId,callback) {
-                $http.get('/api/v1/city/'+cityId+'/boardingpoint/')
-                    .then(function (response) {
+                services.get('/api/v1/city/'+cityId+'/boardingpoint/', '', function (response) {
+                    if (response) {
                         callback(response.data);
-                    },function (error) {
-                        sweetAlert("Oops...", "Error loading BoardingPoint data!", "error" + angular.toJson(error));
-                    });
+                    }
+                }, function (error) {
+                    sweetAlert("Oops...", "Error loading BoardingPoint data!", "error" + angular.toJson(error));
+                })
+                // $http.get('/api/v1/city/'+cityId+'/boardingpoint/')
+                //     .then(function (response) {
+                //         callback(response.data);
+                //     },function (error) {
+                //         sweetAlert("Oops...", "Error loading BoardingPoint data!", "error" + angular.toJson(error));
+                //     });
             }
         }
     }).controller('BoardingPointsListController', function ($scope, $http,$uibModal, $log, NgTableParams,$state,$stateParams, $filter, cityManager, $rootScope) {
